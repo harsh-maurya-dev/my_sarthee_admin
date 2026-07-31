@@ -1,65 +1,324 @@
+import Link from "next/link";
 import Image from "next/image";
+import { Metadata } from "next";
+import {
+  Video,
+  FileText,
+  FlaskConical,
+  Pill,
+  Calendar,
+  CreditCard,
+  Ambulance,
+  Stethoscope,
+  ArrowRight,
+  CheckCircle2,
+  ShieldCheck,
+  Building2,
+  Users,
+  Activity,
+  LogIn,
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 
-export default function Home() {
+export const metadata: Metadata = {
+  title: "MySarthee | Enterprise HealthCare Services & Admin Portal",
+  description: "Explore all healthcare services offered by MySarthee, including EHR, Telehealth, Diagnostics, and Admin Management.",
+};
+
+const healthcareServices = [
+  {
+    title: "Telehealth & Virtual Consultations",
+    description: "High-definition video consultations, real-time doctor queuing, and instant digital prescription dispatching.",
+    icon: Video,
+    badge: "24/7 Available",
+  },
+  {
+    title: "Electronic Health Records (EHR)",
+    description: "HIPAA-compliant centralized patient medical histories, clinical notes, lab results, and ICD-10 diagnostic coding.",
+    icon: FileText,
+    badge: "HIPAA Certified",
+  },
+  {
+    title: "Pathology & Lab Diagnostics",
+    description: "Automated specimen tracking, digital lab report generation, and direct patient portal result delivery.",
+    icon: FlaskConical,
+    badge: "Automated Workflow",
+  },
+  {
+    title: "Pharmacy & Inventory Suite",
+    description: "Real-time pharmaceutical stock monitoring, batch expiration tracking, e-prescriptions, and automated reordering.",
+    icon: Pill,
+    badge: "Smart Inventory",
+  },
+  {
+    title: "Patient Appointment Scheduling",
+    description: "Multi-specialty doctor booking engine with automated SMS/email appointment reminders and queue management.",
+    icon: Calendar,
+    badge: "Patient-Centric",
+  },
+  {
+    title: "Medical Billing & Revenue Cycle",
+    description: "Streamlined insurance claims management, automated copay invoicing, and financial revenue analytics.",
+    icon: CreditCard,
+    badge: "Financial Control",
+  },
+  {
+    title: "Emergency & Critical Triage",
+    description: "Instant ambulance GPS dispatch tracking, emergency room occupancy monitoring, and real-time vital alerts.",
+    icon: Ambulance,
+    badge: "Real-time Triage",
+  },
+  {
+    title: "Clinical Staff & Roster Management",
+    description: "Doctor shift scheduling, credential verification, department duty rosters, and clinical performance tracking.",
+    icon: Stethoscope,
+    badge: "Operations",
+  },
+];
+
+const metrics = [
+  { value: "99.99%", label: "System Reliability & Uptime", icon: Activity },
+  { value: "2.8M+", label: "Patient Records Secured", icon: Users },
+  { value: "180+", label: "Hospital & Clinic Networks", icon: Building2 },
+  { value: "100%", label: "HIPAA & ISO 27001 Compliant", icon: ShieldCheck },
+];
+
+export default function LandingPage() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
+    <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950 text-foreground selection:bg-teal-500 selection:text-white">
+      {/* Top Navbar */}
+      <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+        <div className="container mx-auto flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
+          {/* Logo */}
+          <Link href="/" className="flex items-center gap-3 group">
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white dark:bg-slate-900 border p-1 shadow-md group-hover:scale-105 transition-transform">
+              <Image
+                src="/logo/logo.svg"
+                alt="MySarthee Logo"
+                width={32}
+                height={32}
+                className="h-8 w-8 object-contain"
+                priority
+              />
+            </div>
+            <div className="flex flex-col">
+              <span className="font-extrabold text-lg tracking-tight text-foreground">
+                MySarthee
+              </span>
+              <span className="text-[10px] font-semibold text-teal-600 dark:text-teal-400 -mt-1">
+                HealthCare Portal
+              </span>
+            </div>
+          </Link>
+
+          {/* Nav Links */}
+          <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-muted-foreground">
+            <a href="#services" className="hover:text-foreground transition-colors">
+              Healthcare Services
+            </a>
+            <a href="#solutions" className="hover:text-foreground transition-colors">
+              Enterprise Solutions
+            </a>
+            <a href="#compliance" className="hover:text-foreground transition-colors">
+              Compliance & Security
+            </a>
+          </nav>
+
+          {/* Admin Login CTA */}
+          <div className="flex items-center gap-3">
+            <Button
+              asChild
+              size="sm"
+              className="h-9 px-4 bg-teal-600 text-white font-semibold hover:bg-teal-700 dark:bg-teal-500 dark:hover:bg-teal-600 shadow-sm gap-2"
+            >
+              <Link href="/login">
+                <LogIn className="h-4 w-4" />
+                <span>Admin Login</span>
+              </Link>
+            </Button>
+          </div>
+        </div>
+      </header>
+
+      {/* Hero Section */}
+      <section className="relative overflow-hidden pt-16 pb-20 md:pt-24 md:pb-28">
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:32px_32px] pointer-events-none" />
+        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-teal-500/10 rounded-full blur-3xl pointer-events-none" />
+
+        <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          {/* Tagline Badge */}
+          <div className="inline-flex items-center gap-2 rounded-full border border-teal-200 bg-teal-50/80 px-3.5 py-1 text-xs font-semibold text-teal-800 dark:border-teal-900/50 dark:bg-teal-950/50 dark:text-teal-300 mb-6">
+            <Image src="/logo/logo.svg" alt="MySarthee" width={16} height={16} className="h-4 w-4" />
+            <span>Next-Gen Enterprise HealthCare Platform</span>
+          </div>
+
+          <h1 className="max-w-4xl mx-auto text-3xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl text-foreground leading-[1.15]">
+            Unified Healthcare Operations & Intelligent Patient Care Services
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+
+          <p className="mt-6 max-w-2xl mx-auto text-base sm:text-lg text-muted-foreground leading-relaxed">
+            MySarthee provides a comprehensive ecosystem for healthcare providers, administrators, and clinical staff to deliver superior care and streamline administrative operations.
           </p>
+
+          {/* Action CTAs */}
+          <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+            <Button
+              asChild
+              size="lg"
+              className="h-11 px-6 bg-teal-600 text-white font-semibold hover:bg-teal-700 dark:bg-teal-500 dark:hover:bg-teal-600 shadow-md shadow-teal-600/20 gap-2 w-full sm:w-auto"
+            >
+              <Link href="/login">
+                <span>Access Admin Portal</span>
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+            </Button>
+            <Button
+              asChild
+              variant="outline"
+              size="lg"
+              className="h-11 px-6 border-slate-300 dark:border-slate-800 font-semibold w-full sm:w-auto"
+            >
+              <a href="#services">
+                <span>Explore Healthcare Services</span>
+              </a>
+            </Button>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      </section>
+
+      {/* Metrics Bar */}
+      <section className="border-y bg-background py-10">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+            {metrics.map((item, idx) => {
+              const Icon = item.icon;
+              return (
+                <div key={idx} className="flex flex-col items-center p-3">
+                  <Icon className="h-6 w-6 text-teal-600 mb-2" />
+                  <span className="text-2xl sm:text-3xl font-extrabold text-foreground tracking-tight">
+                    {item.value}
+                  </span>
+                  <span className="text-xs text-muted-foreground mt-1 font-medium">
+                    {item.label}
+                  </span>
+                </div>
+              );
+            })}
+          </div>
         </div>
-      </main>
+      </section>
+
+      {/* Offered Services Section */}
+      <section id="services" className="py-20 md:py-28">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-2xl mx-auto mb-16">
+            <h2 className="text-2xl sm:text-4xl font-bold tracking-tight text-foreground">
+              Comprehensive HealthCare Services Offered
+            </h2>
+            <p className="mt-4 text-sm sm:text-base text-muted-foreground leading-relaxed">
+              Explore the full suite of clinical, diagnostic, and administrative healthcare solutions available across our network.
+            </p>
+          </div>
+
+          {/* Services Grid */}
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+            {healthcareServices.map((service, idx) => {
+              const Icon = service.icon;
+              return (
+                <Card
+                  key={idx}
+                  className="group relative overflow-hidden transition-all duration-300 hover:border-teal-500/50 hover:shadow-lg hover:-translate-y-1 bg-card border-slate-200/80 dark:border-slate-800 flex flex-col justify-between"
+                >
+                  <CardHeader className="space-y-3 pb-3">
+                    <div className="flex items-center justify-between">
+                      <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-teal-50 text-teal-700 dark:bg-teal-950/80 dark:text-teal-400 group-hover:bg-teal-600 group-hover:text-white transition-colors">
+                        <Icon className="h-5 w-5" />
+                      </div>
+                      <span className="text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 text-muted-foreground">
+                        {service.badge}
+                      </span>
+                    </div>
+                    <CardTitle className="text-base font-bold text-foreground">
+                      {service.title}
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <CardDescription className="text-xs leading-relaxed text-muted-foreground">
+                      {service.description}
+                    </CardDescription>
+                  </CardContent>
+                </Card>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* Compliance & Security Banner */}
+      <section id="compliance" className="bg-teal-900 text-white py-16">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
+            <div className="space-y-3 max-w-2xl text-center lg:text-left">
+              <span className="text-xs font-semibold uppercase tracking-wider text-teal-300">
+                Enterprise Standards & Security
+              </span>
+              <h3 className="text-2xl sm:text-3xl font-bold tracking-tight">
+                Built to Meet Global Medical Compliance Requirements
+              </h3>
+              <p className="text-sm text-teal-100/80 leading-relaxed">
+                MySarthee ensures strict adherence to HIPAA, GDPR medical privacy standards, end-to-end data encryption, and role-based access control for administrative users.
+              </p>
+            </div>
+            <div className="flex flex-wrap justify-center gap-4 shrink-0">
+              <div className="flex items-center gap-2 rounded-xl bg-teal-800/80 px-4 py-3 border border-teal-700">
+                <CheckCircle2 className="h-5 w-5 text-teal-300" />
+                <span className="text-xs font-semibold">HIPAA Compliant</span>
+              </div>
+              <div className="flex items-center gap-2 rounded-xl bg-teal-800/80 px-4 py-3 border border-teal-700">
+                <CheckCircle2 className="h-5 w-5 text-teal-300" />
+                <span className="text-xs font-semibold">256-bit Encryption</span>
+              </div>
+              <div className="flex items-center gap-2 rounded-xl bg-teal-800/80 px-4 py-3 border border-teal-700">
+                <CheckCircle2 className="h-5 w-5 text-teal-300" />
+                <span className="text-xs font-semibold">HL7 / FHIR Ready</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="mt-auto border-t bg-background py-10">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+            <div className="flex items-center gap-3">
+              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-white dark:bg-slate-900 border p-1">
+                <Image src="/logo/logo.svg" alt="MySarthee Logo" width={24} height={24} className="h-5 w-5" />
+              </div>
+              <span className="font-extrabold text-sm text-foreground">
+                MySarthee HealthCare Solutions
+              </span>
+            </div>
+            <div className="flex items-center gap-6 text-xs text-muted-foreground">
+              <Link href="/login" className="hover:text-foreground font-semibold text-teal-600 dark:text-teal-400">
+                Admin Portal Login
+              </Link>
+              <span>Privacy Policy</span>
+              <span>Terms of Service</span>
+            </div>
+          </div>
+          <div className="mt-8 border-t pt-6 text-center text-xs text-muted-foreground">
+            &copy; {new Date().getFullYear()} MySarthee Enterprise. All rights reserved.
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
