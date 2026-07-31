@@ -36,8 +36,8 @@ export function MobileSidebar() {
       <SheetContent side="left" className="w-72 p-0 flex flex-col">
         {/* Brand Header */}
         <SheetHeader className="h-16 px-4 flex justify-center border-b text-left">
-          <SheetTitle asChild>
-            <Link href="/" className="flex items-center gap-2.5">
+          <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
+          <Link href="/" className="flex items-center gap-2.5">
               <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-slate-100 dark:bg-slate-900 border p-1 shadow-xs">
                 <Image
                   src="/logo/logo.svg"
@@ -56,7 +56,6 @@ export function MobileSidebar() {
                 </span>
               </div>
             </Link>
-          </SheetTitle>
         </SheetHeader>
 
         {/* Nav List */}
@@ -72,7 +71,7 @@ export function MobileSidebar() {
             className="w-full flex items-center justify-start text-xs text-rose-600 hover:text-rose-700 hover:bg-rose-50 dark:hover:bg-rose-950/40 font-semibold gap-2.5 h-9 px-3"
           >
             <LogOut className="h-4 w-4 shrink-0 text-rose-600" />
-            <span>Logout Session</span>
+            <span>Logout</span>
           </Button>
         </div>
       </SheetContent>

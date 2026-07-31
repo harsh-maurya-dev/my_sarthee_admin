@@ -108,7 +108,7 @@ export default function AccountPage() {
           className="h-9 text-xs text-rose-600 border-rose-200 hover:bg-rose-50 font-semibold gap-1.5"
         >
           <LogOut className="h-3.5 w-3.5" />
-          <span>Logout Session</span>
+          <span>Logout</span>
         </Button>
       </div>
 

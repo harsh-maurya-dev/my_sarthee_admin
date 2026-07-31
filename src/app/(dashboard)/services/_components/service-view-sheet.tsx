@@ -143,11 +143,10 @@ export function ServiceViewSheet({
               variant={service.status === "Enabled" ? "outline" : "default"}
               size="sm"
               onClick={handleToggle}
-              className={`h-9 text-xs font-semibold ${
-                service.status === "Enabled"
+              className={`h-9 text-xs font-semibold ${service.status === "Enabled"
                   ? "border-amber-300 text-amber-700 hover:bg-amber-50"
                   : "bg-emerald-600 text-white hover:bg-emerald-700"
-              }`}
+                }`}
             >
               {service.status === "Enabled" ? (
                 <>
@@ -169,7 +168,7 @@ export function ServiceViewSheet({
                 onClose();
                 onDelete(service.id);
               }}
-              className="h-9 text-xs gap-1.5 font-semibold bg-rose-600 hover:bg-rose-700"
+              className="h-9 text-xs gap-1.5 font-semibold border-rose-300 text-rose-600"
             >
               <Trash2 className="h-3.5 w-3.5" />
               Delete Service

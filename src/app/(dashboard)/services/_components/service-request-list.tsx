@@ -140,7 +140,7 @@ export function ServiceRequestList({ availableServices }: ServiceRequestListProp
           <div className="flex items-center gap-2">
             <div className="flex items-center gap-1.5 text-xs">
               <span className="text-muted-foreground font-medium hidden sm:inline">Status:</span>
-              <Select value={statusFilter} onValueChange={(val) => setStatusFilter(val)}>
+              <Select value={statusFilter} onValueChange={(val: any) => setStatusFilter(val || "All")}>
                 <SelectTrigger className="h-9 text-xs w-40">
                   <SelectValue placeholder="Status Filter" />
                 </SelectTrigger>

@@ -129,7 +129,7 @@ export function AddEditJobModal({
 
             <div className="space-y-1.5 w-full">
               <Label className="text-xs font-semibold">Department *</Label>
-              <Select value={department} onValueChange={(val) => setDepartment(val)}>
+              <Select value={department} onValueChange={(val: any) => setDepartment(val || "")}>
                 <SelectTrigger className="h-9 text-xs w-full">
                   <SelectValue placeholder="Department" />
                 </SelectTrigger>

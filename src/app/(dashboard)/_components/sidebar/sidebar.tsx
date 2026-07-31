@@ -72,7 +72,7 @@ export function Sidebar() {
       </div>
 
       {/* Nav List */}
-      <ScrollArea className="flex-1">
+      <ScrollArea className="flex-1 h-[calc(100ch_-70px)] overflow-y-auto">
         <SidebarNav />
       </ScrollArea>
 
@@ -87,7 +87,7 @@ export function Sidebar() {
           )}
         >
           <LogOut className="h-4 w-4 shrink-0 text-rose-600" />
-          {!isCollapsed && <span>Logout Session</span>}
+          {!isCollapsed && <span>Logout</span>}
         </Button>
       </div>
     </aside>

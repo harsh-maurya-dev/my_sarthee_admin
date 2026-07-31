@@ -97,15 +97,13 @@ export function ResetPasswordForm() {
               </p>
             </div>
             <div className="pt-2">
-              <Button
-                asChild
-                className="w-full h-10 bg-teal-600 text-white font-semibold hover:bg-teal-700 dark:bg-teal-500"
+              <Link
+                href="/login"
+                className="inline-flex w-full h-10 items-center justify-center rounded-lg bg-teal-600 text-white font-semibold text-sm hover:bg-teal-700 dark:bg-teal-500"
               >
-                <Link href="/login">
-                  Proceed to Sign In
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
-              </Button>
+                Proceed to Sign In
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
             </div>
           </div>
         ) : (

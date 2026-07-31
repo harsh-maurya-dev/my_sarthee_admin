@@ -113,8 +113,20 @@ export const navGroups: NavGroup[] = [
           { title: "Blog/News Management", href: "/website/blogs" },
         ],
       },
-      { title: "CMS Management", href: "/cms", icon: FileCode },
-      { title: "Account & Profile", href: "/account", icon: UserCog },
+      {
+        title: "CMS Management",
+        href: "/cms",
+        icon: FileCode,
+        subItems: [
+          { title: "Why MySarthee", href: "/cms?tab=why-mysarthee" },
+          { title: "Join as Caregiver", href: "/cms?tab=join-as-caregiver" },
+          { title: "Contact Us", href: "/cms?tab=contact-us" },
+          { title: "Privacy Policy", href: "/cms?tab=privacy-policy" },
+          { title: "Terms & Conditions", href: "/cms?tab=terms-conditions" },
+          { title: "About Us", href: "/cms?tab=about-us" },
+          { title: "FAQs", href: "/cms?tab=faqs" },
+        ],
+      },
     ],
   },
 ];
@@ -252,8 +264,8 @@ export function SidebarNav() {
 
               if (isCollapsed) {
                 return (
-                  <Tooltip key={item.title} delayDuration={0}>
-                    <TooltipTrigger asChild>{mainLink}</TooltipTrigger>
+                  <Tooltip key={item.title}>
+                    <TooltipTrigger>{mainLink}</TooltipTrigger>
                     <TooltipContent side="right" className="font-medium text-xs">
                       {item.title}
                     </TooltipContent>

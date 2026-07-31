@@ -80,7 +80,8 @@ export function ReviewRequestModal({
   const selectedService = availableServices.find((s) => s.id === selectedServiceId);
   const calculatedFinalPrice = Math.max(0, basePrice + addonFee - discount);
 
-  const handleSelectService = (serviceId: string) => {
+  const handleSelectService = (serviceId: string | null) => {
+    if (!serviceId) return;
     setSelectedServiceId(serviceId);
     const service = availableServices.find((s) => s.id === serviceId);
     if (service) {

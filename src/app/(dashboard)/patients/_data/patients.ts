@@ -48,6 +48,11 @@ export interface Patient {
   bloodGroup?: string;
   emergencyContact?: string;
   assignedCaregiver?: string;
+  vitals?: {
+    heartRate: string;
+    bloodPressure: string;
+    oxygenLevel: string;
+  };
   careRequirements?: CareRequirement;
   carePlan?: CarePlan;
   serviceHistory?: ServiceHistoryItem[];

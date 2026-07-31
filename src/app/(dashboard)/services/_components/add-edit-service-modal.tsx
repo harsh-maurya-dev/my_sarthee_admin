@@ -126,7 +126,7 @@ export function AddEditServiceModal({
           <div className="grid grid-cols-2 gap-3">
             <div className="space-y-1.5">
               <Label className="text-xs font-semibold">Category</Label>
-              <Select value={category} onValueChange={(val) => setCategory(val)}>
+              <Select value={category} onValueChange={(val: any) => setCategory(val || "")}>
                 <SelectTrigger className="h-9 text-xs">
                   <SelectValue placeholder="Category" />
                 </SelectTrigger>

@@ -133,16 +133,13 @@ export default function LandingPage() {
 
           {/* Admin Login CTA */}
           <div className="flex items-center gap-3">
-            <Button
-              asChild
-              size="sm"
-              className="h-9 px-4 bg-teal-600 text-white font-semibold hover:bg-teal-700 dark:bg-teal-500 dark:hover:bg-teal-600 shadow-sm gap-2"
+            <Link
+              href="/login"
+              className="inline-flex h-9 px-4 items-center justify-center rounded-lg bg-teal-600 text-white text-xs font-semibold hover:bg-teal-700 dark:bg-teal-500 dark:hover:bg-teal-600 shadow-xs gap-2"
             >
-              <Link href="/login">
-                <LogIn className="h-4 w-4" />
-                <span>Admin Login</span>
-              </Link>
-            </Button>
+              <LogIn className="h-4 w-4" />
+              <span>Admin Login</span>
+            </Link>
           </div>
         </div>
       </header>
@@ -169,26 +166,19 @@ export default function LandingPage() {
 
           {/* Action CTAs */}
           <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Button
-              asChild
-              size="lg"
-              className="h-11 px-6 bg-teal-600 text-white font-semibold hover:bg-teal-700 dark:bg-teal-500 dark:hover:bg-teal-600 shadow-md shadow-teal-600/20 gap-2 w-full sm:w-auto"
+            <Link
+              href="/login"
+              className="inline-flex h-11 px-6 items-center justify-center rounded-lg bg-teal-600 text-white text-sm font-semibold hover:bg-teal-700 dark:bg-teal-500 dark:hover:bg-teal-600 shadow-md shadow-teal-600/20 gap-2 w-full sm:w-auto"
             >
-              <Link href="/login">
-                <span>Access Admin Portal</span>
-                <ArrowRight className="h-4 w-4" />
-              </Link>
-            </Button>
-            <Button
-              asChild
-              variant="outline"
-              size="lg"
-              className="h-11 px-6 border-slate-300 dark:border-slate-800 font-semibold w-full sm:w-auto"
+              <span>Access Admin Portal</span>
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+            <a
+              href="#services"
+              className="inline-flex h-11 px-6 items-center justify-center rounded-lg border border-slate-300 dark:border-slate-800 text-sm font-semibold text-foreground hover:bg-slate-100 dark:hover:bg-slate-900 w-full sm:w-auto"
             >
-              <a href="#services">
-                <span>Explore Healthcare Services</span>
-              </a>
-            </Button>
+              <span>Explore Healthcare Services</span>
+            </a>
           </div>
         </div>
       </section>
