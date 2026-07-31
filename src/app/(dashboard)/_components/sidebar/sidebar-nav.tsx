@@ -92,43 +92,43 @@ export const navGroups: NavGroup[] = [
       { title: "Push Notification Management", href: "/push-notifications", icon: Send },
     ],
   },
-  {
-    // groupName: "Website & Content",
-    items: [
-      {
-        title: "Website Management",
-        href: "/website",
-        icon: Globe,
-        subItems: [
-          {
-            title: "Careers Management",
-            href: "/website/careers",
-            subItems: [
-              { title: "Job Management", href: "/website/careers/jobs" },
-              { title: "Application Management", href: "/website/careers/applications" },
-            ],
-          },
-          { title: "Service Management", href: "/website/services" },
-          { title: "Enquiry Management", href: "/website/enquiries" },
-          { title: "Blog/News Management", href: "/website/blogs" },
-        ],
-      },
-      {
-        title: "CMS Management",
-        href: "/cms",
-        icon: FileCode,
-        subItems: [
-          { title: "Why MySarthee", href: "/cms?tab=why-mysarthee" },
-          { title: "Join as Caregiver", href: "/cms?tab=join-as-caregiver" },
-          { title: "Contact Us", href: "/cms?tab=contact-us" },
-          { title: "Privacy Policy", href: "/cms?tab=privacy-policy" },
-          { title: "Terms & Conditions", href: "/cms?tab=terms-conditions" },
-          { title: "About Us", href: "/cms?tab=about-us" },
-          { title: "FAQs", href: "/cms?tab=faqs" },
-        ],
-      },
-    ],
-  },
+  // {
+  //   // groupName: "Website & Content",
+  //   items: [
+  //     {
+  //       title: "Website Management",
+  //       href: "/website",
+  //       icon: Globe,
+  //       subItems: [
+  //         {
+  //           title: "Careers Management",
+  //           href: "/website/careers",
+  //           subItems: [
+  //             { title: "Job Management", href: "/website/careers/jobs" },
+  //             { title: "Application Management", href: "/website/careers/applications" },
+  //           ],
+  //         },
+  //         { title: "Service Management", href: "/website/services" },
+  //         { title: "Enquiry Management", href: "/website/enquiries" },
+  //         { title: "Blog/News Management", href: "/website/blogs" },
+  //       ],
+  //     },
+  //     {
+  //       title: "CMS Management",
+  //       href: "/cms",
+  //       icon: FileCode,
+  //       subItems: [
+  //         { title: "Why MySarthee", href: "/cms?tab=why-mysarthee" },
+  //         { title: "Join as Caregiver", href: "/cms?tab=join-as-caregiver" },
+  //         { title: "Contact Us", href: "/cms?tab=contact-us" },
+  //         { title: "Privacy Policy", href: "/cms?tab=privacy-policy" },
+  //         { title: "Terms & Conditions", href: "/cms?tab=terms-conditions" },
+  //         { title: "About Us", href: "/cms?tab=about-us" },
+  //         { title: "FAQs", href: "/cms?tab=faqs" },
+  //       ],
+  //     },
+  //   ],
+  // },
 ];
 
 export function SidebarNav() {
