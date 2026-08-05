@@ -28,7 +28,7 @@ export default function RootLayout({
       <head>
         <link rel="icon" href="/logo/logo.svg" type="image/svg+xml" />
       </head>
-      <body className="min-h-full flex flex-col bg-background text-foreground tracking-tight">
+      <body className="min-h-full flex flex-col bg-background dark:bg-slate-950 text-foreground tracking-tight">
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
