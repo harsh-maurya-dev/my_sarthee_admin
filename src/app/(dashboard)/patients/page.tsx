@@ -1,9 +1,13 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import { initialPatients, Patient } from "./_data/patients";
+import {
+  initialPatients360,
+  Patient360,
+  RiskLevel,
+  PatientStatus,
+} from "@/lib/admin-data";
 import { PatientDetailsSheet } from "./_components/patient-details-sheet";
-import { AddPatientModal } from "./_components/add-patient-modal";
 import {
   Table,
   TableBody,
@@ -15,6 +19,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import {
   Select,
   SelectContent,
@@ -23,364 +28,380 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuGroup,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import {
   Search,
   Plus,
   Filter,
   Eye,
-  Download,
   Calendar,
-  RefreshCw,
-  UserCheck,
-  MoreVertical,
-  CheckCircle2,
-  XCircle,
-  Ban,
+  Phone,
+  MapPin,
+  HeartPulse,
+  Sparkles,
+  Download,
+  AlertTriangle,
+  FileCheck,
 } from "lucide-react";
 import { swiftAlert } from "@/lib/swift-alert";
 
 export default function PatientManagementPage() {
-  const [patients, setPatients] = useState<Patient[]>(initialPatients);
+  const [patients, setPatients] = useState<Patient360[]>(initialPatients360);
   const [searchQuery, setSearchQuery] = useState("");
-  const [statusFilter, setStatusFilter] = useState<"All" | "Active" | "Inactive" | "Blocked">("All");
-  const [dateFilter, setDateFilter] = useState("");
-  const [selectedPatient, setSelectedPatient] = useState<Patient | null>(null);
+  const [statusFilter, setStatusFilter] = useState<string>("All");
+  const [locationFilter, setLocationFilter] = useState<string>("All");
+  const [activeTab, setActiveTab] = useState<string>("All");
+  const [selectedPatient, setSelectedPatient] = useState<Patient360 | null>(null);
   const [isSheetOpen, setIsSheetOpen] = useState(false);
-  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
 
-  // Filter patients based on Search (Full Name / Phone Number) and Filters (Status, Date)
+  // Filter patients based on Search, Status, Tab, and Location
   const filteredPatients = useMemo(() => {
-    return patients.filter((patient) => {
+    return patients.filter((p) => {
       const q = searchQuery.toLowerCase();
       const matchesSearch =
-        patient.fullName.toLowerCase().includes(q) ||
-        patient.phoneNumber.toLowerCase().includes(q) ||
-        patient.id.toLowerCase().includes(q);
+        p.fullName.toLowerCase().includes(q) ||
+        p.patientId.toLowerCase().includes(q) ||
+        p.primaryContactPhone.includes(q) ||
+        p.locationArea.toLowerCase().includes(q);
 
       const matchesStatus =
-        statusFilter === "All" || patient.status === statusFilter;
+        statusFilter === "All" || p.currentStatus === statusFilter;
 
-      const matchesDate = !dateFilter || patient.registrationDate === dateFilter;
+      const matchesLocation =
+        locationFilter === "All" || p.locationArea === locationFilter;
 
-      return matchesSearch && matchesStatus && matchesDate;
+      const matchesTab =
+        activeTab === "All" ||
+        (activeTab === "Active" && p.currentStatus === "Active") ||
+        (activeTab === "Completed" && p.currentStatus === "Completed") ||
+        (activeTab === "Risk" && (p.riskIndicator === "Critical" || p.riskIndicator === "High")) ||
+        (activeTab === "Pending" && p.currentStatus === "Pending");
+
+      return matchesSearch && matchesStatus && matchesLocation && matchesTab;
     });
-  }, [patients, searchQuery, statusFilter, dateFilter]);
+  }, [patients, searchQuery, statusFilter, locationFilter, activeTab]);
 
-  const handleViewPatient = (patient: Patient) => {
+  const handleOpen360 = (patient: Patient360) => {
     setSelectedPatient(patient);
     setIsSheetOpen(true);
   };
 
-  const handleUpdateStatus = (patientId: string, newStatus: Patient["status"]) => {
-    setPatients((prev) =>
-      prev.map((p) => (p.id === patientId ? { ...p, status: newStatus } : p))
-    );
+  const handleUpdatePatient = (updated: Patient360) => {
+    setPatients((prev) => prev.map((p) => (p.id === updated.id ? updated : p)));
+    setSelectedPatient(updated);
+  };
 
-    const targetPatient = patients.find((p) => p.id === patientId);
-    const name = targetPatient?.fullName || "Patient";
-
-    if (newStatus === "Active") {
-      swiftAlert.success({
-        title: "Patient Enabled",
-        description: `${name} has been enabled and marked as Active.`,
-      });
-    } else if (newStatus === "Inactive") {
-      swiftAlert.info({
-        title: "Patient Disabled",
-        description: `${name} has been disabled and marked as Inactive.`,
-      });
-    } else if (newStatus === "Blocked") {
-      swiftAlert.error({
-        title: "Patient Blocked",
-        description: `${name} has been blocked from system access.`,
-      });
-    }
-
-    if (selectedPatient && selectedPatient.id === patientId) {
-      setSelectedPatient((prev) => (prev ? { ...prev, status: newStatus } : null));
+  const getRiskBadge = (risk: RiskLevel) => {
+    switch (risk) {
+      case "Critical":
+        return <Badge className="bg-rose-600 text-white font-bold text-[10px] animate-pulse">🔴 Critical</Badge>;
+      case "High":
+        return <Badge className="bg-orange-500 text-white font-bold text-[10px]">🟠 High</Badge>;
+      case "Medium":
+        return <Badge className="bg-amber-500 text-white font-bold text-[10px]">🟡 Medium</Badge>;
+      default:
+        return <Badge className="bg-emerald-600 text-white font-bold text-[10px]">🟢 Normal</Badge>;
     }
   };
 
-  const handleUpdatePatient = (updatedPatient: Patient) => {
-    setPatients((prev) =>
-      prev.map((p) => (p.id === updatedPatient.id ? updatedPatient : p))
-    );
-    setSelectedPatient(updatedPatient);
-  };
-
-  const handleAddPatient = (newPatient: Patient) => {
-    setPatients((prev) => [newPatient, ...prev]);
-  };
-
-  const handleResetFilters = () => {
-    setSearchQuery("");
-    setStatusFilter("All");
-    setDateFilter("");
-    swiftAlert.info({
-      title: "Filters Reset",
-      description: "Displaying all registered patient records.",
-    });
-  };
-
-  const renderStatusBadge = (status: Patient["status"]) => {
+  const getPaymentStatusBadge = (status: string) => {
     switch (status) {
-      case "Active":
-        return <Badge className="bg-emerald-600 text-white font-semibold text-[11px]">Active</Badge>;
-      case "Inactive":
-        return <Badge variant="secondary" className="bg-slate-200 text-slate-700 dark:bg-slate-800 dark:text-slate-300 font-medium text-[11px]">Inactive</Badge>;
-      case "Blocked":
-        return <Badge variant="destructive" className="bg-rose-600 text-white font-semibold text-[11px]">Blocked</Badge>;
+      case "Paid":
+        return <Badge variant="outline" className="text-emerald-700 bg-emerald-50 border-emerald-300 text-[10px]">Paid</Badge>;
+      case "Pending":
+        return <Badge variant="outline" className="text-amber-700 bg-amber-50 border-amber-300 text-[10px]">Pending</Badge>;
+      case "Overdue":
+        return <Badge variant="destructive" className="text-[10px]">Overdue</Badge>;
+      default:
+        return <Badge variant="outline" className="text-[10px]">{status}</Badge>;
     }
   };
 
   return (
-    <div className="space-y-6">
-      {/* Page Header */}
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+    <div className="space-y-6 pb-10">
+      {/* Header */}
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between border-b pb-4">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl flex items-center gap-2">
-            <UserCheck className="h-7 w-7 text-teal-600" />
-            Patient Management
-          </h1>
+          <div className="flex items-center gap-2">
+            <h1 className="text-2xl font-black tracking-tight text-foreground sm:text-3xl">
+              Patient Management
+            </h1>
+            <Badge className="bg-teal-600 text-white font-semibold text-xs">
+              {filteredPatients.length} Patients
+            </Badge>
+          </div>
           <p className="text-xs text-muted-foreground mt-1">
-            Manage patient records, care requirements, care plans, and status actions.
+            Complete directory of home care patients with risk indicators, care plans, and Patient 360° telemetry.
           </p>
         </div>
         <div className="flex items-center gap-2">
           <Button
+            size="sm"
             variant="outline"
-            size="sm"
-            onClick={() =>
-              swiftAlert.success({
-                title: "Report Exported",
-                description: "Exported patient list to CSV format.",
-              })
-            }
-            className="h-9 gap-2 text-xs border-slate-200"
+            className="text-xs font-semibold"
+            onClick={() => swiftAlert.info({ title: "Export Started", description: "Exporting patient directory CSV." })}
           >
-            <Download className="h-3.5 w-3.5" />
-            <span>Export CSV</span>
+            <Download className="h-3.5 w-3.5 mr-1.5" />
+            Export CSV
           </Button>
-          <Button
+          {/* <Button
             size="sm"
-            onClick={() => setIsAddModalOpen(true)}
-            className="h-9 gap-2 bg-teal-600 text-white hover:bg-teal-700 text-xs font-semibold shadow-xs"
+            className="bg-teal-600 hover:bg-teal-700 text-white font-semibold text-xs shadow-sm"
+            onClick={() => swiftAlert.info({ title: "New Patient Intake", description: "Opening intake onboarding workflow." })}
           >
-            <Plus className="h-3.5 w-3.5" />
-            <span>Register Patient</span>
-          </Button>
+            <Plus className="h-4 w-4 mr-1.5" />
+            New Patient Intake
+          </Button> */}
         </div>
       </div>
 
-      {/* Search & Filter Bar */}
-      <div className="rounded-2xl border bg-card p-4 shadow-xs space-y-3">
-        <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
-          {/* Search by Username / Full Name or Phone Number */}
-          <div className="relative flex-1 max-w-md">
-            <Search className="absolute left-3 top-2.5 h-4 w-4 text-muted-foreground" />
-            <Input
-              placeholder="Search by Patient Name or Phone Number..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-9 h-9 text-xs"
-            />
-          </div>
+      {/* Tabs Filter Bar */}
+      <div className="flex items-center gap-2 border-b pb-3 overflow-x-auto scrollbar-none">
+        {[
+          { key: "All", label: "All Patients", count: patients.length },
+          { key: "Active", label: "Active Care", count: patients.filter((p) => p.currentStatus === "Active").length },
+          { key: "Risk", label: "High Risk Triage", count: patients.filter((p) => p.riskIndicator === "Critical" || p.riskIndicator === "High").length },
+          { key: "Completed", label: "Completed Care", count: patients.filter((p) => p.currentStatus === "Completed").length },
+        ].map((tab) => (
+          <button
+            key={tab.key}
+            onClick={() => setActiveTab(tab.key)}
+            className={`flex items-center gap-2 rounded-lg px-3 py-1.5 text-xs font-bold transition-all shrink-0 ${
+              activeTab === tab.key
+                ? "bg-teal-600 text-white shadow-sm"
+                : "bg-slate-100/80 text-muted-foreground hover:bg-slate-200 dark:bg-slate-800"
+            }`}
+          >
+            <span>{tab.label}</span>
+            <span
+              className={`text-[10px] px-1.5 py-0.2 rounded-full ${
+                activeTab === tab.key ? "bg-white/20 text-white" : "bg-slate-200 text-slate-700 dark:bg-slate-700 dark:text-slate-300"
+              }`}
+            >
+              {tab.count}
+            </span>
+          </button>
+        ))}
+      </div>
 
-          {/* Filter Options */}
-          <div className="flex flex-wrap items-center gap-2">
-            {/* Status Filter */}
-            <div className="flex items-center gap-1.5 text-xs">
-              <span className="text-muted-foreground font-medium hidden sm:inline">Status:</span>
-              <Select
-                value={statusFilter}
-                onValueChange={(val: any) => setStatusFilter(val)}
-              >
-                <SelectTrigger className="h-9 text-xs w-32">
-                  <SelectValue placeholder="Status" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="All">All Status</SelectItem>
-                  <SelectItem value="Active">Active Only</SelectItem>
-                  <SelectItem value="Inactive">Inactive Only</SelectItem>
-                  <SelectItem value="Blocked">Blocked Only</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
+      {/* Search & Location Filters */}
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center justify-between">
+        <div className="relative w-full sm:w-80">
+          <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+          <Input
+            type="search"
+            placeholder="Search by name, ID (#MS1024), phone, area..."
+            className="pl-9 text-xs rounded-xl bg-card"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+        </div>
 
-            {/* Date Filter */}
-            <div className="flex items-center gap-1.5 text-xs">
-              <span className="text-muted-foreground font-medium hidden sm:inline">Reg. Date:</span>
-              <div className="relative">
-                <Calendar className="absolute left-2.5 top-2.5 h-3.5 w-3.5 text-muted-foreground" />
-                <Input
-                  type="date"
-                  value={dateFilter}
-                  onChange={(e) => setDateFilter(e.target.value)}
-                  className="h-9 text-xs pl-8 w-36"
-                />
-              </div>
-            </div>
+        <div className="flex items-center gap-2">
+          <Select value={locationFilter} onValueChange={(val) => val && setLocationFilter(val)}>
+            <SelectTrigger className="w-36 h-9 text-xs rounded-xl bg-card">
+              <SelectValue placeholder="Area" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="All">All Locations</SelectItem>
+              <SelectItem value="Andheri">Andheri</SelectItem>
+              <SelectItem value="Bandra">Bandra</SelectItem>
+              <SelectItem value="Powai">Powai</SelectItem>
+              <SelectItem value="Juhu">Juhu</SelectItem>
+              <SelectItem value="South Mumbai">South Mumbai</SelectItem>
+            </SelectContent>
+          </Select>
 
-            {/* Reset Button */}
-            {(searchQuery || statusFilter !== "All" || dateFilter) && (
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={handleResetFilters}
-                className="h-9 text-xs px-2.5 text-muted-foreground hover:text-foreground"
-              >
-                <RefreshCw className="h-3.5 w-3.5 mr-1" />
-                Reset
-              </Button>
-            )}
-          </div>
+          <Select value={statusFilter} onValueChange={(val) => val && setStatusFilter(val)}>
+            <SelectTrigger className="w-36 h-9 text-xs rounded-xl bg-card">
+              <SelectValue placeholder="Status" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="All">All Statuses</SelectItem>
+              <SelectItem value="Active">Active</SelectItem>
+              <SelectItem value="Scheduled">Scheduled</SelectItem>
+              <SelectItem value="Completed">Completed</SelectItem>
+            </SelectContent>
+          </Select>
         </div>
       </div>
 
-      {/* Patient Data Table */}
+      {/* Patient Table with all required columns */}
       <div className="rounded-2xl border bg-card shadow-xs overflow-hidden">
-        <Table>
-          <TableHeader className="bg-slate-50 dark:bg-slate-900/60">
-            <TableRow>
-              <TableHead className="font-bold text-xs">Full Name</TableHead>
-              <TableHead className="font-bold text-xs">Age / Gender</TableHead>
-              <TableHead className="font-bold text-xs">DOB</TableHead>
-              <TableHead className="font-bold text-xs">Phone Number</TableHead>
-              <TableHead className="font-bold text-xs">Address / Location</TableHead>
-              <TableHead className="font-bold text-xs">Medical Condition</TableHead>
-              <TableHead className="font-bold text-xs text-center">Status</TableHead>
-              <TableHead className="font-bold text-xs text-right">Actions</TableHead>
+        <Table className="min-w-[1100px] w-full">
+          <TableHeader>
+            <TableRow className="bg-slate-50/80 dark:bg-slate-900/50 hover:bg-slate-50/80">
+              <TableHead className="text-xs font-bold uppercase tracking-wider text-muted-foreground w-64">
+                Patient Name & ID
+              </TableHead>
+              <TableHead className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                Age / Gender
+              </TableHead>
+              <TableHead className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                Care Required
+              </TableHead>
+              <TableHead className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                Location
+              </TableHead>
+              <TableHead className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                Primary Contact
+              </TableHead>
+              <TableHead className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                Assigned Professional
+              </TableHead>
+              <TableHead className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                Start Date
+              </TableHead>
+              <TableHead className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                Current Status
+              </TableHead>
+              <TableHead className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                Payment Status
+              </TableHead>
+              <TableHead className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                Risk Indicator
+              </TableHead>
+              <TableHead className="text-xs font-bold uppercase tracking-wider text-muted-foreground text-right">
+                Action
+              </TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {filteredPatients.length === 0 ? (
               <TableRow>
-                <TableCell colSpan={8} className="text-center py-12 text-muted-foreground text-xs font-medium">
-                  No registered patients found matching your search or filter criteria.
+                <TableCell colSpan={11} className="h-32 text-center text-xs text-muted-foreground">
+                  No patients matching your criteria.
                 </TableCell>
               </TableRow>
             ) : (
-              filteredPatients.map((patient) => (
-                <TableRow key={patient.id} className="hover:bg-slate-50/80 dark:hover:bg-slate-900/40">
-                  <TableCell className="font-semibold text-xs text-foreground">
-                    <div className="flex flex-col">
-                      <span>{patient.fullName}</span>
-                      <span className="text-[10px] font-mono text-muted-foreground font-normal">
-                        {patient.id}
+              filteredPatients.map((p) => {
+                const assignedPro = p.assignedTeam[0];
+                const latestInvoice = p.invoices[0];
+
+                return (
+                  <TableRow
+                    key={p.id}
+                    className="cursor-pointer transition-colors hover:bg-slate-50/80 dark:hover:bg-slate-900/50"
+                    onClick={() => handleOpen360(p)}
+                  >
+                    {/* Patient Name & ID */}
+                    <TableCell className="py-3">
+                      <div className="flex items-center gap-2.5">
+                        <Avatar className="h-8 w-8 bg-teal-100 text-teal-800 text-xs font-bold shrink-0">
+                          <AvatarFallback>{p.fullName.slice(0, 2).toUpperCase()}</AvatarFallback>
+                        </Avatar>
+                        <div>
+                          <div className="text-xs font-bold text-foreground hover:text-teal-600 transition-colors">
+                            {p.fullName}
+                          </div>
+                          <span className="text-[10px] font-mono text-muted-foreground">
+                            {p.patientId}
+                          </span>
+                        </div>
+                      </div>
+                    </TableCell>
+
+                    {/* Age / Gender */}
+                    <TableCell className="text-xs font-medium text-foreground py-3">
+                      {p.age}y / {p.gender.slice(0, 1)}
+                    </TableCell>
+
+                    {/* Care Required */}
+                    <TableCell className="py-3">
+                      <Badge variant="outline" className="text-[10px] font-semibold">
+                        {p.careRequired}
+                      </Badge>
+                    </TableCell>
+
+                    {/* Location Area */}
+                    <TableCell className="text-xs font-medium text-muted-foreground py-3">
+                      <span className="flex items-center gap-1">
+                        <MapPin className="h-3 w-3 text-teal-600 shrink-0" />
+                        {p.locationArea}
                       </span>
-                    </div>
-                  </TableCell>
-                  <TableCell className="text-xs">
-                    {patient.age} yrs · <span className="text-muted-foreground">{patient.gender}</span>
-                  </TableCell>
-                  <TableCell className="text-xs text-muted-foreground">
-                    {patient.dateOfBirth}
-                  </TableCell>
-                  <TableCell className="text-xs font-mono">
-                    {patient.phoneNumber}
-                  </TableCell>
-                  <TableCell className="text-xs max-w-[180px] truncate text-muted-foreground">
-                    {patient.address}
-                  </TableCell>
-                  <TableCell className="text-xs font-medium text-teal-700 dark:text-teal-400 max-w-[200px] truncate">
-                    {patient.medicalCondition}
-                  </TableCell>
-                  <TableCell className="text-center">
-                    {renderStatusBadge(patient.status)}
-                  </TableCell>
-                  <TableCell className="text-right">
-                    <div className="flex items-center justify-end gap-1">
+                    </TableCell>
+
+                    {/* Primary Contact */}
+                    <TableCell className="py-3">
+                      <div className="text-xs font-semibold text-foreground">
+                        {p.primaryContactName}
+                      </div>
+                      <div className="text-[10px] text-muted-foreground flex items-center gap-1">
+                        <Phone className="h-2.5 w-2.5 text-teal-600" />
+                        {p.primaryContactPhone}
+                      </div>
+                    </TableCell>
+
+                    {/* Assigned Professional */}
+                    <TableCell className="py-3">
+                      {assignedPro ? (
+                        <div>
+                          <span className="text-xs font-bold text-foreground block">
+                            {assignedPro.name}
+                          </span>
+                          <span className="text-[10px] text-muted-foreground">
+                            {assignedPro.role}
+                          </span>
+                        </div>
+                      ) : (
+                        <span className="text-xs font-bold text-amber-600">Pending</span>
+                      )}
+                    </TableCell>
+
+                    {/* Start Date */}
+                    <TableCell className="text-xs text-muted-foreground py-3">
+                      {p.careStartDate}
+                    </TableCell>
+
+                    {/* Current Status */}
+                    <TableCell className="py-3">
+                      <Badge
+                        className={`text-[10px] font-bold ${
+                          p.currentStatus === "Active"
+                            ? "bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300"
+                            : p.currentStatus === "Scheduled"
+                            ? "bg-sky-100 text-sky-800 dark:bg-sky-950 dark:text-sky-300"
+                            : "bg-slate-100 text-slate-700"
+                        }`}
+                      >
+                        {p.currentStatus}
+                      </Badge>
+                    </TableCell>
+
+                    {/* Payment Status */}
+                    <TableCell className="py-3">
+                      {latestInvoice ? getPaymentStatusBadge(latestInvoice.status) : <Badge variant="outline" className="text-[10px]">N/A</Badge>}
+                    </TableCell>
+
+                    {/* Risk Indicator */}
+                    <TableCell className="py-3">
+                      {getRiskBadge(p.riskIndicator)}
+                    </TableCell>
+
+                    {/* Action Button */}
+                    <TableCell className="text-right py-3" onClick={(e) => e.stopPropagation()}>
                       <Button
                         size="sm"
-                        variant="outline"
-                        onClick={() => handleViewPatient(patient)}
-                        className="h-8 text-xs gap-1 font-medium border-slate-200 hover:bg-teal-50 hover:text-teal-700 hover:border-teal-300 dark:hover:bg-teal-950"
+                        variant="ghost"
+                        className="h-7 text-xs font-bold text-teal-700 hover:text-teal-800 hover:bg-teal-50"
+                        onClick={() => handleOpen360(p)}
                       >
-                        <Eye className="h-3.5 w-3.5" />
-                        <span>View</span>
+                        <Eye className="h-3.5 w-3.5 mr-1" />
+                        360° View
                       </Button>
-
-                      {/* Action Button Dropdown (Enable, Disable, Block User) */}
-                      <DropdownMenu>
-                        <DropdownMenuTrigger className="inline-flex h-8 w-8 items-center justify-center rounded-lg border border-slate-200 bg-background text-muted-foreground transition-colors hover:bg-slate-100 hover:text-foreground dark:border-slate-800 dark:hover:bg-slate-800">
-                          <MoreVertical className="h-4 w-4" />
-                          <span className="sr-only">Patient Actions</span>
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent align="end" className="w-48 bg-card border shadow-lg">
-                          <DropdownMenuGroup>
-                            <DropdownMenuLabel className="text-[11px] font-semibold text-muted-foreground">
-                              Account Actions
-                            </DropdownMenuLabel>
-                          </DropdownMenuGroup>
-                          <DropdownMenuSeparator />
-                          <DropdownMenuItem
-                            onClick={() => handleUpdateStatus(patient.id, "Active")}
-                            disabled={patient.status === "Active"}
-                            className="cursor-pointer text-xs text-emerald-600 focus:text-emerald-700 focus:bg-emerald-50 dark:focus:bg-emerald-950/40"
-                          >
-                            <CheckCircle2 className="mr-2 h-3.5 w-3.5" />
-                            <span>Enable</span>
-                          </DropdownMenuItem>
-                          <DropdownMenuItem
-                            onClick={() => handleUpdateStatus(patient.id, "Inactive")}
-                            disabled={patient.status === "Inactive"}
-                            className="cursor-pointer text-xs text-slate-700 dark:text-slate-300 focus:bg-slate-100 dark:focus:bg-slate-800"
-                          >
-                            <XCircle className="mr-2 h-3.5 w-3.5" />
-                            <span>Disable</span>
-                          </DropdownMenuItem>
-                          <DropdownMenuSeparator />
-                          <DropdownMenuItem
-                            onClick={() => handleUpdateStatus(patient.id, "Blocked")}
-                            disabled={patient.status === "Blocked"}
-                            className="cursor-pointer text-xs text-rose-600 focus:text-rose-700 focus:bg-rose-50 dark:focus:bg-rose-950/40"
-                          >
-                            <Ban className="mr-2 h-3.5 w-3.5" />
-                            <span>Block User</span>
-                          </DropdownMenuItem>
-                        </DropdownMenuContent>
-                      </DropdownMenu>
-                    </div>
-                  </TableCell>
-                </TableRow>
-              ))
+                    </TableCell>
+                  </TableRow>
+                );
+              })
             )}
           </TableBody>
         </Table>
-
-        {/* Footer Summary */}
-        <div className="p-4 border-t bg-slate-50/50 dark:bg-slate-900/30 flex items-center justify-between text-xs text-muted-foreground">
-          <span>
-            Showing <strong className="text-foreground">{filteredPatients.length}</strong> of{" "}
-            <strong className="text-foreground">{patients.length}</strong> registered patients
-          </span>
-          <span className="font-medium text-teal-600 dark:text-teal-400">
-            System Live Sync Active
-          </span>
-        </div>
       </div>
 
-      {/* Patient Details Sheet Drawer */}
+      {/* Patient 360° Sheet Modal */}
       <PatientDetailsSheet
         patient={selectedPatient}
         isOpen={isSheetOpen}
         onClose={() => setIsSheetOpen(false)}
         onUpdatePatient={handleUpdatePatient}
-      />
-
-      {/* Register Patient Modal */}
-      <AddPatientModal
-        isOpen={isAddModalOpen}
-        onClose={() => setIsAddModalOpen(false)}
-        onAddPatient={handleAddPatient}
       />
     </div>
   );

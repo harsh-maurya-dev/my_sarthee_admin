@@ -1,19 +1,51 @@
 "use client";
 
+import { useState } from "react";
 import { useTheme } from "next-themes";
-import { Menu, Search, Bell, Moon, Sun, Palette, Command, PanelLeft } from "lucide-react";
+import Link from "next/link";
+import {
+  Menu,
+  Bell,
+  Moon,
+  Sun,
+  ShieldCheck,
+  AlertTriangle,
+  ChevronDown,
+  Activity,
+  CheckCircle2,
+  Users2,
+} from "lucide-react";
 import { useSidebar } from "@/context/sidebar-context";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Badge } from "@/components/ui/badge";
 import { UserNav } from "./user-nav";
+import { systemRoles, UserRole } from "@/lib/admin-data";
+import { swiftAlert } from "@/lib/swift-alert";
 
 export function Topbar() {
-  const { toggleMobileSidebar, toggleSidebar } = useSidebar();
+  const { toggleMobileSidebar } = useSidebar();
   const { theme, setTheme } = useTheme();
+  const [activeRole, setActiveRole] = useState<UserRole>("Super Admin");
+
+  const handleRoleChange = (role: UserRole) => {
+    setActiveRole(role);
+    swiftAlert.info({
+      title: `Switched View: ${role}`,
+      description: `Viewing operational permissions and dashboards configured for ${role}.`,
+    });
+  };
 
   return (
-    <header className="sticky top-0 z-30 flex h-16 w-full items-center justify-between  bg-background/95 px-4 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      {/* Left: Menu Toggles & Search Bar */}
+    <header className="sticky top-0 z-30 flex h-16 w-full items-center justify-between border-b border-border/40 bg-background/95 px-4 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      {/* Left: Mobile Toggle & System Live Badge */}
       <div className="flex items-center gap-3">
         <Button
           variant="ghost"
@@ -25,54 +57,89 @@ export function Topbar() {
           <span className="sr-only">Toggle Mobile Menu</span>
         </Button>
 
-        {/* <Button
-          variant="ghost"
-          size="icon"
-          className="hidden md:flex h-9 w-9 text-muted-foreground hover:text-foreground"
-          onClick={toggleSidebar}
-        >
-          <PanelLeft className="h-4 w-4" />
-          <span className="sr-only">Toggle Sidebar</span>
-        </Button> */}
-
-        {/* Global Search Bar */}
-        {/* <div className="relative w-48 sm:w-64 md:w-80">
-          <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-          <Input
-            type="search"
-            placeholder="Search..."
-            className="w-full rounded-lg bg-slate-100/80 pl-9 pr-12 text-sm border-0 focus-visible:ring-1 focus-visible:ring-ring dark:bg-slate-800/60"
-          />
-          <div className="absolute right-2.5 top-2.5 flex items-center gap-0.5 rounded border bg-background px-1.5 py-0.5 text-[10px] font-medium text-muted-foreground shadow-xs">
-            <Command className="h-2.5 w-2.5" />
-            <span>K</span>
-          </div>
-        </div> */}
+        {/* Live Operational Status */}
+        <div className="hidden sm:flex items-center gap-2 rounded-full border border-emerald-200/80 bg-emerald-50/70 px-3 py-1 text-xs font-semibold text-emerald-800 dark:border-emerald-900/60 dark:bg-emerald-950/40 dark:text-emerald-300">
+          <span className="relative flex h-2 w-2">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+          </span>
+          <span>Care Delivery Live</span>
+          <span className="text-[10px] text-muted-foreground/80">· 114 Pros On Duty</span>
+        </div>
       </div>
 
-      {/* Right Actions */}
+      {/* Right Actions: Role Selector, Critical Escalation Banner, Notifications, Theme, User */}
       <div className="flex items-center gap-2 sm:gap-3">
-        {/* <Button
-          variant="ghost"
-          size="sm"
-          className="hidden sm:inline-flex text-xs font-semibold text-teal-600 hover:text-teal-700 hover:bg-teal-50 dark:text-teal-400 dark:hover:bg-teal-950/40"
-        >
-          <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse mr-1.5" />
-          HealthCare Live
-        </Button> */}
+        {/* Role Switcher Preview */}
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button
+              variant="outline"
+              size="sm"
+              className="h-8 gap-1.5 rounded-lg border-teal-200 bg-teal-50/50 text-xs font-semibold text-teal-900 hover:bg-teal-100/70 dark:border-teal-900 dark:bg-teal-950/40 dark:text-teal-200"
+            >
+              <ShieldCheck className="h-3.5 w-3.5 text-teal-600 dark:text-teal-400" />
+              <span className="hidden md:inline">Role:</span> {activeRole}
+              <ChevronDown className="h-3 w-3 text-teal-600/70 dark:text-teal-400/70" />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end" className="w-64">
+            <DropdownMenuLabel className="text-xs font-bold text-muted-foreground uppercase tracking-wider">
+              Switch Admin Role View
+            </DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            {systemRoles.map((r) => (
+              <DropdownMenuItem
+                key={r.role}
+                onClick={() => handleRoleChange(r.role)}
+                className="flex items-start justify-between cursor-pointer py-2"
+              >
+                <div className="space-y-0.5">
+                  <div className="flex items-center gap-1.5">
+                    <span className="text-xs font-bold text-foreground">{r.role}</span>
+                    {activeRole === r.role && (
+                      <CheckCircle2 className="h-3 w-3 text-teal-600" />
+                    )}
+                  </div>
+                  <p className="text-[10px] text-muted-foreground leading-tight line-clamp-1">
+                    {r.description}
+                  </p>
+                </div>
+              </DropdownMenuItem>
+            ))}
+          </DropdownMenuContent>
+        </DropdownMenu>
+
+        {/* Critical Escalations Quick Link */}
+        <Link href="/escalations">
+          <Button
+            variant="ghost"
+            size="sm"
+            className="h-8 gap-1.5 text-xs font-bold text-rose-600 bg-rose-50 hover:bg-rose-100 dark:bg-rose-950/50 dark:text-rose-300 px-2.5"
+          >
+            <AlertTriangle className="h-3.5 w-3.5 animate-bounce" />
+            <span className="hidden sm:inline">3 Critical Alerts</span>
+          </Button>
+        </Link>
 
         {/* Notifications */}
-        <Button variant="ghost" size="icon" className="relative h-9 w-9 text-muted-foreground hover:text-foreground">
-          <Bell className="h-4 w-4" />
-          <span className="absolute right-2 top-2 h-2 w-2 rounded-full bg-rose-500 ring-2 ring-background" />
-          <span className="sr-only">Notifications</span>
-        </Button>
+        <Link href="/communication">
+          <Button
+            variant="ghost"
+            size="icon"
+            className="relative h-8 w-8 text-muted-foreground hover:text-foreground"
+          >
+            <Bell className="h-4 w-4" />
+            <span className="absolute right-1.5 top-1.5 h-2 w-2 rounded-full bg-rose-500 ring-2 ring-background" />
+            <span className="sr-only">Notifications</span>
+          </Button>
+        </Link>
 
         {/* Theme Toggle */}
         <Button
           variant="ghost"
           size="icon"
-          className="h-9 w-9 text-muted-foreground hover:text-foreground"
+          className="h-8 w-8 text-muted-foreground hover:text-foreground"
           onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
         >
           <Sun className="h-4 w-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
@@ -80,13 +147,7 @@ export function Topbar() {
           <span className="sr-only">Toggle Theme</span>
         </Button>
 
-        {/* Customization / Palette */}
-        {/* <Button variant="ghost" size="icon" className="h-9 w-9 text-muted-foreground hover:text-foreground">
-          <Palette className="h-4 w-4" />
-          <span className="sr-only">Customization</span>
-        </Button> */}
-
-        {/* User Navigation Dropdown */}
+        {/* User Profile */}
         <UserNav />
       </div>
     </header>

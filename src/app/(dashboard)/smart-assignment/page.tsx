@@ -1,377 +1,269 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState } from "react";
 import {
-  PatientRequirement,
-  CaregiverCandidate,
-  initialPendingAssignments,
-} from "./_data/assignments";
-import { AnalyzeRequirementModal } from "./_components/analyze-requirement-modal";
-import { AssignCaregiverModal } from "./_components/assign-caregiver-modal";
-import { AssignmentConfirmationModal } from "./_components/assignment-confirmation-modal";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
+  initialBookings,
+  initialCareProfessionals,
+  BookingItem,
+  CareProfessional,
+} from "@/lib/admin-data";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import {
   Sparkles,
-  Search,
-  Filter,
-  Activity,
+  MapPin,
   CheckCircle2,
   Clock,
+  Send,
   UserCheck,
-  MapPin,
-  RefreshCw,
-  Zap,
-  TrendingUp,
-  AlertTriangle,
+  Search,
+  Filter,
+  Check,
+  ShieldCheck,
+  Stethoscope,
+  ArrowRight,
 } from "lucide-react";
 import { swiftAlert } from "@/lib/swift-alert";
 
-export default function SmartAssignmentPage() {
-  const [assignments, setAssignments] = useState<PatientRequirement[]>(initialPendingAssignments);
-  const [searchQuery, setSearchQuery] = useState("");
-  const [roleFilter, setRoleFilter] = useState<"All" | "Nurse" | "Caregiver" | "Physiotherapist">("All");
-  const [urgencyFilter, setUrgencyFilter] = useState<"All" | "Normal" | "High" | "Urgent">("All");
+export default function SmartAssignmentEnginePage() {
+  const [bookings, setBookings] = useState<BookingItem[]>(initialBookings);
+  const [selectedBooking, setSelectedBooking] = useState<BookingItem>(bookings[0]);
+  const [professionals, setProfessionals] = useState<CareProfessional[]>(initialCareProfessionals);
 
-  // Modal states
-  const [selectedRequirement, setSelectedRequirement] = useState<PatientRequirement | null>(null);
-  const [isAnalyzeOpen, setIsAnalyzeOpen] = useState(false);
+  // Available professionals ranked for smart matching
+  const matchingCandidates = professionals
+    .filter((p) => p.status === "Available" || p.status === "Care Completed")
+    .map((p) => {
+      let score = 80;
+      const reasons: string[] = [];
 
-  const [assignRequirement, setAssignRequirement] = useState<PatientRequirement | null>(null);
-  const [isAssignOpen, setIsAssignOpen] = useState(false);
+      if (p.area === selectedBooking.locationArea) {
+        score += 15;
+        reasons.push(`Area Match (${p.area})`);
+      } else {
+        reasons.push(`Nearby (${p.area} - 4.2 km)`);
+      }
 
-  const [confirmedReq, setConfirmedReq] = useState<PatientRequirement | null>(null);
-  const [confirmedCaregiver, setConfirmedCaregiver] = useState<CaregiverCandidate | null>(null);
-  const [isConfirmOpen, setIsConfirmOpen] = useState(false);
+      if (
+        (selectedBooking.careType === "Nursing" && p.type === "Nurse") ||
+        (selectedBooking.careType === "Personal Care" && p.type === "Caregiver") ||
+        (selectedBooking.careType === "Physiotherapy" && p.type === "Physiotherapist") ||
+        selectedBooking.careType === "Combination"
+      ) {
+        score += 10;
+        reasons.push(`Skill & Role Perfect Match (${p.type})`);
+      }
 
-  // Filtered
-  const filteredAssignments = useMemo(() => {
-    return assignments.filter((req) => {
-      const q = searchQuery.toLowerCase();
-      const matchesSearch =
-        req.patientName.toLowerCase().includes(q) ||
-        req.condition.toLowerCase().includes(q) ||
-        req.id.toLowerCase().includes(q) ||
-        req.location.neighborhood.toLowerCase().includes(q);
+      if (p.rating >= 4.8) {
+        score += 5;
+        reasons.push(`High Satisfaction Rating (★ ${p.rating})`);
+      }
 
-      const matchesRole = roleFilter === "All" || req.requestedRole === roleFilter;
-      const matchesUrgency = urgencyFilter === "All" || req.urgency === urgencyFilter;
+      const finalScore = Math.min(score, 99);
+      return {
+        ...p,
+        matchScore: finalScore,
+        matchReasons: reasons,
+      };
+    })
+    .sort((a, b) => b.matchScore - a.matchScore);
 
-      return matchesSearch && matchesRole && matchesUrgency;
-    });
-  }, [assignments, searchQuery, roleFilter, urgencyFilter]);
-
-  // Handlers
-  const handleOpenAnalyze = (req: PatientRequirement) => {
-    setSelectedRequirement(req);
-    setIsAnalyzeOpen(true);
-  };
-
-  const handleOpenAssign = (req: PatientRequirement) => {
-    setAssignRequirement(req);
-    setIsAssignOpen(true);
-  };
-
-  const handleConfirmAssignment = (req: PatientRequirement, caregiver: CaregiverCandidate) => {
-    // Update assignment status
-    setAssignments((prev) =>
-      prev.map((item) =>
-        item.id === req.id
+  const handleAssignProfessional = (pro: typeof matchingCandidates[0]) => {
+    // Update booking status
+    setBookings((prev) =>
+      prev.map((b) =>
+        b.id === selectedBooking.id
           ? {
-              ...item,
-              status: "Assigned",
-              assignedCaregiverId: caregiver.id,
-              assignedCaregiverName: caregiver.name,
+              ...b,
+              status: "Upcoming",
+              assignedProfessional: {
+                name: pro.name,
+                type: pro.type,
+                phone: pro.phone,
+              },
             }
-          : item
+          : b
       )
     );
 
-    setConfirmedReq(req);
-    setConfirmedCaregiver(caregiver);
-    setIsConfirmOpen(true);
+    // Update professional status to Assigned
+    setProfessionals((prev) =>
+      prev.map((p) => (p.id === pro.id ? { ...p, status: "Assigned" } : p))
+    );
 
     swiftAlert.success({
-      title: "Smart Match Complete",
-      description: `${caregiver.name} assigned to ${req.patientName}. Notifications dispatched.`,
+      title: "Smart Assignment Confirmed!",
+      description: `${pro.name} (${pro.type}) successfully assigned to ${selectedBooking.patientName} (${selectedBooking.bookingCode}). WhatsApp dispatch notification sent.`,
     });
   };
 
-  const pendingCount = assignments.filter((a) => a.status === "Pending Assignment").length;
-  const assignedToday = assignments.filter((a) => a.status === "Assigned").length;
-  const urgentCount = assignments.filter((a) => a.urgency === "Urgent" && a.status === "Pending Assignment").length;
-
   return (
-    <div className="space-y-6">
-      {/* Page Header */}
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+    <div className="space-y-6 pb-10">
+      {/* Header */}
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between border-b pb-4">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl flex items-center gap-2">
-            <Sparkles className="h-7 w-7 text-teal-600" />
-            Smart Assignment Engine
-          </h1>
+          <div className="flex items-center gap-2">
+            <h1 className="text-2xl font-black tracking-tight text-foreground sm:text-3xl">
+              Smart Assignment Engine
+            </h1>
+            <Badge className="bg-teal-600 text-white font-semibold text-xs flex items-center gap-1">
+              <Sparkles className="h-3 w-3" /> AI Proximity & Skill Matcher
+            </Badge>
+          </div>
           <p className="text-xs text-muted-foreground mt-1">
-            Automated AI caregiver matching based on patient condition, proximity, availability, skills & gender preference.
+            Recommends best available Nurses, Caregivers, and Physios matching patient area, clinical needs, and rating.
           </p>
         </div>
-        <Button
-          size="sm"
-          onClick={() => {
-            if (filteredAssignments.length > 0) {
-              handleOpenAssign(filteredAssignments[0]);
-            }
-          }}
-          className="h-9 gap-2 bg-teal-600 text-white hover:bg-teal-700 text-xs font-semibold shadow-xs"
-        >
-          <Zap className="h-3.5 w-3.5" />
-          <span>Auto-Match Next Request</span>
-        </Button>
       </div>
 
-      {/* KPI Stats Cards */}
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-        <div className="rounded-2xl border bg-card p-4 shadow-xs flex items-center justify-between">
-          <div>
-            <p className="text-xs font-medium text-muted-foreground">Pending Assignments</p>
-            <h3 className="text-2xl font-extrabold text-foreground mt-1">{pendingCount}</h3>
-            <p className="text-[10px] text-amber-600 font-semibold mt-0.5">Awaiting Caregiver Match</p>
-          </div>
-          <div className="h-10 w-10 rounded-full bg-amber-100 dark:bg-amber-950 text-amber-600 flex items-center justify-center">
-            <Clock className="h-5 w-5" />
-          </div>
-        </div>
-
-        <div className="rounded-2xl border bg-card p-4 shadow-xs flex items-center justify-between">
-          <div>
-            <p className="text-xs font-medium text-muted-foreground">Urgent Care Needs</p>
-            <h3 className="text-2xl font-extrabold text-foreground mt-1">{urgentCount}</h3>
-            <p className="text-[10px] text-rose-600 font-semibold mt-0.5">Requires Immediate Dispatch</p>
-          </div>
-          <div className="h-10 w-10 rounded-full bg-rose-100 dark:bg-rose-950 text-rose-600 flex items-center justify-center">
-            <AlertTriangle className="h-5 w-5" />
-          </div>
-        </div>
-
-        <div className="rounded-2xl border bg-card p-4 shadow-xs flex items-center justify-between">
-          <div>
-            <p className="text-xs font-medium text-muted-foreground">Matched Today</p>
-            <h3 className="text-2xl font-extrabold text-foreground mt-1">{assignedToday}</h3>
-            <p className="text-[10px] text-emerald-600 font-semibold mt-0.5">100% Match Accuracy</p>
-          </div>
-          <div className="h-10 w-10 rounded-full bg-emerald-100 dark:bg-emerald-950 text-emerald-600 flex items-center justify-center">
-            <UserCheck className="h-5 w-5" />
-          </div>
-        </div>
-      </div>
-
-      {/* Filter Bar */}
-      <div className="rounded-2xl border bg-card p-4 shadow-xs space-y-3">
-        <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
-          <div className="relative flex-1 max-w-md">
-            <Search className="absolute left-3 top-2.5 h-4 w-4 text-muted-foreground" />
-            <Input
-              placeholder="Search by Patient Name, Condition, or Location..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-9 h-9 text-xs"
-            />
-          </div>
-
-          <div className="flex flex-wrap items-center gap-2">
-            <div className="flex items-center gap-1.5 text-xs">
-              <span className="text-muted-foreground font-medium hidden sm:inline">Role Needed:</span>
-              <Select value={roleFilter} onValueChange={(val: any) => setRoleFilter(val)}>
-                <SelectTrigger className="h-9 text-xs w-36">
-                  <SelectValue placeholder="Role" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="All">All Roles</SelectItem>
-                  <SelectItem value="Nurse">Nurse</SelectItem>
-                  <SelectItem value="Caregiver">Caregiver</SelectItem>
-                  <SelectItem value="Physiotherapist">Physiotherapist</SelectItem>
-                </SelectContent>
-              </Select>
+      {/* Main Grid: Left Bookings Queue, Right Match Recommendations */}
+      <div className="grid gap-6 lg:grid-cols-12">
+        {/* Left Column: Bookings Awaiting Assignment */}
+        <div className="lg:col-span-5 rounded-2xl border bg-card p-5 shadow-xs space-y-4">
+          <div className="flex items-center justify-between border-b pb-3">
+            <div>
+              <h2 className="text-sm font-extrabold text-foreground">Open Bookings Queue</h2>
+              <p className="text-[11px] text-muted-foreground">Select a booking to run smart matching</p>
             </div>
-
-            <div className="flex items-center gap-1.5 text-xs">
-              <span className="text-muted-foreground font-medium hidden sm:inline">Urgency:</span>
-              <Select value={urgencyFilter} onValueChange={(val: any) => setUrgencyFilter(val)}>
-                <SelectTrigger className="h-9 text-xs w-32">
-                  <SelectValue placeholder="Urgency" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="All">All Urgency</SelectItem>
-                  <SelectItem value="Normal">Normal</SelectItem>
-                  <SelectItem value="High">High</SelectItem>
-                  <SelectItem value="Urgent">Urgent Only</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
+            <Badge variant="outline" className="text-xs font-bold text-amber-700 bg-amber-50 border-amber-300">
+              {bookings.filter((b) => b.status === "Pending Assignment" || b.status === "New").length} Awaiting
+            </Badge>
           </div>
-        </div>
-      </div>
 
-      {/* Pending Assignments Data Table */}
-      <div className="rounded-2xl border bg-card shadow-xs overflow-hidden">
-        <Table>
-          <TableHeader className="bg-slate-50 dark:bg-slate-900/60">
-            <TableRow>
-              <TableHead className="font-bold text-xs">Booking ID / Patient</TableHead>
-              <TableHead className="font-bold text-xs">Health Condition</TableHead>
-              <TableHead className="font-bold text-xs">Requested Role</TableHead>
-              <TableHead className="font-bold text-xs">Shift & Location</TableHead>
-              <TableHead className="font-bold text-xs text-center">Urgency</TableHead>
-              <TableHead className="font-bold text-xs text-center">Status</TableHead>
-              <TableHead className="font-bold text-xs text-right">Actions</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {filteredAssignments.length === 0 ? (
-              <TableRow>
-                <TableCell colSpan={7} className="text-center py-12 text-muted-foreground text-xs font-medium">
-                  No pending assignments found matching your filter criteria.
-                </TableCell>
-              </TableRow>
-            ) : (
-              filteredAssignments.map((req) => (
-                <TableRow key={req.id} className="hover:bg-slate-50/80 dark:hover:bg-slate-900/40">
-                  {/* Booking ID & Patient */}
-                  <TableCell className="text-xs">
-                    <div className="flex flex-col">
-                      <span className="font-bold text-foreground">{req.patientName}</span>
-                      <span className="text-[10px] font-mono text-muted-foreground">
-                        {req.id} · {req.patientAge}y ({req.patientGender})
-                      </span>
-                    </div>
-                  </TableCell>
-
-                  {/* Condition */}
-                  <TableCell className="text-xs max-w-[220px]">
-                    <div className="font-semibold text-foreground truncate">{req.condition}</div>
-                    <div className="text-[10px] text-muted-foreground truncate">{req.careRequirement}</div>
-                  </TableCell>
-
-                  {/* Role Needed */}
-                  <TableCell className="text-xs">
-                    <Badge variant="outline" className="bg-teal-50 text-teal-900 border-teal-300 dark:bg-teal-950 dark:text-teal-200 font-semibold text-[10px]">
-                      {req.requestedRole}
+          <div className="space-y-3">
+            {bookings.map((booking) => {
+              const isSelected = selectedBooking.id === booking.id;
+              return (
+                <div
+                  key={booking.id}
+                  onClick={() => setSelectedBooking(booking)}
+                  className={`cursor-pointer rounded-xl border p-3.5 transition-all ${
+                    isSelected
+                      ? "border-teal-600 bg-teal-50/60 dark:bg-teal-950/40 ring-1 ring-teal-600 shadow-sm"
+                      : "border-slate-200/80 bg-slate-50/40 hover:bg-slate-100/60 dark:border-slate-800"
+                  }`}
+                >
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-bold text-foreground font-mono">
+                      {booking.bookingCode}
+                    </span>
+                    <Badge
+                      className={`text-[10px] font-bold ${
+                        booking.status === "Pending Assignment"
+                          ? "bg-amber-100 text-amber-800"
+                          : booking.status === "New"
+                          ? "bg-sky-100 text-sky-800"
+                          : "bg-emerald-100 text-emerald-800"
+                      }`}
+                    >
+                      {booking.status}
                     </Badge>
-                  </TableCell>
+                  </div>
 
-                  {/* Shift & Location */}
-                  <TableCell className="text-xs">
-                    <div className="flex flex-col">
-                      <span className="font-medium text-foreground">{req.scheduleSlot}</span>
-                      <span className="text-[10px] text-muted-foreground flex items-center gap-1">
-                        <MapPin className="h-3 w-3 text-slate-500" />
-                        {req.location.neighborhood}, {req.location.city}
-                      </span>
+                  <div className="mt-2">
+                    <h3 className="text-xs font-bold text-foreground">{booking.patientName}</h3>
+                    <p className="text-[11px] text-muted-foreground">
+                      {booking.ageGender} · Care: <strong className="text-foreground">{booking.careType}</strong>
+                    </p>
+                  </div>
+
+                  <div className="mt-2 pt-2 border-t flex items-center justify-between text-[11px] text-muted-foreground">
+                    <span className="flex items-center gap-1 font-medium">
+                      <MapPin className="h-3 w-3 text-teal-600" /> {booking.locationArea}
+                    </span>
+                    <span>Starts: {booking.startDate}</span>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Right Column: Smart Matching Recommendations for Selected Booking */}
+        <div className="lg:col-span-7 rounded-2xl border bg-card p-5.5 shadow-xs space-y-5">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b pb-4">
+            <div>
+              <div className="flex items-center gap-2">
+                <h2 className="text-sm font-extrabold text-foreground">
+                  Smart Match Recommendations for {selectedBooking.patientName}
+                </h2>
+              </div>
+              <p className="text-xs text-muted-foreground mt-0.5">
+                Target: {selectedBooking.careType} · Location: {selectedBooking.locationArea} · Start Date: {selectedBooking.startDate}
+              </p>
+            </div>
+            <Badge className="bg-teal-700 text-teal-100 text-xs font-mono">
+              Booking {selectedBooking.bookingCode}
+            </Badge>
+          </div>
+
+          {/* Candidates List */}
+          <div className="space-y-4">
+            <h3 className="text-xs font-extrabold uppercase tracking-wider text-muted-foreground">
+              Top Ranked Available Professionals ({matchingCandidates.length})
+            </h3>
+
+            {matchingCandidates.map((pro, index) => (
+              <div
+                key={pro.id}
+                className="rounded-xl border border-slate-200 bg-slate-50/50 dark:border-slate-800 dark:bg-slate-900/30 p-4 space-y-3 transition-all hover:border-teal-500/50 hover:shadow-xs"
+              >
+                <div className="flex items-start justify-between gap-3">
+                  <div className="flex items-center gap-3">
+                    <Avatar className="h-11 w-11 bg-teal-100 text-teal-800 font-bold border-2 border-teal-500">
+                      <AvatarFallback>{pro.name.slice(0, 2).toUpperCase()}</AvatarFallback>
+                    </Avatar>
+                    <div>
+                      <div className="flex items-center gap-2 flex-wrap">
+                        <h4 className="text-sm font-bold text-foreground">{pro.name}</h4>
+                        <Badge variant="outline" className="text-[10px] font-bold">
+                          {pro.type}
+                        </Badge>
+                        <Badge className="bg-emerald-600 text-white text-[10px] font-bold">
+                          {pro.matchScore}% Match Score
+                        </Badge>
+                      </div>
+                      <p className="text-xs text-muted-foreground mt-0.5 flex items-center gap-2">
+                        <span className="flex items-center gap-1">
+                          <MapPin className="h-3 w-3 text-teal-600" /> {pro.area}
+                        </span>
+                        <span>·</span>
+                        <span>★ {pro.rating} ({pro.totalVisitsCompleted} visits)</span>
+                      </p>
                     </div>
-                  </TableCell>
+                  </div>
 
-                  {/* Urgency */}
-                  <TableCell className="text-center">
-                    {req.urgency === "Urgent" ? (
-                      <Badge variant="destructive" className="text-[10px] font-bold">Urgent</Badge>
-                    ) : req.urgency === "High" ? (
-                      <Badge className="bg-amber-600 text-white text-[10px] font-bold">High</Badge>
-                    ) : (
-                      <Badge variant="outline" className="text-[10px]">Normal</Badge>
-                    )}
-                  </TableCell>
+                  <Button
+                    size="sm"
+                    className="bg-teal-600 hover:bg-teal-700 text-white text-xs font-bold shrink-0 gap-1"
+                    onClick={() => handleAssignProfessional(pro)}
+                  >
+                    <Check className="h-3.5 w-3.5" />
+                    Assign & Dispatch
+                  </Button>
+                </div>
 
-                  {/* Status */}
-                  <TableCell className="text-center">
-                    {req.status === "Assigned" ? (
-                      <Badge className="bg-emerald-600 text-white font-semibold text-[10px]">
-                        Assigned ({req.assignedCaregiverName})
-                      </Badge>
-                    ) : (
-                      <Badge variant="outline" className="border-amber-500 text-amber-600 bg-amber-50 dark:bg-amber-950/40 text-[10px]">
-                        Pending Assignment
-                      </Badge>
-                    )}
-                  </TableCell>
-
-                  {/* Actions */}
-                  <TableCell className="text-right">
-                    <div className="flex items-center justify-end gap-1.5">
-                      <Button
-                        size="sm"
-                        variant="outline"
-                        onClick={() => handleOpenAnalyze(req)}
-                        className="h-8 text-xs gap-1 border-slate-200 hover:bg-slate-100"
-                      >
-                        <Activity className="h-3.5 w-3.5" />
-                        <span>Analyze</span>
-                      </Button>
-                      <Button
-                        size="sm"
-                        onClick={() => handleOpenAssign(req)}
-                        disabled={req.status === "Assigned"}
-                        className="h-8 text-xs gap-1 bg-teal-600 text-white hover:bg-teal-700 font-semibold shadow-xs"
-                      >
-                        <Sparkles className="h-3.5 w-3.5" />
-                        <span>Assign Caregiver</span>
-                      </Button>
-                    </div>
-                  </TableCell>
-                </TableRow>
-              ))
-            )}
-          </TableBody>
-        </Table>
-
-        <div className="p-4 border-t bg-slate-50/50 dark:bg-slate-900/30 flex items-center justify-between text-xs text-muted-foreground">
-          <span>
-            Showing <strong className="text-foreground">{filteredAssignments.length}</strong> care requirements
-          </span>
-          <span className="font-medium text-teal-600 dark:text-teal-400">
-            AI Proximity & Skill Matching Active
-          </span>
+                {/* Match Reasons Badges */}
+                <div className="flex items-center gap-1.5 flex-wrap pt-1">
+                  {pro.matchReasons.map((reason, rid) => (
+                    <span
+                      key={rid}
+                      className="text-[10px] font-semibold px-2 py-0.5 rounded-md bg-teal-50 text-teal-900 border border-teal-200 dark:bg-teal-950 dark:text-teal-300 dark:border-teal-900"
+                    >
+                      ✓ {reason}
+                    </span>
+                  ))}
+                  <span className="text-[10px] text-muted-foreground ml-auto">
+                    Languages: {pro.languages.join(", ")}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
-
-      {/* Modals */}
-      <AnalyzeRequirementModal
-        isOpen={isAnalyzeOpen}
-        onClose={() => setIsAnalyzeOpen(false)}
-        requirement={selectedRequirement}
-        onProceedToAssign={(req) => {
-          setAssignRequirement(req);
-          setIsAssignOpen(true);
-        }}
-      />
-
-      <AssignCaregiverModal
-        isOpen={isAssignOpen}
-        onClose={() => setIsAssignOpen(false)}
-        requirement={assignRequirement}
-        onConfirmAssignment={handleConfirmAssignment}
-      />
-
-      <AssignmentConfirmationModal
-        isOpen={isConfirmOpen}
-        onClose={() => setIsConfirmOpen(false)}
-        requirement={confirmedReq}
-        assignedCaregiver={confirmedCaregiver}
-      />
     </div>
   );
 }

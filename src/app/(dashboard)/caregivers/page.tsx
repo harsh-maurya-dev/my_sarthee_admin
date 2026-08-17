@@ -2,14 +2,11 @@
 
 import { useState, useMemo } from "react";
 import {
-  Caregiver,
-  CaregiverRegistrationRequest,
-  initialCaregivers,
-  initialRegistrationRequests,
-} from "./_data/caregivers";
-import { CaregiverDetailsSheet } from "./_components/caregiver-details-sheet";
-import { AddCaregiverModal } from "./_components/add-caregiver-modal";
-import { ReviewApplicantModal } from "./_components/review-applicant-modal";
+  initialCareProfessionals,
+  CareProfessional,
+  ProfessionalStatus,
+} from "@/lib/admin-data";
+import { OnboardProfessionalModal } from "./_components/onboard-professional-modal";
 import {
   Table,
   TableBody,
@@ -21,7 +18,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import {
   Select,
   SelectContent,
@@ -30,603 +27,345 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuGroup,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import {
   Search,
   Plus,
-  Eye,
-  CheckCircle2,
-  XCircle,
-  Ban,
-  MoreVertical,
+  Filter,
+  Phone,
+  Mail,
+  MapPin,
   HeartPulse,
-  RefreshCw,
-  Download,
+  Sparkles,
   Calendar,
-  Star,
-  ClipboardList,
-  Users,
-  UserCheck,
+  CheckCircle2,
+  Clock,
   ShieldCheck,
+  Award,
+  ArrowRight,
+  TrendingUp,
+  Activity,
+  SlidersHorizontal,
 } from "lucide-react";
 import { swiftAlert } from "@/lib/swift-alert";
 
-export default function CaregiverManagementPage() {
-  const [activeTab, setActiveTab] = useState<"caregivers" | "requests">("caregivers");
-
-  // Caregiver List State
-  const [caregivers, setCaregivers] = useState<Caregiver[]>(initialCaregivers);
+export default function CareProfessionalsPage() {
+  const [professionals, setProfessionals] = useState<CareProfessional[]>(initialCareProfessionals);
   const [searchQuery, setSearchQuery] = useState("");
-  const [statusFilter, setStatusFilter] = useState<"All" | "Active" | "Inactive" | "Blocked">("All");
-  const [dateFilter, setDateFilter] = useState("");
+  const [typeFilter, setTypeFilter] = useState<string>("All");
+  const [statusFilter, setStatusFilter] = useState<string>("All");
+  const [areaFilter, setAreaFilter] = useState<string>("All");
+  const [activeTab, setActiveTab] = useState<"roster" | "availability">("availability");
+  const [isOnboardModalOpen, setIsOnboardModalOpen] = useState(false);
 
-  // Registration Requests State
-  const [registrationRequests, setRegistrationRequests] = useState<CaregiverRegistrationRequest[]>(
-    initialRegistrationRequests
-  );
-
-  // UI State
-  const [selectedCaregiver, setSelectedCaregiver] = useState<Caregiver | null>(null);
-  const [isSheetOpen, setIsSheetOpen] = useState(false);
-  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
-  const [selectedApplicant, setSelectedApplicant] = useState<CaregiverRegistrationRequest | null>(null);
-  const [isReviewOpen, setIsReviewOpen] = useState(false);
-
-  // Filtered Caregivers
-  const filteredCaregivers = useMemo(() => {
-    return caregivers.filter((cg) => {
+  // Lifecycle status filters
+  const filteredPros = useMemo(() => {
+    return professionals.filter((p) => {
       const q = searchQuery.toLowerCase();
       const matchesSearch =
-        cg.fullName.toLowerCase().includes(q) ||
-        cg.username.toLowerCase().includes(q) ||
-        cg.skills.some((s) => s.toLowerCase().includes(q)) ||
-        cg.id.toLowerCase().includes(q);
+        p.name.toLowerCase().includes(q) ||
+        p.phone.includes(q) ||
+        p.area.toLowerCase().includes(q) ||
+        (p.currentAssignment && p.currentAssignment.patientName.toLowerCase().includes(q));
 
-      const matchesStatus = statusFilter === "All" || cg.status === statusFilter;
-      const matchesDate = !dateFilter || cg.registrationDate === dateFilter;
+      const matchesType = typeFilter === "All" || p.type === typeFilter;
+      const matchesStatus = statusFilter === "All" || p.status === statusFilter;
+      const matchesArea = areaFilter === "All" || p.area === areaFilter;
 
-      return matchesSearch && matchesStatus && matchesDate;
+      return matchesSearch && matchesType && matchesStatus && matchesArea;
     });
-  }, [caregivers, searchQuery, statusFilter, dateFilter]);
+  }, [professionals, searchQuery, typeFilter, statusFilter, areaFilter]);
 
-  // Pending requests count
-  const pendingCount = registrationRequests.filter((r) => r.status === "Pending Review").length;
-
-  // Handlers
-  const handleViewCaregiver = (caregiver: Caregiver) => {
-    setSelectedCaregiver(caregiver);
-    setIsSheetOpen(true);
+  const handleAddProfessional = (newPro: CareProfessional) => {
+    setProfessionals((prev) => [newPro, ...prev]);
   };
 
-  const handleUpdateStatus = (caregiverId: string, newStatus: Caregiver["status"]) => {
-    setCaregivers((prev) =>
-      prev.map((cg) => (cg.id === caregiverId ? { ...cg, status: newStatus } : cg))
+  const handleUpdateStatus = (proId: string, nextStatus: ProfessionalStatus) => {
+    setProfessionals((prev) =>
+      prev.map((p) => (p.id === proId ? { ...p, status: nextStatus } : p))
     );
-
-    const target = caregivers.find((cg) => cg.id === caregiverId);
-    const name = target?.fullName || "Caregiver";
-
-    if (newStatus === "Active") {
-      swiftAlert.success({ title: "Caregiver Enabled", description: `${name} has been enabled.` });
-    } else if (newStatus === "Inactive") {
-      swiftAlert.info({ title: "Caregiver Disabled", description: `${name} has been disabled.` });
-    } else if (newStatus === "Blocked") {
-      swiftAlert.error({ title: "Caregiver Blocked", description: `${name} has been blocked.` });
-    }
-
-    if (selectedCaregiver?.id === caregiverId) {
-      setSelectedCaregiver((prev) => (prev ? { ...prev, status: newStatus } : null));
-    }
+    swiftAlert.success({
+      title: "Status Transition Updated",
+      description: `Professional marked as ${nextStatus}.`,
+    });
   };
 
-  const handleAddCaregiver = (newCaregiver: Caregiver) => {
-    setCaregivers((prev) => [newCaregiver, ...prev]);
-  };
-
-  const handleApproveApplicant = (applicantId: string) => {
-    setRegistrationRequests((prev) =>
-      prev.map((r) => (r.id === applicantId ? { ...r, status: "Approved" as const } : r))
-    );
-    // Add to active caregivers
-    const applicant = registrationRequests.find((r) => r.id === applicantId);
-    if (applicant) {
-      const newCaregiver: Caregiver = {
-        id: `CG-${Date.now().toString().slice(-6)}`,
-        fullName: applicant.fullName,
-        username: applicant.username,
-        email: applicant.email,
-        phoneNumber: applicant.phoneNumber,
-        age: applicant.age,
-        gender: applicant.gender,
-        dateOfBirth: applicant.dateOfBirth,
-        skills: applicant.skills,
-        experience: applicant.experience,
-        certifications: applicant.certifications,
-        status: "Active",
-        registrationDate: new Date().toISOString().split("T")[0],
-        rating: 5.0,
-        completedVisits: 0,
-        punctualityRate: "100%",
-        kycStatus: "Verified",
-        kycDetails: applicant.kycDetails,
-      };
-      setCaregivers((prev) => [newCaregiver, ...prev]);
-    }
-  };
-
-  const handleRejectApplicant = (applicantId: string) => {
-    setRegistrationRequests((prev) =>
-      prev.map((r) => (r.id === applicantId ? { ...r, status: "Rejected" as const } : r))
-    );
-  };
-
-  const handleResetFilters = () => {
-    setSearchQuery("");
-    setStatusFilter("All");
-    setDateFilter("");
-    swiftAlert.info({ title: "Filters Reset", description: "Displaying all registered caregivers." });
-  };
-
-  const renderStatusBadge = (status: Caregiver["status"]) => {
+  const getStatusBadge = (status: ProfessionalStatus) => {
     switch (status) {
-      case "Active":
-        return <Badge className="bg-emerald-600 text-white font-semibold text-[11px]">Active</Badge>;
-      case "Inactive":
-        return <Badge variant="secondary" className="bg-slate-200 text-slate-700 dark:bg-slate-800 dark:text-slate-300 font-medium text-[11px]">Inactive</Badge>;
-      case "Blocked":
-        return <Badge variant="destructive" className="bg-rose-600 text-white font-semibold text-[11px]">Blocked</Badge>;
+      case "Available":
+        return <Badge className="bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300 font-bold">🟢 Available</Badge>;
+      case "Assigned":
+        return <Badge className="bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-300 font-bold">🟡 Assigned</Badge>;
+      case "Accepted":
+        return <Badge className="bg-sky-100 text-sky-800 dark:bg-sky-950 dark:text-sky-300 font-bold">🔵 Accepted</Badge>;
+      case "En route":
+        return <Badge className="bg-indigo-100 text-indigo-800 dark:bg-indigo-950 dark:text-indigo-300 font-bold">🚗 En Route</Badge>;
+      case "Care Started":
+        return <Badge className="bg-teal-600 text-white font-bold animate-pulse">❤️ Care Started</Badge>;
+      case "Care Completed":
+        return <Badge className="bg-slate-200 text-slate-800 font-bold">✓ Completed</Badge>;
+      default:
+        return <Badge className="bg-slate-100 text-slate-600 font-bold">Off Duty</Badge>;
     }
   };
 
   return (
-    <div className="space-y-6">
-      {/* Page Header */}
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+    <div className="space-y-6 pb-10">
+      {/* Top Banner */}
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between border-b pb-4">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl flex items-center gap-2">
-            <HeartPulse className="h-7 w-7 text-teal-600" />
-            Care Giver Management
-          </h1>
+          <div className="flex items-center gap-2">
+            <h1 className="text-2xl font-black tracking-tight text-foreground sm:text-3xl">
+              Care Professionals & Availability
+            </h1>
+            <Badge className="bg-teal-600 text-white font-semibold text-xs">
+              Unified Roster
+            </Badge>
+          </div>
           <p className="text-xs text-muted-foreground mt-1">
-            Manage caregiver roster, review registration requests, verify KYC, and monitor performance ratings.
+            Common module for Nurses, Caregivers, and Physiotherapists tracking real-time availability lifecycle.
           </p>
         </div>
         <div className="flex items-center gap-2">
           <Button
-            variant="outline"
             size="sm"
-            onClick={() =>
-              swiftAlert.success({
-                title: "Report Exported",
-                description: "Exported caregiver roster to CSV format.",
-              })
-            }
-            className="h-9 gap-2 text-xs border-slate-200"
+            className="bg-teal-600 hover:bg-teal-700 text-white font-semibold text-xs shadow-sm gap-1.5"
+            onClick={() => setIsOnboardModalOpen(true)}
           >
-            <Download className="h-3.5 w-3.5" />
-            <span>Export CSV</span>
-          </Button>
-          <Button
-            size="sm"
-            onClick={() => setIsAddModalOpen(true)}
-            className="h-9 gap-2 bg-teal-600 text-white hover:bg-teal-700 text-xs font-semibold shadow-xs"
-          >
-            <Plus className="h-3.5 w-3.5" />
-            <span>Register Caregiver</span>
+            <Plus className="h-4 w-4" />
+            Onboard Professional
           </Button>
         </div>
       </div>
 
-      {/* Navigation Tabs */}
-      <div className="flex items-center border-b border-slate-200 dark:border-slate-800 gap-4">
-        <button
-          onClick={() => setActiveTab("caregivers")}
-          className={`pb-3 text-xs font-bold transition-all flex items-center gap-2 relative ${
-            activeTab === "caregivers"
-              ? "text-teal-600 dark:text-teal-400 border-b-2 border-teal-600 dark:border-teal-400"
-              : "text-muted-foreground hover:text-foreground"
-          }`}
-        >
-          <Users className="h-4 w-4" />
-          <span>Registered Caregivers</span>
-          <Badge variant="secondary" className="text-[10px] px-1.5 py-0 h-4">
-            {caregivers.length}
-          </Badge>
-        </button>
+      {/* Lifecycle Flow Header Breadcrumb */}
+      {/* <div className="rounded-xl border bg-slate-900 text-white p-4 shadow-sm">
+        <div className="flex items-center justify-between flex-wrap gap-2">
+          <div className="text-xs font-bold uppercase tracking-wider text-teal-400">
+            Care Delivery Status Pipeline:
+          </div>
+          <div className="flex items-center gap-1.5 text-xs text-slate-200 overflow-x-auto scrollbar-none">
+            <span className="font-semibold px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 border border-emerald-700">1. Available</span>
+            <span>&rarr;</span>
+            <span className="font-semibold px-2 py-0.5 rounded bg-amber-950 text-amber-300 border border-amber-700">2. Assigned</span>
+            <span>&rarr;</span>
+            <span className="font-semibold px-2 py-0.5 rounded bg-sky-950 text-sky-300 border border-sky-700">3. Accepted</span>
+            <span>&rarr;</span>
+            <span className="font-semibold px-2 py-0.5 rounded bg-indigo-950 text-indigo-300 border border-indigo-700">4. En Route</span>
+            <span>&rarr;</span>
+            <span className="font-semibold px-2 py-0.5 rounded bg-teal-800 text-teal-200 border border-teal-600">5. Care Started</span>
+            <span>&rarr;</span>
+            <span className="font-semibold px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">6. Care Completed</span>
+          </div>
+        </div>
+      </div> */}
 
-        <button
-          onClick={() => setActiveTab("requests")}
-          className={`pb-3 text-xs font-bold transition-all flex items-center gap-2 relative ${
-            activeTab === "requests"
-              ? "text-teal-600 dark:text-teal-400 border-b-2 border-teal-600 dark:border-teal-400"
-              : "text-muted-foreground hover:text-foreground"
-          }`}
-        >
-          <ClipboardList className="h-4 w-4" />
-          <span>Registration Requests</span>
-          {pendingCount > 0 && (
-            <Badge className="bg-teal-600 text-white text-[10px] px-1.5 py-0 h-4 min-w-4 flex items-center justify-center">
-              {pendingCount}
-            </Badge>
-          )}
-        </button>
+      {/* Filter Tabs: All, Nurses, Caregivers, Physiotherapists */}
+      <div className="flex items-center justify-between border-b pb-3 flex-wrap gap-3">
+        <div className="flex items-center gap-1.5 overflow-x-auto scrollbar-none">
+          {[
+            { key: "All", label: "All Professionals", count: professionals.length },
+            { key: "Nurse", label: "Nurses", count: professionals.filter((p) => p.type === "Nurse").length },
+            { key: "Caregiver", label: "Caregivers", count: professionals.filter((p) => p.type === "Caregiver").length },
+            { key: "Physiotherapist", label: "Physiotherapists", count: professionals.filter((p) => p.type === "Physiotherapist").length },
+          ].map((tab) => (
+            <button
+              key={tab.key}
+              onClick={() => setTypeFilter(tab.key)}
+              className={`flex items-center gap-2 rounded-lg px-3 py-1.5 text-xs font-bold transition-all ${
+                typeFilter === tab.key
+                  ? "bg-teal-600 text-white shadow-sm"
+                  : "bg-slate-100 text-muted-foreground hover:bg-slate-200 dark:bg-slate-800"
+              }`}
+            >
+              <span>{tab.label}</span>
+              <span
+                className={`text-[10px] px-1.5 py-0.2 rounded-full ${
+                  typeFilter === tab.key ? "bg-white/25 text-white" : "bg-slate-200 text-slate-700 dark:bg-slate-700"
+                }`}
+              >
+                {tab.count}
+              </span>
+            </button>
+          ))}
+        </div>
+
+        {/* Search & Area Filter */}
+        <div className="flex items-center gap-2">
+          <div className="relative w-64">
+            <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+            <Input
+              type="search"
+              placeholder="Search professional or area..."
+              className="pl-9 text-xs rounded-xl bg-card"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+          </div>
+
+          <Select value={statusFilter} onValueChange={(val) => val && setStatusFilter(val)}>
+            <SelectTrigger className="w-36 h-9 text-xs rounded-xl bg-card">
+              <SelectValue placeholder="Status" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="All">All Statuses</SelectItem>
+              <SelectItem value="Available">Available</SelectItem>
+              <SelectItem value="Assigned">Assigned</SelectItem>
+              <SelectItem value="Accepted">Accepted</SelectItem>
+              <SelectItem value="En route">En route</SelectItem>
+              <SelectItem value="Care Started">Care Started</SelectItem>
+              <SelectItem value="Care Completed">Care Completed</SelectItem>
+              <SelectItem value="Off Duty">Off Duty</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
       </div>
 
-      {/* TAB 1: REGISTERED CAREGIVERS */}
-      {activeTab === "caregivers" && (
-        <>
-          {/* Search & Filter Bar */}
-          <div className="rounded-2xl border bg-card p-4 shadow-xs space-y-3">
-            <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
-              <div className="relative flex-1 max-w-md">
-                <Search className="absolute left-3 top-2.5 h-4 w-4 text-muted-foreground" />
-                <Input
-                  placeholder="Search by Name, Username, or Skills..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-9 h-9 text-xs"
-                />
-              </div>
-
-              <div className="flex flex-wrap items-center gap-2">
-                <div className="flex items-center gap-1.5 text-xs">
-                  <span className="text-muted-foreground font-medium hidden sm:inline">Status:</span>
-                  <Select value={statusFilter} onValueChange={(val: any) => setStatusFilter(val)}>
-                    <SelectTrigger className="h-9 text-xs w-32">
-                      <SelectValue placeholder="Status" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="All">All Status</SelectItem>
-                      <SelectItem value="Active">Active Only</SelectItem>
-                      <SelectItem value="Inactive">Inactive Only</SelectItem>
-                      <SelectItem value="Blocked">Blocked Only</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-
-                <div className="flex items-center gap-1.5 text-xs">
-                  <span className="text-muted-foreground font-medium hidden sm:inline">Reg. Date:</span>
-                  <div className="relative">
-                    <Calendar className="absolute left-2.5 top-2.5 h-3.5 w-3.5 text-muted-foreground" />
-                    <Input
-                      type="date"
-                      value={dateFilter}
-                      onChange={(e) => setDateFilter(e.target.value)}
-                      className="h-9 text-xs pl-8 w-36"
-                    />
-                  </div>
-                </div>
-
-                {(searchQuery || statusFilter !== "All" || dateFilter) && (
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    onClick={handleResetFilters}
-                    className="h-9 text-xs px-2.5 text-muted-foreground hover:text-foreground"
-                  >
-                    <RefreshCw className="h-3.5 w-3.5 mr-1" />
-                    Reset
-                  </Button>
-                )}
-              </div>
-            </div>
-          </div>
-
-          {/* Caregiver Data Table */}
-          <div className="rounded-2xl border bg-card shadow-xs overflow-hidden">
-            <Table>
-              <TableHeader className="bg-slate-50 dark:bg-slate-900/60">
-                <TableRow>
-                  <TableHead className="font-bold text-xs">Full Name</TableHead>
-                  <TableHead className="font-bold text-xs">Age / Gender</TableHead>
-                  <TableHead className="font-bold text-xs">Skills</TableHead>
-                  <TableHead className="font-bold text-xs">Experience</TableHead>
-                  <TableHead className="font-bold text-xs">Rating</TableHead>
-                  <TableHead className="font-bold text-xs text-center">KYC</TableHead>
-                  <TableHead className="font-bold text-xs text-center">Status</TableHead>
-                  <TableHead className="font-bold text-xs text-right">Actions</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {filteredCaregivers.length === 0 ? (
-                  <TableRow>
-                    <TableCell colSpan={8} className="text-center py-12 text-muted-foreground text-xs font-medium">
-                      No registered caregivers found matching your search or filter criteria.
-                    </TableCell>
-                  </TableRow>
-                ) : (
-                  filteredCaregivers.map((cg) => (
-                    <TableRow key={cg.id} className="hover:bg-slate-50/80 dark:hover:bg-slate-900/40">
-                      {/* Full Name & ID */}
-                      <TableCell className="text-xs">
-                        <div className="flex items-center gap-2.5">
-                          <Avatar className="h-8 w-8 border shadow-sm">
-                            <AvatarImage src={cg.avatar} alt={cg.fullName} />
-                            <AvatarFallback className="bg-teal-700 text-white text-[10px] font-bold">
-                              {cg.fullName.charAt(0)}
-                            </AvatarFallback>
-                          </Avatar>
-                          <div className="flex flex-col">
-                            <span className="font-semibold text-foreground">{cg.fullName}</span>
-                            <span className="text-[10px] font-mono text-muted-foreground font-normal">
-                              @{cg.username} · {cg.id}
-                            </span>
-                          </div>
-                        </div>
-                      </TableCell>
-
-                      {/* Age / Gender */}
-                      <TableCell className="text-xs">
-                        {cg.age} yrs · <span className="text-muted-foreground">{cg.gender}</span>
-                      </TableCell>
-
-                      {/* Skills */}
-                      <TableCell className="text-xs max-w-[200px]">
-                        <div className="flex flex-wrap gap-1">
-                          {cg.skills.slice(0, 2).map((skill, idx) => (
-                            <Badge key={idx} variant="outline" className="text-[9px] px-1.5 py-0">
-                              {skill}
-                            </Badge>
-                          ))}
-                          {cg.skills.length > 2 && (
-                            <Badge variant="secondary" className="text-[9px] px-1.5 py-0">
-                              +{cg.skills.length - 2}
-                            </Badge>
+      {/* Availability Table */}
+      <div className="rounded-2xl border bg-card shadow-xs overflow-hidden">
+        <Table>
+          <TableHeader>
+            <TableRow className="bg-slate-50/80 dark:bg-slate-900/50 hover:bg-slate-50/80">
+              <TableHead className="text-xs font-bold uppercase tracking-wider text-muted-foreground w-64">
+                Professional
+              </TableHead>
+              <TableHead className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                Type
+              </TableHead>
+              <TableHead className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                Area
+              </TableHead>
+              <TableHead className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                Status
+              </TableHead>
+              <TableHead className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                Current Assignment
+              </TableHead>
+              <TableHead className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                Experience & Rating
+              </TableHead>
+              <TableHead className="text-xs font-bold uppercase tracking-wider text-muted-foreground text-right">
+                Quick Actions
+              </TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {filteredPros.length === 0 ? (
+              <TableRow>
+                <TableCell colSpan={7} className="h-32 text-center text-xs text-muted-foreground">
+                  No professionals match the selected criteria.
+                </TableCell>
+              </TableRow>
+            ) : (
+              filteredPros.map((pro) => (
+                <TableRow key={pro.id} className="hover:bg-slate-50/80 dark:hover:bg-slate-900/50">
+                  {/* Professional */}
+                  <TableCell className="py-3">
+                    <div className="flex items-center gap-3">
+                      <Avatar className="h-9 w-9 bg-teal-100 text-teal-800 text-xs font-bold">
+                        <AvatarFallback>{pro.name.slice(0, 2).toUpperCase()}</AvatarFallback>
+                      </Avatar>
+                      <div>
+                        <div className="text-xs font-bold text-foreground flex items-center gap-1.5">
+                          {pro.name}
+                          {pro.policeVerified && (
+                            <ShieldCheck className="h-3 w-3 text-teal-600" />
                           )}
                         </div>
-                      </TableCell>
-
-                      {/* Experience */}
-                      <TableCell className="text-xs font-medium text-foreground">
-                        {cg.experience}
-                      </TableCell>
-
-                      {/* Rating */}
-                      <TableCell className="text-xs">
-                        <div className="flex items-center gap-1 text-amber-500 font-bold">
-                          <Star className="h-3 w-3 fill-amber-500" />
-                          <span>{cg.rating.toFixed(1)}</span>
+                        <div className="text-[10px] text-muted-foreground flex items-center gap-1">
+                          <Phone className="h-2.5 w-2.5 text-teal-600" /> {pro.phone}
                         </div>
-                      </TableCell>
-
-                      {/* KYC Status */}
-                      <TableCell className="text-center">
-                        {cg.kycStatus === "Verified" ? (
-                          <Badge className="bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300 font-semibold text-[10px]">
-                            <ShieldCheck className="h-3 w-3 mr-0.5" /> Verified
-                          </Badge>
-                        ) : cg.kycStatus === "Pending" ? (
-                          <Badge variant="outline" className="border-amber-500 text-amber-600 text-[10px]">Pending</Badge>
-                        ) : (
-                          <Badge variant="destructive" className="text-[10px]">Rejected</Badge>
-                        )}
-                      </TableCell>
-
-                      {/* Status */}
-                      <TableCell className="text-center">
-                        {renderStatusBadge(cg.status)}
-                      </TableCell>
-
-                      {/* Actions */}
-                      <TableCell className="text-right">
-                        <div className="flex items-center justify-end gap-1">
-                          <Button
-                            size="sm"
-                            variant="outline"
-                            onClick={() => handleViewCaregiver(cg)}
-                            className="h-8 text-xs gap-1 font-medium border-slate-200 hover:bg-teal-50 hover:text-teal-700 hover:border-teal-300 dark:hover:bg-teal-950"
-                          >
-                            <Eye className="h-3.5 w-3.5" />
-                            <span>View</span>
-                          </Button>
-
-                          <DropdownMenu>
-                            <DropdownMenuTrigger className="inline-flex h-8 w-8 items-center justify-center rounded-lg border border-slate-200 bg-background text-muted-foreground transition-colors hover:bg-slate-100 hover:text-foreground dark:border-slate-800 dark:hover:bg-slate-800">
-                              <MoreVertical className="h-4 w-4" />
-                              <span className="sr-only">Actions</span>
-                            </DropdownMenuTrigger>
-                            <DropdownMenuContent align="end" className="w-48 bg-card border shadow-lg">
-                              <DropdownMenuGroup>
-                                <DropdownMenuLabel className="text-[11px] font-semibold text-muted-foreground">
-                                  Account Actions
-                                </DropdownMenuLabel>
-                              </DropdownMenuGroup>
-                              <DropdownMenuSeparator />
-                              <DropdownMenuItem
-                                onClick={() => handleUpdateStatus(cg.id, "Active")}
-                                disabled={cg.status === "Active"}
-                                className="cursor-pointer text-xs text-emerald-600 focus:text-emerald-700 focus:bg-emerald-50 dark:focus:bg-emerald-950/40"
-                              >
-                                <CheckCircle2 className="mr-2 h-3.5 w-3.5" />
-                                <span>Enable</span>
-                              </DropdownMenuItem>
-                              <DropdownMenuItem
-                                onClick={() => handleUpdateStatus(cg.id, "Inactive")}
-                                disabled={cg.status === "Inactive"}
-                                className="cursor-pointer text-xs text-slate-700 dark:text-slate-300 focus:bg-slate-100 dark:focus:bg-slate-800"
-                              >
-                                <XCircle className="mr-2 h-3.5 w-3.5" />
-                                <span>Disable</span>
-                              </DropdownMenuItem>
-                              <DropdownMenuSeparator />
-                              <DropdownMenuItem
-                                onClick={() => handleUpdateStatus(cg.id, "Blocked")}
-                                disabled={cg.status === "Blocked"}
-                                className="cursor-pointer text-xs text-rose-600 focus:text-rose-700 focus:bg-rose-50 dark:focus:bg-rose-950/40"
-                              >
-                                <Ban className="mr-2 h-3.5 w-3.5" />
-                                <span>Block User</span>
-                              </DropdownMenuItem>
-                            </DropdownMenuContent>
-                          </DropdownMenu>
-                        </div>
-                      </TableCell>
-                    </TableRow>
-                  ))
-                )}
-              </TableBody>
-            </Table>
-
-            {/* Footer Summary */}
-            <div className="p-4 border-t bg-slate-50/50 dark:bg-slate-900/30 flex items-center justify-between text-xs text-muted-foreground">
-              <span>
-                Showing <strong className="text-foreground">{filteredCaregivers.length}</strong> of{" "}
-                <strong className="text-foreground">{caregivers.length}</strong> registered caregivers
-              </span>
-              <span className="font-medium text-teal-600 dark:text-teal-400">
-                Roster Live Sync Active
-              </span>
-            </div>
-          </div>
-        </>
-      )}
-
-      {/* TAB 2: REGISTRATION REQUESTS */}
-      {activeTab === "requests" && (
-        <div className="rounded-2xl border bg-card shadow-xs overflow-hidden">
-          <Table>
-            <TableHeader className="bg-slate-50 dark:bg-slate-900/60">
-              <TableRow>
-                <TableHead className="font-bold text-xs">Application ID</TableHead>
-                <TableHead className="font-bold text-xs">Applicant Name</TableHead>
-                <TableHead className="font-bold text-xs">Experience</TableHead>
-                <TableHead className="font-bold text-xs">Certifications</TableHead>
-                <TableHead className="font-bold text-xs text-center">KYC Status</TableHead>
-                <TableHead className="font-bold text-xs text-center">Status</TableHead>
-                <TableHead className="font-bold text-xs text-right">Actions</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {registrationRequests.length === 0 ? (
-                <TableRow>
-                  <TableCell colSpan={7} className="text-center py-12 text-muted-foreground text-xs font-medium">
-                    No pending caregiver registration requests.
+                      </div>
+                    </div>
                   </TableCell>
-                </TableRow>
-              ) : (
-                registrationRequests.map((req) => (
-                  <TableRow key={req.id} className="hover:bg-slate-50/80 dark:hover:bg-slate-900/40">
-                    <TableCell className="font-mono text-xs text-foreground font-semibold">
-                      <div className="flex flex-col">
-                        <span>{req.id}</span>
-                        <span className="text-[10px] text-muted-foreground font-normal">
-                          Applied: {req.appliedDate}
+
+                  {/* Type */}
+                  <TableCell className="py-3">
+                    <Badge variant="outline" className="text-[10px] font-bold">
+                      {pro.type}
+                    </Badge>
+                  </TableCell>
+
+                  {/* Area */}
+                  <TableCell className="text-xs font-medium text-foreground py-3">
+                    <span className="flex items-center gap-1">
+                      <MapPin className="h-3 w-3 text-teal-600" />
+                      {pro.area}
+                    </span>
+                  </TableCell>
+
+                  {/* Status */}
+                  <TableCell className="py-3">
+                    {getStatusBadge(pro.status)}
+                  </TableCell>
+
+                  {/* Current Assignment */}
+                  <TableCell className="py-3">
+                    {pro.currentAssignment ? (
+                      <div>
+                        <span className="text-xs font-bold text-teal-700 dark:text-teal-400 block">
+                          Patient #{pro.currentAssignment.patientId} ({pro.currentAssignment.patientName})
+                        </span>
+                        <span className="text-[10px] text-muted-foreground">
+                          {pro.currentAssignment.shiftTime}
                         </span>
                       </div>
-                    </TableCell>
+                    ) : (
+                      <span className="text-xs font-bold text-muted-foreground">—</span>
+                    )}
+                  </TableCell>
 
-                    <TableCell className="text-xs">
-                      <div className="flex items-center gap-2">
-                        <div className="h-7 w-7 rounded-full bg-teal-100 text-teal-800 font-bold flex items-center justify-center text-[10px] dark:bg-teal-950 dark:text-teal-300">
-                          {req.fullName.charAt(0)}
-                        </div>
-                        <div className="flex flex-col">
-                          <span className="font-semibold text-foreground">{req.fullName}</span>
-                          <span className="text-[10px] text-muted-foreground">{req.age}y · {req.gender} · {req.phoneNumber}</span>
-                        </div>
-                      </div>
-                    </TableCell>
+                  {/* Experience & Rating */}
+                  <TableCell className="py-3">
+                    <div className="text-xs font-semibold text-foreground">
+                      ★ {pro.rating} <span className="text-muted-foreground text-[10px]">({pro.totalVisitsCompleted} visits)</span>
+                    </div>
+                    <div className="text-[10px] text-muted-foreground">
+                      {pro.experienceYears} yrs exp · {pro.qualification}
+                    </div>
+                  </TableCell>
 
-                    <TableCell className="text-xs font-medium text-foreground">
-                      {req.experience}
-                    </TableCell>
-
-                    <TableCell className="text-xs max-w-[180px]">
-                      <div className="flex flex-wrap gap-1">
-                        {req.certifications.slice(0, 1).map((cert, idx) => (
-                          <Badge key={idx} variant="outline" className="text-[9px] px-1.5 py-0 truncate max-w-[150px]">
-                            {cert}
-                          </Badge>
-                        ))}
-                        {req.certifications.length > 1 && (
-                          <Badge variant="secondary" className="text-[9px] px-1.5 py-0">
-                            +{req.certifications.length - 1}
-                          </Badge>
-                        )}
-                      </div>
-                    </TableCell>
-
-                    <TableCell className="text-center">
-                      {req.kycDetails.idProof && req.kycDetails.nursingLicense && req.kycDetails.backgroundCheck ? (
-                        <Badge className="bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300 font-semibold text-[10px]">
-                          <ShieldCheck className="h-3 w-3 mr-0.5" /> Complete
-                        </Badge>
-                      ) : (
-                        <Badge variant="outline" className="border-amber-500 text-amber-600 text-[10px]">Incomplete</Badge>
-                      )}
-                    </TableCell>
-
-                    <TableCell className="text-center">
-                      {req.status === "Approved" ? (
-                        <Badge className="bg-emerald-600 text-white font-semibold text-[11px]">Approved</Badge>
-                      ) : req.status === "Rejected" ? (
-                        <Badge variant="destructive" className="bg-rose-600 text-white font-semibold text-[11px]">Rejected</Badge>
-                      ) : (
-                        <Badge variant="outline" className="border-amber-500 text-amber-600 bg-amber-50 dark:bg-amber-950/40 text-[11px] font-semibold">Pending Review</Badge>
-                      )}
-                    </TableCell>
-
-                    <TableCell className="text-right">
+                  {/* Quick Action */}
+                  <TableCell className="text-right py-3">
+                    {pro.status === "Available" ? (
+                      <Button
+                        size="sm"
+                        className="h-7 text-xs bg-teal-600 hover:bg-teal-700 text-white font-bold"
+                        onClick={() =>
+                          swiftAlert.info({
+                            title: `Assign ${pro.name}`,
+                            description: "Connecting to open booking queue in Smart Matcher.",
+                          })
+                        }
+                      >
+                        Assign Patient
+                      </Button>
+                    ) : (
                       <Button
                         size="sm"
                         variant="outline"
-                        onClick={() => {
-                          setSelectedApplicant(req);
-                          setIsReviewOpen(true);
-                        }}
-                        className="h-8 text-xs gap-1 font-medium border-slate-200 hover:bg-teal-50 hover:text-teal-700 hover:border-teal-300 dark:hover:bg-teal-950"
+                        className="h-7 text-xs font-semibold"
+                        onClick={() =>
+                          swiftAlert.info({
+                            title: `Shift Schedule: ${pro.name}`,
+                            description: `Current active shift: ${pro.currentAssignment?.shiftTime || "Scheduled"}.`,
+                          })
+                        }
                       >
-                        <UserCheck className="h-3.5 w-3.5" />
-                        <span>Review Application</span>
+                        View Shift
                       </Button>
-                    </TableCell>
-                  </TableRow>
-                ))
-              )}
-            </TableBody>
-          </Table>
+                    )}
+                  </TableCell>
+                </TableRow>
+              ))
+            )}
+          </TableBody>
+        </Table>
+      </div>
 
-          <div className="p-4 border-t bg-slate-50/50 dark:bg-slate-900/30 flex items-center justify-between text-xs text-muted-foreground">
-            <span>
-              Showing <strong className="text-foreground">{registrationRequests.length}</strong> total registration
-              requests · <strong className="text-amber-600">{pendingCount} pending</strong>
-            </span>
-            <span className="font-medium text-teal-600 dark:text-teal-400">
-              Mobile App Sync Active
-            </span>
-          </div>
-        </div>
-      )}
-
-      {/* Caregiver Details Sheet */}
-      <CaregiverDetailsSheet
-        caregiver={selectedCaregiver}
-        isOpen={isSheetOpen}
-        onClose={() => setIsSheetOpen(false)}
-        onUpdateStatus={handleUpdateStatus}
-      />
-
-      {/* Add Caregiver Modal */}
-      <AddCaregiverModal
-        isOpen={isAddModalOpen}
-        onClose={() => setIsAddModalOpen(false)}
-        onAddCaregiver={handleAddCaregiver}
-      />
-
-      {/* Review Applicant Modal */}
-      <ReviewApplicantModal
-        isOpen={isReviewOpen}
-        onClose={() => setIsReviewOpen(false)}
-        applicant={selectedApplicant}
-        onApprove={handleApproveApplicant}
-        onReject={handleRejectApplicant}
+      {/* Care Professional Onboarding Modal */}
+      <OnboardProfessionalModal
+        isOpen={isOnboardModalOpen}
+        onClose={() => setIsOnboardModalOpen(false)}
+        onAddProfessional={handleAddProfessional}
       />
     </div>
   );
