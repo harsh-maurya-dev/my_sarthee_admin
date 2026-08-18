@@ -18,6 +18,9 @@ import {
   ChevronDown,
   ChevronRight,
   Sparkles,
+  FileCode,
+  Globe,
+  Briefcase,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useSidebar } from "@/context/sidebar-context";
@@ -104,22 +107,27 @@ export const navGroups: NavGroup[] = [
         badge: "AI Match",
         badgeColor: "bg-teal-100 text-teal-800 dark:bg-teal-950 dark:text-teal-300",
       },
+            {
+        title: "Service Management",
+        href: "/services",
+        icon: Briefcase,
+      },
     ],
   },
   {
     groupName: "Clinical & Quality",
     items: [
-      {
-        title: "Care Management",
-        href: "/care-management",
-        icon: HeartHandshake
-        // subItems: [
-        //   { title: "Care Plans", href: "/care-management?tab=care-plans" },
-        //   { title: "Today's Care Stream", href: "/care-management?tab=todays-care" },
-        //   { title: "Visit Monitoring", href: "/care-management?tab=visits" },
-        //   { title: "Care Progress", href: "/care-management?tab=progress" },
-        // ],
-      },
+      // {
+      //   title: "Care Management",
+      //   href: "/care-management",
+      //   icon: HeartHandshake,
+      //   // subItems: [
+      //   //   { title: "Care Plans", href: "/care-management?tab=care-plans" },
+      //   //   { title: "Today's Care Stream", href: "/care-management?tab=todays-care" },
+      //   //   { title: "Visit Monitoring", href: "/care-management?tab=visits" },
+      //   //   { title: "Care Progress", href: "/care-management?tab=progress" },
+      //   // ],
+      // },
       {
         title: "Escalations",
         href: "/escalations",
@@ -188,6 +196,21 @@ export const navGroups: NavGroup[] = [
         //   { title: "Coverage Locations", href: "/settings?tab=locations" },
         //   { title: "Audit Logs", href: "/settings?tab=audit" },
         // ],
+      },
+    ],
+  },
+  {
+    groupName: "Content & Web",
+    items: [
+      {
+        title: "CMS Management",
+        href: "/cms",
+        icon: FileCode,
+      },
+      {
+        title: "Website Management",
+        href: "/website/services",
+        icon: Globe,
       },
     ],
   },

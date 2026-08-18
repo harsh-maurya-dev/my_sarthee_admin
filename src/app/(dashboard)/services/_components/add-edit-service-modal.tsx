@@ -14,14 +14,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { Image as ImageIcon, Sparkles } from "lucide-react";
+import { Image as ImageIcon } from "lucide-react";
 import { swiftAlert } from "@/lib/swift-alert";
 
 interface AddEditServiceModalProps {
@@ -122,36 +115,18 @@ export function AddEditServiceModal({
             />
           </div>
 
-          {/* Category & Price */}
-          <div className="grid grid-cols-2 gap-3">
-            <div className="space-y-1.5">
-              <Label className="text-xs font-semibold">Category</Label>
-              <Select value={category} onValueChange={(val: any) => setCategory(val || "")}>
-                <SelectTrigger className="h-9 text-xs">
-                  <SelectValue placeholder="Category" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="Telehealth">Telehealth</SelectItem>
-                  <SelectItem value="Home Care">Home Care</SelectItem>
-                  <SelectItem value="Rehabilitation">Rehabilitation</SelectItem>
-                  <SelectItem value="Diagnostics">Diagnostics</SelectItem>
-                  <SelectItem value="Senior Care">Senior Care</SelectItem>
-                  <SelectItem value="Emergency">Emergency</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-            <div className="space-y-1.5">
-              <Label htmlFor="price" className="text-xs font-semibold">
-                Pricing Rate
-              </Label>
-              <Input
-                id="price"
-                placeholder="$100 / session"
-                value={price}
-                onChange={(e) => setPrice(e.target.value)}
-                className="h-9 text-xs"
-              />
-            </div>
+          {/* Pricing Rate */}
+          <div className="space-y-1.5">
+            <Label htmlFor="price" className="text-xs font-semibold">
+              Pricing Rate
+            </Label>
+            <Input
+              id="price"
+              placeholder="e.g. ₹1,200 / shift or ₹25,000 / month"
+              value={price}
+              onChange={(e) => setPrice(e.target.value)}
+              className="h-9 text-xs"
+            />
           </div>
 
           {/* Image URL & Live Preview */}
@@ -197,20 +172,6 @@ export function AddEditServiceModal({
               className="text-xs min-h-[90px]"
               required
             />
-          </div>
-
-          {/* Status */}
-          <div className="space-y-1.5">
-            <Label className="text-xs font-semibold">Initial Status</Label>
-            <Select value={status} onValueChange={(val: any) => setStatus(val)}>
-              <SelectTrigger className="h-9 text-xs">
-                <SelectValue placeholder="Status" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="Enabled">Enabled (Active on Platform)</SelectItem>
-                <SelectItem value="Disabled">Disabled (Hidden from Platform)</SelectItem>
-              </SelectContent>
-            </Select>
           </div>
 
           <DialogFooter className="pt-3">

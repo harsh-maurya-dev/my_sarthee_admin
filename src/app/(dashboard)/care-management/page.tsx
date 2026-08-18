@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, Suspense } from "react";
+import { useSearchParams, useRouter } from "next/navigation";
 import {
   initialPatients360,
   Patient360,
@@ -28,9 +29,24 @@ import {
 } from "lucide-react";
 import { swiftAlert } from "@/lib/swift-alert";
 
-export default function CareManagementPage() {
+function CareManagementContent() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const tabParam = searchParams.get("tab");
+
   const [activeTab, setActiveTab] = useState<"care-plans" | "todays-care" | "progress">("care-plans");
   const [selectedPatient, setSelectedPatient] = useState<Patient360>(initialPatients360[0]);
+
+  useEffect(() => {
+    if (tabParam && ["care-plans", "todays-care", "progress"].includes(tabParam)) {
+      setActiveTab(tabParam as any);
+    }
+  }, [tabParam]);
+
+  const handleTabChange = (tab: "care-plans" | "todays-care" | "progress") => {
+    setActiveTab(tab);
+    router.push(`/care-management?tab=${tab}`);
+  };
 
   return (
     <div className="space-y-6 pb-10">
@@ -62,7 +78,7 @@ export default function CareManagementPage() {
           return (
             <button
               key={tab.key}
-              onClick={() => setActiveTab(tab.key as any)}
+              onClick={() => handleTabChange(tab.key as any)}
               className={`flex items-center gap-2 rounded-lg px-3.5 py-2 text-xs font-bold transition-all ${
                 activeTab === tab.key
                   ? "bg-teal-600 text-white shadow-sm"
@@ -321,5 +337,13 @@ export default function CareManagementPage() {
         </div>
       )}
     </div>
+  );
+}
+
+export default function CareManagementPage() {
+  return (
+    <Suspense fallback={<div className="p-6 text-xs text-muted-foreground">Loading care management...</div>}>
+      <CareManagementContent />
+    </Suspense>
   );
 }

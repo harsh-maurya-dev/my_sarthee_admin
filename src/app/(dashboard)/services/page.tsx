@@ -266,12 +266,9 @@ export default function ServiceManagementPage() {
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value="All">All Categories</SelectItem>
-                      <SelectItem value="Telehealth">Telehealth</SelectItem>
-                      <SelectItem value="Home Care">Home Care</SelectItem>
-                      <SelectItem value="Rehabilitation">Rehabilitation</SelectItem>
-                      <SelectItem value="Diagnostics">Diagnostics</SelectItem>
-                      <SelectItem value="Senior Care">Senior Care</SelectItem>
-                      <SelectItem value="Emergency">Emergency</SelectItem>
+                      <SelectItem value="Physiotherapy">Physiotherapy</SelectItem>
+                      <SelectItem value="Nursing">Nursing</SelectItem>
+                      <SelectItem value="Caregiver">Caregiver</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -312,7 +309,7 @@ export default function ServiceManagementPage() {
                 <TableRow>
                   <TableHead className="font-bold text-xs">Image</TableHead>
                   <TableHead className="font-bold text-xs">Service Name</TableHead>
-                  <TableHead className="font-bold text-xs">Category & Rate</TableHead>
+                  <TableHead className="font-bold text-xs">Rate</TableHead>
                   <TableHead className="font-bold text-xs max-w-xs">Description</TableHead>
                   <TableHead className="font-bold text-xs text-center">Status</TableHead>
                   <TableHead className="font-bold text-xs text-right">Actions</TableHead>
@@ -347,15 +344,8 @@ export default function ServiceManagementPage() {
                         </div>
                       </TableCell>
 
-                      <TableCell className="text-xs">
-                        <div className="flex flex-col gap-0.5">
-                          <Badge variant="outline" className="w-fit text-[10px]">
-                            {service.category}
-                          </Badge>
-                          <span className="font-semibold text-foreground text-[11px]">
-                            {service.price}
-                          </span>
-                        </div>
+                      <TableCell className="text-xs font-semibold text-foreground">
+                        {service.price}
                       </TableCell>
 
                       <TableCell className="text-xs text-muted-foreground max-w-xs truncate">
