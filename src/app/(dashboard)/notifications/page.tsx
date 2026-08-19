@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useMemo } from "react";
+import Link from "next/link";
 import { AdminNotification, initialNotifications } from "./_data/notifications";
 import { NotificationViewModal } from "./_components/notification-view-modal";
 import { Badge } from "@/components/ui/badge";
@@ -19,6 +20,7 @@ import {
   Plus,
   ShieldCheck,
   CheckCheck,
+  Send,
 } from "lucide-react";
 import { swiftAlert } from "@/lib/swift-alert";
 
@@ -63,8 +65,8 @@ export default function NotificationPage() {
   const handleMarkAllAsRead = () => {
     setNotifications((prev) => prev.map((n) => ({ ...n, status: "Read" })));
     swiftAlert.success({
-      title: "All Notifications Read",
-      description: "Cleared all unread notification badges.",
+      title: "All Notifications Marked Read",
+      description: "All inbox notification items marked as read.",
     });
   };
 
@@ -81,16 +83,28 @@ export default function NotificationPage() {
             Real-time alerts for New Bookings, Assignment Pending, Visit GPS Alerts, and Patient Complaints.
           </p>
         </div>
-        {unreadCount > 0 && (
-          <Button
-            size="sm"
-            onClick={handleMarkAllAsRead}
-            className="h-9 gap-2 bg-teal-600 text-white hover:bg-teal-700 text-xs font-semibold shadow-xs"
-          >
-            <CheckCheck className="h-4 w-4" />
-            <span>Mark All as Read</span>
-          </Button>
-        )}
+        <div className="flex items-center gap-2">
+          <Link href="/push-notifications">
+            <Button
+              variant="outline"
+              size="sm"
+              className="h-9 gap-2 text-xs font-semibold"
+            >
+              <Send className="h-3.5 w-3.5 text-teal-600" />
+              <span>Compose Push Broadcast</span>
+            </Button>
+          </Link>
+          {unreadCount > 0 && (
+            <Button
+              size="sm"
+              onClick={handleMarkAllAsRead}
+              className="h-9 gap-2 bg-teal-600 text-white hover:bg-teal-700 text-xs font-semibold shadow-xs"
+            >
+              <CheckCheck className="h-4 w-4" />
+              <span>Mark All as Read</span>
+            </Button>
+          )}
+        </div>
       </div>
 
       {/* KPI Cards */}

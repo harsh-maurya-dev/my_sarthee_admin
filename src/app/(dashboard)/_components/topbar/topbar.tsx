@@ -123,7 +123,7 @@ export function Topbar() {
         </Link>
 
         {/* Notifications */}
-        <Link href="/communication">
+        <Link href="/notifications">
           <Button
             variant="ghost"
             size="icon"

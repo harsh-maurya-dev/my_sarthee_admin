@@ -21,6 +21,10 @@ import {
   FileCode,
   Globe,
   Briefcase,
+  BellRing,
+  CalendarClock,
+  FileCheck,
+  CheckSquare,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useSidebar } from "@/context/sidebar-context";
@@ -107,10 +111,20 @@ export const navGroups: NavGroup[] = [
         badge: "AI Match",
         badgeColor: "bg-teal-100 text-teal-800 dark:bg-teal-950 dark:text-teal-300",
       },
-            {
+      {
         title: "Service Management",
         href: "/services",
         icon: Briefcase,
+      },
+      {
+        title: "Onboarding Documents",
+        href: "/onboarding-documents",
+        icon: FileCheck,
+      },
+      {
+        title: "Checklist Templates",
+        href: "/checklist-templates",
+        icon: CheckSquare,
       },
     ],
   },
@@ -144,12 +158,14 @@ export const navGroups: NavGroup[] = [
       {
         title: "Communication",
         href: "/communication",
-        icon: MessageSquareText
-        // subItems: [
-        //   { title: "Patient & Family", href: "/communication?tab=family" },
-        //   { title: "Care Professionals", href: "/communication?tab=professionals" },
-        //   { title: "Automated Triggers", href: "/communication?tab=automated" },
-        // ],
+        icon: MessageSquareText,
+      },
+      {
+        title: "Push Notifications",
+        href: "/push-notifications",
+        icon: BellRing,
+        badge: "Mobile",
+        badgeColor: "bg-teal-100 text-teal-800 dark:bg-teal-950 dark:text-teal-300",
       },
     ],
   },

@@ -45,6 +45,7 @@ export interface CaregiverRegistrationRequest {
   licenseDocumentUrl: string;
   backgroundCheckStatus: "Passed" | "Pending" | "Failed";
   status: "Pending Review" | "Approved" | "Rejected";
+  rejectionReason?: string;
   notes?: string;
 }
 
