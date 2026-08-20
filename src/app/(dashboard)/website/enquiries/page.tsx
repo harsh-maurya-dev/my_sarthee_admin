@@ -174,6 +174,7 @@ export default function EnquiryManagementPage() {
             </Select>
           </div>
         </div>
+        
 
         {/* Date Range Filter */}
         <div className="flex flex-wrap items-center justify-between gap-2 pt-2 border-t text-xs">
