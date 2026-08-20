@@ -4,6 +4,7 @@ import { useState, useMemo } from "react";
 import { WebsiteService, initialWebsiteServices } from "./_data/website-services";
 import { AddEditWebsiteServiceModal } from "./_components/add-edit-website-service-modal";
 import { WebsiteServiceViewModal } from "./_components/website-service-view-modal";
+import { WebsiteNavHeader } from "../_components/website-nav-header";
 import {
   Table,
   TableBody,
@@ -144,6 +145,9 @@ export default function WebsiteServicesPage() {
         </Button>
       </div>
 
+      {/* Nav Header */}
+      {/* <WebsiteNavHeader /> */}
+
       {/* Filter Bar & View Toggle */}
       <div className="rounded-2xl border bg-card p-4 shadow-xs space-y-3">
         <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
@@ -255,9 +259,8 @@ export default function WebsiteServicesPage() {
                     size="sm"
                     variant="outline"
                     onClick={() => handleToggleStatus(s)}
-                    className={`h-8 text-xs gap-1 ${
-                      s.status === "Active" ? "text-amber-600 hover:bg-amber-50" : "text-emerald-600 hover:bg-emerald-50"
-                    }`}
+                    className={`h-8 text-xs gap-1 ${s.status === "Active" ? "text-amber-600 hover:bg-amber-50" : "text-emerald-600 hover:bg-emerald-50"
+                      }`}
                   >
                     {s.status === "Active" ? <XCircle className="h-3.5 w-3.5" /> : <CheckCircle2 className="h-3.5 w-3.5" />}
                     <span>{s.status === "Active" ? "Disable" : "Enable"}</span>

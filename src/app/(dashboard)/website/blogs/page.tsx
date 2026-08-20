@@ -4,6 +4,7 @@ import { useState, useMemo } from "react";
 import { BlogPost, initialBlogPosts } from "./_data/blogs";
 import { AddEditBlogModal } from "./_components/add-edit-blog-modal";
 import { BlogViewModal } from "./_components/blog-view-modal";
+import { WebsiteNavHeader } from "../_components/website-nav-header";
 import {
   Table,
   TableBody,
@@ -146,6 +147,9 @@ export default function BlogManagementPage() {
         </Button>
       </div>
 
+      {/* Nav Header */}
+      {/* <WebsiteNavHeader /> */}
+
       {/* Filter Bar & View Mode Toggle */}
       <div className="rounded-2xl border bg-card p-4 shadow-xs space-y-3">
         <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
@@ -220,8 +224,8 @@ export default function BlogManagementPage() {
                           b.status === "Published"
                             ? "default"
                             : b.status === "Draft"
-                            ? "outline"
-                            : "secondary"
+                              ? "outline"
+                              : "secondary"
                         }
                         className="font-bold text-[10px]"
                       >
@@ -270,9 +274,8 @@ export default function BlogManagementPage() {
                     size="sm"
                     variant="outline"
                     onClick={() => handleTogglePublish(b)}
-                    className={`h-8 text-xs gap-1 ${
-                      b.status === "Published" ? "text-amber-600 hover:bg-amber-50" : "text-emerald-600 hover:bg-emerald-50"
-                    }`}
+                    className={`h-8 text-xs gap-1 ${b.status === "Published" ? "text-amber-600 hover:bg-amber-50" : "text-emerald-600 hover:bg-emerald-50"
+                      }`}
                   >
                     {b.status === "Published" ? "Unpublish" : "Publish"}
                   </Button>
@@ -331,8 +334,8 @@ export default function BlogManagementPage() {
                         b.status === "Published"
                           ? "default"
                           : b.status === "Draft"
-                          ? "outline"
-                          : "secondary"
+                            ? "outline"
+                            : "secondary"
                       }
                       className="text-[10px] font-bold"
                     >

@@ -3,6 +3,7 @@
 import { useState, useMemo } from "react";
 import { JobApplication, initialJobApplications } from "./_data/applications";
 import { ApplicationDetailsModal } from "./_components/application-details-modal";
+import { WebsiteNavHeader } from "../../_components/website-nav-header";
 import {
   Table,
   TableBody,
@@ -116,41 +117,9 @@ export default function ApplicationManagementPage() {
         </Button>
       </div>
 
-      {/* KPI Stats Cards */}
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-        <div className="rounded-2xl border bg-card p-4 shadow-xs flex items-center justify-between">
-          <div>
-            <p className="text-xs font-medium text-muted-foreground">Total Received Applications</p>
-            <h3 className="text-2xl font-extrabold text-foreground mt-1">{totalCount}</h3>
-            <p className="text-[10px] text-teal-600 font-semibold mt-0.5">Website Candidate Submissions</p>
-          </div>
-          <div className="h-10 w-10 rounded-full bg-teal-100 dark:bg-teal-950 text-teal-600 flex items-center justify-center">
-            <Users className="h-5 w-5" />
-          </div>
-        </div>
+      {/* Nav Header */}
+      {/* <WebsiteNavHeader /> */} 
 
-        <div className="rounded-2xl border bg-card p-4 shadow-xs flex items-center justify-between">
-          <div>
-            <p className="text-xs font-medium text-muted-foreground">Shortlisted Candidates</p>
-            <h3 className="text-2xl font-extrabold text-foreground mt-1">{shortlistedCount}</h3>
-            <p className="text-[10px] text-emerald-600 font-semibold mt-0.5">Qualified for Interview</p>
-          </div>
-          <div className="h-10 w-10 rounded-full bg-emerald-100 dark:bg-emerald-950 text-emerald-600 flex items-center justify-center">
-            <UserCheck className="h-5 w-5" />
-          </div>
-        </div>
-
-        <div className="rounded-2xl border bg-card p-4 shadow-xs flex items-center justify-between">
-          <div>
-            <p className="text-xs font-medium text-muted-foreground">Rejected Applications</p>
-            <h3 className="text-2xl font-extrabold text-foreground mt-1">{rejectedCount}</h3>
-            <p className="text-[10px] text-rose-600 font-semibold mt-0.5">Archived Submissions</p>
-          </div>
-          <div className="h-10 w-10 rounded-full bg-rose-100 dark:bg-rose-950 text-rose-600 flex items-center justify-center">
-            <UserX className="h-5 w-5" />
-          </div>
-        </div>
-      </div>
 
       {/* Filter Bar */}
       <div className="rounded-2xl border bg-card p-4 shadow-xs space-y-3">
@@ -243,8 +212,8 @@ export default function ApplicationManagementPage() {
                         a.status === "Shortlisted"
                           ? "default"
                           : a.status === "Rejected"
-                          ? "destructive"
-                          : "outline"
+                            ? "destructive"
+                            : "outline"
                       }
                       className="text-[10px] font-bold"
                     >

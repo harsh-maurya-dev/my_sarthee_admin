@@ -3,6 +3,7 @@
 import { useState, useMemo } from "react";
 import { WebsiteEnquiry, initialWebsiteEnquiries } from "./_data/enquiries";
 import { EnquiryDetailsModal } from "./_components/enquiry-details-modal";
+import { WebsiteNavHeader } from "../_components/website-nav-header";
 import {
   Table,
   TableBody,
@@ -31,9 +32,8 @@ import {
   Calendar,
   Phone,
   Mail,
-  CheckCircle2,
-  Clock,
-  Send,
+  Edit,
+  X,
 } from "lucide-react";
 import { swiftAlert } from "@/lib/swift-alert";
 
@@ -41,28 +41,33 @@ export default function EnquiryManagementPage() {
   const [enquiries, setEnquiries] = useState<WebsiteEnquiry[]>(initialWebsiteEnquiries);
   const [searchQuery, setSearchQuery] = useState("");
   const [statusFilter, setStatusFilter] = useState<string>("All");
-  const [dateFilter, setDateFilter] = useState("");
+  const [startDateFrom, setStartDateFrom] = useState<string>("");
+  const [startDateTo, setStartDateTo] = useState<string>("");
 
   const [selectedEnquiry, setSelectedEnquiry] = useState<WebsiteEnquiry | null>(null);
   const [isDetailsOpen, setIsDetailsOpen] = useState(false);
 
-  // Filtered
+  // Filtered by Search (Subject, Message, Name, Email) and Filters (Date Range, Status)
   const filteredEnquiries = useMemo(() => {
     return enquiries.filter((e) => {
       const q = searchQuery.toLowerCase();
       const matchesSearch =
-        e.name.toLowerCase().includes(q) ||
+        !searchQuery ||
         e.subject.toLowerCase().includes(q) ||
         e.message.toLowerCase().includes(q) ||
+        e.name.toLowerCase().includes(q) ||
         e.email.toLowerCase().includes(q) ||
         e.id.toLowerCase().includes(q);
 
       const matchesStatus = statusFilter === "All" || e.status === statusFilter;
-      const matchesDate = !dateFilter || e.submittedDate === dateFilter;
 
-      return matchesSearch && matchesStatus && matchesDate;
+      const enquiryDate = e.submittedDate; // format YYYY-MM-DD
+      const matchesDateFrom = !startDateFrom || enquiryDate >= startDateFrom;
+      const matchesDateTo = !startDateTo || enquiryDate <= startDateTo;
+
+      return matchesSearch && matchesStatus && matchesDateFrom && matchesDateTo;
     });
-  }, [enquiries, searchQuery, statusFilter, dateFilter]);
+  }, [enquiries, searchQuery, statusFilter, startDateFrom, startDateTo]);
 
   const handleOpenDetails = (enquiry: WebsiteEnquiry) => {
     setSelectedEnquiry(enquiry);
@@ -91,17 +96,30 @@ export default function EnquiryManagementPage() {
     }
   };
 
+  const clearFilters = () => {
+    setSearchQuery("");
+    setStatusFilter("All");
+    setStartDateFrom("");
+    setStartDateTo("");
+  };
+
+  const hasActiveFilters =
+    searchQuery !== "" ||
+    statusFilter !== "All" ||
+    startDateFrom !== "" ||
+    startDateTo !== "";
+
   const totalCount = enquiries.length;
   const newCount = enquiries.filter((e) => e.status === "New").length;
   const resolvedCount = enquiries.filter((e) => e.status === "Resolved").length;
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 pb-10">
       {/* Page Header */}
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl flex items-center gap-2">
-            <MessageSquare className="h-7 w-7 text-teal-600" />
+            <MessageSquare className="h-7 w-7 text-teal-600 dark:text-teal-400" />
             Enquiry Form Management
           </h1>
           <p className="text-xs text-muted-foreground mt-1">
@@ -123,96 +141,93 @@ export default function EnquiryManagementPage() {
         </Button>
       </div>
 
-      {/* KPI Stats Cards */}
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-        <div className="rounded-2xl border bg-card p-4 shadow-xs flex items-center justify-between">
-          <div>
-            <p className="text-xs font-medium text-muted-foreground">Total Submitted Enquiries</p>
-            <h3 className="text-2xl font-extrabold text-foreground mt-1">{totalCount}</h3>
-            <p className="text-[10px] text-teal-600 font-semibold mt-0.5">Website Form Submissions</p>
-          </div>
-          <div className="h-10 w-10 rounded-full bg-teal-100 dark:bg-teal-950 text-teal-600 flex items-center justify-center">
-            <MessageSquare className="h-5 w-5" />
-          </div>
-        </div>
+      {/* Nav Header */}
+      {/* <WebsiteNavHeader /> */} 
 
-        <div className="rounded-2xl border bg-card p-4 shadow-xs flex items-center justify-between">
-          <div>
-            <p className="text-xs font-medium text-muted-foreground">New Unread Enquiries</p>
-            <h3 className="text-2xl font-extrabold text-foreground mt-1">{newCount}</h3>
-            <p className="text-[10px] text-amber-600 font-semibold mt-0.5">Awaiting Staff Response</p>
-          </div>
-          <div className="h-10 w-10 rounded-full bg-amber-100 dark:bg-amber-950 text-amber-600 flex items-center justify-center">
-            <Clock className="h-5 w-5" />
-          </div>
-        </div>
 
-        <div className="rounded-2xl border bg-card p-4 shadow-xs flex items-center justify-between">
-          <div>
-            <p className="text-xs font-medium text-muted-foreground">Resolved Enquiries</p>
-            <h3 className="text-2xl font-extrabold text-foreground mt-1">{resolvedCount}</h3>
-            <p className="text-[10px] text-emerald-600 font-semibold mt-0.5">Follow-up Completed</p>
-          </div>
-          <div className="h-10 w-10 rounded-full bg-emerald-100 dark:bg-emerald-950 text-emerald-600 flex items-center justify-center">
-            <CheckCircle2 className="h-5 w-5" />
-          </div>
-        </div>
-      </div>
-
-      {/* Filter Bar */}
+      {/* Search & Filter Toolbar (Search by Subject, Message; Filter by Date Range, Status) */}
       <div className="rounded-2xl border bg-card p-4 shadow-xs space-y-3">
         <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+          {/* Search by Subject / Message / Name */}
           <div className="relative flex-1 max-w-md">
             <Search className="absolute left-3 top-2.5 h-4 w-4 text-muted-foreground" />
             <Input
-              placeholder="Search by Subject, Message, Name, or Email..."
+              placeholder="Search by Subject, Message, or Sender Name..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-9 h-9 text-xs"
+              className="pl-9 h-9 text-xs rounded-xl"
             />
           </div>
 
           <div className="flex flex-wrap items-center gap-2">
-            <div className="flex items-center gap-1.5 text-xs">
-              <span className="text-muted-foreground font-medium hidden sm:inline">Status:</span>
-              <Select value={statusFilter} onValueChange={(val: any) => setStatusFilter(val)}>
-                <SelectTrigger className="h-9 text-xs w-36">
-                  <SelectValue placeholder="Status" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="All">All Statuses</SelectItem>
-                  <SelectItem value="New">New Only</SelectItem>
-                  <SelectItem value="Contacted">Contacted</SelectItem>
-                  <SelectItem value="Resolved">Resolved</SelectItem>
-                </SelectContent>
-              </Select>
+            {/* Status Filter */}
+            <Select value={statusFilter} onValueChange={(val: any) => setStatusFilter(val)}>
+              <SelectTrigger className="h-9 w-36 text-xs rounded-xl">
+                <SelectValue placeholder="Status" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="All">All Statuses</SelectItem>
+                <SelectItem value="New">New</SelectItem>
+                <SelectItem value="Contacted">Contacted</SelectItem>
+                <SelectItem value="Resolved">Resolved</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+        </div>
+
+        {/* Date Range Filter */}
+        <div className="flex flex-wrap items-center justify-between gap-2 pt-2 border-t text-xs">
+          <div className="flex flex-wrap items-center gap-2">
+            <div className="flex items-center gap-1.5 text-muted-foreground font-semibold">
+              <Calendar className="h-3.5 w-3.5 text-teal-600" />
+              <span>Date Range:</span>
             </div>
 
-            <div className="flex items-center gap-1.5 text-xs">
-              <span className="text-muted-foreground font-medium hidden sm:inline">Date:</span>
-              <div className="relative">
-                <Calendar className="absolute left-2.5 top-2.5 h-3.5 w-3.5 text-muted-foreground" />
-                <Input
-                  type="date"
-                  value={dateFilter}
-                  onChange={(e) => setDateFilter(e.target.value)}
-                  className="h-9 text-xs pl-8 w-36"
-                />
-              </div>
+            <div className="flex items-center gap-1.5">
+              <span className="text-[11px] text-muted-foreground">From</span>
+              <Input
+                type="date"
+                value={startDateFrom}
+                onChange={(e) => setStartDateFrom(e.target.value)}
+                className="h-8 w-34 text-xs rounded-lg bg-background px-2"
+              />
+            </div>
+
+            <div className="flex items-center gap-1.5">
+              <span className="text-[11px] text-muted-foreground">To</span>
+              <Input
+                type="date"
+                value={startDateTo}
+                onChange={(e) => setStartDateTo(e.target.value)}
+                className="h-8 w-34 text-xs rounded-lg bg-background px-2"
+              />
             </div>
           </div>
+
+          {hasActiveFilters && (
+            <Button
+              size="sm"
+              variant="ghost"
+              onClick={clearFilters}
+              className="h-7 text-xs text-muted-foreground hover:text-foreground gap-1 px-2"
+            >
+              <X className="h-3 w-3" />
+              <span>Reset Filters</span>
+            </Button>
+          )}
         </div>
       </div>
 
-      {/* Enquiries Data Table */}
+      {/* Enquiries Table */}
       <div className="rounded-2xl border bg-card shadow-xs overflow-hidden">
         <Table>
           <TableHeader className="bg-slate-50 dark:bg-slate-900/60">
             <TableRow>
-              <TableHead className="font-bold text-xs">Sender Name & Phone</TableHead>
-              <TableHead className="font-bold text-xs">Email Address</TableHead>
+              <TableHead className="font-bold text-xs">ID / Date</TableHead>
+              <TableHead className="font-bold text-xs">Name</TableHead>
+              <TableHead className="font-bold text-xs">Email & Phone</TableHead>
               <TableHead className="font-bold text-xs">Subject</TableHead>
-              <TableHead className="font-bold text-xs">Submitted Date</TableHead>
+              <TableHead className="font-bold text-xs">Message</TableHead>
               <TableHead className="font-bold text-xs text-center">Status</TableHead>
               <TableHead className="font-bold text-xs text-right">Actions</TableHead>
             </TableRow>
@@ -220,45 +235,47 @@ export default function EnquiryManagementPage() {
           <TableBody>
             {filteredEnquiries.length === 0 ? (
               <TableRow>
-                <TableCell colSpan={6} className="text-center py-12 text-muted-foreground text-xs font-medium">
-                  No enquiry submissions found matching your search.
+                <TableCell colSpan={7} className="h-32 text-center text-xs text-muted-foreground">
+                  No enquiry submissions found matching your search and filter criteria.
                 </TableCell>
               </TableRow>
             ) : (
               filteredEnquiries.map((e) => (
-                <TableRow key={e.id} className="hover:bg-slate-50/80 dark:hover:bg-slate-900/40">
-                  {/* Sender Name & Phone */}
-                  <TableCell className="text-xs">
-                    <span className="font-bold text-foreground block">{e.name}</span>
-                    <span className="text-[10px] font-mono text-muted-foreground flex items-center gap-1">
-                      <Phone className="h-3 w-3 text-slate-400" /> {e.phone}
-                    </span>
+                <TableRow
+                  key={e.id}
+                  className="hover:bg-slate-50/80 dark:hover:bg-slate-900/40 cursor-pointer"
+                  onClick={() => handleOpenDetails(e)}
+                >
+                  <TableCell className="text-xs font-mono">
+                    <span className="font-bold text-foreground">{e.id}</span>
+                    <span className="text-[10px] text-muted-foreground block">{e.submittedDate}</span>
                   </TableCell>
 
-                  {/* Email */}
-                  <TableCell className="text-xs font-mono text-foreground">
-                    {e.email}
+                  <TableCell className="text-xs font-bold text-foreground">
+                    {e.name}
                   </TableCell>
 
-                  {/* Subject */}
-                  <TableCell className="text-xs font-semibold text-foreground max-w-xs truncate">
-                    {e.subject}
+                  <TableCell className="text-xs font-mono">
+                    <span className="text-foreground block">{e.email}</span>
+                    <span className="text-[10px] text-muted-foreground">{e.phone}</span>
                   </TableCell>
 
-                  {/* Date */}
-                  <TableCell className="text-xs font-mono text-muted-foreground">
-                    {e.submittedDate}
+                  <TableCell className="text-xs font-semibold text-foreground max-w-[180px]">
+                    <span className="truncate block">{e.subject}</span>
                   </TableCell>
 
-                  {/* Status */}
+                  <TableCell className="text-xs text-muted-foreground max-w-[260px]">
+                    <span className="truncate block">{e.message}</span>
+                  </TableCell>
+
                   <TableCell className="text-center">
                     <Badge
                       variant={
                         e.status === "Resolved"
                           ? "default"
                           : e.status === "Contacted"
-                          ? "secondary"
-                          : "outline"
+                            ? "secondary"
+                            : "outline"
                       }
                       className="text-[10px] font-bold"
                     >
@@ -266,19 +283,31 @@ export default function EnquiryManagementPage() {
                     </Badge>
                   </TableCell>
 
-                  {/* Actions */}
-                  <TableCell className="text-right">
+                  <TableCell className="text-right" onClick={(ev) => ev.stopPropagation()}>
                     <div className="flex items-center justify-end gap-1">
+                      {/* View */}
                       <Button
                         size="sm"
                         variant="outline"
                         onClick={() => handleOpenDetails(e)}
-                        className="h-8 text-xs gap-1 border-slate-200 hover:bg-teal-50 hover:text-teal-700"
+                        className="h-8 text-xs gap-1"
                       >
-                        <Eye className="h-3.5 w-3.5" />
+                        <Eye className="h-3.5 w-3.5 text-teal-600" />
                         <span>View</span>
                       </Button>
 
+                      {/* Update */}
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        onClick={() => handleOpenDetails(e)}
+                        className="h-8 text-xs gap-1"
+                      >
+                        <Edit className="h-3.5 w-3.5 text-sky-600" />
+                        <span>Update</span>
+                      </Button>
+
+                      {/* Delete */}
                       <Button
                         size="sm"
                         variant="ghost"
@@ -294,18 +323,9 @@ export default function EnquiryManagementPage() {
             )}
           </TableBody>
         </Table>
-
-        <div className="p-4 border-t bg-slate-50/50 dark:bg-slate-900/30 flex items-center justify-between text-xs text-muted-foreground">
-          <span>
-            Showing <strong className="text-foreground">{filteredEnquiries.length}</strong> website enquiry submissions
-          </span>
-          <span className="font-medium text-teal-600 dark:text-teal-400">
-            Contact Form Sync Active
-          </span>
-        </div>
       </div>
 
-      {/* Enquiry Details Modal */}
+      {/* Details & Status Update Modal */}
       <EnquiryDetailsModal
         isOpen={isDetailsOpen}
         onClose={() => setIsDetailsOpen(false)}

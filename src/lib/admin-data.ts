@@ -2,6 +2,7 @@
 
 export type CareType =
   | "Nursing"
+  | "Caregiving"
   | "Personal Care"
   | "Physiotherapy"
   | "Health Monitoring"
@@ -23,7 +24,7 @@ export type CareDuration =
 
 export type RiskLevel = "Critical" | "High" | "Medium" | "Normal";
 
-export type PatientStatus = "Active" | "Scheduled" | "On Hold" | "Completed" | "Pending";
+export type PatientStatus = "Active" | "Scheduled" | "Pending Assignment" | "On Hold" | "Completed" | "Pending";
 
 export type PaymentStatus = "Paid" | "Pending" | "Partially Paid" | "Overdue";
 
@@ -508,14 +509,14 @@ export const initialPatients360: Patient360[] = [
     doctorName: "Dr. Farokh Udwadia",
     doctorHospital: "Breach Candy Hospital",
     doctorNotes: "Focus on active-assisted range of motion for left upper limb. Maintain BP < 135/85 mmHg. Daily fasting sugar monitoring required.",
-    careRequired: "Combination",
+    careRequired: "Nursing",
     careStartDate: "2026-08-01",
     currentStatus: "Active",
     riskIndicator: "Critical",
     riskReason: "SpO2 dipped to 91% on exertion during morning shift; elevated BP (152/94). Coordinator review required.",
     carePlan: {
       id: "CP-1024",
-      careType: "Combination",
+      careType: "Nursing",
       frequency: "Twice daily",
       duration: "30 days",
       startDate: "2026-08-01",
@@ -669,14 +670,14 @@ export const initialPatients360: Patient360[] = [
     doctorName: "Dr. Alok Sharma",
     doctorHospital: "Lilavati Hospital",
     doctorNotes: "Requires constant companionship to prevent disorientation and wandering. Medication compliance critical. Gentle knee exercises.",
-    careRequired: "Personal Care",
+    careRequired: "Caregiving",
     careStartDate: "2026-07-15",
     currentStatus: "Active",
     riskIndicator: "Medium",
     riskReason: "Caregiver replacement requested for coming weekend due to personal leave.",
     carePlan: {
       id: "CP-1042",
-      careType: "Personal Care",
+      careType: "Caregiving",
       frequency: "Once daily",
       duration: "30 days",
       startDate: "2026-07-15",
@@ -764,13 +765,13 @@ export const initialPatients360: Patient360[] = [
     doctorName: "Dr. Pettigrew",
     doctorHospital: "Saifee Hospital",
     doctorNotes: "Requires assistance with meal times and sit-to-stand transitions. Levodopa dosage adherence is mandatory every 6 hours.",
-    careRequired: "Combination",
+    careRequired: "Caregiving",
     careStartDate: "2026-08-10",
     currentStatus: "Active",
     riskIndicator: "Normal",
     carePlan: {
       id: "CP-1055",
-      careType: "Combination",
+      careType: "Caregiving",
       frequency: "Twice daily",
       duration: "30 days",
       startDate: "2026-08-10",
@@ -990,6 +991,63 @@ export const initialPatients360: Patient360[] = [
     communicationHistory: [],
     adminNotes: [],
     referralSource: "Digital",
+  },
+  {
+    id: "pat-7",
+    patientId: "MS-1105",
+    fullName: "Vikram Malhotra",
+    age: 68,
+    gender: "Male",
+    dateOfBirth: "1958-05-10",
+    bloodGroup: "A+",
+    address: "Flat 502, Green Acres, Powai",
+    locationArea: "Powai",
+    primaryContactName: "Ananya Malhotra",
+    primaryContactRelation: "Daughter",
+    primaryContactPhone: "+91 98200 44321",
+    primaryContactWhatsapp: "+91 98200 44321",
+    emergencyContact: "Ananya Malhotra (+91 98200 44321)",
+    primaryDiagnosis: "Post-Operative Hip Replacement Care & Vital Monitoring",
+    allergies: ["None"],
+    mobilityLevel: "Assisted Walker",
+    doctorName: "Dr. K. N. Mehta",
+    doctorHospital: "Hiranandani Hospital",
+    doctorNotes: "Requires daily wound inspection and surgical dressing changes.",
+    careRequired: "Nursing",
+    careStartDate: "2026-08-22",
+    currentStatus: "Pending Assignment",
+    riskIndicator: "Normal",
+    carePlan: {
+      id: "CP-1105",
+      careType: "Nursing",
+      frequency: "Once daily",
+      duration: "14 days",
+      startDate: "2026-08-22",
+      endDate: "2026-09-05",
+      goals: "Sterile incision healing, pain management, and assisted mobility.",
+      specialRequirements: ["Wound dressing twice weekly", "Vital telemetry log"],
+      activitiesProgress: [],
+      milestones: [],
+    },
+    assignedTeam: [],
+    dailyVisits: [],
+    invoices: [
+      {
+        id: "INV-2026-08-1105",
+        bookingId: "BK-2122",
+        date: "2026-08-20",
+        bookingValue: 22000,
+        discount: 1000,
+        tax: 3780,
+        amountPaid: 24780,
+        balance: 0,
+        status: "Paid",
+      },
+    ],
+    communicationHistory: [],
+    adminNotes: [],
+    referralSource: "Hospital",
+    referralPartnerName: "Hiranandani Hospital",
   },
 ];
 

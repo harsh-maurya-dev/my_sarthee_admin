@@ -25,6 +25,7 @@ import {
   CalendarClock,
   FileCheck,
   CheckSquare,
+  ShieldCheck,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useSidebar } from "@/context/sidebar-context";
@@ -39,6 +40,7 @@ export interface SubNavItem {
   href: string;
   badge?: string;
   badgeColor?: string;
+  subItems?: SubNavItem[];
 }
 
 export interface NavItem {
@@ -156,6 +158,11 @@ export const navGroups: NavGroup[] = [
         // ],
       },
       {
+        title: "Quality Assurance",
+        href: "/quality-management",
+        icon: ShieldCheck,
+      },
+      {
         title: "Communication",
         href: "/communication",
         icon: MessageSquareText,
@@ -227,6 +234,19 @@ export const navGroups: NavGroup[] = [
         title: "Website Management",
         href: "/website/services",
         icon: Globe,
+        subItems: [
+          {
+            title: "Careers Management",
+            href: "/website/careers/jobs",
+            subItems: [
+              { title: "Job Management", href: "/website/careers/jobs" },
+              { title: "Application Management", href: "/website/careers/applications" },
+            ],
+          },
+          { title: "Service Management", href: "/website/services" },
+          { title: "Enquiry Management", href: "/website/enquiries" },
+          { title: "Blog/News Management", href: "/website/blogs" },
+        ],
       },
     ],
   },
@@ -236,9 +256,14 @@ export function SidebarNav() {
   const pathname = usePathname();
   const { isCollapsed } = useSidebar();
   const [openSubmenu, setOpenSubmenu] = useState<string | null>(null);
+  const [openNestedSubmenu, setOpenNestedSubmenu] = useState<string | null>(null);
 
   const toggleSubmenu = (title: string) => {
     setOpenSubmenu((prev) => (prev === title ? null : title));
+  };
+
+  const toggleNestedSubmenu = (title: string) => {
+    setOpenNestedSubmenu((prev) => (prev === title ? null : title));
   };
 
   return (
@@ -254,10 +279,16 @@ export function SidebarNav() {
             {group.items.map((item) => {
               const Icon = item.icon;
               const hasChildren = Boolean(item.subItems && item.subItems.length > 0);
+              const isChildOrNestedActive =
+                item.subItems?.some(
+                  (sub) =>
+                    pathname === sub.href.split("?")[0] ||
+                    sub.subItems?.some((n) => pathname === n.href.split("?")[0])
+                ) ?? false;
               const isActive =
                 pathname === item.href ||
                 (item.href === "/dashboard" && pathname === "/") ||
-                (item.href !== "/dashboard" && pathname.startsWith(item.href));
+                (item.href !== "/dashboard" && (pathname.startsWith(item.href) || isChildOrNestedActive));
               const isSubOpen = openSubmenu === item.title || (isActive && openSubmenu === null);
 
               const mainLink = (
@@ -340,6 +371,57 @@ export function SidebarNav() {
                   {hasChildren && !isCollapsed && isSubOpen && (
                     <div className="ml-4 pl-2 border-l border-slate-200 dark:border-slate-800 my-1 space-y-0.5">
                       {item.subItems?.map((sub) => {
+                        const hasNested = Boolean(sub.subItems && sub.subItems.length > 0);
+                        const isNestedChildActive = sub.subItems?.some(
+                          (nested) => pathname === nested.href.split("?")[0]
+                        );
+                        const isNestedOpen =
+                          openNestedSubmenu === sub.title ||
+                          (isNestedChildActive && openNestedSubmenu === null);
+
+                        if (hasNested) {
+                          return (
+                            <div key={sub.title} className="space-y-0.5">
+                              <button
+                                onClick={() => toggleNestedSubmenu(sub.title)}
+                                className={cn(
+                                  "w-full flex items-center justify-between rounded-md px-2 py-1.5 text-[11px] font-medium transition-colors",
+                                  isNestedChildActive
+                                    ? "text-teal-900 font-bold dark:text-teal-200"
+                                    : "text-muted-foreground hover:text-foreground hover:bg-slate-100/50 dark:hover:bg-slate-800/40"
+                                )}
+                              >
+                                <span className="truncate">{sub.title}</span>
+                                {isNestedOpen ? (
+                                  <ChevronDown className="h-3 w-3 text-muted-foreground" />
+                                ) : (
+                                  <ChevronRight className="h-3 w-3 text-muted-foreground" />
+                                )}
+                              </button>
+
+                              {isNestedOpen && (
+                                <div className="ml-3 pl-2 border-l border-slate-200 dark:border-slate-800 my-0.5 space-y-0.5">
+                                  {sub.subItems?.map((nested) => {
+                                    const isChildActive = pathname === nested.href.split("?")[0];
+                                    return (
+                                      <Link
+                                        key={nested.title}
+                                        href={nested.href}
+                                        className={cn(
+                                          "flex items-center justify-between rounded-md px-2 py-1.5 text-[11px] font-medium transition-colors text-muted-foreground hover:text-foreground hover:bg-slate-100/50 dark:hover:bg-slate-800/40",
+                                          isChildActive && "text-teal-600 font-semibold dark:text-teal-400"
+                                        )}
+                                      >
+                                        <span className="truncate">{nested.title}</span>
+                                      </Link>
+                                    );
+                                  })}
+                                </div>
+                              )}
+                            </div>
+                          );
+                        }
+
                         const isChildActive = pathname === sub.href.split("?")[0];
                         return (
                           <Link

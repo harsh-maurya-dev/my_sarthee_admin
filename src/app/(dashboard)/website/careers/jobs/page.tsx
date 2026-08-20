@@ -4,6 +4,7 @@ import { useState, useMemo } from "react";
 import { JobPosting, initialJobPostings } from "./_data/jobs";
 import { AddEditJobModal } from "./_components/add-edit-job-modal";
 import { JobViewModal } from "./_components/job-view-modal";
+import { WebsiteNavHeader } from "../../_components/website-nav-header";
 import {
   Table,
   TableBody,
@@ -141,6 +142,9 @@ export default function JobManagementPage() {
           <span>Post New Job</span>
         </Button>
       </div>
+
+      {/* Nav Header */}
+      {/* <WebsiteNavHeader /> */}
 
       {/* Filter Bar */}
       <div className="rounded-2xl border bg-card p-4 shadow-xs space-y-3">

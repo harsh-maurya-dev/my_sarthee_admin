@@ -29,17 +29,13 @@ import {
 } from "@/components/ui/select";
 import {
   Search,
-  Plus,
   Filter,
   Eye,
   Calendar,
   Phone,
   MapPin,
-  HeartPulse,
-  Sparkles,
   Download,
-  AlertTriangle,
-  FileCheck,
+  X,
 } from "lucide-react";
 import { swiftAlert } from "@/lib/swift-alert";
 
@@ -47,12 +43,21 @@ export default function PatientManagementPage() {
   const [patients, setPatients] = useState<Patient360[]>(initialPatients360);
   const [searchQuery, setSearchQuery] = useState("");
   const [statusFilter, setStatusFilter] = useState<string>("All");
+  const [careTypeFilter, setCareTypeFilter] = useState<string>("All");
   const [locationFilter, setLocationFilter] = useState<string>("All");
-  const [activeTab, setActiveTab] = useState<string>("All");
+  const [startDateFrom, setStartDateFrom] = useState<string>("");
+  const [startDateTo, setStartDateTo] = useState<string>("");
   const [selectedPatient, setSelectedPatient] = useState<Patient360 | null>(null);
   const [isSheetOpen, setIsSheetOpen] = useState(false);
 
-  // Filter patients based on Search, Status, Tab, and Location
+  // Helper to normalize care type
+  const normalizeCareType = (care: string): "Nursing" | "Caregiving" | "Physiotherapy" => {
+    if (care === "Nursing") return "Nursing";
+    if (care === "Physiotherapy") return "Physiotherapy";
+    return "Caregiving";
+  };
+
+  // Filter patients based on Search, Status, Care Type, Location, and Start Date Range
   const filteredPatients = useMemo(() => {
     return patients.filter((p) => {
       const q = searchQuery.toLowerCase();
@@ -63,21 +68,33 @@ export default function PatientManagementPage() {
         p.locationArea.toLowerCase().includes(q);
 
       const matchesStatus =
-        statusFilter === "All" || p.currentStatus === statusFilter;
+        statusFilter === "All" ||
+        (statusFilter === "Pending Assignment"
+          ? p.currentStatus === "Pending Assignment" || p.currentStatus === "Pending"
+          : p.currentStatus === statusFilter);
+
+      const normalizedCare = normalizeCareType(p.careRequired);
+      const matchesCareType =
+        careTypeFilter === "All" || normalizedCare === careTypeFilter;
 
       const matchesLocation =
         locationFilter === "All" || p.locationArea === locationFilter;
 
-      const matchesTab =
-        activeTab === "All" ||
-        (activeTab === "Active" && p.currentStatus === "Active") ||
-        (activeTab === "Completed" && p.currentStatus === "Completed") ||
-        (activeTab === "Risk" && (p.riskIndicator === "Critical" || p.riskIndicator === "High")) ||
-        (activeTab === "Pending" && p.currentStatus === "Pending");
+      // Start Date Range Filter
+      const patientDate = p.careStartDate; // format YYYY-MM-DD
+      const matchesDateFrom = !startDateFrom || patientDate >= startDateFrom;
+      const matchesDateTo = !startDateTo || patientDate <= startDateTo;
 
-      return matchesSearch && matchesStatus && matchesLocation && matchesTab;
+      return (
+        matchesSearch &&
+        matchesStatus &&
+        matchesCareType &&
+        matchesLocation &&
+        matchesDateFrom &&
+        matchesDateTo
+      );
     });
-  }, [patients, searchQuery, statusFilter, locationFilter, activeTab]);
+  }, [patients, searchQuery, statusFilter, careTypeFilter, locationFilter, startDateFrom, startDateTo]);
 
   const handleOpen360 = (patient: Patient360) => {
     setSelectedPatient(patient);
@@ -88,6 +105,23 @@ export default function PatientManagementPage() {
     setPatients((prev) => prev.map((p) => (p.id === updated.id ? updated : p)));
     setSelectedPatient(updated);
   };
+
+  const clearFilters = () => {
+    setSearchQuery("");
+    setStatusFilter("All");
+    setCareTypeFilter("All");
+    setLocationFilter("All");
+    setStartDateFrom("");
+    setStartDateTo("");
+  };
+
+  const hasActiveFilters =
+    searchQuery !== "" ||
+    statusFilter !== "All" ||
+    careTypeFilter !== "All" ||
+    locationFilter !== "All" ||
+    startDateFrom !== "" ||
+    startDateTo !== "";
 
   const getRiskBadge = (risk: RiskLevel) => {
     switch (risk) {
@@ -112,6 +146,42 @@ export default function PatientManagementPage() {
         return <Badge variant="destructive" className="text-[10px]">Overdue</Badge>;
       default:
         return <Badge variant="outline" className="text-[10px]">{status}</Badge>;
+    }
+  };
+
+  const getStatusBadge = (status: PatientStatus) => {
+    switch (status) {
+      case "Active":
+        return (
+          <Badge className="bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300 text-[10px] font-bold">
+            Active
+          </Badge>
+        );
+      case "Scheduled":
+        return (
+          <Badge className="bg-sky-100 text-sky-800 dark:bg-sky-950 dark:text-sky-300 text-[10px] font-bold">
+            Scheduled
+          </Badge>
+        );
+      case "Pending Assignment":
+      case "Pending":
+        return (
+          <Badge className="bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-300 text-[10px] font-bold">
+            Pending Assignment
+          </Badge>
+        );
+      case "Completed":
+        return (
+          <Badge className="bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300 text-[10px] font-bold">
+            Completed
+          </Badge>
+        );
+      default:
+        return (
+          <Badge variant="outline" className="text-[10px] font-bold">
+            {status}
+          </Badge>
+        );
     }
   };
 
@@ -142,89 +212,114 @@ export default function PatientManagementPage() {
             <Download className="h-3.5 w-3.5 mr-1.5" />
             Export CSV
           </Button>
-          {/* <Button
-            size="sm"
-            className="bg-teal-600 hover:bg-teal-700 text-white font-semibold text-xs shadow-sm"
-            onClick={() => swiftAlert.info({ title: "New Patient Intake", description: "Opening intake onboarding workflow." })}
-          >
-            <Plus className="h-4 w-4 mr-1.5" />
-            New Patient Intake
-          </Button> */}
         </div>
       </div>
 
-      {/* Tabs Filter Bar */}
-      <div className="flex items-center gap-2 border-b pb-3 overflow-x-auto scrollbar-none">
-        {[
-          { key: "All", label: "All Patients", count: patients.length },
-          { key: "Active", label: "Active Care", count: patients.filter((p) => p.currentStatus === "Active").length },
-          { key: "Risk", label: "High Risk Triage", count: patients.filter((p) => p.riskIndicator === "Critical" || p.riskIndicator === "High").length },
-          { key: "Completed", label: "Completed Care", count: patients.filter((p) => p.currentStatus === "Completed").length },
-        ].map((tab) => (
-          <button
-            key={tab.key}
-            onClick={() => setActiveTab(tab.key)}
-            className={`flex items-center gap-2 rounded-lg px-3 py-1.5 text-xs font-bold transition-all shrink-0 ${
-              activeTab === tab.key
-                ? "bg-teal-600 text-white shadow-sm"
-                : "bg-slate-100/80 text-muted-foreground hover:bg-slate-200 dark:bg-slate-800"
-            }`}
-          >
-            <span>{tab.label}</span>
-            <span
-              className={`text-[10px] px-1.5 py-0.2 rounded-full ${
-                activeTab === tab.key ? "bg-white/20 text-white" : "bg-slate-200 text-slate-700 dark:bg-slate-700 dark:text-slate-300"
-              }`}
+      {/* Filters Toolbar */}
+      <div className="bg-card p-3 rounded-2xl border shadow-2xs space-y-3">
+        <div className="flex flex-wrap items-center gap-2.5 justify-between">
+          {/* Search bar */}
+          <div className="relative flex-1 min-w-[220px] max-w-sm">
+            <Search className="absolute left-2.5 top-2.5 h-3.5 w-3.5 text-muted-foreground" />
+            <Input
+              type="search"
+              placeholder="Search name, ID (#MS-1024), phone..."
+              className="pl-8 h-9 text-xs rounded-xl bg-background"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+          </div>
+
+          {/* Dropdown Filters */}
+          <div className="flex flex-wrap items-center gap-2">
+            {/* Care Required Filter */}
+            <Select value={careTypeFilter} onValueChange={(val) => val && setCareTypeFilter(val)}>
+              <SelectTrigger className="w-[140px] h-9 text-xs rounded-xl bg-background">
+                <SelectValue placeholder="Care Required" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="All">All Care Types</SelectItem>
+                <SelectItem value="Nursing">Nursing</SelectItem>
+                <SelectItem value="Caregiving">Caregiving</SelectItem>
+                <SelectItem value="Physiotherapy">Physiotherapy</SelectItem>
+              </SelectContent>
+            </Select>
+
+            {/* Status Filter */}
+            <Select value={statusFilter} onValueChange={(val) => val && setStatusFilter(val)}>
+              <SelectTrigger className="w-[155px] h-9 text-xs rounded-xl bg-background">
+                <SelectValue placeholder="Status" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="All">All Statuses</SelectItem>
+                <SelectItem value="Active">Active</SelectItem>
+                <SelectItem value="Scheduled">Scheduled</SelectItem>
+                <SelectItem value="Pending Assignment">Pending Assignment</SelectItem>
+                <SelectItem value="Completed">Completed</SelectItem>
+              </SelectContent>
+            </Select>
+
+            {/* Location Area Filter */}
+            <Select value={locationFilter} onValueChange={(val) => val && setLocationFilter(val)}>
+              <SelectTrigger className="w-[130px] h-9 text-xs rounded-xl bg-background">
+                <SelectValue placeholder="Area" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="All">All Locations</SelectItem>
+                <SelectItem value="Andheri">Andheri</SelectItem>
+                <SelectItem value="Bandra">Bandra</SelectItem>
+                <SelectItem value="Powai">Powai</SelectItem>
+                <SelectItem value="Juhu">Juhu</SelectItem>
+                <SelectItem value="South Mumbai">South Mumbai</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+        </div>
+
+        {/* Start Date Range Filter Bar */}
+        <div className="flex flex-wrap items-center justify-between gap-2 pt-2 border-t text-xs">
+          <div className="flex flex-wrap items-center gap-2">
+            <div className="flex items-center gap-1.5 text-muted-foreground font-semibold">
+              <Calendar className="h-3.5 w-3.5 text-teal-600" />
+              <span>Start Date Range:</span>
+            </div>
+
+            <div className="flex items-center gap-1.5">
+              <span className="text-[11px] text-muted-foreground">From</span>
+              <Input
+                type="date"
+                value={startDateFrom}
+                onChange={(e) => setStartDateFrom(e.target.value)}
+                className="h-8 w-34 text-xs rounded-lg bg-background px-2"
+              />
+            </div>
+
+            <div className="flex items-center gap-1.5">
+              <span className="text-[11px] text-muted-foreground">To</span>
+              <Input
+                type="date"
+                value={startDateTo}
+                onChange={(e) => setStartDateTo(e.target.value)}
+                className="h-8 w-34 text-xs rounded-lg bg-background px-2"
+              />
+            </div>
+          </div>
+
+          {hasActiveFilters && (
+            <Button
+              size="sm"
+              variant="ghost"
+              onClick={clearFilters}
+              className="h-7 text-xs text-muted-foreground hover:text-foreground gap-1 px-2"
             >
-              {tab.count}
-            </span>
-          </button>
-        ))}
-      </div>
-
-      {/* Search & Location Filters */}
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-center justify-between">
-        <div className="relative w-full sm:w-80">
-          <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-          <Input
-            type="search"
-            placeholder="Search by name, ID (#MS1024), phone, area..."
-            className="pl-9 text-xs rounded-xl bg-card"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-          />
-        </div>
-
-        <div className="flex items-center gap-2">
-          <Select value={locationFilter} onValueChange={(val) => val && setLocationFilter(val)}>
-            <SelectTrigger className="w-36 h-9 text-xs rounded-xl bg-card">
-              <SelectValue placeholder="Area" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="All">All Locations</SelectItem>
-              <SelectItem value="Andheri">Andheri</SelectItem>
-              <SelectItem value="Bandra">Bandra</SelectItem>
-              <SelectItem value="Powai">Powai</SelectItem>
-              <SelectItem value="Juhu">Juhu</SelectItem>
-              <SelectItem value="South Mumbai">South Mumbai</SelectItem>
-            </SelectContent>
-          </Select>
-
-          <Select value={statusFilter} onValueChange={(val) => val && setStatusFilter(val)}>
-            <SelectTrigger className="w-36 h-9 text-xs rounded-xl bg-card">
-              <SelectValue placeholder="Status" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="All">All Statuses</SelectItem>
-              <SelectItem value="Active">Active</SelectItem>
-              <SelectItem value="Scheduled">Scheduled</SelectItem>
-              <SelectItem value="Completed">Completed</SelectItem>
-            </SelectContent>
-          </Select>
+              <X className="h-3 w-3" />
+              <span>Reset Filters</span>
+            </Button>
+          )}
         </div>
       </div>
 
-      {/* Patient Table with all required columns */}
+      {/* Patient Table */}
       <div className="rounded-2xl border bg-card shadow-xs overflow-hidden">
         <Table className="min-w-[1100px] w-full">
           <TableHeader>
@@ -275,6 +370,7 @@ export default function PatientManagementPage() {
               filteredPatients.map((p) => {
                 const assignedPro = p.assignedTeam[0];
                 const latestInvoice = p.invoices[0];
+                const careDisplay = normalizeCareType(p.careRequired);
 
                 return (
                   <TableRow
@@ -306,8 +402,17 @@ export default function PatientManagementPage() {
 
                     {/* Care Required */}
                     <TableCell className="py-3">
-                      <Badge variant="outline" className="text-[10px] font-semibold">
-                        {p.careRequired}
+                      <Badge
+                        variant="outline"
+                        className={`text-[10px] font-semibold ${
+                          careDisplay === "Nursing"
+                            ? "bg-teal-50 text-teal-800 border-teal-200 dark:bg-teal-950/50 dark:text-teal-300"
+                            : careDisplay === "Physiotherapy"
+                            ? "bg-sky-50 text-sky-800 border-sky-200 dark:bg-sky-950/50 dark:text-sky-300"
+                            : "bg-amber-50 text-amber-800 border-amber-200 dark:bg-amber-950/50 dark:text-amber-300"
+                        }`}
+                      >
+                        {careDisplay}
                       </Badge>
                     </TableCell>
 
@@ -342,28 +447,18 @@ export default function PatientManagementPage() {
                           </span>
                         </div>
                       ) : (
-                        <span className="text-xs font-bold text-amber-600">Pending</span>
+                        <span className="text-xs font-bold text-amber-600">Pending Assignment</span>
                       )}
                     </TableCell>
 
                     {/* Start Date */}
-                    <TableCell className="text-xs text-muted-foreground py-3">
+                    <TableCell className="text-xs text-muted-foreground py-3 font-mono">
                       {p.careStartDate}
                     </TableCell>
 
                     {/* Current Status */}
                     <TableCell className="py-3">
-                      <Badge
-                        className={`text-[10px] font-bold ${
-                          p.currentStatus === "Active"
-                            ? "bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300"
-                            : p.currentStatus === "Scheduled"
-                            ? "bg-sky-100 text-sky-800 dark:bg-sky-950 dark:text-sky-300"
-                            : "bg-slate-100 text-slate-700"
-                        }`}
-                      >
-                        {p.currentStatus}
-                      </Badge>
+                      {getStatusBadge(p.currentStatus)}
                     </TableCell>
 
                     {/* Payment Status */}

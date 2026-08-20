@@ -6,7 +6,7 @@ export interface PatientFeedback {
   rating: number; // 1 to 5 stars
   feedbackText: string;
   date: string;
-  category: "Punctuality" | "Care Quality" | "Communication" | "General";
+  category: "Punctuality" | "Care Quality" | "Communication" | "Clinical Skills" | "General";
   status: "Reviewed" | "Pending Review" | "Action Taken";
 }
 
@@ -18,30 +18,21 @@ export interface CaregiverRatingItem {
   totalReviewsCount: number;
   fiveStarPercentage: number;
   punctualityRate: string;
-  complaintCount: number;
+  totalShiftsCompleted: number;
+  satisfactionScore: number;
   qualityStatus: "Excellent" | "Good" | "Needs Improvement" | "Under Audit";
+  strengths: string[];
 }
 
-export interface PatientComplaint {
+export interface QualityBenchmark {
   id: string;
-  patientName: string;
-  caregiverName: string;
-  issueCategory: "Late Arrival" | "Unprofessional Behavior" | "Care Task Omission" | "Billing Discrepancy";
-  description: string;
-  severity: "Low" | "Medium" | "High" | "Critical";
-  loggedDate: string;
-  status: "Open" | "Investigating" | "Resolved" | "Escalated";
-  resolutionNotes?: string;
-}
-
-export interface QualityAlert {
-  id: string;
-  caregiverName: string;
-  alertType: "Late Check-in Alert" | "Missing Vitals Log" | "Negative Feedback Flag" | "Geofence Mismatch";
-  timestamp: string;
-  description: string;
-  severity: "Warning" | "Critical";
-  status: "Active" | "Dismissed" | "Action Taken";
+  metric: string;
+  category: string;
+  target: string;
+  currentScore: string;
+  status: "Exceeding" | "Compliant" | "Attention Needed";
+  lastAudited: string;
+  auditor: string;
 }
 
 export const initialPatientFeedback: PatientFeedback[] = [
@@ -62,7 +53,7 @@ export const initialPatientFeedback: PatientFeedback[] = [
     caregiverName: "Marcus Brody, PT",
     serviceType: "Physiotherapy Rehab",
     rating: 5,
-    feedbackText: "Marcus was punctual and encouraged me through my gait exercises. Very patient!",
+    feedbackText: "Marcus was punctual and encouraged me through my gait exercises. Very patient and motivating!",
     date: "2026-08-01",
     category: "Punctuality",
     status: "Reviewed",
@@ -72,10 +63,43 @@ export const initialPatientFeedback: PatientFeedback[] = [
     patientName: "Arthur Pendelton",
     caregiverName: "Elena Rostova",
     serviceType: "Dementia & Elderly Care",
-    rating: 2,
-    feedbackText: "Caregiver arrived 25 minutes late for the evening shift without prior notification.",
+    rating: 3,
+    feedbackText: "Caregiver was polite and patient with meals, but arrived 15 minutes late without a prior heads up.",
     date: "2026-07-31",
     category: "Punctuality",
+    status: "Action Taken",
+  },
+  {
+    id: "FB-304",
+    patientName: "Sunita Sharma",
+    caregiverName: "Samira Patel, RN",
+    serviceType: "Palliative & Elderly Care",
+    rating: 5,
+    feedbackText: "Samira is a true angel. She managed medication schedules with supreme accuracy and comforted my mother warmly.",
+    date: "2026-07-30",
+    category: "Clinical Skills",
+    status: "Reviewed",
+  },
+  {
+    id: "FB-305",
+    patientName: "David Goldstein",
+    caregiverName: "Priya Sharma",
+    serviceType: "Post-Stroke Recovery",
+    rating: 4,
+    feedbackText: "Great support with morning mobility routines. Clear communication throughout the session.",
+    date: "2026-07-29",
+    category: "Communication",
+    status: "Reviewed",
+  },
+  {
+    id: "FB-306",
+    patientName: "Meera Krishnan",
+    caregiverName: "Amitabh Sen",
+    serviceType: "Orthopedic Post-Surgical Care",
+    rating: 5,
+    feedbackText: "Incredible attention to vital signs and pain management protocols. Very reassuring demeanor.",
+    date: "2026-07-28",
+    category: "Care Quality",
     status: "Pending Review",
   },
 ];
@@ -89,8 +113,10 @@ export const initialCaregiverRatings: CaregiverRatingItem[] = [
     totalReviewsCount: 84,
     fiveStarPercentage: 96,
     punctualityRate: "99%",
-    complaintCount: 0,
+    totalShiftsCompleted: 142,
+    satisfactionScore: 98,
     qualityStatus: "Excellent",
+    strengths: ["Clinical Rigor", "Patient Empathy", "Medication Adherence"],
   },
   {
     caregiverId: "CG-104",
@@ -100,62 +126,101 @@ export const initialCaregiverRatings: CaregiverRatingItem[] = [
     totalReviewsCount: 62,
     fiveStarPercentage: 92,
     punctualityRate: "98%",
-    complaintCount: 0,
+    totalShiftsCompleted: 98,
+    satisfactionScore: 96,
     qualityStatus: "Excellent",
+    strengths: ["Rehabilitation Expertise", "Motivational Communication", "Punctuality"],
+  },
+  {
+    caregiverId: "CG-102",
+    caregiverName: "Samira Patel, RN",
+    role: "Nurse",
+    averageRating: 4.7,
+    totalReviewsCount: 51,
+    fiveStarPercentage: 88,
+    punctualityRate: "97%",
+    totalShiftsCompleted: 110,
+    satisfactionScore: 94,
+    qualityStatus: "Excellent",
+    strengths: ["Elderly Care", "Vital Signs Monitoring", "Dressing Protocols"],
+  },
+  {
+    caregiverId: "CG-105",
+    caregiverName: "Priya Sharma",
+    role: "Caregiver",
+    averageRating: 4.6,
+    totalReviewsCount: 39,
+    fiveStarPercentage: 82,
+    punctualityRate: "95%",
+    totalShiftsCompleted: 76,
+    satisfactionScore: 91,
+    qualityStatus: "Good",
+    strengths: ["Assisted Daily Living", "Warm Demeanor", "Hygiene Standard"],
   },
   {
     caregiverId: "CG-103",
     caregiverName: "Elena Rostova",
     role: "Caregiver",
-    averageRating: 4.2,
+    averageRating: 4.1,
     totalReviewsCount: 45,
-    fiveStarPercentage: 75,
+    fiveStarPercentage: 73,
     punctualityRate: "88%",
-    complaintCount: 2,
+    totalShiftsCompleted: 85,
+    satisfactionScore: 82,
     qualityStatus: "Needs Improvement",
+    strengths: ["Meal Assistance", "Patience with Dementia"],
   },
 ];
 
-export const initialPatientComplaints: PatientComplaint[] = [
+export const initialQualityBenchmarks: QualityBenchmark[] = [
   {
-    id: "CMP-901",
-    patientName: "Arthur Pendelton",
-    caregiverName: "Elena Rostova",
-    issueCategory: "Late Arrival",
-    description: "Caregiver arrived 25 mins late for 04:00 PM shift. Patient had to wait for dinner assistance.",
-    severity: "Medium",
-    loggedDate: "2026-07-31",
-    status: "Investigating",
+    id: "QBM-01",
+    metric: "Clinical Hygiene & Safety Compliance",
+    category: "Infection Control",
+    target: "≥ 98.0%",
+    currentScore: "99.4%",
+    status: "Exceeding",
+    lastAudited: "2026-08-01",
+    auditor: "Dr. Arvind Rao (Lead QA)",
   },
   {
-    id: "CMP-902",
-    patientName: "Harold Miller",
-    caregiverName: "Samira Patel",
-    issueCategory: "Care Task Omission",
-    description: "Caregiver forgot to log blood glucose reading before administering morning snack.",
-    severity: "High",
-    loggedDate: "2026-07-30",
-    status: "Open",
-  },
-];
-
-export const initialQualityAlerts: QualityAlert[] = [
-  {
-    id: "ALT-701",
-    caregiverName: "Elena Rostova",
-    alertType: "Late Check-in Alert",
-    timestamp: "2026-08-01 04:25 PM",
-    description: "Geofence check-in delayed by > 20 mins past scheduled start time.",
-    severity: "Warning",
-    status: "Active",
+    id: "QBM-02",
+    metric: "Real-Time Vitals Logging Protocol",
+    category: "Telemetry & Clinical Docs",
+    target: "≥ 95.0%",
+    currentScore: "97.8%",
+    status: "Compliant",
+    lastAudited: "2026-08-01",
+    auditor: "Clinical Operations Team",
   },
   {
-    id: "ALT-702",
-    caregiverName: "David Chen, RN",
-    alertType: "Missing Vitals Log",
-    timestamp: "2026-07-31 02:00 PM",
-    description: "Shift check-out submitted without recording Blood Pressure vitals.",
-    severity: "Warning",
-    status: "Dismissed",
+    id: "QBM-03",
+    metric: "Shift On-Time Punctuality Index",
+    category: "SLA Adherence",
+    target: "≥ 95.0%",
+    currentScore: "97.6%",
+    status: "Compliant",
+    lastAudited: "2026-07-30",
+    auditor: "Automated Tele-Geofence",
+  },
+  {
+    id: "QBM-04",
+    metric: "Patient Overall Satisfaction Score",
+    category: "Patient Experience",
+    target: "≥ 4.5 / 5.0",
+    currentScore: "4.8 / 5.0",
+    status: "Exceeding",
+    lastAudited: "2026-08-02",
+    auditor: "Patient Quality Council",
+  },
+  {
+    id: "QBM-05",
+    metric: "Care Plan Adherence & Task Sign-off",
+    category: "Care Delivery",
+    target: "≥ 96.0%",
+    currentScore: "98.2%",
+    status: "Compliant",
+    lastAudited: "2026-07-31",
+    auditor: "Clinical Supervisor",
   },
 ];
