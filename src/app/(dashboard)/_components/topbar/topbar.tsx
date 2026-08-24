@@ -57,21 +57,12 @@ export function Topbar() {
           <span className="sr-only">Toggle Mobile Menu</span>
         </Button>
 
-        {/* Live Operational Status */}
-        <div className="hidden sm:flex items-center gap-2 rounded-full border border-emerald-200/80 bg-emerald-50/70 px-3 py-1 text-xs font-semibold text-emerald-800 dark:border-emerald-900/60 dark:bg-emerald-950/40 dark:text-emerald-300">
-          <span className="relative flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-          </span>
-          <span>Care Delivery Live</span>
-          <span className="text-[10px] text-muted-foreground/80">· 114 Pros On Duty</span>
-        </div>
       </div>
 
       {/* Right Actions: Role Selector, Critical Escalation Banner, Notifications, Theme, User */}
       <div className="flex items-center gap-2 sm:gap-3">
         {/* Role Switcher Preview */}
-        <DropdownMenu>
+        {/* <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button
               variant="outline"
@@ -108,10 +99,10 @@ export function Topbar() {
               </DropdownMenuItem>
             ))}
           </DropdownMenuContent>
-        </DropdownMenu>
+        </DropdownMenu> */}
 
         {/* Critical Escalations Quick Link */}
-        <Link href="/escalations">
+        {/* <Link href="/escalations">
           <Button
             variant="ghost"
             size="sm"
@@ -120,7 +111,7 @@ export function Topbar() {
             <AlertTriangle className="h-3.5 w-3.5 animate-bounce" />
             <span className="hidden sm:inline">3 Critical Alerts</span>
           </Button>
-        </Link>
+        </Link> */}
 
         {/* Notifications */}
         <Link href="/notifications">

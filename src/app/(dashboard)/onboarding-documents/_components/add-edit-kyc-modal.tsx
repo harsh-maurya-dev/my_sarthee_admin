@@ -13,25 +13,10 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
 import {
-  FileText,
   ShieldCheck,
-  Plus,
   Save,
-  CreditCard,
-  Syringe,
-  Shield,
-  Landmark,
-  FileCheck,
 } from "lucide-react";
 import { swiftAlert } from "@/lib/swift-alert";
 
@@ -49,38 +34,26 @@ export function AddEditKYCModal({
   onSave,
 }: AddEditKYCModalProps) {
   const [name, setName] = useState("");
-  const [code, setCode] = useState("");
   const [category, setCategory] = useState<KYCDocumentItem["category"]>("Identity Proof");
   const [iconType, setIconType] = useState<KYCDocumentItem["iconType"]>("id-card");
   const [isMandatory, setIsMandatory] = useState(true);
   const [allowedFormats, setAllowedFormats] = useState<string>("PDF, JPG, PNG");
-  const [maxSizeMB, setMaxSizeMB] = useState(5);
-  const [verificationMethod, setVerificationMethod] = useState<KYCDocumentItem["verificationMethod"]>("Manual Admin Review");
-  const [description, setDescription] = useState("");
   const [status, setStatus] = useState<KYCDocumentItem["status"]>("Active");
 
   useEffect(() => {
     if (documentToEdit) {
       setName(documentToEdit.name);
-      setCode(documentToEdit.code);
       setCategory(documentToEdit.category);
       setIconType(documentToEdit.iconType);
       setIsMandatory(documentToEdit.isMandatory);
       setAllowedFormats(documentToEdit.allowedFormats.join(", "));
-      setMaxSizeMB(documentToEdit.maxSizeMB);
-      setVerificationMethod(documentToEdit.verificationMethod);
-      setDescription(documentToEdit.description);
       setStatus(documentToEdit.status);
     } else {
       setName("");
-      setCode("");
       setCategory("Identity Proof");
       setIconType("id-card");
       setIsMandatory(true);
       setAllowedFormats("PDF, JPG, PNG");
-      setMaxSizeMB(5);
-      setVerificationMethod("Manual Admin Review");
-      setDescription("");
       setStatus("Active");
     }
   }, [documentToEdit, isOpen]);
@@ -98,14 +71,14 @@ export function AddEditKYCModal({
     const newDoc: KYCDocumentItem = {
       id: documentToEdit ? documentToEdit.id : `KYC-${Date.now().toString().slice(-4)}`,
       name: name.trim(),
-      code: code.trim() || name.toUpperCase().replace(/\s+/g, "_"),
+      code: documentToEdit ? documentToEdit.code : name.toUpperCase().replace(/\s+/g, "_"),
       category,
       iconType,
       isMandatory,
       allowedFormats: allowedFormats.split(",").map((s) => s.trim().toUpperCase()).filter(Boolean),
-      maxSizeMB: Number(maxSizeMB) || 5,
-      verificationMethod,
-      description: description.trim(),
+      maxSizeMB: documentToEdit ? documentToEdit.maxSizeMB : 5,
+      verificationMethod: documentToEdit ? documentToEdit.verificationMethod : "Manual Admin Review",
+      description: documentToEdit ? documentToEdit.description : "",
       status,
       createdDate: documentToEdit ? documentToEdit.createdDate : new Date().toISOString().split("T")[0],
       totalSubmissions: documentToEdit ? documentToEdit.totalSubmissions : 0,
@@ -122,7 +95,7 @@ export function AddEditKYCModal({
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-xl max-h-[90vh] overflow-y-auto no-scrollbar p-6">
+      <DialogContent className="sm:max-w-lg max-h-[90vh] overflow-y-auto no-scrollbar p-6">
         <form onSubmit={handleSubmit} className="space-y-4">
           <DialogHeader className="border-b pb-3">
             <DialogTitle className="text-base font-bold flex items-center gap-2">
@@ -135,62 +108,16 @@ export function AddEditKYCModal({
           </DialogHeader>
 
           <div className="space-y-3.5 text-xs">
-            {/* Document Name & Code */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <div className="space-y-1.5">
-                <Label className="text-xs font-semibold text-foreground">Document Name *</Label>
-                <Input
-                  placeholder="e.g. Aadhar Card, Driving License..."
-                  value={name}
-                  onChange={(e) => {
-                    setName(e.target.value);
-                    if (!documentToEdit) {
-                      setCode(e.target.value.toUpperCase().replace(/\s+/g, "_"));
-                    }
-                  }}
-                  className="text-xs h-9"
-                  required
-                />
-              </div>
-
-              <div className="space-y-1.5">
-                <Label className="text-xs font-semibold text-foreground">System Code Identifier</Label>
-                <Input
-                  placeholder="e.g. AADHAR_CARD"
-                  value={code}
-                  onChange={(e) => setCode(e.target.value)}
-                  className="text-xs h-9 font-mono uppercase"
-                />
-              </div>
-            </div>
-
-            {/* Verification Method & Max Size */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <div className="space-y-1.5">
-                <Label className="text-xs font-semibold text-foreground">Verification Method</Label>
-                <Select value={verificationMethod} onValueChange={(val: any) => setVerificationMethod(val)}>
-                  <SelectTrigger className="text-xs h-9">
-                    <SelectValue placeholder="Verification Method" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="Manual Admin Review">Manual Admin Review</SelectItem>
-                    <SelectItem value="API / UIDAI Instant Verification">API / UIDAI Instant Verification</SelectItem>
-                    <SelectItem value="Third-Party Background Check Agency">Third-Party Background Agency</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-
-              <div className="space-y-1.5">
-                <Label className="text-xs font-semibold text-foreground">Max File Size (MB)</Label>
-                <Input
-                  type="number"
-                  min={1}
-                  max={25}
-                  value={maxSizeMB}
-                  onChange={(e) => setMaxSizeMB(Number(e.target.value))}
-                  className="text-xs h-9"
-                />
-              </div>
+            {/* Document Name */}
+            <div className="space-y-1.5">
+              <Label className="text-xs font-semibold text-foreground">Document Name *</Label>
+              <Input
+                placeholder="e.g. Aadhar Card, Driving License..."
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="text-xs h-9"
+                required
+              />
             </div>
 
             {/* Allowed Formats */}
@@ -201,17 +128,6 @@ export function AddEditKYCModal({
                 value={allowedFormats}
                 onChange={(e) => setAllowedFormats(e.target.value)}
                 className="text-xs h-9 font-mono"
-              />
-            </div>
-
-            {/* Description / Caregiver Guidance */}
-            <div className="space-y-1.5">
-              <Label className="text-xs font-semibold text-foreground">Caregiver Instructions / Verification Guidelines</Label>
-              <Textarea
-                placeholder="Specify instructions displayed to the caregiver when uploading this document in the mobile app..."
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-                className="text-xs h-20 resize-none"
               />
             </div>
 

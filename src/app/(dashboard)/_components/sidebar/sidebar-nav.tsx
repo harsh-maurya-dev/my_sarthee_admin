@@ -26,6 +26,7 @@ import {
   FileCheck,
   CheckSquare,
   ShieldCheck,
+  Timer,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useSidebar } from "@/context/sidebar-context";
@@ -113,10 +114,17 @@ export const navGroups: NavGroup[] = [
         badge: "AI Match",
         badgeColor: "bg-teal-100 text-teal-800 dark:bg-teal-950 dark:text-teal-300",
       },
+      // {
+      //   title: "Service Management",
+      //   href: "/services",
+      //   icon: Briefcase,
+      // },
       {
-        title: "Service Management",
-        href: "/services",
-        icon: Briefcase,
+        title: "Estimated Timelines",
+        href: "/estimated-timelines",
+        icon: Timer,
+        badge: "SLA",
+        badgeColor: "bg-teal-100 text-teal-800 dark:bg-teal-950 dark:text-teal-300",
       },
       {
         title: "Onboarding Documents",
