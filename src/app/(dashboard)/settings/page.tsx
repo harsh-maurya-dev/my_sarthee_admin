@@ -4,7 +4,7 @@ import { useState } from "react";
 import { systemRoles, UserRole } from "@/lib/admin-data";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+
 import {
   Table,
   TableBody,
@@ -15,20 +15,15 @@ import {
 } from "@/components/ui/table";
 import {
   ShieldCheck,
-  UserCog,
-  SlidersHorizontal,
   Plus,
-  CheckCircle2,
   Lock,
-  Building,
   MapPin,
   FileCode,
-  Sparkles,
 } from "lucide-react";
-import { swiftAlert } from "@/lib/swift-alert";
+
 
 export default function SettingsAndRolesPage() {
-  const [activeTab, setActiveTab] = useState<"roles" | "services" | "pricing" | "locations" | "audit">("roles");
+  const [activeTab, setActiveTab] = useState<"roles" | "pricing" | "locations" | "audit">("roles");
 
   const modules = [
     "Dashboard KPI Telemetry",
@@ -66,7 +61,7 @@ export default function SettingsAndRolesPage() {
       <div className="flex items-center gap-2 border-b pb-3 overflow-x-auto scrollbar-none">
         {[
           { key: "roles", label: "Users & Roles Matrix", icon: ShieldCheck },
-          { key: "services", label: "Service Catalogue", icon: SlidersHorizontal },
+
           { key: "pricing", label: "Pricing & Rules", icon: Lock },
           { key: "locations", label: "Coverage Locations", icon: MapPin },
           { key: "audit", label: "Compliance Audit Logs", icon: FileCode },
@@ -181,30 +176,6 @@ export default function SettingsAndRolesPage() {
         </div>
       )}
 
-      {/* ------------------------------------------------------------- */}
-      {/* TAB 2: SERVICE CATALOGUE */}
-      {/* ------------------------------------------------------------- */}
-      {activeTab === "services" && (
-        <div className="rounded-2xl border bg-card p-6 shadow-xs space-y-4">
-          <h3 className="text-sm font-extrabold text-foreground">MySarthee Clinical Service Catalogue</h3>
-          <div className="grid gap-3 md:grid-cols-2">
-            {[
-              { title: "Home ICU & Critical Care Nursing", duration: "12h / 24h shifts", basePrice: "₹2,500 / day", staff: "Critical Care Certified Nurses" },
-              { title: "Post-Stroke Recovery Package", duration: "30 days (Twice Daily)", basePrice: "₹48,000 / month", staff: "Nurse + Physio + Caregiver" },
-              { title: "Geriatric Daily Living & Dementia Assist", duration: "8h - 12h daily", basePrice: "₹32,000 / month", staff: "Certified Geriatric Aide" },
-              { title: "Post-TKR Orthopedic Physiotherapy", duration: "14 - 30 sessions", basePrice: "₹1,200 / session", staff: "MPT Musculoskeletal Physios" },
-            ].map((srv, idx) => (
-              <div key={idx} className="rounded-xl border p-4 bg-slate-50/50 dark:bg-slate-900/40 space-y-1.5">
-                <div className="flex justify-between items-center">
-                  <h4 className="text-xs font-bold text-foreground">{srv.title}</h4>
-                  <Badge className="bg-teal-600 text-white text-[10px] font-bold">{srv.basePrice}</Badge>
-                </div>
-                <p className="text-[11px] text-muted-foreground">Duration: {srv.duration} · Staffing: {srv.staff}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
 
       {/* ------------------------------------------------------------- */}
       {/* TAB 4: LOCATIONS */}

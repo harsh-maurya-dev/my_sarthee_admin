@@ -8,6 +8,7 @@ import {
   initialChecklistTemplates,
 } from "./_data/checklist-templates";
 import { AddEditChecklistModal } from "./_components/add-edit-checklist-modal";
+import { VitalsTab } from "./_components/vitals-tab";
 import {
   Table,
   TableBody,
@@ -31,10 +32,12 @@ import {
   RefreshCw,
   Dumbbell,
   Zap,
+  ListChecks,
 } from "lucide-react";
 import { swiftAlert } from "@/lib/swift-alert";
 
 export default function ChecklistTemplatesPage() {
+  const [topTab, setTopTab] = useState<"templates" | "vitals">("templates");
   const [templates, setTemplates] = useState<ChecklistTemplateItem[]>(
     initialChecklistTemplates
   );
@@ -101,135 +104,175 @@ export default function ChecklistTemplatesPage() {
           <div className="flex items-center gap-2">
             <h1 className="text-2xl font-black tracking-tight text-foreground sm:text-3xl flex items-center gap-2">
               <CheckSquare className="h-7 w-7 text-teal-600" />
-              Checklist Templates
+              Checklists & Vitals Protocols
             </h1>
             <Badge className="bg-teal-600 text-white font-semibold text-xs">
-              Visit Duties
+              Clinical Protocols
             </Badge>
           </div>
           <p className="text-xs text-muted-foreground mt-1">
-            Manage checklist options and visit duty items for Caregivers, Nurses, and Physiotherapists.
+            Configure field visit checklist templates and patient vital sign telemetry parameters across Caregiver, Nurse, and Physiotherapist services.
           </p>
         </div>
-        <div className="flex items-center gap-2">
-          <Button
-            size="sm"
-            onClick={() => {
-              setTemplateToEdit(null);
-              setIsAddEditOpen(true);
-            }}
-            className="h-9 gap-2 bg-teal-600 text-white hover:bg-teal-700 text-xs font-semibold shadow-xs"
-          >
-            <Plus className="h-3.5 w-3.5" />
-            <span>
-              Add {mainTab === "Physiotherapist" ? `${physioSubTab} Checklist` : `${mainTab} Checklist`}
-            </span>
-          </Button>
-        </div>
+        {topTab === "templates" && (
+          <div className="flex items-center gap-2">
+            <Button
+              size="sm"
+              onClick={() => {
+                setTemplateToEdit(null);
+                setIsAddEditOpen(true);
+              }}
+              className="h-9 gap-2 bg-teal-600 text-white hover:bg-teal-700 text-xs font-semibold shadow-xs"
+            >
+              <Plus className="h-3.5 w-3.5" />
+              <span>
+                Add {mainTab === "Physiotherapist" ? `${physioSubTab} Checklist` : `${mainTab} Checklist`}
+              </span>
+            </Button>
+          </div>
+        )}
       </div>
 
-      {/* Main 3 Tabs: Caregiver, Nurse, Physiotherapist */}
-      <div className="flex items-center border-b border-slate-200 dark:border-slate-800 gap-4">
-        {/* Tab 1: Caregiver */}
+      {/* Top-Level Tabs: 1. Checklist Templates, 2. Vitals */}
+      <div className="flex items-center border-b border-slate-200 dark:border-slate-800 gap-6">
         <button
-          onClick={() => {
-            setMainTab("Caregiver");
-            setSearchQuery("");
-          }}
+          onClick={() => setTopTab("templates")}
           className={`pb-3 text-xs font-bold transition-all flex items-center gap-2 relative ${
-            mainTab === "Caregiver"
+            topTab === "templates"
               ? "text-teal-600 dark:text-teal-400 border-b-2 border-teal-600 dark:border-teal-400"
               : "text-muted-foreground hover:text-foreground"
           }`}
         >
-          <HeartPulse className="h-4 w-4" />
-          <span>Caregiver</span>
+          <ListChecks className="h-4 w-4" />
+          <span>Checklist Templates</span>
           <Badge variant="secondary" className="text-[10px] px-1.5 py-0 h-4">
-            {caregiverCount}
+            {templates.length}
           </Badge>
         </button>
 
-        {/* Tab 2: Nurse */}
         <button
-          onClick={() => {
-            setMainTab("Nurse");
-            setSearchQuery("");
-          }}
+          onClick={() => setTopTab("vitals")}
           className={`pb-3 text-xs font-bold transition-all flex items-center gap-2 relative ${
-            mainTab === "Nurse"
-              ? "text-teal-600 dark:text-teal-400 border-b-2 border-teal-600 dark:border-teal-400"
-              : "text-muted-foreground hover:text-foreground"
-          }`}
-        >
-          <Stethoscope className="h-4 w-4" />
-          <span>Nurse</span>
-          <Badge variant="secondary" className="text-[10px] px-1.5 py-0 h-4">
-            {nurseCount}
-          </Badge>
-        </button>
-
-        {/* Tab 3: Physiotherapist */}
-        <button
-          onClick={() => {
-            setMainTab("Physiotherapist");
-            setSearchQuery("");
-          }}
-          className={`pb-3 text-xs font-bold transition-all flex items-center gap-2 relative ${
-            mainTab === "Physiotherapist"
+            topTab === "vitals"
               ? "text-teal-600 dark:text-teal-400 border-b-2 border-teal-600 dark:border-teal-400"
               : "text-muted-foreground hover:text-foreground"
           }`}
         >
           <Activity className="h-4 w-4" />
-          <span>Physiotherapist</span>
+          <span>Vitals Checklist & Parameters</span>
           <Badge variant="secondary" className="text-[10px] px-1.5 py-0 h-4">
-            {physioExerciseCount + physioModalitiesCount}
+            5
           </Badge>
         </button>
       </div>
 
-      {/* Sub-Tabs for Physiotherapist (Exercise vs Modalities Applied) */}
-      {mainTab === "Physiotherapist" && (
-        <div className="bg-slate-100/70 dark:bg-slate-900/50 p-1.5 rounded-xl flex items-center gap-1.5 w-fit border border-slate-200 dark:border-slate-800">
-          {/* Sub-Tab A: Exercise */}
-          <button
-            onClick={() => {
-              setPhysioSubTab("Exercise");
-              setSearchQuery("");
-            }}
-            className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 ${
-              physioSubTab === "Exercise"
-                ? "bg-white dark:bg-slate-800 text-teal-700 dark:text-teal-300 shadow-xs border border-slate-200 dark:border-slate-700"
-                : "text-muted-foreground hover:text-foreground"
-            }`}
-          >
-            <Dumbbell className="h-3.5 w-3.5" />
-            <span>Exercises</span>
-            <Badge variant="secondary" className="text-[9px] px-1 py-0 h-3.5">
-              {physioExerciseCount}
-            </Badge>
-          </button>
+      {/* ------------------------------------------------------------- */}
+      {/* TAB 1: CHECKLIST TEMPLATES (Caregiver, Nurse, Physio)         */}
+      {/* ------------------------------------------------------------- */}
+      {topTab === "templates" && (
+        <div className="space-y-6">
+          {/* Sub-Tabs: Caregiver, Nurse, Physiotherapist */}
+          <div className="flex items-center border-b border-slate-200 dark:border-slate-800 gap-4">
+            {/* Sub-Tab 1: Caregiver */}
+            <button
+              onClick={() => {
+                setMainTab("Caregiver");
+                setSearchQuery("");
+              }}
+              className={`pb-2.5 text-xs font-bold transition-all flex items-center gap-2 relative ${
+                mainTab === "Caregiver"
+                  ? "text-teal-600 dark:text-teal-400 border-b-2 border-teal-600 dark:border-teal-400"
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              <HeartPulse className="h-4 w-4" />
+              <span>Caregiver</span>
+              <Badge variant="secondary" className="text-[10px] px-1.5 py-0 h-4">
+                {caregiverCount}
+              </Badge>
+            </button>
 
-          {/* Sub-Tab B: Modalities Applied */}
-          <button
-            onClick={() => {
-              setPhysioSubTab("Modalities Applied");
-              setSearchQuery("");
-            }}
-            className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 ${
-              physioSubTab === "Modalities Applied"
-                ? "bg-white dark:bg-slate-800 text-teal-700 dark:text-teal-300 shadow-xs border border-slate-200 dark:border-slate-700"
-                : "text-muted-foreground hover:text-foreground"
-            }`}
-          >
-            <Zap className="h-3.5 w-3.5" />
-            <span>Modalities Applied</span>
-            <Badge variant="secondary" className="text-[9px] px-1 py-0 h-3.5">
-              {physioModalitiesCount}
-            </Badge>
-          </button>
-        </div>
-      )}
+            {/* Sub-Tab 2: Nurse */}
+            <button
+              onClick={() => {
+                setMainTab("Nurse");
+                setSearchQuery("");
+              }}
+              className={`pb-2.5 text-xs font-bold transition-all flex items-center gap-2 relative ${
+                mainTab === "Nurse"
+                  ? "text-teal-600 dark:text-teal-400 border-b-2 border-teal-600 dark:border-teal-400"
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              <Stethoscope className="h-4 w-4" />
+              <span>Nurse</span>
+              <Badge variant="secondary" className="text-[10px] px-1.5 py-0 h-4">
+                {nurseCount}
+              </Badge>
+            </button>
+
+            {/* Sub-Tab 3: Physiotherapist */}
+            <button
+              onClick={() => {
+                setMainTab("Physiotherapist");
+                setSearchQuery("");
+              }}
+              className={`pb-2.5 text-xs font-bold transition-all flex items-center gap-2 relative ${
+                mainTab === "Physiotherapist"
+                  ? "text-teal-600 dark:text-teal-400 border-b-2 border-teal-600 dark:border-teal-400"
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              <Activity className="h-4 w-4" />
+              <span>Physiotherapist</span>
+              <Badge variant="secondary" className="text-[10px] px-1.5 py-0 h-4">
+                {physioExerciseCount + physioModalitiesCount}
+              </Badge>
+            </button>
+          </div>
+
+          {/* Sub-Tabs for Physiotherapist (Exercise vs Modalities Applied) */}
+          {mainTab === "Physiotherapist" && (
+            <div className="bg-slate-100/70 dark:bg-slate-900/50 p-1.5 rounded-xl flex items-center gap-1.5 w-fit border border-slate-200 dark:border-slate-800">
+              {/* Sub-Tab A: Exercise */}
+              <button
+                onClick={() => {
+                  setPhysioSubTab("Exercise");
+                  setSearchQuery("");
+                }}
+                className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 ${
+                  physioSubTab === "Exercise"
+                    ? "bg-white dark:bg-slate-800 text-teal-700 dark:text-teal-300 shadow-xs border border-slate-200 dark:border-slate-700"
+                    : "text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                <Dumbbell className="h-3.5 w-3.5" />
+                <span>Exercises</span>
+                <Badge variant="secondary" className="text-[9px] px-1 py-0 h-3.5">
+                  {physioExerciseCount}
+                </Badge>
+              </button>
+
+              {/* Sub-Tab B: Modalities Applied */}
+              <button
+                onClick={() => {
+                  setPhysioSubTab("Modalities Applied");
+                  setSearchQuery("");
+                }}
+                className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 ${
+                  physioSubTab === "Modalities Applied"
+                    ? "bg-white dark:bg-slate-800 text-teal-700 dark:text-teal-300 shadow-xs border border-slate-200 dark:border-slate-700"
+                    : "text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                <Zap className="h-3.5 w-3.5" />
+                <span>Modalities Applied</span>
+                <Badge variant="secondary" className="text-[9px] px-1 py-0 h-3.5">
+                  {physioModalitiesCount}
+                </Badge>
+              </button>
+            </div>
+          )}
 
       {/* Search Bar */}
       <div className="rounded-2xl border bg-card p-4 shadow-xs space-y-3">
@@ -334,15 +377,22 @@ export default function ChecklistTemplatesPage() {
         </div>
       </div>
 
-      {/* Add / Edit Checklist Modal */}
-      <AddEditChecklistModal
-        isOpen={isAddEditOpen}
-        onClose={() => setIsAddEditOpen(false)}
-        templateToEdit={templateToEdit}
-        defaultRole={mainTab}
-        defaultSubCategory={physioSubTab}
-        onSave={handleSave}
-      />
-    </div>
-  );
+        {/* Add / Edit Checklist Modal */}
+        <AddEditChecklistModal
+          isOpen={isAddEditOpen}
+          onClose={() => setIsAddEditOpen(false)}
+          templateToEdit={templateToEdit}
+          defaultRole={mainTab}
+          defaultSubCategory={physioSubTab}
+          onSave={handleSave}
+        />
+      </div>
+    )}
+
+    {/* ------------------------------------------------------------- */}
+    {/* TAB 2: VITALS CHECKLIST & CLINICAL PARAMETERS                 */}
+    {/* ------------------------------------------------------------- */}
+    {topTab === "vitals" && <VitalsTab />}
+  </div>
+);
 }

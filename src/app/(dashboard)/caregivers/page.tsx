@@ -15,6 +15,7 @@ import { RejectApplicantModal } from "./_components/reject-applicant-modal";
 import { OnboardProfessionalModal } from "./_components/onboard-professional-modal";
 import { ShiftDetailsModal } from "./_components/shift-details-modal";
 import { ProfessionalScheduleModal } from "./_components/professional-schedule-modal";
+import { LeaveRequestsTab } from "./_components/leave-requests-tab";
 import {
   Table,
   TableBody,
@@ -49,11 +50,12 @@ import {
   Smartphone,
   Check,
   RefreshCw,
+  CalendarOff,
 } from "lucide-react";
 import { swiftAlert } from "@/lib/swift-alert";
 
 export default function CaregiverManagementPage() {
-  const [activeTab, setActiveTab] = useState<"availability" | "requests">("availability");
+  const [activeTab, setActiveTab] = useState<"availability" | "requests" | "leaves">("availability");
 
   // Registration Requests State
   const [registrationRequests, setRegistrationRequests] = useState<CaregiverRegistrationRequest[]>(
@@ -266,15 +268,19 @@ export default function CaregiverManagementPage() {
         >
           <ClipboardList className="h-4 w-4" />
           <span>Registration Requests</span>
-          {/* {pendingCount > 0 ? (
-            <Badge className="bg-amber-500 text-white text-[10px] px-1.5 py-0 h-4 min-w-4 flex items-center justify-center font-bold">
-              {pendingCount} Pending
-            </Badge>
-          ) : (
-            <Badge variant="secondary" className="text-[10px] px-1.5 py-0 h-4">
-              {registrationRequests.length}
-            </Badge>
-          )} */}
+        </button>
+
+        {/* Tab 3: Caregiver Leave Requests */}
+        <button
+          onClick={() => setActiveTab("leaves")}
+          className={`pb-3 text-xs font-bold transition-all flex items-center gap-2 relative ${
+            activeTab === "leaves"
+              ? "text-teal-600 dark:text-teal-400 border-b-2 border-teal-600 dark:border-teal-400"
+              : "text-muted-foreground hover:text-foreground"
+          }`}
+        >
+          <CalendarOff className="h-4 w-4" />
+          <span>Leave Requests</span>
         </button>
       </div>
 
@@ -783,6 +789,11 @@ export default function CaregiverManagementPage() {
           </div>
         </div>
       )}
+
+      {/* ========================================================= */}
+      {/* TAB 3: USER GENERATED LEAVE REQUESTS & APPROVALS          */}
+      {/* ========================================================= */}
+      {activeTab === "leaves" && <LeaveRequestsTab />}
 
       {/* Review Applicant Registration Request Modal */}
       <ReviewApplicantModal
