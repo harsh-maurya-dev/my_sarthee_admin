@@ -27,6 +27,8 @@ import {
   CheckSquare,
   ShieldCheck,
   Timer,
+  UserCheck,
+  RotateCcw,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useSidebar } from "@/context/sidebar-context";
@@ -70,49 +72,36 @@ export const navGroups: NavGroup[] = [
       {
         title: "Patients",
         href: "/patients",
-        icon: Users
-        // badge: "142 Active"
-        // subItems: [
-        //   { title: "All Patients", href: "/patients" },
-        //   { title: "Active Care", href: "/patients?tab=Active" },
-        //   { title: "Completed Care", href: "/patients?tab=Completed" },
-        //   { title: "High Risk Triage", href: "/patients?tab=Risk" },
-        // ],
+        icon: Users,
       },
       {
         title: "Bookings",
         href: "/bookings",
-        icon: CalendarCheck2
-        // badge: "7 Pending",
-        // badgeColor: "bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-300",
-        // subItems: [
-        //   { title: "All Bookings", href: "/bookings" },
-        //   { title: "New Bookings", href: "/bookings?tab=New" },
-        //   { title: "Pending Assignment", href: "/bookings?tab=Pending Assignment" },
-        //   { title: "Upcoming", href: "/bookings?tab=Upcoming" },
-        //   { title: "Ongoing", href: "/bookings?tab=Ongoing" },
-        //   { title: "Completed", href: "/bookings?tab=Completed" },
-        //   { title: "Cancelled", href: "/bookings?tab=Cancelled" },
-        // ],
+        icon: CalendarCheck2,
       },
       {
         title: "Care Professionals",
         href: "/caregivers",
-        icon: HeartPulse
-        // subItems: [
-        //   { title: "All Professionals", href: "/caregivers" },
-        //   { title: "Nurses", href: "/caregivers?type=Nurse" },
-        //   { title: "Caregivers", href: "/caregivers?type=Caregiver" },
-        //   { title: "Physiotherapists", href: "/caregivers?type=Physiotherapist" },
-        //   { title: "Availability Dashboard", href: "/caregivers?tab=availability" },
-        // ],
+        icon: HeartPulse,
       },
+      // {
+      //   title: "Care Professional Onboarding",
+      //   href: "/care-professional-onboarding",
+      //   icon: UserCheck,
+      //   badge: "Stages",
+      //   badgeColor: "bg-blue-100 text-[#01265D] dark:bg-blue-950 dark:text-blue-300",
+      //   subItems: [
+      //     { title: "Application", href: "/care-professional-onboarding?tab=application" },
+      //     { title: "Verified", href: "/care-professional-onboarding?tab=verified" },
+      //     { title: "Eligible for Assignment", href: "/care-professional-onboarding?tab=eligible" },
+      //   ],
+      // },
       {
-        title: "Smart Assignment",
+        title: "Smart Allocation",
         href: "/smart-assignment",
         icon: Sparkles,
         badge: "AI Match",
-        badgeColor: "bg-teal-100 text-teal-800 dark:bg-teal-950 dark:text-teal-300",
+        badgeColor: "bg-blue-100 text-[#01265D] dark:bg-blue-950 dark:text-blue-300",
       },
       {
         title: "Service Management",
@@ -124,7 +113,7 @@ export const navGroups: NavGroup[] = [
         href: "/estimated-timelines",
         icon: Timer,
         badge: "SLA",
-        badgeColor: "bg-teal-100 text-teal-800 dark:bg-teal-950 dark:text-teal-300",
+        badgeColor: "bg-blue-100 text-[#01265D] dark:bg-blue-950 dark:text-blue-300",
       },
       {
         title: "Onboarding Documents",
@@ -141,29 +130,15 @@ export const navGroups: NavGroup[] = [
   {
     groupName: "Clinical & Quality",
     items: [
-      // {
-      //   title: "Care Management",
-      //   href: "/care-management",
-      //   icon: HeartHandshake,
-      //   // subItems: [
-      //   //   { title: "Care Plans", href: "/care-management?tab=care-plans" },
-      //   //   { title: "Today's Care Stream", href: "/care-management?tab=todays-care" },
-      //   //   { title: "Visit Monitoring", href: "/care-management?tab=visits" },
-      //   //   { title: "Care Progress", href: "/care-management?tab=progress" },
-      //   // ],
-      // },
+      {
+        title: "Care Plan Management",
+        href: "/care-management",
+        icon: HeartHandshake,
+      },
       {
         title: "Escalations",
         href: "/escalations",
-        icon: AlertOctagon
-        // badge: "3 Critical",
-        // badgeColor: "bg-rose-500 text-white animate-pulse",
-        // subItems: [
-        //   { title: "Critical Escalations", href: "/escalations?tab=Critical" },
-        //   { title: "High Priority", href: "/escalations?tab=High" },
-        //   { title: "Medium / Routine", href: "/escalations?tab=Medium" },
-        //   { title: "Resolved Cases", href: "/escalations?tab=Resolved" },
-        // ],
+        icon: AlertOctagon,
       },
       {
         title: "Quality Assurance",
@@ -180,7 +155,7 @@ export const navGroups: NavGroup[] = [
         href: "/push-notifications",
         icon: BellRing,
         badge: "Mobile",
-        badgeColor: "bg-teal-100 text-teal-800 dark:bg-teal-950 dark:text-teal-300",
+        badgeColor: "bg-blue-100 text-[#01265D] dark:bg-blue-950 dark:text-blue-300",
       },
     ],
   },
@@ -198,6 +173,18 @@ export const navGroups: NavGroup[] = [
           // { title: "Invoices & Balance", href: "/payments?tab=invoices" },
           { title: "Transactions Log", href: "/transactions" },
           { title: "Caregiver Payouts", href: "/payouts" },
+        ],
+      },
+      {
+        title: "Cancellation & Refund",
+        href: "/cancellations-refunds",
+        icon: RotateCcw,
+        // badge: "Requests",
+        badgeColor: "bg-rose-100 text-rose-800 dark:bg-rose-950 dark:text-rose-300",
+        subItems: [
+          { title: "Cancellation Requests", href: "/cancellations-refunds?tab=cancellations" },
+          { title: "Rescheduling Requests", href: "/cancellations-refunds?tab=rescheduling" },
+          { title: "Refund Processing", href: "/cancellations-refunds?tab=refunds" },
         ],
       },
       {
@@ -307,7 +294,7 @@ export function SidebarNav() {
                       className={cn(
                         "w-full group flex items-center justify-between rounded-lg px-3 py-2 text-xs font-medium transition-colors",
                         isActive
-                          ? "bg-teal-50 font-semibold text-teal-950 dark:bg-teal-950/80 dark:text-teal-200"
+                          ? "bg-blue-50/90 font-semibold text-[#01265D] dark:bg-blue-950/70 dark:text-blue-200"
                           : "text-muted-foreground hover:bg-slate-100/70 hover:text-foreground dark:hover:bg-slate-800/60"
                       )}
                     >
@@ -316,7 +303,7 @@ export function SidebarNav() {
                           className={cn(
                             "h-4 w-4 shrink-0",
                             isActive
-                              ? "text-teal-600 dark:text-teal-400"
+                              ? "text-[#01265D] dark:text-blue-400"
                               : "text-muted-foreground/80 group-hover:text-foreground"
                           )}
                         />
@@ -346,7 +333,7 @@ export function SidebarNav() {
                       className={cn(
                         "group flex items-center justify-between rounded-lg px-3 py-2 text-xs font-medium transition-colors",
                         isActive
-                          ? "bg-teal-50 font-semibold text-teal-950 dark:bg-teal-950/80 dark:text-teal-200"
+                          ? "bg-blue-50/90 font-semibold text-[#01265D] dark:bg-blue-950/70 dark:text-blue-200"
                           : "text-muted-foreground hover:bg-slate-100/70 hover:text-foreground dark:hover:bg-slate-800/60",
                         isCollapsed && "justify-center px-2 py-2.5"
                       )}
@@ -356,7 +343,7 @@ export function SidebarNav() {
                           className={cn(
                             "h-4 w-4 shrink-0",
                             isActive
-                              ? "text-teal-600 dark:text-teal-400"
+                              ? "text-[#01265D] dark:text-blue-400"
                               : "text-muted-foreground/80 group-hover:text-foreground"
                           )}
                         />
@@ -395,7 +382,7 @@ export function SidebarNav() {
                                 className={cn(
                                   "w-full flex items-center justify-between rounded-md px-2 py-1.5 text-[11px] font-medium transition-colors",
                                   isNestedChildActive
-                                    ? "text-teal-900 font-bold dark:text-teal-200"
+                                    ? "text-[#01265D] font-bold dark:text-blue-200"
                                     : "text-muted-foreground hover:text-foreground hover:bg-slate-100/50 dark:hover:bg-slate-800/40"
                                 )}
                               >
@@ -417,7 +404,7 @@ export function SidebarNav() {
                                         href={nested.href}
                                         className={cn(
                                           "flex items-center justify-between rounded-md px-2 py-1.5 text-[11px] font-medium transition-colors text-muted-foreground hover:text-foreground hover:bg-slate-100/50 dark:hover:bg-slate-800/40",
-                                          isChildActive && "text-teal-600 font-semibold dark:text-teal-400"
+                                          isChildActive && "text-[#01265D] font-semibold dark:text-blue-400"
                                         )}
                                       >
                                         <span className="truncate">{nested.title}</span>
@@ -437,7 +424,7 @@ export function SidebarNav() {
                             href={sub.href}
                             className={cn(
                               "flex items-center justify-between rounded-md px-2 py-1.5 text-[11px] font-medium transition-colors text-muted-foreground hover:text-foreground hover:bg-slate-100/50 dark:hover:bg-slate-800/40",
-                              isChildActive && "text-teal-600 font-semibold dark:text-teal-400"
+                              isChildActive && "text-[#01265D] font-semibold dark:text-blue-400"
                             )}
                           >
                             <span className="truncate">{sub.title}</span>

@@ -14,7 +14,7 @@ export default function AuthLayout({
       
       {/* Brand Header */}
       <Link href="/" className="relative z-10 mb-8 flex items-center gap-3 group">
-        <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white dark:bg-slate-900 border p-1.5 shadow-md group-hover:scale-105 transition-transform">
+        <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white border border-slate-200 p-1.5 shadow-md group-hover:scale-105 transition-transform">
           <Image
             src="/logo/logo.svg"
             alt="MySarthee Logo"
@@ -22,13 +22,14 @@ export default function AuthLayout({
             height={36}
             className="h-9 w-9 object-contain"
             priority
+            unoptimized
           />
         </div>
         <div className="flex flex-col">
-          <span className="font-extrabold text-2xl tracking-tight text-foreground">
+          <span className="font-extrabold text-2xl tracking-tight text-[#01265D] dark:text-white">
             MySarthee
           </span>
-          <span className="text-xs font-semibold text-teal-600 dark:text-teal-400">
+          <span className="text-xs font-semibold text-[#01265D]/80 dark:text-blue-400">
             HealthCare Admin Portal
           </span>
         </div>

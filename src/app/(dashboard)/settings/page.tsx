@@ -29,7 +29,7 @@ export default function SettingsAndRolesPage() {
     "Dashboard KPI Telemetry",
     "Patient Management & 360°",
     "Care Professionals Availability",
-    "Smart Assignment Engine",
+    "Smart Allocation Engine",
     "Care Plans & Clinical Protocols",
     "Escalation Centre Triage",
     "Family Communication Hub",
@@ -209,7 +209,7 @@ export default function SettingsAndRolesPage() {
           <h3 className="text-sm font-extrabold text-foreground">Clinical & Operational Audit Trail</h3>
           <div className="space-y-2 text-xs">
             {[
-              { action: "Smart Assignment Executed", actor: "Dr. Vikram Joshi (Coordinator)", target: "Booking BK-2120 assigned to Nurse Priya Sharma", time: "10 mins ago" },
+              { action: "Smart Allocation Executed", actor: "Dr. Vikram Joshi (Coordinator)", target: "Booking BK-2120 assigned to Nurse Priya Sharma", time: "10 mins ago" },
               { action: "Critical Escalation Resolved", actor: "Dr. Vikram Joshi (Clinical Manager)", target: "Patient #MS1024 Telemetry Review & Dr. Udwadia Consult", time: "45 mins ago" },
               { action: "Invoice Generated", actor: "Finance Bot", target: "Invoice #INV-2026-08-1092 generated for Anand Rathi", time: "2 hours ago" },
               { action: "Caregiver Onboarding Verified", actor: "Operations Manager", target: "Police Verification & BLS Certificate cleared for Nurse Sanjay", time: "Yesterday" },

@@ -61,8 +61,8 @@ export function ReassignStaffModal({
       // Search match
       const searchMatch =
         pro.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        pro.zone.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        pro.skills.some((s) => s.toLowerCase().includes(searchQuery.toLowerCase()));
+        pro.area.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        pro.specializations.some((s: string) => s.toLowerCase().includes(searchQuery.toLowerCase()));
 
       return roleMatch && notSamePerson && searchMatch;
     });
@@ -88,8 +88,8 @@ export function ReassignStaffModal({
       name: targetPro.name,
       role: targetPro.type,
       phone: targetPro.phone,
-      avatar: targetPro.avatar,
-      zone: targetPro.zone,
+      avatar: targetPro.avatar || "",
+      zone: targetPro.area,
     };
 
     onConfirmReassign(leaveRequest.id, reassignedInfo, coverageNotes.trim());
@@ -190,7 +190,7 @@ export function ReassignStaffModal({
                             <span className="text-[10px] text-muted-foreground">({pro.id})</span>
                           </div>
                           <div className="flex items-center gap-2 text-[10px] text-muted-foreground">
-                            <span>📍 {pro.zone}</span>
+                            <span>📍 {pro.area}</span>
                             <span>&bull;</span>
                             <span>⭐ {pro.rating}</span>
                             <span>&bull;</span>
@@ -201,7 +201,7 @@ export function ReassignStaffModal({
 
                       <div className="flex items-center">
                         {isSelected ? (
-                          <div className="h-5 w-5 rounded-full bg-teal-600 text-white flex items-center justify-center">
+                          <div className="h-5 w-5 rounded-full bg-[#01265D] text-white flex items-center justify-center">
                             <CheckCircle2 className="h-3.5 w-3.5" />
                           </div>
                         ) : (

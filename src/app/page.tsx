@@ -92,13 +92,13 @@ const metrics = [
 
 export default function LandingPage() {
   return (
-    <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950 text-foreground selection:bg-teal-500 selection:text-white">
+    <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950 text-foreground selection:bg-[#01265D] selection:text-white">
       {/* Top Navbar */}
       <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="container mx-auto flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 group">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white dark:bg-slate-900 border p-1 shadow-md group-hover:scale-105 transition-transform">
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white border border-slate-200 p-1 shadow-md group-hover:scale-105 transition-transform">
               <Image
                 src="/logo/logo.svg"
                 alt="MySarthee Logo"
@@ -106,13 +106,14 @@ export default function LandingPage() {
                 height={32}
                 className="h-8 w-8 object-contain"
                 priority
+                unoptimized
               />
             </div>
             <div className="flex flex-col">
-              <span className="font-extrabold text-lg tracking-tight text-foreground">
+              <span className="font-extrabold text-lg tracking-tight text-[#01265D] dark:text-white">
                 MySarthee
               </span>
-              <span className="text-[10px] font-semibold text-teal-600 dark:text-teal-400 -mt-1">
+              <span className="text-[10px] font-semibold text-[#01265D]/80 dark:text-blue-400 -mt-1">
                 HealthCare Portal
               </span>
             </div>
@@ -120,13 +121,13 @@ export default function LandingPage() {
 
           {/* Nav Links */}
           <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-muted-foreground">
-            <a href="#services" className="hover:text-foreground transition-colors">
+            <a href="#services" className="hover:text-[#01265D] dark:hover:text-blue-400 transition-colors">
               Healthcare Services
             </a>
-            <a href="#solutions" className="hover:text-foreground transition-colors">
+            <a href="#solutions" className="hover:text-[#01265D] dark:hover:text-blue-400 transition-colors">
               Enterprise Solutions
             </a>
-            <a href="#compliance" className="hover:text-foreground transition-colors">
+            <a href="#compliance" className="hover:text-[#01265D] dark:hover:text-blue-400 transition-colors">
               Compliance & Security
             </a>
           </nav>
@@ -135,7 +136,7 @@ export default function LandingPage() {
           <div className="flex items-center gap-3">
             <Link
               href="/login"
-              className="inline-flex h-9 px-4 items-center justify-center rounded-lg bg-teal-600 text-white text-xs font-semibold hover:bg-teal-700 dark:bg-teal-500 dark:hover:bg-teal-600 shadow-xs gap-2"
+              className="inline-flex h-9 px-4 items-center justify-center rounded-lg bg-[#01265D] text-white text-xs font-semibold hover:bg-[#0a3375] shadow-xs gap-2"
             >
               <LogIn className="h-4 w-4" />
               <span>Admin Login</span>
@@ -151,8 +152,8 @@ export default function LandingPage() {
 
         <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8 text-center">
           {/* Tagline Badge */}
-          <div className="inline-flex items-center gap-2 rounded-full border border-teal-200 bg-teal-50/80 px-3.5 py-1 text-xs font-semibold text-teal-800 dark:border-teal-900/50 dark:bg-teal-950/50 dark:text-teal-300 mb-6">
-            <Image src="/logo/logo.svg" alt="MySarthee" width={16} height={16} className="h-4 w-4" />
+          <div className="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50/80 px-3.5 py-1 text-xs font-semibold text-[#01265D] dark:border-blue-900/50 dark:bg-blue-950/50 dark:text-blue-300 mb-6">
+            <Image src="/logo/logo.svg" alt="MySarthee" width={16} height={16} className="h-4 w-4" unoptimized />
             <span>Next-Gen Enterprise HealthCare Platform</span>
           </div>
 
@@ -168,7 +169,7 @@ export default function LandingPage() {
           <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
               href="/login"
-              className="inline-flex h-11 px-6 items-center justify-center rounded-lg bg-teal-600 text-white text-sm font-semibold hover:bg-teal-700 dark:bg-teal-500 dark:hover:bg-teal-600 shadow-md shadow-teal-600/20 gap-2 w-full sm:w-auto"
+              className="inline-flex h-11 px-6 items-center justify-center rounded-lg bg-[#01265D] text-white text-sm font-semibold hover:bg-[#0a3375] shadow-md shadow-[#01265D]/20 gap-2 w-full sm:w-auto"
             >
               <span>Access Admin Portal</span>
               <ArrowRight className="h-4 w-4" />
@@ -191,7 +192,7 @@ export default function LandingPage() {
               const Icon = item.icon;
               return (
                 <div key={idx} className="flex flex-col items-center p-3">
-                  <Icon className="h-6 w-6 text-teal-600 mb-2" />
+                  <Icon className="h-6 w-6 text-[#01265D] dark:text-blue-400 mb-2" />
                   <span className="text-2xl sm:text-3xl font-extrabold text-foreground tracking-tight">
                     {item.value}
                   </span>
@@ -224,11 +225,11 @@ export default function LandingPage() {
               return (
                 <Card
                   key={idx}
-                  className="group relative overflow-hidden transition-all duration-300 hover:border-teal-500/50 hover:shadow-lg hover:-translate-y-1 bg-card border-slate-200/80 dark:border-slate-800 flex flex-col justify-between"
+                  className="group relative overflow-hidden transition-all duration-300 hover:border-[#01265D]/50 hover:shadow-lg hover:-translate-y-1 bg-card border-slate-200/80 dark:border-slate-800 flex flex-col justify-between"
                 >
                   <CardHeader className="space-y-3 pb-3">
                     <div className="flex items-center justify-between">
-                      <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-teal-50 text-teal-700 dark:bg-teal-950/80 dark:text-teal-400 group-hover:bg-teal-600 group-hover:text-white transition-colors">
+                      <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-blue-50 text-[#01265D] dark:bg-blue-950/80 dark:text-blue-300 group-hover:bg-[#01265D] group-hover:text-white transition-colors">
                         <Icon className="h-5 w-5" />
                       </div>
                       <span className="text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 text-muted-foreground">
@@ -252,31 +253,31 @@ export default function LandingPage() {
       </section>
 
       {/* Compliance & Security Banner */}
-      <section id="compliance" className="bg-teal-900 text-white py-16">
+      <section id="compliance" className="bg-[#01265D] text-white py-16">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
             <div className="space-y-3 max-w-2xl text-center lg:text-left">
-              <span className="text-xs font-semibold uppercase tracking-wider text-teal-300">
+              <span className="text-xs font-semibold uppercase tracking-wider text-amber-400">
                 Enterprise Standards & Security
               </span>
               <h3 className="text-2xl sm:text-3xl font-bold tracking-tight">
                 Built to Meet Global Medical Compliance Requirements
               </h3>
-              <p className="text-sm text-teal-100/80 leading-relaxed">
+              <p className="text-sm text-blue-100/80 leading-relaxed">
                 MySarthee ensures strict adherence to HIPAA, GDPR medical privacy standards, end-to-end data encryption, and role-based access control for administrative users.
               </p>
             </div>
             <div className="flex flex-wrap justify-center gap-4 shrink-0">
-              <div className="flex items-center gap-2 rounded-xl bg-teal-800/80 px-4 py-3 border border-teal-700">
-                <CheckCircle2 className="h-5 w-5 text-teal-300" />
+              <div className="flex items-center gap-2 rounded-xl bg-[#0a3375]/90 px-4 py-3 border border-blue-400/30">
+                <CheckCircle2 className="h-5 w-5 text-amber-400" />
                 <span className="text-xs font-semibold">HIPAA Compliant</span>
               </div>
-              <div className="flex items-center gap-2 rounded-xl bg-teal-800/80 px-4 py-3 border border-teal-700">
-                <CheckCircle2 className="h-5 w-5 text-teal-300" />
+              <div className="flex items-center gap-2 rounded-xl bg-[#0a3375]/90 px-4 py-3 border border-blue-400/30">
+                <CheckCircle2 className="h-5 w-5 text-amber-400" />
                 <span className="text-xs font-semibold">256-bit Encryption</span>
               </div>
-              <div className="flex items-center gap-2 rounded-xl bg-teal-800/80 px-4 py-3 border border-teal-700">
-                <CheckCircle2 className="h-5 w-5 text-teal-300" />
+              <div className="flex items-center gap-2 rounded-xl bg-[#0a3375]/90 px-4 py-3 border border-blue-400/30">
+                <CheckCircle2 className="h-5 w-5 text-amber-400" />
                 <span className="text-xs font-semibold">HL7 / FHIR Ready</span>
               </div>
             </div>
@@ -289,15 +290,15 @@ export default function LandingPage() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
             <div className="flex items-center gap-3">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-white dark:bg-slate-900 border p-1">
-                <Image src="/logo/logo.svg" alt="MySarthee Logo" width={24} height={24} className="h-5 w-5" />
+              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-white border border-slate-200 p-1">
+                <Image src="/logo/logo.svg" alt="MySarthee Logo" width={24} height={24} className="h-5 w-5" unoptimized />
               </div>
               <span className="font-extrabold text-sm text-foreground">
                 MySarthee HealthCare Solutions
               </span>
             </div>
             <div className="flex items-center gap-6 text-xs text-muted-foreground">
-              <Link href="/login" className="hover:text-foreground font-semibold text-teal-600 dark:text-teal-400">
+              <Link href="/login" className="hover:text-foreground font-semibold text-[#01265D] dark:text-blue-400">
                 Admin Portal Login
               </Link>
               <span>Privacy Policy</span>

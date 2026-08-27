@@ -54,14 +54,14 @@ export function UserNav() {
         <DropdownMenuGroup>
           <DropdownMenuItem asChild className="cursor-pointer">
             <Link href="/account" className="flex items-center w-full">
-              <User className="mr-2 h-4 w-4 text-teal-600" />
+              <User className="mr-2 h-4 w-4 text-[#01265D] dark:text-blue-400" />
               <span>Profile</span>
             </Link>
           </DropdownMenuItem>
 
           <DropdownMenuItem asChild className="cursor-pointer">
             <Link href="/account" className="flex items-center w-full">
-              <Settings className="mr-2 h-4 w-4 text-teal-600" />
+              <Settings className="mr-2 h-4 w-4 text-[#01265D] dark:text-blue-400" />
               <span>Settings</span>
             </Link>
           </DropdownMenuItem>

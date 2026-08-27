@@ -100,7 +100,7 @@ export function DashboardFilters({ onFilterChange }: DashboardFiltersProps) {
           <Button
             size="sm"
             onClick={handleApplyCustomRange}
-            className="h-8 px-3 text-xs bg-teal-600 text-white hover:bg-teal-700 font-semibold"
+            className="h-8 px-3 text-xs bg-[#01265D] text-white hover:bg-[#0a3375] font-semibold"
           >
             <Filter className="h-3.5 w-3.5 mr-1" />
             Apply
@@ -108,7 +108,7 @@ export function DashboardFilters({ onFilterChange }: DashboardFiltersProps) {
         </div>
       ) : (
         <div className="flex items-center gap-2 text-xs text-muted-foreground font-medium">
-          <CalendarIcon className="h-4 w-4 text-teal-600" />
+          <CalendarIcon className="h-4 w-4 text-[#01265D] dark:text-blue-400" />
           <span>Active Period: {selectedPeriod.toUpperCase()}</span>
         </div>
       )}

@@ -38,20 +38,21 @@ export function MobileSidebar() {
         <SheetHeader className="h-16 px-4 flex justify-center border-b text-left">
           <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
           <Link href="/" className="flex items-center gap-2.5">
-              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-slate-100 dark:bg-slate-900 border p-1 shadow-xs">
+              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-white border border-slate-200 p-1 shadow-xs">
                 <Image
                   src="/logo/logo.svg"
                   alt="MySarthee Logo"
                   width={28}
                   height={28}
                   className="h-7 w-7 object-contain"
+                  unoptimized
                 />
               </div>
               <div className="flex flex-col">
-                <span className="font-extrabold text-base tracking-tight text-foreground">
+                <span className="font-extrabold text-base tracking-tight text-[#01265D] dark:text-white">
                   MySarthee
                 </span>
-                <span className="text-[10px] font-semibold text-teal-600 dark:text-teal-400 -mt-0.5">
+                <span className="text-[10px] font-semibold text-[#01265D]/80 dark:text-blue-400 -mt-0.5">
                   Admin Portal
                 </span>
               </div>

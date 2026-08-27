@@ -94,8 +94,8 @@ export default function SmartAssignmentEnginePage() {
     );
 
     swiftAlert.success({
-      title: "Smart Assignment Confirmed!",
-      description: `${pro.name} (${pro.type}) successfully assigned to ${selectedBooking.patientName} (${selectedBooking.bookingCode}). WhatsApp dispatch notification sent.`,
+      title: "Smart Allocation Confirmed!",
+      description: `${pro.name} (${pro.type}) successfully allocated to ${selectedBooking.patientName} (${selectedBooking.bookingCode}). WhatsApp dispatch notification sent.`,
     });
   };
 
@@ -106,10 +106,10 @@ export default function SmartAssignmentEnginePage() {
         <div>
           <div className="flex items-center gap-2">
             <h1 className="text-2xl font-black tracking-tight text-foreground sm:text-3xl">
-              Smart Assignment Engine
+              Smart Allocation Engine
             </h1>
-            <Badge className="bg-teal-600 text-white font-semibold text-xs flex items-center gap-1">
-              <Sparkles className="h-3 w-3" /> AI Proximity & Skill Matcher
+            <Badge className="bg-[#01265D] text-white font-semibold text-xs flex items-center gap-1">
+              <Sparkles className="h-3 w-3" /> AI Proximity & Skill Allocator
             </Badge>
           </div>
           <p className="text-xs text-muted-foreground mt-1">
@@ -120,7 +120,7 @@ export default function SmartAssignmentEnginePage() {
 
       {/* Main Grid: Left Bookings Queue, Right Match Recommendations */}
       <div className="grid gap-6 lg:grid-cols-12">
-        {/* Left Column: Bookings Awaiting Assignment */}
+        {/* Left Column: Bookings Awaiting Allocation */}
         <div className="lg:col-span-5 rounded-2xl border bg-card p-5 shadow-xs space-y-4">
           <div className="flex items-center justify-between border-b pb-3">
             <div>
@@ -141,7 +141,7 @@ export default function SmartAssignmentEnginePage() {
                   onClick={() => setSelectedBooking(booking)}
                   className={`cursor-pointer rounded-xl border p-3.5 transition-all ${
                     isSelected
-                      ? "border-teal-600 bg-teal-50/60 dark:bg-teal-950/40 ring-1 ring-teal-600 shadow-sm"
+                      ? "border-[#01265D] bg-blue-50/70 dark:bg-blue-950/40 ring-1 ring-[#01265D] shadow-sm"
                       : "border-slate-200/80 bg-slate-50/40 hover:bg-slate-100/60 dark:border-slate-800"
                   }`}
                 >
@@ -171,7 +171,7 @@ export default function SmartAssignmentEnginePage() {
 
                   <div className="mt-2 pt-2 border-t flex items-center justify-between text-[11px] text-muted-foreground">
                     <span className="flex items-center gap-1 font-medium">
-                      <MapPin className="h-3 w-3 text-teal-600" /> {booking.locationArea}
+                      <MapPin className="h-3 w-3 text-[#01265D] dark:text-blue-400" /> {booking.locationArea}
                     </span>
                     <span>Starts: {booking.startDate}</span>
                   </div>
@@ -187,14 +187,14 @@ export default function SmartAssignmentEnginePage() {
             <div>
               <div className="flex items-center gap-2">
                 <h2 className="text-sm font-extrabold text-foreground">
-                  Smart Match Recommendations for {selectedBooking.patientName}
+                  Smart Allocation Recommendations for {selectedBooking.patientName}
                 </h2>
               </div>
               <p className="text-xs text-muted-foreground mt-0.5">
                 Target: {selectedBooking.careType} · Location: {selectedBooking.locationArea} · Start Date: {selectedBooking.startDate}
               </p>
             </div>
-            <Badge className="bg-teal-700 text-teal-100 text-xs font-mono">
+            <Badge className="bg-[#01265D] text-white text-xs font-mono">
               Booking {selectedBooking.bookingCode}
             </Badge>
           </div>
@@ -208,11 +208,11 @@ export default function SmartAssignmentEnginePage() {
             {matchingCandidates.map((pro, index) => (
               <div
                 key={pro.id}
-                className="rounded-xl border border-slate-200 bg-slate-50/50 dark:border-slate-800 dark:bg-slate-900/30 p-4 space-y-3 transition-all hover:border-teal-500/50 hover:shadow-xs"
+                className="rounded-xl border border-slate-200 bg-slate-50/50 dark:border-slate-800 dark:bg-slate-900/30 p-4 space-y-3 transition-all hover:border-[#01265D]/50 hover:shadow-xs"
               >
                 <div className="flex items-start justify-between gap-3">
                   <div className="flex items-center gap-3">
-                    <Avatar className="h-11 w-11 bg-teal-100 text-teal-800 font-bold border-2 border-teal-500">
+                    <Avatar className="h-11 w-11 bg-blue-100 text-[#01265D] font-bold border-2 border-[#01265D]">
                       <AvatarFallback>{pro.name.slice(0, 2).toUpperCase()}</AvatarFallback>
                     </Avatar>
                     <div>
@@ -227,7 +227,7 @@ export default function SmartAssignmentEnginePage() {
                       </div>
                       <p className="text-xs text-muted-foreground mt-0.5 flex items-center gap-2">
                         <span className="flex items-center gap-1">
-                          <MapPin className="h-3 w-3 text-teal-600" /> {pro.area}
+                          <MapPin className="h-3 w-3 text-[#01265D] dark:text-blue-400" /> {pro.area}
                         </span>
                         <span>·</span>
                         <span>★ {pro.rating} ({pro.totalVisitsCompleted} visits)</span>
@@ -237,11 +237,11 @@ export default function SmartAssignmentEnginePage() {
 
                   <Button
                     size="sm"
-                    className="bg-teal-600 hover:bg-teal-700 text-white text-xs font-bold shrink-0 gap-1"
+                    className="bg-[#01265D] hover:bg-[#0a3375] text-white text-xs font-bold shrink-0 gap-1"
                     onClick={() => handleAssignProfessional(pro)}
                   >
                     <Check className="h-3.5 w-3.5" />
-                    Assign & Dispatch
+                    Allocate & Dispatch
                   </Button>
                 </div>
 
@@ -250,7 +250,7 @@ export default function SmartAssignmentEnginePage() {
                   {pro.matchReasons.map((reason, rid) => (
                     <span
                       key={rid}
-                      className="text-[10px] font-semibold px-2 py-0.5 rounded-md bg-teal-50 text-teal-900 border border-teal-200 dark:bg-teal-950 dark:text-teal-300 dark:border-teal-900"
+                      className="text-[10px] font-semibold px-2 py-0.5 rounded-md bg-blue-50 text-[#01265D] border border-blue-200 dark:bg-blue-950 dark:text-blue-300 dark:border-blue-900"
                     >
                       ✓ {reason}
                     </span>
