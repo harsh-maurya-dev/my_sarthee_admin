@@ -218,7 +218,7 @@ export function PreferredSkillsetsTab() {
               onClick={() => setActiveDomain(d.domain)}
               className={`flex items-center gap-2 pb-3 text-xs font-bold transition-all relative ${
                 isActive
-                  ? "text-teal-600 dark:text-teal-400 border-b-2 border-teal-600 dark:border-teal-400"
+                  ? "text-[#01265D] dark:text-blue-400 border-b-2 border-[#01265D] dark:border-blue-800"
                   : "text-muted-foreground hover:text-foreground"
               }`}
             >
@@ -240,7 +240,7 @@ export function PreferredSkillsetsTab() {
             size="sm"
             onClick={handleOpenAdd}
             disabled={isAtMaxSkills}
-            className="h-8 gap-1.5 bg-teal-600 text-white hover:bg-teal-700 text-xs font-semibold shadow-xs disabled:opacity-50 disabled:cursor-not-allowed"
+            className="h-8 gap-1.5 bg-[#01265D] text-white hover:bg-[#0a3375] text-xs font-semibold shadow-xs disabled:opacity-50 disabled:cursor-not-allowed"
           >
             <Plus className="h-3.5 w-3.5" />
             <span>Add Skill</span>
@@ -381,7 +381,7 @@ export function PreferredSkillsetsTab() {
               </strong>{" "}
               skills used
             </span>
-            <span className="font-medium text-teal-600 dark:text-teal-400">
+            <span className="font-medium text-[#01265D] dark:text-blue-400">
               {activeDomain} Domain
             </span>
           </div>
@@ -438,7 +438,7 @@ export function PreferredSkillsetsTab() {
               <Label className="text-xs font-semibold">Upload Image</Label>
               <div
                 onClick={() => fileInputRef.current?.click()}
-                className="group relative flex flex-col items-center justify-center rounded-xl border-2 border-dashed border-slate-300 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-900/30 p-5 cursor-pointer transition-all hover:border-teal-400 hover:bg-teal-50/30 dark:hover:border-teal-600 dark:hover:bg-teal-950/20"
+                className="group relative flex flex-col items-center justify-center rounded-xl border-2 border-dashed border-slate-300 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-900/30 p-5 cursor-pointer transition-all hover:border-blue-200 hover:bg-blue-50 dark:hover:bg-blue-950/40/30 dark:hover:border-[#01265D] dark:hover:bg-blue-950/20"
               >
                 {skillImage ? (
                   <div className="relative">
@@ -471,8 +471,8 @@ export function PreferredSkillsetsTab() {
                   </div>
                 ) : (
                   <>
-                    <div className="h-10 w-10 rounded-lg bg-slate-100 dark:bg-slate-800 flex items-center justify-center mb-1.5 group-hover:bg-teal-100 dark:group-hover:bg-teal-900/40 transition-colors">
-                      <Upload className="h-4 w-4 text-muted-foreground group-hover:text-teal-600 transition-colors" />
+                    <div className="h-10 w-10 rounded-lg bg-slate-100 dark:bg-slate-800 flex items-center justify-center mb-1.5 group-hover:bg-blue-100 dark:hover:bg-blue-900/40 dark:group-hover:bg-blue-100 transition-colors">
+                      <Upload className="h-4 w-4 text-muted-foreground group-hover:text-[#01265D] dark:text-blue-400 transition-colors" />
                     </div>
                     <p className="text-[11px] font-medium text-muted-foreground group-hover:text-foreground transition-colors">
                       Click to upload
@@ -504,7 +504,7 @@ export function PreferredSkillsetsTab() {
             <Button
               size="sm"
               onClick={handleSaveSkill}
-              className="h-9 text-xs bg-teal-600 text-white hover:bg-teal-700 font-semibold"
+              className="h-9 text-xs bg-[#01265D] text-white hover:bg-[#0a3375] font-semibold"
             >
               Add Skill
             </Button>

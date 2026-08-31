@@ -33,7 +33,7 @@ export function WebsiteServiceViewModal({
           <div className="flex items-center justify-between">
             <div>
               <DialogTitle className="text-lg font-bold flex items-center gap-2">
-                <Globe className="h-5 w-5 text-teal-600" />
+                <Globe className="h-5 w-5 text-[#01265D] dark:text-blue-400" />
                 Corporate Website Service View
               </DialogTitle>
               <DialogDescription className="text-xs text-muted-foreground mt-1">
@@ -69,7 +69,7 @@ export function WebsiteServiceViewModal({
         </div>
 
         <DialogFooter>
-          <Button type="button" onClick={onClose} className="w-full bg-teal-600 hover:bg-teal-700 text-white font-bold h-9 text-xs">
+          <Button type="button" onClick={onClose} className="w-full bg-[#01265D] hover:bg-[#0a3375] text-white font-bold h-9 text-xs">
             Close Service Preview
           </Button>
         </DialogFooter>

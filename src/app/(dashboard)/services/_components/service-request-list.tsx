@@ -116,7 +116,7 @@ export function ServiceRequestList({ availableServices }: ServiceRequestListProp
       case "Under Review":
         return <Badge className="bg-blue-600 text-white font-semibold text-[11px]">Under Review</Badge>;
       case "Service Recommended":
-        return <Badge className="bg-teal-600 text-white font-semibold text-[11px]">Recommended</Badge>;
+        return <Badge className="bg-[#01265D] text-white font-semibold text-[11px]">Recommended</Badge>;
       case "Rejected":
         return <Badge variant="destructive" className="bg-rose-600 text-white font-semibold text-[11px]">Rejected</Badge>;
     }
@@ -208,7 +208,7 @@ export function ServiceRequestList({ availableServices }: ServiceRequestListProp
                   <TableCell className="text-xs">
                     <div className="flex flex-col">
                       <span className="font-bold text-foreground flex items-center gap-1">
-                        <User className="h-3 w-3 text-teal-600" />
+                        <User className="h-3 w-3 text-[#01265D] dark:text-blue-400" />
                         {req.patientName}
                       </span>
                       <span className="text-[11px] text-muted-foreground">
@@ -225,7 +225,7 @@ export function ServiceRequestList({ availableServices }: ServiceRequestListProp
                   {/* Recommended Service */}
                   <TableCell className="text-xs">
                     {req.recommendedServiceName ? (
-                      <span className="font-semibold text-teal-700 dark:text-teal-400">
+                      <span className="font-semibold text-[#01265D] dark:text-blue-300 dark:text-blue-400">
                         {req.recommendedServiceName}
                       </span>
                     ) : (
@@ -250,7 +250,7 @@ export function ServiceRequestList({ availableServices }: ServiceRequestListProp
                         size="sm"
                         variant="outline"
                         onClick={() => handleOpenReview(req)}
-                        className="h-8 text-xs gap-1 font-medium border-slate-200 hover:bg-teal-50 hover:text-teal-700 hover:border-teal-300 dark:hover:bg-teal-950"
+                        className="h-8 text-xs gap-1 font-medium border-slate-200 hover:bg-blue-50 dark:hover:bg-blue-950/40 hover:text-[#01265D] dark:text-blue-300 hover:border-blue-300 dark:border-blue-800 dark:hover:bg-blue-950"
                       >
                         <Eye className="h-3.5 w-3.5" />
                         <span>Review & Process</span>
@@ -272,7 +272,7 @@ export function ServiceRequestList({ availableServices }: ServiceRequestListProp
                             onClick={() => handleOpenReview(req)}
                             className="cursor-pointer text-xs"
                           >
-                            <FileCheck className="mr-2 h-3.5 w-3.5 text-teal-600" />
+                            <FileCheck className="mr-2 h-3.5 w-3.5 text-[#01265D] dark:text-blue-400" />
                             <span>1. Review Request</span>
                           </DropdownMenuItem>
                           <DropdownMenuItem
@@ -314,7 +314,7 @@ export function ServiceRequestList({ availableServices }: ServiceRequestListProp
             Showing <strong className="text-foreground">{filteredRequests.length}</strong> of{" "}
             <strong className="text-foreground">{requests.length}</strong> submitted service requests
           </span>
-          <span className="font-medium text-teal-600 dark:text-teal-400">
+          <span className="font-medium text-[#01265D] dark:text-blue-400">
             Request Dispatch Active
           </span>
         </div>

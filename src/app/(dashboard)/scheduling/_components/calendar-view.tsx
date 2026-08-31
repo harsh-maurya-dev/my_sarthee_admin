@@ -42,7 +42,7 @@ export function CalendarView({
       {/* Calendar Date Navigator */}
       <div className="rounded-2xl border bg-card p-4 shadow-xs flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <CalendarIcon className="h-5 w-5 text-teal-600" />
+          <CalendarIcon className="h-5 w-5 text-[#01265D] dark:text-blue-400" />
           <div>
             <h3 className="font-bold text-sm text-foreground">
               {currentDate.toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric", year: "numeric" })}

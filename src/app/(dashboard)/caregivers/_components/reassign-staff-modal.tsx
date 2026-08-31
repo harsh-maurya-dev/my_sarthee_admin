@@ -104,9 +104,9 @@ export function ReassignStaffModal({
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="sm:max-w-lg">
         <DialogHeader>
-          <div className="flex items-center gap-2 text-teal-600">
-            <div className="h-8 w-8 rounded-full bg-teal-100 dark:bg-teal-950 flex items-center justify-center">
-              <ArrowRightLeft className="h-4 w-4 text-teal-600" />
+          <div className="flex items-center gap-2 text-[#01265D] dark:text-blue-400">
+            <div className="h-8 w-8 rounded-full bg-blue-100 dark:bg-blue-950/60 dark:bg-blue-950 flex items-center justify-center">
+              <ArrowRightLeft className="h-4 w-4 text-[#01265D] dark:text-blue-400" />
             </div>
             <DialogTitle className="text-base font-bold text-foreground">
               Reassign Replacement Staff
@@ -133,7 +133,7 @@ export function ReassignStaffModal({
           </div>
 
           <div className="flex items-center gap-1.5 text-muted-foreground">
-            <Calendar className="h-3.5 w-3.5 text-teal-600" />
+            <Calendar className="h-3.5 w-3.5 text-[#01265D] dark:text-blue-400" />
             <span className="font-semibold text-foreground">
               {leaveRequest.startDate} to {leaveRequest.endDate}
             </span>
@@ -173,14 +173,14 @@ export function ReassignStaffModal({
                       onClick={() => setSelectedStaffId(pro.id)}
                       className={`flex items-center justify-between p-2.5 rounded-lg border cursor-pointer transition-all ${
                         isSelected
-                          ? "bg-teal-50/80 border-teal-500 dark:bg-teal-950/40 dark:border-teal-600 shadow-xs"
+                          ? "bg-blue-50 dark:bg-blue-950/40/80 border-[#01265D] dark:bg-blue-950/40 dark:border-[#01265D] shadow-xs"
                           : "hover:bg-slate-50 dark:hover:bg-slate-900 border-transparent"
                       }`}
                     >
                       <div className="flex items-center gap-2.5">
                         <Avatar className="h-8 w-8 border">
                           <AvatarImage src={pro.avatar} alt={pro.name} />
-                          <AvatarFallback className="text-xs font-bold bg-teal-100 text-teal-800">
+                          <AvatarFallback className="text-xs font-bold bg-blue-100 dark:bg-blue-950/60 text-[#01265D] dark:text-blue-200">
                             {pro.name.substring(0, 2)}
                           </AvatarFallback>
                         </Avatar>
@@ -242,7 +242,7 @@ export function ReassignStaffModal({
             <Button
               type="submit"
               size="sm"
-              className="h-9 text-xs bg-teal-600 text-white hover:bg-teal-700 font-semibold"
+              className="h-9 text-xs bg-[#01265D] text-white hover:bg-[#0a3375] font-semibold"
             >
               Confirm Reassignment
             </Button>

@@ -47,7 +47,7 @@ export default function SettingsAndRolesPage() {
             <h1 className="text-2xl font-black tracking-tight text-foreground sm:text-3xl">
               System Settings & Role-Based Access Control (RBAC)
             </h1>
-            <Badge className="bg-teal-600 text-white font-semibold text-xs">
+            <Badge className="bg-[#01265D] text-white font-semibold text-xs">
               Healthcare Governance
             </Badge>
           </div>
@@ -73,7 +73,7 @@ export default function SettingsAndRolesPage() {
               onClick={() => setActiveTab(tab.key as any)}
               className={`flex items-center gap-2 rounded-lg px-3.5 py-2 text-xs font-bold transition-all shrink-0 ${
                 activeTab === tab.key
-                  ? "bg-teal-600 text-white shadow-sm"
+                  ? "bg-[#01265D] text-white shadow-sm"
                   : "bg-slate-100 text-muted-foreground hover:bg-slate-200 dark:bg-slate-800"
               }`}
             >
@@ -95,7 +95,7 @@ export default function SettingsAndRolesPage() {
                 <h2 className="text-sm font-extrabold text-foreground">Operational Role Profiles & Permissions</h2>
                 <p className="text-xs text-muted-foreground">Each role accesses only clinical and financial data within their defined scope</p>
               </div>
-              <Button size="sm" className="bg-teal-600 hover:bg-teal-700 text-white text-xs font-bold">
+              <Button size="sm" className="bg-[#01265D] hover:bg-[#0a3375] text-white text-xs font-bold">
                 <Plus className="h-3.5 w-3.5 mr-1" /> Add Role
               </Button>
             </div>
@@ -191,7 +191,7 @@ export default function SettingsAndRolesPage() {
             ].map((loc, idx) => (
               <div key={idx} className="rounded-xl border p-4 bg-slate-50/50 dark:bg-slate-900/40 space-y-1">
                 <div className="flex items-center gap-1.5">
-                  <MapPin className="h-4 w-4 text-teal-600" />
+                  <MapPin className="h-4 w-4 text-[#01265D] dark:text-blue-400" />
                   <h4 className="text-xs font-bold text-foreground">{loc.name}</h4>
                 </div>
                 <p className="text-[11px] text-muted-foreground">{loc.activePros} on duty · <span className="text-emerald-600 font-semibold">{loc.status}</span></p>

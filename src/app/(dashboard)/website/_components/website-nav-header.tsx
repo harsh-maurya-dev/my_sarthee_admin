@@ -64,7 +64,7 @@ export function WebsiteNavHeader() {
             className={cn(
               "flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all whitespace-nowrap",
               isActive
-                ? "bg-teal-600 text-white shadow-xs"
+                ? "bg-[#01265D] text-white shadow-xs"
                 : "text-muted-foreground hover:text-foreground hover:bg-slate-100 dark:hover:bg-slate-800/60"
             )}
           >

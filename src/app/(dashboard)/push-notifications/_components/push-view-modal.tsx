@@ -33,7 +33,7 @@ export function PushViewModal({
           <div className="flex items-center justify-between">
             <div>
               <DialogTitle className="text-lg font-bold flex items-center gap-2">
-                <Smartphone className="h-5 w-5 text-teal-600" />
+                <Smartphone className="h-5 w-5 text-[#01265D] dark:text-blue-400" />
                 Mobile Device Notification Preview
               </DialogTitle>
               <DialogDescription className="text-xs text-muted-foreground mt-1">
@@ -54,7 +54,7 @@ export function PushViewModal({
           {/* Mobile Push Notification Mockup Box */}
           <div className="rounded-2xl border bg-slate-900 text-white p-4 shadow-lg space-y-3">
             <div className="flex items-center justify-between border-b border-slate-800 pb-2 text-[10px] text-slate-400">
-              <span className="flex items-center gap-1 font-bold text-teal-400">
+              <span className="flex items-center gap-1 font-bold text-blue-400">
                 <Send className="h-3 w-3" /> MySarthee Mobile App
               </span>
               <span>Now</span>
@@ -88,7 +88,7 @@ export function PushViewModal({
         </div>
 
         <DialogFooter>
-          <Button type="button" onClick={onClose} className="w-full bg-teal-600 hover:bg-teal-700 text-white font-bold h-9 text-xs">
+          <Button type="button" onClick={onClose} className="w-full bg-[#01265D] hover:bg-[#0a3375] text-white font-bold h-9 text-xs">
             Close Mobile Preview
           </Button>
         </DialogFooter>

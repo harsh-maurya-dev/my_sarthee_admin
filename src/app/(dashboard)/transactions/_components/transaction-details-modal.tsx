@@ -64,7 +64,7 @@ export function TransactionDetailsModal({
           <div className="flex items-center justify-between">
             <div>
               <DialogTitle className="text-lg font-bold flex items-center gap-2">
-                <Receipt className="h-5 w-5 text-teal-600" />
+                <Receipt className="h-5 w-5 text-[#01265D] dark:text-blue-400" />
                 Payment Transaction Receipt
               </DialogTitle>
               <DialogDescription className="text-xs text-muted-foreground mt-1">
@@ -93,7 +93,7 @@ export function TransactionDetailsModal({
           <div className="rounded-xl border bg-slate-50/80 dark:bg-slate-900/50 p-4 text-center space-y-1">
             <span className="text-muted-foreground text-[11px] font-medium uppercase tracking-wider">Total Paid Amount</span>
             <h2 className="text-3xl font-extrabold text-foreground">${transaction.amount.toLocaleString()}</h2>
-            <p className="text-[10px] text-teal-600 font-semibold">{transaction.serviceCategory}</p>
+            <p className="text-[10px] text-[#01265D] dark:text-blue-400 font-semibold">{transaction.serviceCategory}</p>
           </div>
 
           {/* Transaction Metadata Grid */}

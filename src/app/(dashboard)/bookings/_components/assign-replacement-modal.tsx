@@ -157,7 +157,7 @@ export function AssignReplacementModal({
         <DialogHeader className="border-b pb-3">
           <div className="flex items-center justify-between">
             <DialogTitle className="text-base font-bold flex items-center gap-2">
-              <RefreshCw className="h-5 w-5 text-teal-600 animate-spin-slow" />
+              <RefreshCw className="h-5 w-5 text-[#01265D] dark:text-blue-400 animate-spin-slow" />
               Assign Replacement Professional
             </DialogTitle>
             <Badge
@@ -197,11 +197,11 @@ export function AssignReplacementModal({
           <div className="rounded-xl border bg-slate-50 dark:bg-slate-900/50 p-3 space-y-1.5 text-xs">
             <div className="grid grid-cols-2 gap-2 text-muted-foreground">
               <div className="flex items-center gap-1.5">
-                <MapPin className="h-3.5 w-3.5 text-teal-600" />
+                <MapPin className="h-3.5 w-3.5 text-[#01265D] dark:text-blue-400" />
                 <span>Location: <strong className="text-foreground">{request.locationArea}</strong></span>
               </div>
               <div className="flex items-center gap-1.5">
-                <Clock className="h-3.5 w-3.5 text-teal-600" />
+                <Clock className="h-3.5 w-3.5 text-[#01265D] dark:text-blue-400" />
                 <span>Schedule: <strong className="text-foreground">{request.shiftSchedule}</strong></span>
               </div>
             </div>
@@ -215,7 +215,7 @@ export function AssignReplacementModal({
           {/* Candidate Selection List */}
           <div className="space-y-2">
             <h4 className="text-xs font-bold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
-              <UserCheck className="h-4 w-4 text-teal-600" />
+              <UserCheck className="h-4 w-4 text-[#01265D] dark:text-blue-400" />
               Smart Matched Replacement Candidates
             </h4>
 
@@ -228,12 +228,12 @@ export function AssignReplacementModal({
                     onClick={() => setSelectedCandidateId(candidate.id)}
                     className={`cursor-pointer rounded-xl border p-3 transition-all flex items-center justify-between ${
                       isSelected
-                        ? "border-teal-500 bg-teal-50/70 dark:bg-teal-950/40 shadow-xs ring-1 ring-teal-500"
+                        ? "border-[#01265D] bg-blue-50 dark:bg-blue-950/40/70 dark:bg-blue-950/40 shadow-xs ring-1 ring-[#01265D]"
                         : "border-slate-200 hover:border-slate-300 dark:border-slate-800 bg-card hover:bg-slate-50/50"
                     }`}
                   >
                     <div className="flex items-center gap-3">
-                      <Avatar className="h-9 w-9 bg-teal-100 text-teal-800 font-bold text-xs">
+                      <Avatar className="h-9 w-9 bg-blue-100 dark:bg-blue-950/60 text-[#01265D] dark:text-blue-200 font-bold text-xs">
                         <AvatarFallback>{candidate.name.slice(0, 2).toUpperCase()}</AvatarFallback>
                       </Avatar>
                       <div>
@@ -263,7 +263,7 @@ export function AssignReplacementModal({
                       <div
                         className={`h-5 w-5 rounded-full border flex items-center justify-center ${
                           isSelected
-                            ? "border-teal-600 bg-teal-600 text-white"
+                            ? "border-[#01265D] bg-[#01265D] text-white"
                             : "border-slate-300 dark:border-slate-700"
                         }`}
                       >
@@ -285,7 +285,7 @@ export function AssignReplacementModal({
             type="button"
             size="sm"
             onClick={handleConfirm}
-            className="h-8 text-xs bg-teal-600 hover:bg-teal-700 text-white font-bold gap-1.5 shadow-xs"
+            className="h-8 text-xs bg-[#01265D] hover:bg-[#0a3375] text-white font-bold gap-1.5 shadow-xs"
           >
             <Send className="h-3.5 w-3.5" />
             Confirm & Dispatch Replacement

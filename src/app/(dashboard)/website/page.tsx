@@ -62,8 +62,8 @@ export default function WebsiteManagementOverviewPage() {
       href: "/website/services",
       icon: Briefcase,
       badge: "6 Active Services",
-      badgeColor: "bg-teal-100 text-teal-800 dark:bg-teal-950 dark:text-teal-300",
-      accentColor: "border-teal-500/20 bg-teal-50/20 dark:bg-teal-950/10",
+      badgeColor: "bg-blue-100 dark:bg-blue-950/60 text-[#01265D] dark:text-blue-200 dark:bg-blue-950 dark:text-blue-300",
+      accentColor: "border-[#01265D]/20 bg-blue-50/20 dark:bg-blue-950/20 dark:bg-blue-950/10",
       itemsCount: "6 Live",
       actionText: "Manage Services",
     },
@@ -102,10 +102,10 @@ export default function WebsiteManagementOverviewPage() {
         <div>
           <div className="flex items-center gap-2">
             <h1 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl flex items-center gap-2">
-              <Globe className="h-7 w-7 text-teal-600 dark:text-teal-400" />
+              <Globe className="h-7 w-7 text-[#01265D] dark:text-blue-400" />
               Website Management
             </h1>
-            <Badge className="bg-teal-600 text-white font-semibold text-xs">
+            <Badge className="bg-[#01265D] text-white font-semibold text-xs">
               Live & Public
             </Badge>
           </div>
@@ -133,7 +133,7 @@ export default function WebsiteManagementOverviewPage() {
           <Button
             size="sm"
             onClick={() => window.open("https://mysarthee.care", "_blank")}
-            className="h-9 gap-1.5 bg-teal-600 hover:bg-teal-700 text-white text-xs font-semibold shadow-xs"
+            className="h-9 gap-1.5 bg-[#01265D] hover:bg-[#0a3375] text-white text-xs font-semibold shadow-xs"
           >
             <ExternalLink className="h-3.5 w-3.5" />
             <span>View Live Site</span>
@@ -154,7 +154,7 @@ export default function WebsiteManagementOverviewPage() {
               100% Online & Bookable
             </p>
           </div>
-          <div className="h-10 w-10 rounded-full bg-teal-100 dark:bg-teal-950/60 text-teal-600 flex items-center justify-center">
+          <div className="h-10 w-10 rounded-full bg-blue-100 dark:bg-blue-950/60 dark:bg-blue-950/60 text-[#01265D] dark:text-blue-400 flex items-center justify-center">
             <Briefcase className="h-5 w-5" />
           </div>
         </div>
@@ -163,7 +163,7 @@ export default function WebsiteManagementOverviewPage() {
           <div>
             <p className="text-xs font-medium text-muted-foreground">Published Blog/News</p>
             <h3 className="text-2xl font-extrabold text-foreground mt-1">8 Articles</h3>
-            <p className="text-[10px] text-teal-600 dark:text-teal-400 font-semibold mt-0.5">
+            <p className="text-[10px] text-[#01265D] dark:text-blue-400 font-semibold mt-0.5">
               45.2k Monthly Readers
             </p>
           </div>
@@ -213,7 +213,7 @@ export default function WebsiteManagementOverviewPage() {
                 <div>
                   <div className="flex items-center justify-between mb-3">
                     <div className="h-10 w-10 rounded-xl bg-background border flex items-center justify-center shadow-2xs">
-                      <Icon className="h-5 w-5 text-teal-600 dark:text-teal-400" />
+                      <Icon className="h-5 w-5 text-[#01265D] dark:text-blue-400" />
                     </div>
                     <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${mod.badgeColor}`}>
                       {mod.badge}
@@ -236,7 +236,7 @@ export default function WebsiteManagementOverviewPage() {
                   <Link href={mod.href}>
                     <Button
                       size="sm"
-                      className="h-8 text-xs font-bold gap-1 bg-teal-600 hover:bg-teal-700 text-white shadow-2xs"
+                      className="h-8 text-xs font-bold gap-1 bg-[#01265D] hover:bg-[#0a3375] text-white shadow-2xs"
                     >
                       <span>{mod.actionText}</span>
                       <ArrowRight className="h-3.5 w-3.5" />

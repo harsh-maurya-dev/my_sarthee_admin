@@ -266,7 +266,7 @@ export function ServiceDetailsTab() {
               onClick={() => setActiveDomain(domain.key as any)}
               className={`flex items-center gap-2 pb-3 text-xs font-bold transition-all relative ${
                 isActive
-                  ? "text-teal-600 dark:text-teal-400 border-b-2 border-teal-600 dark:border-teal-400"
+                  ? "text-[#01265D] dark:text-blue-400 border-b-2 border-[#01265D] dark:border-blue-800"
                   : "text-muted-foreground hover:text-foreground"
               }`}
             >
@@ -283,7 +283,7 @@ export function ServiceDetailsTab() {
           <Button
             size="sm"
             onClick={handleOpenAdd}
-            className="h-8 gap-1.5 bg-teal-600 text-white hover:bg-teal-700 text-xs font-semibold shadow-xs"
+            className="h-8 gap-1.5 bg-[#01265D] text-white hover:bg-[#0a3375] text-xs font-semibold shadow-xs"
           >
             <Plus className="h-3.5 w-3.5" />
             <span>
@@ -303,7 +303,7 @@ export function ServiceDetailsTab() {
           <div className="flex items-center justify-between">
             <div>
               <h3 className="text-sm font-bold text-foreground flex items-center gap-1.5">
-                <HeartHandshake className="h-4 w-4 text-teal-600" />
+                <HeartHandshake className="h-4 w-4 text-[#01265D] dark:text-blue-400" />
                 Caregiver Service Pricing & Package Plans
               </h3>
               <p className="text-xs text-muted-foreground mt-0.5">
@@ -387,7 +387,7 @@ export function ServiceDetailsTab() {
                             variant="ghost"
                             size="sm"
                             onClick={() => handleOpenEdit(plan)}
-                            className="h-8 w-8 p-0 text-muted-foreground hover:text-teal-600 hover:bg-teal-50 dark:hover:bg-teal-950/40"
+                            className="h-8 w-8 p-0 text-muted-foreground hover:text-[#01265D] dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-950/40 dark:hover:bg-blue-950/40"
                           >
                             <Pencil className="h-3.5 w-3.5" />
                           </Button>
@@ -421,7 +421,7 @@ export function ServiceDetailsTab() {
           <div className="flex items-center justify-between">
             <div>
               <h3 className="text-sm font-bold text-foreground flex items-center gap-1.5">
-                <Stethoscope className="h-4 w-4 text-teal-600" />
+                <Stethoscope className="h-4 w-4 text-[#01265D] dark:text-blue-400" />
                 Nursing Service Hourly & Daily Coverage Tiers
               </h3>
               <p className="text-xs text-muted-foreground mt-0.5">
@@ -505,7 +505,7 @@ export function ServiceDetailsTab() {
                             variant="ghost"
                             size="sm"
                             onClick={() => handleOpenEdit(plan)}
-                            className="h-8 w-8 p-0 text-muted-foreground hover:text-teal-600 hover:bg-teal-50 dark:hover:bg-teal-950/40"
+                            className="h-8 w-8 p-0 text-muted-foreground hover:text-[#01265D] dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-950/40 dark:hover:bg-blue-950/40"
                           >
                             <Pencil className="h-3.5 w-3.5" />
                           </Button>
@@ -539,7 +539,7 @@ export function ServiceDetailsTab() {
           <div className="flex items-center justify-between">
             <div>
               <h3 className="text-sm font-bold text-foreground flex items-center gap-1.5">
-                <Activity className="h-4 w-4 text-teal-600" />
+                <Activity className="h-4 w-4 text-[#01265D] dark:text-blue-400" />
                 Physiotherapy Sessions & Rehabilitation Pricing
               </h3>
               <p className="text-xs text-muted-foreground mt-0.5">
@@ -611,7 +611,7 @@ export function ServiceDetailsTab() {
                             variant="ghost"
                             size="sm"
                             onClick={() => handleOpenEdit(plan)}
-                            className="h-8 w-8 p-0 text-muted-foreground hover:text-teal-600 hover:bg-teal-50 dark:hover:bg-teal-950/40"
+                            className="h-8 w-8 p-0 text-muted-foreground hover:text-[#01265D] dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-950/40 dark:hover:bg-blue-950/40"
                           >
                             <Pencil className="h-3.5 w-3.5" />
                           </Button>
@@ -743,7 +743,7 @@ export function ServiceDetailsTab() {
               <Button
                 type="submit"
                 size="sm"
-                className="h-9 text-xs bg-teal-600 text-white hover:bg-teal-700 font-semibold"
+                className="h-9 text-xs bg-[#01265D] text-white hover:bg-[#0a3375] font-semibold"
               >
                 {editingItem ? "Save Changes" : "Create Pricing Tier"}
               </Button>

@@ -62,7 +62,7 @@ export function QualityItemModal({
       <DialogContent className="sm:max-w-lg max-h-[90vh] overflow-y-auto no-scrollbar p-6">
         <DialogHeader>
           <div className="flex items-center gap-2">
-            <div className="h-9 w-9 rounded-full bg-teal-100 dark:bg-teal-950 text-teal-600 flex items-center justify-center">
+            <div className="h-9 w-9 rounded-full bg-blue-100 dark:bg-blue-950/60 dark:bg-blue-950 text-[#01265D] dark:text-blue-400 flex items-center justify-center">
               <ShieldCheck className="h-5 w-5" />
             </div>
             <div>
@@ -163,7 +163,7 @@ export function QualityItemModal({
 
                   <div className="rounded-lg bg-card p-2.5 border">
                     <p className="text-[10px] text-muted-foreground">Punctuality Score</p>
-                    <p className="text-base font-extrabold text-teal-600 flex items-center gap-1 mt-0.5">
+                    <p className="text-base font-extrabold text-[#01265D] dark:text-blue-400 flex items-center gap-1 mt-0.5">
                       <Clock className="h-4 w-4" /> {data.punctualityRate}
                     </p>
                     <p className="text-[10px] text-muted-foreground mt-0.5">On-time check-in</p>
@@ -172,7 +172,7 @@ export function QualityItemModal({
                   <div className="rounded-lg bg-card p-2.5 border">
                     <p className="text-[10px] text-muted-foreground">Shifts Completed</p>
                     <p className="text-base font-extrabold text-foreground flex items-center gap-1 mt-0.5">
-                      <UserCheck className="h-4 w-4 text-teal-600" /> {data.totalShiftsCompleted}
+                      <UserCheck className="h-4 w-4 text-[#01265D] dark:text-blue-400" /> {data.totalShiftsCompleted}
                     </p>
                     <p className="text-[10px] text-muted-foreground mt-0.5">Total assignments</p>
                   </div>
@@ -182,7 +182,7 @@ export function QualityItemModal({
                   <p className="font-bold text-muted-foreground mb-1.5">Key Strengths & Clinical Attributes:</p>
                   <div className="flex flex-wrap gap-1.5">
                     {data.strengths.map((str, i) => (
-                      <Badge key={i} variant="secondary" className="text-[10px] bg-teal-50 text-teal-800 dark:bg-teal-950 dark:text-teal-300">
+                      <Badge key={i} variant="secondary" className="text-[10px] bg-blue-50 dark:bg-blue-950/40 text-[#01265D] dark:text-blue-200 dark:bg-blue-950 dark:text-blue-300">
                         <Sparkles className="h-2.5 w-2.5 mr-1" />
                         {str}
                       </Badge>
@@ -212,7 +212,7 @@ export function QualityItemModal({
             type="button"
             size="sm"
             onClick={handleSaveAction}
-            className="h-9 text-xs bg-teal-600 hover:bg-teal-700 text-white font-bold gap-1"
+            className="h-9 text-xs bg-[#01265D] hover:bg-[#0a3375] text-white font-bold gap-1"
           >
             <CheckCircle2 className="h-3.5 w-3.5" />
             Save Audit Review

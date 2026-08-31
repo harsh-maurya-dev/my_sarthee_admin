@@ -76,7 +76,7 @@ export default function NotificationPage() {
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl flex items-center gap-2">
-            <Bell className="h-7 w-7 text-teal-600" />
+            <Bell className="h-7 w-7 text-[#01265D] dark:text-blue-400" />
             System Notification Console
           </h1>
           <p className="text-xs text-muted-foreground mt-1">
@@ -90,7 +90,7 @@ export default function NotificationPage() {
               size="sm"
               className="h-9 gap-2 text-xs font-semibold"
             >
-              <Send className="h-3.5 w-3.5 text-teal-600" />
+              <Send className="h-3.5 w-3.5 text-[#01265D] dark:text-blue-400" />
               <span>Compose Push Broadcast</span>
             </Button>
           </Link>
@@ -98,7 +98,7 @@ export default function NotificationPage() {
             <Button
               size="sm"
               onClick={handleMarkAllAsRead}
-              className="h-9 gap-2 bg-teal-600 text-white hover:bg-teal-700 text-xs font-semibold shadow-xs"
+              className="h-9 gap-2 bg-[#01265D] text-white hover:bg-[#0a3375] text-xs font-semibold shadow-xs"
             >
               <CheckCheck className="h-4 w-4" />
               <span>Mark All as Read</span>
@@ -116,14 +116,14 @@ export default function NotificationPage() {
               {unreadCount}
               {unreadCount > 0 && (
                 <span className="relative flex h-2.5 w-2.5">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-teal-600"></span>
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-100 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#01265D]"></span>
                 </span>
               )}
             </h3>
-            <p className="text-[10px] text-teal-600 font-semibold mt-0.5">Awaiting Admin Action</p>
+            <p className="text-[10px] text-[#01265D] dark:text-blue-400 font-semibold mt-0.5">Awaiting Admin Action</p>
           </div>
-          <div className="h-10 w-10 rounded-full bg-teal-100 dark:bg-teal-950 text-teal-600 flex items-center justify-center">
+          <div className="h-10 w-10 rounded-full bg-blue-100 dark:bg-blue-950/60 dark:bg-blue-950 text-[#01265D] dark:text-blue-400 flex items-center justify-center">
             <Bell className="h-5 w-5" />
           </div>
         </div>
@@ -157,7 +157,7 @@ export default function NotificationPage() {
           onClick={() => setActiveTab("All")}
           className={`pb-3 text-xs font-bold transition-all flex items-center gap-2 relative shrink-0 ${
             activeTab === "All"
-              ? "text-teal-600 dark:text-teal-400 border-b-2 border-teal-600 dark:border-teal-400"
+              ? "text-[#01265D] dark:text-blue-400 border-b-2 border-[#01265D] dark:border-blue-800"
               : "text-muted-foreground hover:text-foreground"
           }`}
         >
@@ -169,7 +169,7 @@ export default function NotificationPage() {
           onClick={() => setActiveTab("New Booking")}
           className={`pb-3 text-xs font-bold transition-all flex items-center gap-2 relative shrink-0 ${
             activeTab === "New Booking"
-              ? "text-teal-600 dark:text-teal-400 border-b-2 border-teal-600 dark:border-teal-400"
+              ? "text-[#01265D] dark:text-blue-400 border-b-2 border-[#01265D] dark:border-blue-800"
               : "text-muted-foreground hover:text-foreground"
           }`}
         >
@@ -181,7 +181,7 @@ export default function NotificationPage() {
           onClick={() => setActiveTab("Assignment Pending")}
           className={`pb-3 text-xs font-bold transition-all flex items-center gap-2 relative shrink-0 ${
             activeTab === "Assignment Pending"
-              ? "text-teal-600 dark:text-teal-400 border-b-2 border-teal-600 dark:border-teal-400"
+              ? "text-[#01265D] dark:text-blue-400 border-b-2 border-[#01265D] dark:border-blue-800"
               : "text-muted-foreground hover:text-foreground"
           }`}
         >
@@ -193,7 +193,7 @@ export default function NotificationPage() {
           onClick={() => setActiveTab("Visit Alert")}
           className={`pb-3 text-xs font-bold transition-all flex items-center gap-2 relative shrink-0 ${
             activeTab === "Visit Alert"
-              ? "text-teal-600 dark:text-teal-400 border-b-2 border-teal-600 dark:border-teal-400"
+              ? "text-[#01265D] dark:text-blue-400 border-b-2 border-[#01265D] dark:border-blue-800"
               : "text-muted-foreground hover:text-foreground"
           }`}
         >
@@ -205,7 +205,7 @@ export default function NotificationPage() {
           onClick={() => setActiveTab("Complaint Alert")}
           className={`pb-3 text-xs font-bold transition-all flex items-center gap-2 relative shrink-0 ${
             activeTab === "Complaint Alert"
-              ? "text-teal-600 dark:text-teal-400 border-b-2 border-teal-600 dark:border-teal-400"
+              ? "text-[#01265D] dark:text-blue-400 border-b-2 border-[#01265D] dark:border-blue-800"
               : "text-muted-foreground hover:text-foreground"
           }`}
         >
@@ -230,7 +230,7 @@ export default function NotificationPage() {
                 onClick={() => handleOpenView(notif)}
                 className={`rounded-2xl border p-4 transition-all cursor-pointer flex items-center justify-between gap-4 ${
                   isUnread
-                    ? "bg-teal-50/40 dark:bg-teal-950/20 border-teal-200 dark:border-teal-900 ring-1 ring-teal-500/20 shadow-xs"
+                    ? "bg-blue-50 dark:bg-blue-950/40/40 dark:bg-blue-950/20 border-blue-200 dark:border-blue-900 ring-1 ring-[#01265D]/20 shadow-xs"
                     : "bg-card hover:border-slate-300 dark:hover:border-slate-700"
                 }`}
               >
@@ -241,7 +241,7 @@ export default function NotificationPage() {
                         ? "bg-rose-100 text-rose-600 dark:bg-rose-950 dark:text-rose-400"
                         : notif.priority === "Urgent"
                         ? "bg-amber-100 text-amber-600 dark:bg-amber-950 dark:text-amber-400"
-                        : "bg-teal-100 text-teal-600 dark:bg-teal-950 dark:text-teal-400"
+                        : "bg-blue-100 dark:bg-blue-950/60 text-[#01265D] dark:text-blue-400 dark:bg-blue-950 dark:text-blue-400"
                     }`}
                   >
                     {notif.priority === "Critical" ? (
@@ -257,7 +257,7 @@ export default function NotificationPage() {
                         {notif.title}
                       </h4>
                       {isUnread && (
-                        <span className="h-2 w-2 rounded-full bg-teal-600 animate-pulse" />
+                        <span className="h-2 w-2 rounded-full bg-[#01265D] animate-pulse" />
                       )}
                       <Badge variant="outline" className="text-[10px] px-1.5 py-0">
                         {notif.category}

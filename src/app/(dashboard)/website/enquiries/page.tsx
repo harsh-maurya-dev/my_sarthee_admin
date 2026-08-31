@@ -119,7 +119,7 @@ export default function EnquiryManagementPage() {
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl flex items-center gap-2">
-            <MessageSquare className="h-7 w-7 text-teal-600 dark:text-teal-400" />
+            <MessageSquare className="h-7 w-7 text-[#01265D] dark:text-blue-400" />
             Enquiry Form Management
           </h1>
           <p className="text-xs text-muted-foreground mt-1">
@@ -134,7 +134,7 @@ export default function EnquiryManagementPage() {
               description: "Exported website contact enquiries to CSV.",
             })
           }
-          className="h-9 gap-2 bg-teal-600 text-white hover:bg-teal-700 text-xs font-semibold shadow-xs"
+          className="h-9 gap-2 bg-[#01265D] text-white hover:bg-[#0a3375] text-xs font-semibold shadow-xs"
         >
           <Download className="h-3.5 w-3.5" />
           <span>Export Enquiries CSV</span>
@@ -180,7 +180,7 @@ export default function EnquiryManagementPage() {
         <div className="flex flex-wrap items-center justify-between gap-2 pt-2 border-t text-xs">
           <div className="flex flex-wrap items-center gap-2">
             <div className="flex items-center gap-1.5 text-muted-foreground font-semibold">
-              <Calendar className="h-3.5 w-3.5 text-teal-600" />
+              <Calendar className="h-3.5 w-3.5 text-[#01265D] dark:text-blue-400" />
               <span>Date Range:</span>
             </div>
 
@@ -293,7 +293,7 @@ export default function EnquiryManagementPage() {
                         onClick={() => handleOpenDetails(e)}
                         className="h-8 text-xs gap-1"
                       >
-                        <Eye className="h-3.5 w-3.5 text-teal-600" />
+                        <Eye className="h-3.5 w-3.5 text-[#01265D] dark:text-blue-400" />
                         <span>View</span>
                       </Button>
 

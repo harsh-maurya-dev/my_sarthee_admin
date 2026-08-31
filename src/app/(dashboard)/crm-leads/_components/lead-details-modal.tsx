@@ -62,7 +62,7 @@ export function LeadDetailsModal({
           <div className="flex items-center justify-between">
             <div>
               <DialogTitle className="text-lg font-bold flex items-center gap-2">
-                <Target className="h-5 w-5 text-teal-600" />
+                <Target className="h-5 w-5 text-[#01265D] dark:text-blue-400" />
                 Lead Telemetry & Conversion Pipeline
               </DialogTitle>
               <DialogDescription className="text-xs text-muted-foreground mt-1">
@@ -70,7 +70,7 @@ export function LeadDetailsModal({
                 <strong className="text-foreground">{lead.createdDate}</strong>
               </DialogDescription>
             </div>
-            <Badge variant="outline" className="bg-teal-50 text-teal-900 border-teal-300 font-bold text-xs">
+            <Badge variant="outline" className="bg-blue-50 dark:bg-blue-950/40 text-[#01265D] dark:text-blue-100 border-blue-300 dark:border-blue-800 font-bold text-xs">
               {lead.leadSource}
             </Badge>
           </div>
@@ -107,7 +107,7 @@ export function LeadDetailsModal({
               </div>
               <div className="flex items-center gap-1.5">
                 <Clock className="h-3.5 w-3.5 text-slate-500" />
-                <span>Current Stage: <strong className="text-teal-600">{lead.conversionStatus}</strong></span>
+                <span>Current Stage: <strong className="text-[#01265D] dark:text-blue-400">{lead.conversionStatus}</strong></span>
               </div>
             </div>
           </div>
@@ -115,7 +115,7 @@ export function LeadDetailsModal({
           {/* Update Stage Section */}
           <div className="rounded-xl border p-4 bg-card space-y-3">
             <h4 className="text-xs font-bold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
-              <ArrowRight className="h-4 w-4 text-teal-600" />
+              <ArrowRight className="h-4 w-4 text-[#01265D] dark:text-blue-400" />
               Update Conversion Stage
             </h4>
 
@@ -155,7 +155,7 @@ export function LeadDetailsModal({
           {lead.historyLog && lead.historyLog.length > 0 && (
             <div className="rounded-xl border p-4 bg-card space-y-3">
               <h4 className="text-xs font-bold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
-                <Clock className="h-4 w-4 text-teal-600" />
+                <Clock className="h-4 w-4 text-[#01265D] dark:text-blue-400" />
                 Interaction History Log
               </h4>
 
@@ -182,7 +182,7 @@ export function LeadDetailsModal({
             type="button"
             size="sm"
             onClick={handleSaveUpdate}
-            className="h-9 text-xs bg-teal-600 hover:bg-teal-700 text-white font-bold gap-1"
+            className="h-9 text-xs bg-[#01265D] hover:bg-[#0a3375] text-white font-bold gap-1"
           >
             <CheckCircle2 className="h-3.5 w-3.5" />
             Update Lead Stage

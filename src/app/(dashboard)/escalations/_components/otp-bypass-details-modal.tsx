@@ -81,7 +81,7 @@ export function OTPBypassDetailsModal({
                   ? "bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300 border-emerald-300"
                   : record.securityStatus === "Flagged for Review"
                   ? "bg-rose-100 text-rose-800 dark:bg-rose-950 dark:text-rose-300 border-rose-300"
-                  : "bg-teal-100 text-teal-800 dark:bg-teal-950 dark:text-teal-300 border-teal-300"
+                  : "bg-blue-100 dark:bg-blue-950/60 text-[#01265D] dark:text-blue-200 dark:bg-blue-950 dark:text-blue-300 border-blue-300 dark:border-blue-800"
               }
             >
               {record.securityStatus}
@@ -93,13 +93,13 @@ export function OTPBypassDetailsModal({
           {/* Section 1: User Details */}
           <div className="p-4 rounded-xl border bg-slate-50/60 dark:bg-slate-900/50 space-y-2.5">
             <h3 className="text-xs font-bold flex items-center gap-1.5 uppercase tracking-wider text-muted-foreground">
-              <User className="h-3.5 w-3.5 text-teal-600" />
+              <User className="h-3.5 w-3.5 text-[#01265D] dark:text-blue-400" />
               User Information
             </h3>
             <div className="grid grid-cols-2 gap-3 pt-1">
               <div>
                 <span className="text-[11px] text-muted-foreground block">User ID</span>
-                <span className="font-mono font-bold text-teal-700 dark:text-teal-300">{record.userId}</span>
+                <span className="font-mono font-bold text-[#01265D] dark:text-blue-300">{record.userId}</span>
               </div>
               <div>
                 <span className="text-[11px] text-muted-foreground block">Full Name</span>
@@ -118,7 +118,7 @@ export function OTPBypassDetailsModal({
               <div>
                 <span className="text-[11px] text-muted-foreground block">Location / Area</span>
                 <span className="font-medium text-foreground flex items-center gap-1">
-                  <MapPin className="h-3 w-3 text-teal-600" /> {record.userLocation}
+                  <MapPin className="h-3 w-3 text-[#01265D] dark:text-blue-400" /> {record.userLocation}
                 </span>
               </div>
               {record.bookingId && (
@@ -151,7 +151,7 @@ export function OTPBypassDetailsModal({
           <Button
             type="button"
             onClick={onClose}
-            className="h-8 text-xs bg-teal-600 hover:bg-teal-700 text-white font-bold px-4"
+            className="h-8 text-xs bg-[#01265D] hover:bg-[#0a3375] text-white font-bold px-4"
           >
             Close Details
           </Button>

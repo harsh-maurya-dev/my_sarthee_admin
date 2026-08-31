@@ -113,7 +113,7 @@ export default function CRMLeadsPage() {
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl flex items-center gap-2">
-            <Target className="h-7 w-7 text-teal-600" />
+            <Target className="h-7 w-7 text-[#01265D] dark:text-blue-400" />
             CRM & Patient Lead Management
           </h1>
           <p className="text-xs text-muted-foreground mt-1">
@@ -123,7 +123,7 @@ export default function CRMLeadsPage() {
         <Button
           size="sm"
           onClick={() => setIsAddOpen(true)}
-          className="h-9 gap-2 bg-teal-600 text-white hover:bg-teal-700 text-xs font-semibold shadow-xs"
+          className="h-9 gap-2 bg-[#01265D] text-white hover:bg-[#0a3375] text-xs font-semibold shadow-xs"
         >
           <Plus className="h-3.5 w-3.5" />
           <span>Register New Lead</span>
@@ -136,9 +136,9 @@ export default function CRMLeadsPage() {
           <div>
             <p className="text-xs font-medium text-muted-foreground">Total Pipeline Leads</p>
             <h3 className="text-2xl font-extrabold text-foreground mt-1">{totalLeadsCount}</h3>
-            <p className="text-[10px] text-teal-600 font-semibold mt-0.5">Active Contacts</p>
+            <p className="text-[10px] text-[#01265D] dark:text-blue-400 font-semibold mt-0.5">Active Contacts</p>
           </div>
-          <div className="h-10 w-10 rounded-full bg-teal-100 dark:bg-teal-950 text-teal-600 flex items-center justify-center">
+          <div className="h-10 w-10 rounded-full bg-blue-100 dark:bg-blue-950/60 dark:bg-blue-950 text-[#01265D] dark:text-blue-400 flex items-center justify-center">
             <Users className="h-5 w-5" />
           </div>
         </div>
@@ -169,7 +169,7 @@ export default function CRMLeadsPage() {
           <div>
             <p className="text-xs font-medium text-muted-foreground">Pipeline Deal Value</p>
             <h3 className="text-2xl font-extrabold text-foreground mt-1">${pipelineValue.toLocaleString()}</h3>
-            <p className="text-[10px] text-teal-600 font-semibold mt-0.5">Estimated Potential</p>
+            <p className="text-[10px] text-[#01265D] dark:text-blue-400 font-semibold mt-0.5">Estimated Potential</p>
           </div>
           <div className="h-10 w-10 rounded-full bg-blue-100 dark:bg-blue-950 text-blue-600 flex items-center justify-center">
             <DollarSign className="h-5 w-5" />
@@ -310,7 +310,7 @@ export default function CRMLeadsPage() {
                       size="sm"
                       variant="outline"
                       onClick={() => handleOpenDetails(l)}
-                      className="h-8 text-xs gap-1 border-slate-200 hover:bg-teal-50 hover:text-teal-700"
+                      className="h-8 text-xs gap-1 border-slate-200 hover:bg-blue-50 dark:hover:bg-blue-950/40 hover:text-[#01265D] dark:text-blue-300"
                     >
                       <Eye className="h-3.5 w-3.5" />
                       <span>View</span>
@@ -326,7 +326,7 @@ export default function CRMLeadsPage() {
           <span>
             Showing <strong className="text-foreground">{filteredLeads.length}</strong> patient leads in pipeline
           </span>
-          <span className="font-medium text-teal-600 dark:text-teal-400">
+          <span className="font-medium text-[#01265D] dark:text-blue-400">
             Source Attribution Tracker Active
           </span>
         </div>

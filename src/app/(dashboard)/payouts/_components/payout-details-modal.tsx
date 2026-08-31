@@ -45,7 +45,7 @@ export function PayoutDetailsModal({
           <div className="flex items-center justify-between">
             <div>
               <DialogTitle className="text-lg font-bold flex items-center gap-2">
-                <Receipt className="h-5 w-5 text-teal-600" />
+                <Receipt className="h-5 w-5 text-[#01265D] dark:text-blue-400" />
                 Caregiver Payout Breakdown
               </DialogTitle>
               <DialogDescription className="text-xs text-muted-foreground mt-1">
@@ -68,7 +68,7 @@ export function PayoutDetailsModal({
             <span className="text-muted-foreground font-semibold text-[10px] uppercase tracking-wider block">
               Net Amount Transferred to Caregiver
             </span>
-            <h2 className="text-3xl font-extrabold text-teal-600 dark:text-teal-400">
+            <h2 className="text-3xl font-extrabold text-[#01265D] dark:text-blue-400">
               ${payout.netCaregiverPayout.toLocaleString()}
             </h2>
             <p className="text-[11px] text-muted-foreground">
@@ -113,7 +113,7 @@ export function PayoutDetailsModal({
               type="button"
               size="sm"
               onClick={handleProcess}
-              className="h-9 text-xs bg-teal-600 hover:bg-teal-700 text-white font-bold gap-1"
+              className="h-9 text-xs bg-[#01265D] hover:bg-[#0a3375] text-white font-bold gap-1"
             >
               <CheckCircle2 className="h-3.5 w-3.5" />
               Transfer Net Payout

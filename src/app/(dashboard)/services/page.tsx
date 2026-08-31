@@ -170,7 +170,7 @@ export default function ServiceManagementPage() {
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl flex items-center gap-2">
-            <Layers className="h-7 w-7 text-teal-600" />
+            <Layers className="h-7 w-7 text-[#01265D] dark:text-blue-400" />
             Service Management
           </h1>
           <p className="text-xs text-muted-foreground mt-1">
@@ -195,7 +195,7 @@ export default function ServiceManagementPage() {
           <Button
             size="sm"
             onClick={handleOpenAddModal}
-            className="h-9 gap-2 bg-teal-600 text-white hover:bg-teal-700 text-xs font-semibold shadow-xs"
+            className="h-9 gap-2 bg-[#01265D] text-white hover:bg-[#0a3375] text-xs font-semibold shadow-xs"
           >
             <Plus className="h-3.5 w-3.5" />
             <span>Add New Service</span>
@@ -209,13 +209,13 @@ export default function ServiceManagementPage() {
           onClick={() => setActiveTab("requests")}
           className={`pb-3 text-xs font-bold transition-all flex items-center gap-2 relative ${
             activeTab === "requests"
-              ? "text-teal-600 dark:text-teal-400 border-b-2 border-teal-600 dark:border-teal-400"
+              ? "text-[#01265D] dark:text-blue-400 border-b-2 border-[#01265D] dark:border-blue-800"
               : "text-muted-foreground hover:text-foreground"
           }`}
         >
           <ClipboardList className="h-4 w-4" />
           <span>Service Requests Flow</span>
-          <Badge className="bg-teal-600 text-white text-[10px] px-1.5 py-0 h-4 min-w-4 flex items-center justify-center">
+          <Badge className="bg-[#01265D] text-white text-[10px] px-1.5 py-0 h-4 min-w-4 flex items-center justify-center">
             5
           </Badge>
         </button>
@@ -224,7 +224,7 @@ export default function ServiceManagementPage() {
           onClick={() => setActiveTab("catalog")}
           className={`pb-3 text-xs font-bold transition-all flex items-center gap-2 relative ${
             activeTab === "catalog"
-              ? "text-teal-600 dark:text-teal-400 border-b-2 border-teal-600 dark:border-teal-400"
+              ? "text-[#01265D] dark:text-blue-400 border-b-2 border-[#01265D] dark:border-blue-800"
               : "text-muted-foreground hover:text-foreground"
           }`}
         >
@@ -371,7 +371,7 @@ export default function ServiceManagementPage() {
                             size="sm"
                             variant="outline"
                             onClick={() => handleOpenViewSheet(service)}
-                            className="h-8 text-xs gap-1 font-medium border-slate-200 hover:bg-teal-50 hover:text-teal-700 hover:border-teal-300 dark:hover:bg-teal-950"
+                            className="h-8 text-xs gap-1 font-medium border-slate-200 hover:bg-blue-50 dark:hover:bg-blue-950/40 hover:text-[#01265D] dark:text-blue-300 hover:border-blue-300 dark:border-blue-800 dark:hover:bg-blue-950"
                           >
                             <Eye className="h-3.5 w-3.5" />
                             <span>View</span>
@@ -393,7 +393,7 @@ export default function ServiceManagementPage() {
                                 onClick={() => handleOpenEditModal(service)}
                                 className="cursor-pointer text-xs"
                               >
-                                <Pencil className="mr-2 h-3.5 w-3.5 text-teal-600" />
+                                <Pencil className="mr-2 h-3.5 w-3.5 text-[#01265D] dark:text-blue-400" />
                                 <span>Edit</span>
                               </DropdownMenuItem>
                               <DropdownMenuItem
@@ -435,7 +435,7 @@ export default function ServiceManagementPage() {
                 Showing <strong className="text-foreground">{filteredServices.length}</strong> of{" "}
                 <strong className="text-foreground">{services.length}</strong> active platform services
               </span>
-              <span className="font-medium text-teal-600 dark:text-teal-400">
+              <span className="font-medium text-[#01265D] dark:text-blue-400">
                 Catalog Sync Active
               </span>
             </div>

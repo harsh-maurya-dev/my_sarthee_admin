@@ -157,7 +157,7 @@ export default function ServiceManagementModulePage() {
         <div>
           <div className="flex items-center gap-2">
             <h1 className="text-2xl font-black tracking-tight text-foreground sm:text-3xl flex items-center gap-2.5">
-              <Layers className="h-7 w-7 text-teal-600" />
+              <Layers className="h-7 w-7 text-[#01265D] dark:text-blue-400" />
               Service Management
             </h1>
           </div>
@@ -184,7 +184,7 @@ export default function ServiceManagementModulePage() {
           <Button
             size="sm"
             onClick={handleOpenAddModal}
-            className="h-9 gap-2 bg-teal-600 text-white hover:bg-teal-700 text-xs font-semibold shadow-xs"
+            className="h-9 gap-2 bg-[#01265D] text-white hover:bg-[#0a3375] text-xs font-semibold shadow-xs"
           >
             <Plus className="h-3.5 w-3.5" />
             <span>Create New Service Category</span>
@@ -198,7 +198,7 @@ export default function ServiceManagementModulePage() {
           onClick={() => setActiveTab("catalogue")}
           className={`pb-3 text-xs font-bold transition-all flex items-center gap-2 relative ${
             activeTab === "catalogue"
-              ? "text-teal-600 dark:text-teal-400 border-b-2 border-teal-600 dark:border-teal-400"
+              ? "text-[#01265D] dark:text-blue-400 border-b-2 border-[#01265D] dark:border-blue-800"
               : "text-muted-foreground hover:text-foreground"
           }`}
         >
@@ -213,7 +213,7 @@ export default function ServiceManagementModulePage() {
           onClick={() => setActiveTab("skillsets")}
           className={`pb-3 text-xs font-bold transition-all flex items-center gap-2 relative ${
             activeTab === "skillsets"
-              ? "text-teal-600 dark:text-teal-400 border-b-2 border-teal-600 dark:border-teal-400"
+              ? "text-[#01265D] dark:text-blue-400 border-b-2 border-[#01265D] dark:border-blue-800"
               : "text-muted-foreground hover:text-foreground"
           }`}
         >
@@ -225,7 +225,7 @@ export default function ServiceManagementModulePage() {
           onClick={() => setActiveTab("pricing")}
           className={`pb-3 text-xs font-bold transition-all flex items-center gap-2 relative ${
             activeTab === "pricing"
-              ? "text-teal-600 dark:text-teal-400 border-b-2 border-teal-600 dark:border-teal-400"
+              ? "text-[#01265D] dark:text-blue-400 border-b-2 border-[#01265D] dark:border-blue-800"
               : "text-muted-foreground hover:text-foreground"
           }`}
         >
@@ -401,7 +401,7 @@ export default function ServiceManagementModulePage() {
                               onClick={() => handleOpenEditModal(category)}
                               className="cursor-pointer text-xs"
                             >
-                              <Pencil className="mr-2 h-3.5 w-3.5 text-teal-600" />
+                              <Pencil className="mr-2 h-3.5 w-3.5 text-[#01265D] dark:text-blue-400" />
                               <span>Edit</span>
                             </DropdownMenuItem>
                             <DropdownMenuSeparator />
@@ -434,7 +434,7 @@ export default function ServiceManagementModulePage() {
                 <strong className="text-foreground">{categories.length}</strong>{" "}
                 service categories
               </span>
-              <span className="font-medium text-teal-600 dark:text-teal-400">
+              <span className="font-medium text-[#01265D] dark:text-blue-400">
                 Catalogue Active
               </span>
             </div>

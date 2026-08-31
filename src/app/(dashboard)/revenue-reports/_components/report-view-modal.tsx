@@ -48,7 +48,7 @@ export function ReportViewModal({
       <DialogContent className="sm:max-w-md max-h-[90vh] overflow-y-auto no-scrollbar p-6">
         <DialogHeader>
           <div className="flex items-center gap-2">
-            <div className="h-9 w-9 rounded-full bg-teal-100 dark:bg-teal-950 text-teal-600 flex items-center justify-center">
+            <div className="h-9 w-9 rounded-full bg-blue-100 dark:bg-blue-950/60 dark:bg-blue-950 text-[#01265D] dark:text-blue-400 flex items-center justify-center">
               <TrendingUp className="h-5 w-5" />
             </div>
             <div>
@@ -106,7 +106,7 @@ export function ReportViewModal({
               </div>
               <div className="flex justify-between border-b pb-1.5">
                 <span className="text-muted-foreground font-medium">Patient Retention Rate:</span>
-                <span className="font-bold text-teal-600">{data.retentionRatePercent}%</span>
+                <span className="font-bold text-[#01265D] dark:text-blue-400">{data.retentionRatePercent}%</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-muted-foreground font-medium">Top Acquisition Source:</span>
@@ -128,7 +128,7 @@ export function ReportViewModal({
               </div>
               <div className="flex justify-between border-b pb-1.5">
                 <span className="text-muted-foreground font-medium">Duty Utilization Rate:</span>
-                <span className="font-extrabold text-teal-600 text-sm">{data.utilizationPercent}%</span>
+                <span className="font-extrabold text-[#01265D] dark:text-blue-400 text-sm">{data.utilizationPercent}%</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-muted-foreground font-medium">Completed Home Visits:</span>
@@ -150,7 +150,7 @@ export function ReportViewModal({
               </div>
               <div className="flex justify-between border-b pb-1.5">
                 <span className="text-muted-foreground font-medium">Blended CAC per Patient:</span>
-                <span className="font-extrabold text-teal-600 text-sm">${data.cacPerPatient}</span>
+                <span className="font-extrabold text-[#01265D] dark:text-blue-400 text-sm">${data.cacPerPatient}</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-muted-foreground font-medium">Conversion Rate:</span>
@@ -176,7 +176,7 @@ export function ReportViewModal({
             <Download className="h-3.5 w-3.5" />
             Export CSV
           </Button>
-          <Button type="button" onClick={onClose} className="h-9 text-xs bg-teal-600 hover:bg-teal-700 text-white font-bold">
+          <Button type="button" onClick={onClose} className="h-9 text-xs bg-[#01265D] hover:bg-[#0a3375] text-white font-bold">
             Close
           </Button>
         </DialogFooter>

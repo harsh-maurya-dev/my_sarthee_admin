@@ -55,7 +55,7 @@ export function ShiftDetailsModal({
       case "En route":
         return <Badge className="bg-indigo-100 text-indigo-800 dark:bg-indigo-950 dark:text-indigo-300 font-bold text-[10px]">🚗 En Route</Badge>;
       case "Care Started":
-        return <Badge className="bg-teal-600 text-white font-bold animate-pulse text-[10px]">❤️ Care Started</Badge>;
+        return <Badge className="bg-[#01265D] text-white font-bold animate-pulse text-[10px]">❤️ Care Started</Badge>;
       case "Care Completed":
         return <Badge className="bg-slate-200 text-slate-800 font-bold text-[10px]">✓ Completed</Badge>;
       default:
@@ -69,7 +69,7 @@ export function ShiftDetailsModal({
         <DialogHeader className="border-b pb-3">
           <div className="flex items-center justify-between">
             <DialogTitle className="text-base font-bold flex items-center gap-2">
-              <Clock className="h-5 w-5 text-teal-600" />
+              <Clock className="h-5 w-5 text-[#01265D] dark:text-blue-400" />
               Active Shift Details & Live Roster
             </DialogTitle>
             {getStatusBadge(professional.status)}
@@ -102,7 +102,7 @@ export function ShiftDetailsModal({
               <div className="flex items-center gap-2 text-xs">
                 <a
                   href={`tel:${professional.phone}`}
-                  className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-teal-50 dark:bg-teal-950/60 text-teal-700 dark:text-teal-300 font-semibold border border-teal-200 dark:border-teal-800 hover:bg-teal-100"
+                  className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-blue-50 dark:bg-blue-950/40 dark:bg-blue-950/60 text-[#01265D] dark:text-blue-300 font-semibold border border-blue-200 dark:border-blue-900 dark:border-blue-800 hover:bg-blue-100 dark:hover:bg-blue-900/40"
                 >
                   <Phone className="h-3.5 w-3.5" />
                   {professional.phone}
@@ -112,7 +112,7 @@ export function ShiftDetailsModal({
 
             <div className="flex flex-wrap items-center gap-3 pt-2 border-t border-slate-200 dark:border-slate-800 text-[11px] text-muted-foreground">
               <span className="flex items-center gap-1">
-                <MapPin className="h-3 w-3 text-teal-600" /> Base Area: {professional.area}
+                <MapPin className="h-3 w-3 text-[#01265D] dark:text-blue-400" /> Base Area: {professional.area}
               </span>
               <span>&bull;</span>
               <span className="flex items-center gap-1">
@@ -126,13 +126,13 @@ export function ShiftDetailsModal({
 
           {/* Current Assignment / Active Shift Card */}
           {assignment ? (
-            <div className="rounded-2xl border border-teal-200 dark:border-teal-900/60 bg-teal-50/30 dark:bg-teal-950/20 p-4 space-y-3">
+            <div className="rounded-2xl border border-blue-200 dark:border-blue-900/60 bg-blue-50 dark:bg-blue-950/40/30 dark:bg-blue-950/20 p-4 space-y-3">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-bold text-teal-900 dark:text-teal-200 flex items-center gap-1.5">
-                  <Activity className="h-4 w-4 text-teal-600 animate-pulse" />
+                <span className="text-xs font-bold text-[#01265D] dark:text-blue-100 dark:text-blue-300 flex items-center gap-1.5">
+                  <Activity className="h-4 w-4 text-[#01265D] dark:text-blue-400 animate-pulse" />
                   Current Active Patient Assignment
                 </span>
-                <Badge className="bg-teal-600 text-white text-[10px] font-bold">
+                <Badge className="bg-[#01265D] text-white text-[10px] font-bold">
                   Live Dispatch
                 </Badge>
               </div>
@@ -151,18 +151,18 @@ export function ShiftDetailsModal({
                 <div className="space-y-1">
                   <span className="text-[10px] uppercase font-bold text-muted-foreground">Shift Timing & Window</span>
                   <div className="text-xs font-bold text-foreground flex items-center gap-1">
-                    <Clock className="h-3.5 w-3.5 text-teal-600" />
+                    <Clock className="h-3.5 w-3.5 text-[#01265D] dark:text-blue-400" />
                     {assignment.shiftTime}
                   </div>
-                  <span className="text-[10px] text-teal-700 dark:text-teal-400 font-semibold block">
+                  <span className="text-[10px] text-[#01265D] dark:text-blue-300 dark:text-blue-400 font-semibold block">
                     Today &bull; Verified GPS Tracking
                   </span>
                 </div>
               </div>
 
-              <div className="pt-2 border-t border-teal-200 dark:border-teal-900/60 flex items-center justify-between text-[11px]">
+              <div className="pt-2 border-t border-blue-200 dark:border-blue-900/60 flex items-center justify-between text-[11px]">
                 <span className="flex items-center gap-1 text-muted-foreground font-medium">
-                  <Navigation className="h-3 w-3 text-teal-600" />
+                  <Navigation className="h-3 w-3 text-[#01265D] dark:text-blue-400" />
                   Location: <strong className="text-foreground">{assignment.location || professional.area}</strong>
                 </span>
                 <span className="text-emerald-700 dark:text-emerald-400 font-semibold">
@@ -206,7 +206,7 @@ export function ShiftDetailsModal({
             }
             className="h-8 text-xs gap-1"
           >
-            <Sparkles className="h-3.5 w-3.5 text-teal-600" />
+            <Sparkles className="h-3.5 w-3.5 text-[#01265D] dark:text-blue-400" />
             Sync Attendance
           </Button>
 

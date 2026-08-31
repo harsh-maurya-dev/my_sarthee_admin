@@ -215,7 +215,7 @@ export function AddEditCategoryModal({
             </Label>
             <div
               onClick={() => fileInputRef.current?.click()}
-              className="group relative flex flex-col items-center justify-center rounded-xl border-2 border-dashed border-slate-300 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-900/30 p-6 cursor-pointer transition-all hover:border-teal-400 hover:bg-teal-50/30 dark:hover:border-teal-600 dark:hover:bg-teal-950/20"
+              className="group relative flex flex-col items-center justify-center rounded-xl border-2 border-dashed border-slate-300 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-900/30 p-6 cursor-pointer transition-all hover:border-blue-200 hover:bg-blue-50 dark:hover:bg-blue-950/40/30 dark:hover:border-[#01265D] dark:hover:bg-blue-950/20"
             >
               {icon ? (
                 <div className="relative">
@@ -248,8 +248,8 @@ export function AddEditCategoryModal({
                 </div>
               ) : (
                 <>
-                  <div className="h-12 w-12 rounded-xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center mb-2 group-hover:bg-teal-100 dark:group-hover:bg-teal-900/40 transition-colors">
-                    <Upload className="h-5 w-5 text-muted-foreground group-hover:text-teal-600 transition-colors" />
+                  <div className="h-12 w-12 rounded-xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center mb-2 group-hover:bg-blue-100 dark:hover:bg-blue-900/40 dark:group-hover:bg-blue-100 transition-colors">
+                    <Upload className="h-5 w-5 text-muted-foreground group-hover:text-[#01265D] dark:text-blue-400 transition-colors" />
                   </div>
                   <p className="text-xs font-medium text-muted-foreground group-hover:text-foreground transition-colors">
                     Click to upload icon
@@ -282,7 +282,7 @@ export function AddEditCategoryModal({
             <Button
               type="submit"
               size="sm"
-              className="h-9 text-xs bg-teal-600 text-white hover:bg-teal-700 font-semibold"
+              className="h-9 text-xs bg-[#01265D] text-white hover:bg-[#0a3375] font-semibold"
             >
               {isEditing ? "Save Changes" : "Create Category"}
             </Button>

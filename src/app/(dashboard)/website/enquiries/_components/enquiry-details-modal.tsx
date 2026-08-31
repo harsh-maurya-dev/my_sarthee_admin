@@ -66,7 +66,7 @@ export function EnquiryDetailsModal({
           <div className="flex items-center justify-between">
             <div>
               <DialogTitle className="text-lg font-bold flex items-center gap-2">
-                <MessageSquare className="h-5 w-5 text-teal-600" />
+                <MessageSquare className="h-5 w-5 text-[#01265D] dark:text-blue-400" />
                 Website Contact Form Enquiry
               </DialogTitle>
               <DialogDescription className="text-xs text-muted-foreground mt-1">
@@ -122,7 +122,7 @@ export function EnquiryDetailsModal({
           {/* Update Status & Response Notes */}
           <div className="rounded-xl border p-4 bg-card space-y-3">
             <h4 className="text-xs font-bold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
-              <ArrowRight className="h-4 w-4 text-teal-600" /> Update Enquiry Status
+              <ArrowRight className="h-4 w-4 text-[#01265D] dark:text-blue-400" /> Update Enquiry Status
             </h4>
 
             <div className="grid grid-cols-2 gap-3">
@@ -162,7 +162,7 @@ export function EnquiryDetailsModal({
             type="button"
             size="sm"
             onClick={handleSaveUpdate}
-            className="h-9 text-xs bg-teal-600 hover:bg-teal-700 text-white font-bold gap-1"
+            className="h-9 text-xs bg-[#01265D] hover:bg-[#0a3375] text-white font-bold gap-1"
           >
             <CheckCircle2 className="h-3.5 w-3.5" />
             Update Enquiry Status

@@ -97,7 +97,7 @@ export function AddEditChecklistModal({
         <form onSubmit={handleSubmit} className="space-y-4">
           <DialogHeader className="border-b pb-3">
             <DialogTitle className="text-base font-bold flex items-center gap-2">
-              <CheckSquare className="h-5 w-5 text-teal-600" />
+              <CheckSquare className="h-5 w-5 text-[#01265D] dark:text-blue-400" />
               {templateToEdit ? "Edit Checklist" : `Add ${role} Checklist`}
             </DialogTitle>
             <DialogDescription className="text-xs text-muted-foreground mt-0.5">
@@ -129,7 +129,7 @@ export function AddEditChecklistModal({
                   value={physioSubCategory}
                   onValueChange={(val) => { if (val) setPhysioSubCategory(val as PhysioSubCategory); }}
                 >
-                  <SelectTrigger className="text-xs h-9 bg-teal-50/50 dark:bg-teal-950/30 border-teal-300">
+                  <SelectTrigger className="text-xs h-9 bg-blue-50/50 dark:bg-blue-950/30 dark:bg-blue-950/30 border-blue-300 dark:border-blue-800">
                     <SelectValue placeholder="Sub-category" />
                   </SelectTrigger>
                   <SelectContent>
@@ -166,7 +166,7 @@ export function AddEditChecklistModal({
             <Button type="button" variant="outline" size="sm" onClick={onClose} className="h-8 text-xs">
               Cancel
             </Button>
-            <Button type="submit" size="sm" className="h-8 text-xs bg-teal-600 hover:bg-teal-700 text-white font-bold gap-1.5 shadow-xs">
+            <Button type="submit" size="sm" className="h-8 text-xs bg-[#01265D] hover:bg-[#0a3375] text-white font-bold gap-1.5 shadow-xs">
               <Save className="h-3.5 w-3.5" />
               <span>{templateToEdit ? "Update Checklist" : "Save Checklist"}</span>
             </Button>

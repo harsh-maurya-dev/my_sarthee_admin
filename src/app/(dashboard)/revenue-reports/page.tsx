@@ -63,7 +63,7 @@ export default function RevenueReportsPage() {
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl flex items-center gap-2">
-            <TrendingUp className="h-7 w-7 text-teal-600" />
+            <TrendingUp className="h-7 w-7 text-[#01265D] dark:text-blue-400" />
             Revenue & Operational Reports
           </h1>
           <p className="text-xs text-muted-foreground mt-1">
@@ -78,7 +78,7 @@ export default function RevenueReportsPage() {
               description: "Exported executive report dataset to CSV.",
             })
           }
-          className="h-9 gap-2 bg-teal-600 text-white hover:bg-teal-700 text-xs font-semibold shadow-xs"
+          className="h-9 gap-2 bg-[#01265D] text-white hover:bg-[#0a3375] text-xs font-semibold shadow-xs"
         >
           <Download className="h-3.5 w-3.5" />
           <span>Export Executive Report</span>
@@ -104,9 +104,9 @@ export default function RevenueReportsPage() {
           <div>
             <p className="text-xs font-medium text-muted-foreground">Active Patients</p>
             <h3 className="text-2xl font-extrabold text-foreground mt-1">1,420</h3>
-            <p className="text-[10px] text-teal-600 font-semibold mt-0.5">+185 new this quarter</p>
+            <p className="text-[10px] text-[#01265D] dark:text-blue-400 font-semibold mt-0.5">+185 new this quarter</p>
           </div>
-          <div className="h-10 w-10 rounded-full bg-teal-100 dark:bg-teal-950 text-teal-600 flex items-center justify-center">
+          <div className="h-10 w-10 rounded-full bg-blue-100 dark:bg-blue-950/60 dark:bg-blue-950 text-[#01265D] dark:text-blue-400 flex items-center justify-center">
             <Users className="h-5 w-5" />
           </div>
         </div>
@@ -140,7 +140,7 @@ export default function RevenueReportsPage() {
           onClick={() => setActiveTab("revenue")}
           className={`pb-3 text-xs font-bold transition-all flex items-center gap-2 relative ${
             activeTab === "revenue"
-              ? "text-teal-600 dark:text-teal-400 border-b-2 border-teal-600 dark:border-teal-400"
+              ? "text-[#01265D] dark:text-blue-400 border-b-2 border-[#01265D] dark:border-blue-800"
               : "text-muted-foreground hover:text-foreground"
           }`}
         >
@@ -152,7 +152,7 @@ export default function RevenueReportsPage() {
           onClick={() => setActiveTab("growth")}
           className={`pb-3 text-xs font-bold transition-all flex items-center gap-2 relative ${
             activeTab === "growth"
-              ? "text-teal-600 dark:text-teal-400 border-b-2 border-teal-600 dark:border-teal-400"
+              ? "text-[#01265D] dark:text-blue-400 border-b-2 border-[#01265D] dark:border-blue-800"
               : "text-muted-foreground hover:text-foreground"
           }`}
         >
@@ -164,7 +164,7 @@ export default function RevenueReportsPage() {
           onClick={() => setActiveTab("utilization")}
           className={`pb-3 text-xs font-bold transition-all flex items-center gap-2 relative ${
             activeTab === "utilization"
-              ? "text-teal-600 dark:text-teal-400 border-b-2 border-teal-600 dark:border-teal-400"
+              ? "text-[#01265D] dark:text-blue-400 border-b-2 border-[#01265D] dark:border-blue-800"
               : "text-muted-foreground hover:text-foreground"
           }`}
         >
@@ -176,7 +176,7 @@ export default function RevenueReportsPage() {
           onClick={() => setActiveTab("cac")}
           className={`pb-3 text-xs font-bold transition-all flex items-center gap-2 relative ${
             activeTab === "cac"
-              ? "text-teal-600 dark:text-teal-400 border-b-2 border-teal-600 dark:border-teal-400"
+              ? "text-[#01265D] dark:text-blue-400 border-b-2 border-[#01265D] dark:border-blue-800"
               : "text-muted-foreground hover:text-foreground"
           }`}
         >
@@ -271,7 +271,7 @@ export default function RevenueReportsPage() {
                     +{g.newPatientsAdded}
                   </TableCell>
 
-                  <TableCell className="text-xs font-semibold text-teal-600">
+                  <TableCell className="text-xs font-semibold text-[#01265D] dark:text-blue-400">
                     {g.retentionRatePercent}%
                   </TableCell>
 
@@ -331,7 +331,7 @@ export default function RevenueReportsPage() {
                     {u.activeDutyHours} / {u.totalAvailableHours} hrs
                   </TableCell>
 
-                  <TableCell className="text-xs font-extrabold text-teal-600">
+                  <TableCell className="text-xs font-extrabold text-[#01265D] dark:text-blue-400">
                     {u.utilizationPercent}%
                   </TableCell>
 
@@ -389,7 +389,7 @@ export default function RevenueReportsPage() {
                     +{c.patientsAcquired} Patients
                   </TableCell>
 
-                  <TableCell className="text-xs font-extrabold text-teal-600">
+                  <TableCell className="text-xs font-extrabold text-[#01265D] dark:text-blue-400">
                     ${c.cacPerPatient}
                   </TableCell>
 

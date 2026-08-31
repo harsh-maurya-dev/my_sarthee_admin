@@ -51,10 +51,10 @@ export function DocumentPreviewModal({
         <DialogHeader className="border-b pb-3">
           <div className="flex items-center justify-between">
             <DialogTitle className="text-base font-bold flex items-center gap-2">
-              <Smartphone className="h-5 w-5 text-teal-600" />
+              <Smartphone className="h-5 w-5 text-[#01265D] dark:text-blue-400" />
               Mobile App Caregiver View Preview
             </DialogTitle>
-            <Badge className="bg-teal-600 text-white text-[10px]">
+            <Badge className="bg-[#01265D] text-white text-[10px]">
               {kycDoc ? "KYC Document" : "Training SOP"}
             </Badge>
           </div>
@@ -104,7 +104,7 @@ export function DocumentPreviewModal({
 
                 <div className="flex items-center justify-between text-[10px] text-muted-foreground pt-1">
                   <span>Formats: {kycDoc.allowedFormats.join(", ")}</span>
-                  <span className="font-semibold text-teal-600">{kycDoc.verificationMethod}</span>
+                  <span className="font-semibold text-[#01265D] dark:text-blue-400">{kycDoc.verificationMethod}</span>
                 </div>
               </div>
             )}
@@ -124,7 +124,7 @@ export function DocumentPreviewModal({
                     <div>
                       <h4 className="font-bold text-sm text-foreground">{trainingDoc.title}</h4>
                       <p className="text-[11px] text-muted-foreground mt-0.5 flex items-center gap-1.5">
-                        <Clock className="h-3 w-3 text-teal-600" />
+                        <Clock className="h-3 w-3 text-[#01265D] dark:text-blue-400" />
                         {trainingDoc.estimatedReadingTime} · {trainingDoc.pagesCount} Pages · {trainingDoc.version}
                       </p>
                     </div>
@@ -142,7 +142,7 @@ export function DocumentPreviewModal({
                     Roles: {trainingDoc.targetRoles.join(", ")}
                   </span>
                   {trainingDoc.isAssessmentMandatory && (
-                    <Badge variant="outline" className="text-[9px] border-teal-400 text-teal-700 bg-teal-50 dark:bg-teal-950">
+                    <Badge variant="outline" className="text-[9px] border-blue-200 text-[#01265D] dark:text-blue-300 bg-blue-50 dark:bg-blue-950/40 dark:bg-blue-950">
                       Pass Score: {trainingDoc.passingScorePercent}%
                     </Badge>
                   )}
@@ -165,7 +165,7 @@ export function DocumentPreviewModal({
             }
             className="h-8 text-xs gap-1.5"
           >
-            <Sparkles className="h-3.5 w-3.5 text-teal-600" />
+            <Sparkles className="h-3.5 w-3.5 text-[#01265D] dark:text-blue-400" />
             Notify Caregiver App
           </Button>
           <Button type="button" size="sm" onClick={onClose} className="h-8 text-xs">

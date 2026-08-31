@@ -80,7 +80,7 @@ export function EditProfileModal({
       <DialogContent className="sm:max-w-md p-6">
         <DialogHeader>
           <DialogTitle className="text-lg font-bold flex items-center gap-2">
-            <UserCog className="h-5 w-5 text-teal-600" />
+            <UserCog className="h-5 w-5 text-[#01265D] dark:text-blue-400" />
             Edit Admin Profile
           </DialogTitle>
           <DialogDescription className="text-xs text-muted-foreground">
@@ -91,7 +91,7 @@ export function EditProfileModal({
         <form onSubmit={handleSubmit} className="space-y-4 py-2">
           {/* Avatar URL / Preview */}
           <div className="flex items-center gap-4 border-b pb-4">
-            <div className="relative h-16 w-16 rounded-full overflow-hidden border-2 border-teal-600 bg-slate-100 shrink-0">
+            <div className="relative h-16 w-16 rounded-full overflow-hidden border-2 border-[#01265D] bg-slate-100 shrink-0">
               <img
                 src={avatarUrl}
                 alt={name}
@@ -150,7 +150,7 @@ export function EditProfileModal({
             <Button type="button" variant="outline" size="sm" onClick={onClose} className="h-9 text-xs">
               Cancel
             </Button>
-            <Button type="submit" size="sm" className="h-9 text-xs bg-teal-600 text-white hover:bg-teal-700 font-semibold">
+            <Button type="submit" size="sm" className="h-9 text-xs bg-[#01265D] text-white hover:bg-[#0a3375] font-semibold">
               Save Profile Changes
             </Button>
           </DialogFooter>

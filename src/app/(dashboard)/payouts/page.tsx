@@ -85,7 +85,7 @@ export default function PayoutsPage() {
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl flex items-center gap-2">
-            <Receipt className="h-7 w-7 text-teal-600" />
+            <Receipt className="h-7 w-7 text-[#01265D] dark:text-blue-400" />
             Caregiver Payout Management
           </h1>
           <p className="text-xs text-muted-foreground mt-1">
@@ -100,7 +100,7 @@ export default function PayoutsPage() {
               description: "Exported payout ledger to CSV format.",
             })
           }
-          className="h-9 gap-2 bg-teal-600 text-white hover:bg-teal-700 text-xs font-semibold shadow-xs"
+          className="h-9 gap-2 bg-[#01265D] text-white hover:bg-[#0a3375] text-xs font-semibold shadow-xs"
         >
           <Download className="h-3.5 w-3.5" />
           <span>Export Payouts CSV</span>
@@ -113,9 +113,9 @@ export default function PayoutsPage() {
           <div>
             <p className="text-xs font-medium text-muted-foreground">Total Disbursed Net Payouts</p>
             <h3 className="text-2xl font-extrabold text-foreground mt-1">${totalDisbursed.toLocaleString()}</h3>
-            <p className="text-[10px] text-teal-600 font-semibold mt-0.5">Transferred to Caregivers</p>
+            <p className="text-[10px] text-[#01265D] dark:text-blue-400 font-semibold mt-0.5">Transferred to Caregivers</p>
           </div>
-          <div className="h-10 w-10 rounded-full bg-teal-100 dark:bg-teal-950 text-teal-600 flex items-center justify-center">
+          <div className="h-10 w-10 rounded-full bg-blue-100 dark:bg-blue-950/60 dark:bg-blue-950 text-[#01265D] dark:text-blue-400 flex items-center justify-center">
             <DollarSign className="h-5 w-5" />
           </div>
         </div>
@@ -239,7 +239,7 @@ export default function PayoutsPage() {
                   </TableCell>
 
                   {/* Net Payout */}
-                  <TableCell className="text-xs font-extrabold text-teal-600 dark:text-teal-400">
+                  <TableCell className="text-xs font-extrabold text-[#01265D] dark:text-blue-400">
                     ${p.netCaregiverPayout.toLocaleString()}
                   </TableCell>
 
@@ -265,7 +265,7 @@ export default function PayoutsPage() {
                       size="sm"
                       variant="outline"
                       onClick={() => handleOpenDetails(p)}
-                      className="h-8 text-xs gap-1 border-slate-200 hover:bg-teal-50 hover:text-teal-700"
+                      className="h-8 text-xs gap-1 border-slate-200 hover:bg-blue-50 dark:hover:bg-blue-950/40 hover:text-[#01265D] dark:text-blue-300"
                     >
                       <Eye className="h-3.5 w-3.5" />
                       <span>View</span>
@@ -281,7 +281,7 @@ export default function PayoutsPage() {
           <span>
             Showing <strong className="text-foreground">{filteredPayouts.length}</strong> caregiver payout records
           </span>
-          <span className="font-medium text-teal-600 dark:text-teal-400">
+          <span className="font-medium text-[#01265D] dark:text-blue-400">
             Automated Commission Calculation Active
           </span>
         </div>

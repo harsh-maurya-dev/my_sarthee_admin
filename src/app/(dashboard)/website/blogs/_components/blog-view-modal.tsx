@@ -33,7 +33,7 @@ export function BlogViewModal({
           <div className="flex items-center justify-between">
             <div>
               <DialogTitle className="text-lg font-bold flex items-center gap-2">
-                <BookOpen className="h-5 w-5 text-teal-600" />
+                <BookOpen className="h-5 w-5 text-[#01265D] dark:text-blue-400" />
                 Health Article & News Preview
               </DialogTitle>
               <DialogDescription className="text-xs text-muted-foreground mt-1">
@@ -69,7 +69,7 @@ export function BlogViewModal({
           <div className="space-y-2">
             <h3 className="font-extrabold text-base text-foreground leading-snug">{blog.title}</h3>
             <div className="flex items-center gap-3 text-muted-foreground font-medium text-[11px]">
-              <span className="flex items-center gap-1 text-teal-600">
+              <span className="flex items-center gap-1 text-[#01265D] dark:text-blue-400">
                 <User className="h-3.5 w-3.5" /> By {blog.author}
               </span>
               <span>•</span>
@@ -87,7 +87,7 @@ export function BlogViewModal({
         </div>
 
         <DialogFooter>
-          <Button type="button" onClick={onClose} className="w-full bg-teal-600 hover:bg-teal-700 text-white font-bold h-9 text-xs">
+          <Button type="button" onClick={onClose} className="w-full bg-[#01265D] hover:bg-[#0a3375] text-white font-bold h-9 text-xs">
             Close Article Preview
           </Button>
         </DialogFooter>

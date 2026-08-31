@@ -192,10 +192,10 @@ export default function OnboardingDocumentsPage() {
         <div>
           <div className="flex items-center gap-2">
             <h1 className="text-2xl font-black tracking-tight text-foreground sm:text-3xl flex items-center gap-2">
-              <FileCheck className="h-7 w-7 text-teal-600" />
+              <FileCheck className="h-7 w-7 text-[#01265D] dark:text-blue-400" />
               Onboarding Documents
             </h1>
-            <Badge className="bg-teal-600 text-white font-semibold text-xs">
+            <Badge className="bg-[#01265D] text-white font-semibold text-xs">
               Caregiver Compliance Hub
             </Badge>
           </div>
@@ -211,7 +211,7 @@ export default function OnboardingDocumentsPage() {
                 setKycToEdit(null);
                 setIsAddEditKYCOpen(true);
               }}
-              className="h-9 gap-2 bg-teal-600 text-white hover:bg-teal-700 text-xs font-semibold shadow-xs"
+              className="h-9 gap-2 bg-[#01265D] text-white hover:bg-[#0a3375] text-xs font-semibold shadow-xs"
             >
               <Plus className="h-3.5 w-3.5" />
               <span>Add KYC Document</span>
@@ -223,7 +223,7 @@ export default function OnboardingDocumentsPage() {
                 setTrainingToEdit(null);
                 setIsAddEditTrainingOpen(true);
               }}
-              className="h-9 gap-2 bg-teal-600 text-white hover:bg-teal-700 text-xs font-semibold shadow-xs"
+              className="h-9 gap-2 bg-[#01265D] text-white hover:bg-[#0a3375] text-xs font-semibold shadow-xs"
             >
               <Plus className="h-3.5 w-3.5" />
               <span>Create Training SOP</span>
@@ -240,7 +240,7 @@ export default function OnboardingDocumentsPage() {
             onClick={() => setActiveTab("kyc")}
             className={`pb-3 text-xs font-bold transition-all flex items-center gap-2 relative ${
               activeTab === "kyc"
-                ? "text-teal-600 dark:text-teal-400 border-b-2 border-teal-600 dark:border-teal-400"
+                ? "text-[#01265D] dark:text-blue-400 border-b-2 border-[#01265D] dark:border-blue-800"
                 : "text-muted-foreground hover:text-foreground"
             }`}
           >
@@ -256,7 +256,7 @@ export default function OnboardingDocumentsPage() {
             onClick={() => setActiveTab("training")}
             className={`pb-3 text-xs font-bold transition-all flex items-center gap-2 relative ${
               activeTab === "training"
-                ? "text-teal-600 dark:text-teal-400 border-b-2 border-teal-600 dark:border-teal-400"
+                ? "text-[#01265D] dark:text-blue-400 border-b-2 border-[#01265D] dark:border-blue-800"
                 : "text-muted-foreground hover:text-foreground"
             }`}
           >
@@ -275,7 +275,7 @@ export default function OnboardingDocumentsPage() {
             size="sm"
             onClick={() => setViewMode("cards")}
             className={`h-8 px-2.5 text-xs font-semibold ${
-              viewMode === "cards" ? "bg-teal-600 text-white" : "text-muted-foreground"
+              viewMode === "cards" ? "bg-[#01265D] text-white" : "text-muted-foreground"
             }`}
           >
             <Grid className="h-3.5 w-3.5 mr-1" />
@@ -286,7 +286,7 @@ export default function OnboardingDocumentsPage() {
             size="sm"
             onClick={() => setViewMode("table")}
             className={`h-8 px-2.5 text-xs font-semibold ${
-              viewMode === "table" ? "bg-teal-600 text-white" : "text-muted-foreground"
+              viewMode === "table" ? "bg-[#01265D] text-white" : "text-muted-foreground"
             }`}
           >
             <List className="h-3.5 w-3.5 mr-1" />
@@ -414,7 +414,7 @@ export default function OnboardingDocumentsPage() {
                           setPreviewTrainingDoc(null);
                           setIsPreviewOpen(true);
                         }}
-                        className="h-7 text-xs px-2 text-teal-700 hover:bg-teal-50 dark:hover:bg-teal-950"
+                        className="h-7 text-xs px-2 text-[#01265D] dark:text-blue-300 hover:bg-blue-50 dark:hover:bg-blue-950/40 dark:hover:bg-blue-950"
                       >
                         <Eye className="h-3.5 w-3.5 mr-1" />
                         Preview
@@ -469,7 +469,7 @@ export default function OnboardingDocumentsPage() {
                         <span className="text-[10px] text-muted-foreground font-mono">{doc.code}</span>
                       </TableCell>
                       <TableCell className="py-3 text-xs">{doc.category}</TableCell>
-                      {/* <TableCell className="py-3 text-xs font-medium text-teal-700 dark:text-teal-400">
+                      {/* <TableCell className="py-3 text-xs font-medium text-[#01265D] dark:text-blue-300 dark:text-blue-400">
                         {doc.verificationMethod}
                       </TableCell> */}
                       <TableCell className="py-3 text-xs text-muted-foreground">
@@ -501,7 +501,7 @@ export default function OnboardingDocumentsPage() {
                               setPreviewTrainingDoc(null);
                               setIsPreviewOpen(true);
                             }}
-                            className="h-7 text-xs px-2 text-teal-700 hover:bg-teal-50"
+                            className="h-7 text-xs px-2 text-[#01265D] dark:text-blue-300 hover:bg-blue-50 dark:hover:bg-blue-950/40"
                           >
                             <Eye className="h-3.5 w-3.5" />
                           </Button> */}
@@ -601,14 +601,14 @@ export default function OnboardingDocumentsPage() {
                     setPreviewKycDoc(null);
                     setIsPreviewOpen(true);
                   }}
-                  className="cursor-pointer rounded-2xl border border-slate-200/90 dark:border-slate-800 bg-card p-4 hover:border-teal-400 hover:shadow-md transition-all flex items-center justify-between group"
+                  className="cursor-pointer rounded-2xl border border-slate-200/90 dark:border-slate-800 bg-card p-4 hover:border-blue-200 hover:shadow-md transition-all flex items-center justify-between group"
                 >
                   <div className="flex items-center gap-4">
                     <div className="h-12 w-12 rounded-2xl bg-amber-50 dark:bg-amber-950/70 border border-amber-200 dark:border-amber-800 flex items-center justify-center text-2xl shrink-0 group-hover:scale-105 transition-transform shadow-xs">
                       {getTrainingIcon(doc.iconType)}
                     </div>
                     <div>
-                      <h3 className="text-sm font-bold text-foreground group-hover:text-teal-600 transition-colors flex items-center gap-2">
+                      <h3 className="text-sm font-bold text-foreground group-hover:text-[#01265D] dark:text-blue-400 transition-colors flex items-center gap-2">
                         {doc.title}
                         <Badge variant="outline" className="text-[10px] font-mono">
                           {doc.version}
@@ -618,7 +618,7 @@ export default function OnboardingDocumentsPage() {
                         <span>{doc.category}</span>
                         <span>&bull;</span>
                         <span className="flex items-center gap-1 text-foreground font-medium">
-                          <Clock className="h-3 w-3 text-teal-600" /> {doc.estimatedReadingTime}
+                          <Clock className="h-3 w-3 text-[#01265D] dark:text-blue-400" /> {doc.estimatedReadingTime}
                         </span>
                         <span>&bull;</span>
                         <span>{doc.pagesCount} Pages</span>
@@ -644,7 +644,7 @@ export default function OnboardingDocumentsPage() {
                       <Edit className="h-3.5 w-3.5 mr-1" />
                       Edit
                     </Button>
-                    <div className="h-9 w-9 rounded-full bg-slate-50 dark:bg-slate-800 flex items-center justify-center text-muted-foreground group-hover:text-teal-600 group-hover:bg-teal-50 transition-colors">
+                    <div className="h-9 w-9 rounded-full bg-slate-50 dark:bg-slate-800 flex items-center justify-center text-muted-foreground group-hover:text-[#01265D] dark:text-blue-400 group-hover:bg-blue-50 dark:hover:bg-blue-950/40 transition-colors">
                       <ChevronRight className="h-5 w-5" />
                     </div>
                   </div>
@@ -688,7 +688,7 @@ export default function OnboardingDocumentsPage() {
                           ))}
                         </div>
                       </TableCell>
-                      {/* <TableCell className="py-3 text-center text-xs font-bold text-teal-600">
+                      {/* <TableCell className="py-3 text-center text-xs font-bold text-[#01265D] dark:text-blue-400">
                         {doc.passingScorePercent}%
                       </TableCell> */}
                       <TableCell className="py-3 text-center text-xs font-semibold">
@@ -704,7 +704,7 @@ export default function OnboardingDocumentsPage() {
                               setPreviewKycDoc(null);
                               setIsPreviewOpen(true);
                             }}
-                            className="h-7 text-xs px-2 text-teal-700 hover:bg-teal-50"
+                            className="h-7 text-xs px-2 text-[#01265D] dark:text-blue-300 hover:bg-blue-50 dark:hover:bg-blue-950/40"
                           >
                             <Eye className="h-3.5 w-3.5" />
                           </Button> */}

@@ -47,7 +47,7 @@ export function AnalyzeRequirementModal({
           <div className="flex items-center justify-between">
             <div>
               <DialogTitle className="text-lg font-bold flex items-center gap-2">
-                <Activity className="h-5 w-5 text-teal-600" />
+                <Activity className="h-5 w-5 text-[#01265D] dark:text-blue-400" />
                 Analyze Care Requirement & Health Condition
               </DialogTitle>
               <DialogDescription className="text-xs text-muted-foreground mt-1">
@@ -74,7 +74,7 @@ export function AnalyzeRequirementModal({
           <div className="rounded-xl border bg-slate-50/80 dark:bg-slate-900/50 p-4 space-y-3">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <div className="h-10 w-10 rounded-full bg-teal-100 text-teal-800 dark:bg-teal-950 dark:text-teal-300 font-bold flex items-center justify-center text-sm">
+                <div className="h-10 w-10 rounded-full bg-blue-100 dark:bg-blue-950/60 text-[#01265D] dark:text-blue-200 dark:bg-blue-950 dark:text-blue-300 font-bold flex items-center justify-center text-sm">
                   {requirement.patientName.charAt(0)}
                 </div>
                 <div>
@@ -84,7 +84,7 @@ export function AnalyzeRequirementModal({
                   </p>
                 </div>
               </div>
-              <Badge variant="outline" className="bg-teal-50 text-teal-900 dark:bg-teal-950/60 dark:text-teal-200 border-teal-200 text-xs">
+              <Badge variant="outline" className="bg-blue-50 dark:bg-blue-950/40 text-[#01265D] dark:text-blue-100 dark:bg-blue-950/60 dark:text-blue-300 border-blue-200 dark:border-blue-900 text-xs">
                 {requirement.requestedRole} Requested
               </Badge>
             </div>
@@ -114,7 +114,7 @@ export function AnalyzeRequirementModal({
           {/* Diagnosis & Care Need */}
           <div className="rounded-xl border p-4 bg-card space-y-3">
             <h4 className="text-xs font-bold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
-              <Stethoscope className="h-4 w-4 text-teal-600" />
+              <Stethoscope className="h-4 w-4 text-[#01265D] dark:text-blue-400" />
               Diagnosis & Care Requirement
             </h4>
             <div className="space-y-2 text-xs">
@@ -144,7 +144,7 @@ export function AnalyzeRequirementModal({
           {/* Required Care Tasks */}
           <div className="rounded-xl border p-4 bg-card space-y-2.5">
             <h4 className="text-xs font-bold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
-              <CheckCircle2 className="h-4 w-4 text-teal-600" />
+              <CheckCircle2 className="h-4 w-4 text-[#01265D] dark:text-blue-400" />
               Required Clinical Tasks Checklist
             </h4>
             <div className="grid grid-cols-2 gap-2 text-xs">
@@ -160,7 +160,7 @@ export function AnalyzeRequirementModal({
           {/* Preferences & Matching Criteria */}
           <div className="rounded-xl border p-4 bg-card space-y-3">
             <h4 className="text-xs font-bold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
-              <Sparkles className="h-4 w-4 text-teal-600" />
+              <Sparkles className="h-4 w-4 text-[#01265D] dark:text-blue-400" />
               Caregiver Match Criteria & Preferences
             </h4>
             <div className="grid grid-cols-2 gap-3 text-xs">
@@ -177,7 +177,7 @@ export function AnalyzeRequirementModal({
               <span className="text-xs text-muted-foreground">Mandatory Specialty Skills:</span>
               <div className="flex flex-wrap gap-1">
                 {requirement.preferences.requiredSkills.map((skill, idx) => (
-                  <Badge key={idx} variant="outline" className="text-[10px] bg-teal-50 text-teal-900 border-teal-300 dark:bg-teal-950 dark:text-teal-200">
+                  <Badge key={idx} variant="outline" className="text-[10px] bg-blue-50 dark:bg-blue-950/40 text-[#01265D] dark:text-blue-100 border-blue-300 dark:border-blue-800 dark:bg-blue-950 dark:text-blue-300">
                     {skill}
                   </Badge>
                 ))}
@@ -197,7 +197,7 @@ export function AnalyzeRequirementModal({
               onClose();
               onProceedToAssign(requirement);
             }}
-            className="h-9 text-xs bg-teal-600 hover:bg-teal-700 text-white font-bold gap-1.5 shadow-xs"
+            className="h-9 text-xs bg-[#01265D] hover:bg-[#0a3375] text-white font-bold gap-1.5 shadow-xs"
           >
             <Sparkles className="h-3.5 w-3.5" />
             <span>Run AI Smart Match</span>

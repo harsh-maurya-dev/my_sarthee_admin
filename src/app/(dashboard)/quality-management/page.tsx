@@ -109,7 +109,7 @@ export default function QualityManagementPage() {
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl flex items-center gap-2">
-            <ShieldCheck className="h-7 w-7 text-teal-600 dark:text-teal-400" />
+            <ShieldCheck className="h-7 w-7 text-[#01265D] dark:text-blue-400" />
             Quality Assurance & Service Compliance
           </h1>
           <p className="text-xs text-muted-foreground mt-1">
@@ -139,7 +139,7 @@ export default function QualityManagementPage() {
                 description: "Automated caregiver compliance & telemetry audit completed successfully.",
               })
             }
-            className="h-9 gap-2 bg-teal-600 text-white hover:bg-teal-700 text-xs font-semibold shadow-xs"
+            className="h-9 gap-2 bg-[#01265D] text-white hover:bg-[#0a3375] text-xs font-semibold shadow-xs"
           >
             <Award className="h-3.5 w-3.5" />
             <span>Run Quality Audit</span>
@@ -153,7 +153,7 @@ export default function QualityManagementPage() {
           onClick={() => setActiveTab("feedback")}
           className={`pb-3 text-xs font-bold transition-all flex items-center gap-2 relative ${
             activeTab === "feedback"
-              ? "text-teal-600 dark:text-teal-400 border-b-2 border-teal-600 dark:border-teal-400"
+              ? "text-[#01265D] dark:text-blue-400 border-b-2 border-[#01265D] dark:border-blue-800"
               : "text-muted-foreground hover:text-foreground"
           }`}
         >
@@ -168,7 +168,7 @@ export default function QualityManagementPage() {
           onClick={() => setActiveTab("ratings")}
           className={`pb-3 text-xs font-bold transition-all flex items-center gap-2 relative ${
             activeTab === "ratings"
-              ? "text-teal-600 dark:text-teal-400 border-b-2 border-teal-600 dark:border-teal-400"
+              ? "text-[#01265D] dark:text-blue-400 border-b-2 border-[#01265D] dark:border-blue-800"
               : "text-muted-foreground hover:text-foreground"
           }`}
         >
@@ -204,7 +204,7 @@ export default function QualityManagementPage() {
                 aria-label="Filter by category"
                 value={feedbackCategoryFilter}
                 onChange={(e) => setFeedbackCategoryFilter(e.target.value)}
-                className="h-8 rounded-lg border bg-background px-2.5 text-xs text-foreground focus:outline-hidden focus:ring-1 focus:ring-teal-500"
+                className="h-8 rounded-lg border bg-background px-2.5 text-xs text-foreground focus:outline-hidden focus:ring-1 focus:ring-[#01265D]"
               >
                 <option value="All">All Categories</option>
                 <option value="Care Quality">Care Quality</option>
@@ -217,7 +217,7 @@ export default function QualityManagementPage() {
                 aria-label="Filter by rating"
                 value={feedbackRatingFilter}
                 onChange={(e) => setFeedbackRatingFilter(e.target.value)}
-                className="h-8 rounded-lg border bg-background px-2.5 text-xs text-foreground focus:outline-hidden focus:ring-1 focus:ring-teal-500"
+                className="h-8 rounded-lg border bg-background px-2.5 text-xs text-foreground focus:outline-hidden focus:ring-1 focus:ring-[#01265D]"
               >
                 <option value="All">All Ratings</option>
                 <option value="5">5 Stars Only</option>
@@ -293,7 +293,7 @@ export default function QualityManagementPage() {
                           onClick={() => handleOpenModal("feedback", fb)}
                           className="h-8 text-xs gap-1 border-slate-200 dark:border-slate-800"
                         >
-                          <Eye className="h-3.5 w-3.5 text-teal-600 dark:text-teal-400" />
+                          <Eye className="h-3.5 w-3.5 text-[#01265D] dark:text-blue-400" />
                           <span>Review</span>
                         </Button>
                       </TableCell>
@@ -330,7 +330,7 @@ export default function QualityManagementPage() {
                 aria-label="Filter by role"
                 value={caregiverRoleFilter}
                 onChange={(e) => setCaregiverRoleFilter(e.target.value)}
-                className="h-8 rounded-lg border bg-background px-2.5 text-xs text-foreground focus:outline-hidden focus:ring-1 focus:ring-teal-500"
+                className="h-8 rounded-lg border bg-background px-2.5 text-xs text-foreground focus:outline-hidden focus:ring-1 focus:ring-[#01265D]"
               >
                 <option value="All">All Roles</option>
                 <option value="Nurse">Nurses</option>
@@ -342,7 +342,7 @@ export default function QualityManagementPage() {
                 aria-label="Filter by quality status"
                 value={caregiverStatusFilter}
                 onChange={(e) => setCaregiverStatusFilter(e.target.value)}
-                className="h-8 rounded-lg border bg-background px-2.5 text-xs text-foreground focus:outline-hidden focus:ring-1 focus:ring-teal-500"
+                className="h-8 rounded-lg border bg-background px-2.5 text-xs text-foreground focus:outline-hidden focus:ring-1 focus:ring-[#01265D]"
               >
                 <option value="All">All Quality Statuses</option>
                 <option value="Excellent">Excellent</option>
@@ -424,7 +424,7 @@ export default function QualityManagementPage() {
                           onClick={() => handleOpenModal("caregiver", r)}
                           className="h-8 text-xs gap-1 border-slate-200 dark:border-slate-800"
                         >
-                          <Award className="h-3.5 w-3.5 text-teal-600 dark:text-teal-400" />
+                          <Award className="h-3.5 w-3.5 text-[#01265D] dark:text-blue-400" />
                           <span>Audit Profile</span>
                         </Button>
                       </TableCell>

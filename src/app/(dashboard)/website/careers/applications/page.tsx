@@ -95,7 +95,7 @@ export default function ApplicationManagementPage() {
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl flex items-center gap-2">
-            <FileUser className="h-7 w-7 text-teal-600" />
+            <FileUser className="h-7 w-7 text-[#01265D] dark:text-blue-400" />
             Job Application Management
           </h1>
           <p className="text-xs text-muted-foreground mt-1">
@@ -110,7 +110,7 @@ export default function ApplicationManagementPage() {
               description: "Exported all candidate resumes & application records to ZIP.",
             })
           }
-          className="h-9 gap-2 bg-teal-600 text-white hover:bg-teal-700 text-xs font-semibold shadow-xs"
+          className="h-9 gap-2 bg-[#01265D] text-white hover:bg-[#0a3375] text-xs font-semibold shadow-xs"
         >
           <Download className="h-3.5 w-3.5" />
           <span>Export Candidate Resumes</span>
@@ -198,7 +198,7 @@ export default function ApplicationManagementPage() {
                       size="sm"
                       variant="ghost"
                       onClick={() => handleDownloadResume(a.candidateName)}
-                      className="h-7 text-[11px] gap-1 text-teal-600 hover:bg-teal-50 px-2"
+                      className="h-7 text-[11px] gap-1 text-[#01265D] dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-950/40 px-2"
                     >
                       <FileText className="h-3.5 w-3.5" />
                       <span>Download PDF</span>
@@ -227,7 +227,7 @@ export default function ApplicationManagementPage() {
                       size="sm"
                       variant="outline"
                       onClick={() => handleOpenDetails(a)}
-                      className="h-8 text-xs gap-1 border-slate-200 hover:bg-teal-50 hover:text-teal-700"
+                      className="h-8 text-xs gap-1 border-slate-200 hover:bg-blue-50 dark:hover:bg-blue-950/40 hover:text-[#01265D] dark:text-blue-300"
                     >
                       <Eye className="h-3.5 w-3.5" />
                       <span>View</span>
@@ -243,7 +243,7 @@ export default function ApplicationManagementPage() {
           <span>
             Showing <strong className="text-foreground">{filteredApps.length}</strong> candidate applications
           </span>
-          <span className="font-medium text-teal-600 dark:text-teal-400">
+          <span className="font-medium text-[#01265D] dark:text-blue-400">
             Resume Screening Matrix Active
           </span>
         </div>

@@ -90,7 +90,7 @@ function CMSContentManager() {
         <div>
           <div className="flex items-center gap-2">
             <h1 className="text-2xl font-black tracking-tight text-foreground sm:text-3xl flex items-center gap-2">
-              <FileCode className="h-7 w-7 text-teal-600 shrink-0" />
+              <FileCode className="h-7 w-7 text-[#01265D] dark:text-blue-400 shrink-0" />
               Content Management System (CMS)
             </h1>
             <Badge className="bg-emerald-600 text-white text-xs font-bold">
@@ -108,7 +108,7 @@ function CMSContentManager() {
             <Button
               size="sm"
               variant={viewMode === "editor" ? "default" : "ghost"}
-              className={`h-7 px-2.5 text-xs font-semibold ${viewMode === "editor" ? "bg-teal-600 text-white" : ""}`}
+              className={`h-7 px-2.5 text-xs font-semibold ${viewMode === "editor" ? "bg-[#01265D] text-white" : ""}`}
               onClick={() => setViewMode("editor")}
             >
               <Edit3 className="h-3.5 w-3.5 mr-1" />
@@ -117,7 +117,7 @@ function CMSContentManager() {
             <Button
               size="sm"
               variant={viewMode === "split" ? "default" : "ghost"}
-              className={`h-7 px-2.5 text-xs font-semibold ${viewMode === "split" ? "bg-teal-600 text-white" : ""}`}
+              className={`h-7 px-2.5 text-xs font-semibold ${viewMode === "split" ? "bg-[#01265D] text-white" : ""}`}
               onClick={() => setViewMode("split")}
             >
               <Columns className="h-3.5 w-3.5 mr-1" />
@@ -126,7 +126,7 @@ function CMSContentManager() {
             <Button
               size="sm"
               variant={viewMode === "preview" ? "default" : "ghost"}
-              className={`h-7 px-2.5 text-xs font-semibold ${viewMode === "preview" ? "bg-teal-600 text-white" : ""}`}
+              className={`h-7 px-2.5 text-xs font-semibold ${viewMode === "preview" ? "bg-[#01265D] text-white" : ""}`}
               onClick={() => setViewMode("preview")}
             >
               <Eye className="h-3.5 w-3.5 mr-1" />
@@ -149,17 +149,17 @@ function CMSContentManager() {
                   onClick={() => handleSelectTab(tab.id)}
                   className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-bold transition-all shrink-0 border ${
                     isActive
-                      ? "bg-teal-600 text-white border-teal-600 shadow-sm"
+                      ? "bg-[#01265D] text-white border-[#01265D] shadow-sm"
                       : "bg-card hover:bg-slate-100 dark:hover:bg-slate-800 text-muted-foreground hover:text-foreground border-border"
                   }`}
                 >
-                  <TabIcon className={`h-3.5 w-3.5 ${isActive ? "text-white" : "text-teal-600 dark:text-teal-400"}`} />
+                  <TabIcon className={`h-3.5 w-3.5 ${isActive ? "text-white" : "text-[#01265D] dark:text-blue-400"}`} />
                   <span>{tab.title}</span>
                   {tab.badge && (
                     <span
                       className={`text-[9px] px-1.5 py-0.2 rounded font-bold uppercase ${
                         isActive
-                          ? "bg-teal-700/60 text-teal-100"
+                          ? "bg-[#01265D]/60 text-[#01265D]"
                           : "bg-slate-100 dark:bg-slate-800 text-muted-foreground"
                       }`}
                     >
@@ -196,7 +196,7 @@ function CMSContentManager() {
           <div className="space-y-4">
             <div className="flex items-center justify-between">
               <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
-                <Edit3 className="h-3.5 w-3.5 text-teal-600" />
+                <Edit3 className="h-3.5 w-3.5 text-[#01265D] dark:text-blue-400" />
                 Content Editor
               </span>
               <span className="text-[11px] text-muted-foreground">
@@ -216,7 +216,7 @@ function CMSContentManager() {
           <div className="space-y-4">
             <div className="flex items-center justify-between">
               <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
-                <Globe className="h-3.5 w-3.5 text-teal-600" />
+                <Globe className="h-3.5 w-3.5 text-[#01265D] dark:text-blue-400" />
                 Live Website Public Preview
               </span>
               <Badge variant="outline" className="text-[10px] text-emerald-700 bg-emerald-50 dark:bg-emerald-950/40 border-emerald-300">
@@ -238,23 +238,23 @@ function CMSContentManager() {
                   <span>https://mysarthee.health/{currentSection.sectionId}</span>
                 </div>
                 <div className="flex items-center gap-1 text-[10px] text-muted-foreground font-semibold">
-                  <CheckCircle2 className="h-3 w-3 text-teal-600" />
+                  <CheckCircle2 className="h-3 w-3 text-[#01265D] dark:text-blue-400" />
                   Published
                 </div>
               </div>
 
               {/* Simulated Public Web Page Content */}
-              <div className="p-6 space-y-6 bg-gradient-to-b from-teal-50/20 via-background to-background min-h-[500px]">
+              <div className="p-6 space-y-6 bg-gradient-to-b from-blue-50/20 via-background to-background min-h-[500px]">
                 {/* Hero Section Banner */}
                 <div className="space-y-3 pb-6 border-b">
-                  <Badge className="bg-teal-100 text-teal-800 dark:bg-teal-950 dark:text-teal-300 font-bold text-[10px]">
+                  <Badge className="bg-blue-100 dark:bg-blue-950/60 text-[#01265D] dark:text-blue-200 dark:bg-blue-950 dark:text-blue-300 font-bold text-[10px]">
                     {currentMeta.title}
                   </Badge>
                   <h2 className="text-2xl font-black tracking-tight text-foreground leading-tight">
                     {currentSection.headline}
                   </h2>
                   {currentSection.subheadline && (
-                    <p className="text-sm font-medium text-teal-700 dark:text-teal-400 leading-relaxed">
+                    <p className="text-sm font-medium text-[#01265D] dark:text-blue-300 dark:text-blue-400 leading-relaxed">
                       {currentSection.subheadline}
                     </p>
                   )}
@@ -275,10 +275,10 @@ function CMSContentManager() {
                       {currentSection.items.map((item, i) => (
                         <div
                           key={i}
-                          className="p-3.5 rounded-xl border bg-slate-50/80 dark:bg-slate-900/60 space-y-1 hover:border-teal-300 transition-colors"
+                          className="p-3.5 rounded-xl border bg-slate-50/80 dark:bg-slate-900/60 space-y-1 hover:border-blue-300 dark:border-blue-800 transition-colors"
                         >
                           <div className="text-xs font-bold text-foreground flex items-center gap-2">
-                            <span className="w-5 h-5 rounded-full bg-teal-100 text-teal-800 dark:bg-teal-950 dark:text-teal-300 text-[10px] flex items-center justify-center font-black">
+                            <span className="w-5 h-5 rounded-full bg-blue-100 dark:bg-blue-950/60 text-[#01265D] dark:text-blue-200 dark:bg-blue-950 dark:text-blue-300 text-[10px] flex items-center justify-center font-black">
                               {i + 1}
                             </span>
                             {item.title}

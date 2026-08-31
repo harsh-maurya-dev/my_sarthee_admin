@@ -99,7 +99,7 @@ export function AddEditKYCModal({
         <form onSubmit={handleSubmit} className="space-y-4">
           <DialogHeader className="border-b pb-3">
             <DialogTitle className="text-base font-bold flex items-center gap-2">
-              <ShieldCheck className="h-5 w-5 text-teal-600" />
+              <ShieldCheck className="h-5 w-5 text-[#01265D] dark:text-blue-400" />
               {documentToEdit ? "Edit KYC Document Requirement" : "Configure New KYC Document"}
             </DialogTitle>
             <DialogDescription className="text-xs text-muted-foreground mt-0.5">
@@ -147,7 +147,7 @@ export function AddEditKYCModal({
             <Button type="button" variant="outline" size="sm" onClick={onClose} className="h-8 text-xs">
               Cancel
             </Button>
-            <Button type="submit" size="sm" className="h-8 text-xs bg-teal-600 hover:bg-teal-700 text-white font-bold gap-1.5 shadow-xs">
+            <Button type="submit" size="sm" className="h-8 text-xs bg-[#01265D] hover:bg-[#0a3375] text-white font-bold gap-1.5 shadow-xs">
               <Save className="h-3.5 w-3.5" />
               <span>{documentToEdit ? "Update Document" : "Save KYC Document"}</span>
             </Button>

@@ -43,7 +43,7 @@ export function NotificationViewModal({
       <DialogContent className="sm:max-w-md p-6">
         <DialogHeader>
           <div className="flex items-center gap-2">
-            <div className="h-9 w-9 rounded-full bg-teal-100 dark:bg-teal-950 text-teal-600 flex items-center justify-center">
+            <div className="h-9 w-9 rounded-full bg-blue-100 dark:bg-blue-950/60 dark:bg-blue-950 text-[#01265D] dark:text-blue-400 flex items-center justify-center">
               <Bell className="h-5 w-5" />
             </div>
             <div>
@@ -107,7 +107,7 @@ export function NotificationViewModal({
               type="button"
               size="sm"
               onClick={handleRead}
-              className="h-9 text-xs bg-teal-600 hover:bg-teal-700 text-white font-bold gap-1"
+              className="h-9 text-xs bg-[#01265D] hover:bg-[#0a3375] text-white font-bold gap-1"
             >
               <CheckCircle2 className="h-3.5 w-3.5" />
               Mark as Read

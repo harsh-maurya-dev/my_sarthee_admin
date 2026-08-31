@@ -90,7 +90,7 @@ export default function TransactionsPage() {
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl flex items-center gap-2">
-            <CreditCard className="h-7 w-7 text-teal-600" />
+            <CreditCard className="h-7 w-7 text-[#01265D] dark:text-blue-400" />
             Transaction Management
           </h1>
           <p className="text-xs text-muted-foreground mt-1">
@@ -105,7 +105,7 @@ export default function TransactionsPage() {
               description: "Exported transaction ledger to CSV.",
             })
           }
-          className="h-9 gap-2 bg-teal-600 text-white hover:bg-teal-700 text-xs font-semibold shadow-xs"
+          className="h-9 gap-2 bg-[#01265D] text-white hover:bg-[#0a3375] text-xs font-semibold shadow-xs"
         >
           <Download className="h-3.5 w-3.5" />
           <span>Export Transactions CSV</span>
@@ -129,9 +129,9 @@ export default function TransactionsPage() {
           <div>
             <p className="text-xs font-medium text-muted-foreground">Successful Txns</p>
             <h3 className="text-2xl font-extrabold text-foreground mt-1">{successfulCount}</h3>
-            <p className="text-[10px] text-teal-600 font-semibold mt-0.5">Cleared Transactions</p>
+            <p className="text-[10px] text-[#01265D] dark:text-blue-400 font-semibold mt-0.5">Cleared Transactions</p>
           </div>
-          <div className="h-10 w-10 rounded-full bg-teal-100 dark:bg-teal-950 text-teal-600 flex items-center justify-center">
+          <div className="h-10 w-10 rounded-full bg-blue-100 dark:bg-blue-950/60 dark:bg-blue-950 text-[#01265D] dark:text-blue-400 flex items-center justify-center">
             <CheckCircle2 className="h-5 w-5" />
           </div>
         </div>
@@ -287,7 +287,7 @@ export default function TransactionsPage() {
                       size="sm"
                       variant="outline"
                       onClick={() => handleOpenDetails(t)}
-                      className="h-8 text-xs gap-1 border-slate-200 hover:bg-teal-50 hover:text-teal-700"
+                      className="h-8 text-xs gap-1 border-slate-200 hover:bg-blue-50 dark:hover:bg-blue-950/40 hover:text-[#01265D] dark:text-blue-300"
                     >
                       <Eye className="h-3.5 w-3.5" />
                       <span>View</span>
@@ -303,7 +303,7 @@ export default function TransactionsPage() {
           <span>
             Showing <strong className="text-foreground">{filteredTransactions.length}</strong> payment transactions
           </span>
-          <span className="font-medium text-teal-600 dark:text-teal-400">
+          <span className="font-medium text-[#01265D] dark:text-blue-400">
             Payment Gateway Sync Active
           </span>
         </div>

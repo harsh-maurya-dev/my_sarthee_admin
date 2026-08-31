@@ -76,7 +76,7 @@ export function ForgotPasswordForm() {
             <div className="pt-2">
               <Link
                 href="/reset-password"
-                className="inline-flex w-full h-10 items-center justify-center rounded-lg bg-teal-600 text-white font-semibold text-sm hover:bg-teal-700 dark:bg-teal-500"
+                className="inline-flex w-full h-10 items-center justify-center rounded-lg bg-[#01265D] text-white font-semibold text-sm hover:bg-[#0a3375] dark:bg-[#01265D]"
               >
                 Simulate Opening Reset Link
               </Link>
@@ -105,7 +105,7 @@ export function ForgotPasswordForm() {
             <Button
               type="submit"
               disabled={isLoading}
-              className="w-full h-10 bg-teal-600 text-white font-semibold hover:bg-teal-700 dark:bg-teal-500 dark:hover:bg-teal-600 mt-2"
+              className="w-full h-10 bg-[#01265D] text-white font-semibold hover:bg-[#0a3375] dark:bg-[#01265D] dark:hover:bg-[#01265D] mt-2"
             >
               {isLoading ? (
                 <>

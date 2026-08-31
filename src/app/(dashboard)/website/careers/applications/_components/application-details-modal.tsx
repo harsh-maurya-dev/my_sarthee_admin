@@ -90,7 +90,7 @@ export function ApplicationDetailsModal({
           <div className="flex items-center justify-between">
             <div>
               <DialogTitle className="text-lg font-bold flex items-center gap-2">
-                <FileUser className="h-5 w-5 text-teal-600" />
+                <FileUser className="h-5 w-5 text-[#01265D] dark:text-blue-400" />
                 Job Candidate Application Profile
               </DialogTitle>
               <DialogDescription className="text-xs text-muted-foreground mt-1">
@@ -117,7 +117,7 @@ export function ApplicationDetailsModal({
           {/* Candidate Card */}
           <div className="rounded-xl border bg-slate-50 dark:bg-slate-900/50 p-4 space-y-2">
             <h3 className="font-extrabold text-base text-foreground">{application.candidateName}</h3>
-            <p className="text-xs font-semibold text-teal-600 dark:text-teal-400 flex items-center gap-1">
+            <p className="text-xs font-semibold text-[#01265D] dark:text-blue-400 flex items-center gap-1">
               <Briefcase className="h-3.5 w-3.5" /> Applied Position: {application.appliedJobTitle}
             </p>
 
@@ -134,7 +134,7 @@ export function ApplicationDetailsModal({
           {/* Qualification Details */}
           <div className="rounded-xl border p-4 bg-card space-y-2">
             <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider block flex items-center gap-1">
-              <GraduationCap className="h-3.5 w-3.5 text-teal-600" /> Candidate Qualification & Experience
+              <GraduationCap className="h-3.5 w-3.5 text-[#01265D] dark:text-blue-400" /> Candidate Qualification & Experience
             </span>
             <p className="text-foreground font-medium leading-relaxed bg-slate-50 dark:bg-slate-900 p-3 rounded-lg border">
               {application.qualification}
@@ -152,7 +152,7 @@ export function ApplicationDetailsModal({
               variant="outline"
               size="sm"
               onClick={handleDownloadResume}
-              className="h-9 text-xs gap-1.5 border-teal-200 text-teal-700 dark:text-teal-400"
+              className="h-9 text-xs gap-1.5 border-blue-200 dark:border-blue-900 text-[#01265D] dark:text-blue-300 dark:text-blue-400"
             >
               <Download className="h-3.5 w-3.5" />
               Download Resume

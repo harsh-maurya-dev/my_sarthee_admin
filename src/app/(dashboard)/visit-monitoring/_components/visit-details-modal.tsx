@@ -51,7 +51,7 @@ export function VisitDetailsModal({
           <div className="flex items-center justify-between">
             <div>
               <DialogTitle className="text-lg font-bold flex items-center gap-2">
-                <Eye className="h-5 w-5 text-teal-600" />
+                <Eye className="h-5 w-5 text-[#01265D] dark:text-blue-400" />
                 Live Visit Telemetry & Care Details
               </DialogTitle>
               <DialogDescription className="text-xs text-muted-foreground mt-1">
@@ -113,7 +113,7 @@ export function VisitDetailsModal({
           {/* GPS Check-In & Check-Out Telemetry Grid */}
           <div className="rounded-xl border p-4 bg-card space-y-3">
             <h4 className="text-xs font-bold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
-              <Compass className="h-4 w-4 text-teal-600" />
+              <Compass className="h-4 w-4 text-[#01265D] dark:text-blue-400" />
               GPS Geofence & Check-In / Check-Out Telemetry
             </h4>
 
@@ -155,14 +155,14 @@ export function VisitDetailsModal({
                 </div>
                 <div className="flex items-center justify-between pt-0.5 text-foreground text-[10px]">
                   <span>Elapsed Time:</span>
-                  <strong className="text-teal-600 font-bold">{visit.actualDurationMinutes} mins</strong>
+                  <strong className="text-[#01265D] dark:text-blue-400 font-bold">{visit.actualDurationMinutes} mins</strong>
                 </div>
               </div>
             </div>
 
             {visit.checkOut.summaryNotes && (
-              <div className="rounded-lg bg-teal-50/60 dark:bg-teal-950/30 p-2.5 text-xs text-foreground border border-teal-200 dark:border-teal-900">
-                <span className="font-bold text-teal-900 dark:text-teal-200 block mb-0.5">Caregiver Check-Out Notes:</span>
+              <div className="rounded-lg bg-blue-50/60 dark:bg-blue-950/30 dark:bg-blue-950/30 p-2.5 text-xs text-foreground border border-blue-200 dark:border-blue-900">
+                <span className="font-bold text-[#01265D] dark:text-blue-100 dark:text-blue-300 block mb-0.5">Caregiver Check-Out Notes:</span>
                 <p className="text-muted-foreground">{visit.checkOut.summaryNotes}</p>
               </div>
             )}
@@ -172,7 +172,7 @@ export function VisitDetailsModal({
           {visit.vitalSignsRecorded && (
             <div className="rounded-xl border p-4 bg-card space-y-3">
               <h4 className="text-xs font-bold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
-                <Activity className="h-4 w-4 text-teal-600" />
+                <Activity className="h-4 w-4 text-[#01265D] dark:text-blue-400" />
                 Recorded Patient Vital Signs
               </h4>
 
@@ -205,7 +205,7 @@ export function VisitDetailsModal({
           <div className="rounded-xl border p-4 bg-card space-y-3">
             <div className="flex items-center justify-between">
               <h4 className="text-xs font-bold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
-                <CheckCircle2 className="h-4 w-4 text-teal-600" />
+                <CheckCircle2 className="h-4 w-4 text-[#01265D] dark:text-blue-400" />
                 Assigned Task Progress Checklist ({completedTaskCount}/{visit.tasks.length})
               </h4>
               <Badge variant="outline" className="text-[10px] font-bold">
@@ -244,7 +244,7 @@ export function VisitDetailsModal({
         </div>
 
         <DialogFooter>
-          <Button type="button" onClick={onClose} className="w-full bg-teal-600 hover:bg-teal-700 text-white font-bold h-9 text-xs">
+          <Button type="button" onClick={onClose} className="w-full bg-[#01265D] hover:bg-[#0a3375] text-white font-bold h-9 text-xs">
             Close Telemetry View
           </Button>
         </DialogFooter>

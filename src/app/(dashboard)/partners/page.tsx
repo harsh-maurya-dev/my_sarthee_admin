@@ -63,7 +63,7 @@ export default function PartnersAndReferralsPage() {
             <h1 className="text-2xl font-black tracking-tight text-foreground sm:text-3xl">
               Partners & Referral Source Network
             </h1>
-            <Badge className="bg-teal-600 text-white font-semibold text-xs">
+            <Badge className="bg-[#01265D] text-white font-semibold text-xs">
               B2B & Medical Channels
             </Badge>
           </div>
@@ -74,7 +74,7 @@ export default function PartnersAndReferralsPage() {
         <div className="flex items-center gap-2">
           <Button
             size="sm"
-            className="bg-teal-600 hover:bg-teal-700 text-white font-semibold text-xs shadow-sm gap-1.5"
+            className="bg-[#01265D] hover:bg-[#0a3375] text-white font-semibold text-xs shadow-sm gap-1.5"
             onClick={() => swiftAlert.info({ title: "New Partner Onboarding", description: "Opening B2B contract onboarding wizard." })}
           >
             <Plus className="h-4 w-4" />
@@ -88,7 +88,7 @@ export default function PartnersAndReferralsPage() {
         <div className="rounded-xl border bg-card p-4 shadow-xs">
           <div className="flex items-center justify-between">
             <span className="text-xs font-semibold text-muted-foreground">Hospital Discharge Desks</span>
-            <Building2 className="h-4 w-4 text-teal-600" />
+            <Building2 className="h-4 w-4 text-[#01265D] dark:text-blue-400" />
           </div>
           <div className="mt-2 text-2xl font-black text-foreground">330 Referrals</div>
           <p className="text-[11px] text-emerald-600 font-semibold mt-1">Lilavati & Breach Candy Leads (89% conv)</p>
@@ -131,7 +131,7 @@ export default function PartnersAndReferralsPage() {
               onClick={() => setTypeFilter(type)}
               className={`rounded-lg px-3 py-1.5 text-xs font-bold transition-all ${
                 typeFilter === type
-                  ? "bg-teal-600 text-white shadow-sm"
+                  ? "bg-[#01265D] text-white shadow-sm"
                   : "bg-slate-100 text-muted-foreground hover:bg-slate-200 dark:bg-slate-800"
               }`}
             >
@@ -201,7 +201,7 @@ export default function PartnersAndReferralsPage() {
                 <TableCell className="text-xs font-bold text-foreground py-3">
                   {p.totalReferrals}
                 </TableCell>
-                <TableCell className="text-xs font-bold text-teal-700 dark:text-teal-400 py-3">
+                <TableCell className="text-xs font-bold text-[#01265D] dark:text-blue-300 dark:text-blue-400 py-3">
                   {p.activePatients}
                 </TableCell>
                 <TableCell className="text-xs font-bold text-emerald-600 py-3">

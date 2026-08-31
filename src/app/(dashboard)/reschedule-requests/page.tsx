@@ -127,10 +127,10 @@ export default function RescheduleRequestsPage() {
         <div>
           <div className="flex items-center gap-2">
             <h1 className="text-2xl font-black tracking-tight text-foreground sm:text-3xl flex items-center gap-2">
-              <CalendarClock className="h-7 w-7 text-teal-600" />
+              <CalendarClock className="h-7 w-7 text-[#01265D] dark:text-blue-400" />
               Visit Reschedule Requests
             </h1>
-            <Badge className="bg-teal-600 text-white font-semibold text-xs">
+            <Badge className="bg-[#01265D] text-white font-semibold text-xs">
               {pendingCount} Pending Action
             </Badge>
           </div>
@@ -199,9 +199,9 @@ export default function RescheduleRequestsPage() {
           <div>
             <p className="text-xs font-semibold text-muted-foreground">Avg. Response Time</p>
             <h3 className="text-2xl font-black text-foreground mt-1">12m</h3>
-            <p className="text-[10px] text-teal-600 font-medium mt-0.5">Target: &lt; 30 mins</p>
+            <p className="text-[10px] text-[#01265D] dark:text-blue-400 font-medium mt-0.5">Target: &lt; 30 mins</p>
           </div>
-          <div className="h-10 w-10 rounded-xl bg-teal-100 dark:bg-teal-950 text-teal-600 flex items-center justify-center font-bold">
+          <div className="h-10 w-10 rounded-xl bg-blue-100 dark:bg-blue-950/60 dark:bg-blue-950 text-[#01265D] dark:text-blue-400 flex items-center justify-center font-bold">
             <CalendarClock className="h-5 w-5" />
           </div>
         </div>
@@ -315,7 +315,7 @@ export default function RescheduleRequestsPage() {
                   {/* Request ID & Submitted Time */}
                   <TableCell className="py-3 font-mono">
                     <div className="flex flex-col">
-                      <span className="text-xs font-bold text-teal-700 dark:text-teal-400">{req.id}</span>
+                      <span className="text-xs font-bold text-[#01265D] dark:text-blue-300 dark:text-blue-400">{req.id}</span>
                       <span className="text-[10px] text-muted-foreground">{req.requestedAt}</span>
                     </div>
                   </TableCell>
@@ -355,12 +355,12 @@ export default function RescheduleRequestsPage() {
                   {/* Requested New Schedule */}
                   <TableCell className="py-3 text-xs">
                     <div className="flex flex-col">
-                      <span className="font-bold text-teal-700 dark:text-teal-400 flex items-center gap-1">
+                      <span className="font-bold text-[#01265D] dark:text-blue-300 dark:text-blue-400 flex items-center gap-1">
                         <Calendar className="h-3 w-3" />
                         {req.requestedNewSchedule.date}
                       </span>
                       <span className="text-[11px] font-semibold text-foreground flex items-center gap-1 mt-0.5">
-                        <Clock className="h-3 w-3 text-teal-600" />
+                        <Clock className="h-3 w-3 text-[#01265D] dark:text-blue-400" />
                         {req.requestedNewSchedule.timeSlot}
                       </span>
                     </div>
@@ -407,7 +407,7 @@ export default function RescheduleRequestsPage() {
                           setSelectedRequest(req);
                           setIsReviewOpen(true);
                         }}
-                        className="h-8 text-xs gap-1 font-semibold border-slate-200 hover:bg-teal-50 hover:text-teal-700 hover:border-teal-300 dark:hover:bg-teal-950"
+                        className="h-8 text-xs gap-1 font-semibold border-slate-200 hover:bg-blue-50 dark:hover:bg-blue-950/40 hover:text-[#01265D] dark:text-blue-300 hover:border-blue-300 dark:border-blue-800 dark:hover:bg-blue-950"
                       >
                         <Eye className="h-3.5 w-3.5" />
                         <span>Review</span>
@@ -447,7 +447,7 @@ export default function RescheduleRequestsPage() {
             <strong className="text-foreground">{requests.length}</strong> total requests ·{" "}
             <strong className="text-amber-600">{pendingCount} pending decision</strong>
           </span>
-          <span className="font-medium text-teal-600 dark:text-teal-400 flex items-center gap-1">
+          <span className="font-medium text-[#01265D] dark:text-blue-400 flex items-center gap-1">
             <Smartphone className="h-3.5 w-3.5" />
             Mobile Sync Active
           </span>

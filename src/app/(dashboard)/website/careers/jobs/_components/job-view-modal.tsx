@@ -33,7 +33,7 @@ export function JobViewModal({
           <div className="flex items-center justify-between">
             <div>
               <DialogTitle className="text-lg font-bold flex items-center gap-2">
-                <Briefcase className="h-5 w-5 text-teal-600" />
+                <Briefcase className="h-5 w-5 text-[#01265D] dark:text-blue-400" />
                 Job Profile Details
               </DialogTitle>
               <DialogDescription className="text-xs text-muted-foreground mt-1">
@@ -54,7 +54,7 @@ export function JobViewModal({
           <div className="space-y-1">
             <h3 className="font-extrabold text-base text-foreground">{job.jobTitle}</h3>
             <div className="flex items-center gap-3 text-muted-foreground font-medium pt-1">
-              <span className="flex items-center gap-1 text-teal-600">
+              <span className="flex items-center gap-1 text-[#01265D] dark:text-blue-400">
                 <MapPin className="h-3.5 w-3.5" /> {job.location}
               </span>
               <span>•</span>
@@ -71,7 +71,7 @@ export function JobViewModal({
         </div>
 
         <DialogFooter>
-          <Button type="button" onClick={onClose} className="w-full bg-teal-600 hover:bg-teal-700 text-white font-bold h-9 text-xs">
+          <Button type="button" onClick={onClose} className="w-full bg-[#01265D] hover:bg-[#0a3375] text-white font-bold h-9 text-xs">
             Close Job View
           </Button>
         </DialogFooter>

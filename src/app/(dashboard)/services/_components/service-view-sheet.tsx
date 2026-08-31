@@ -87,7 +87,7 @@ export function ServiceViewSheet({
           {/* Quick Metrics */}
           <div className="grid grid-cols-2 gap-4">
             <div className="rounded-xl border p-4 bg-slate-50/60 dark:bg-slate-900/60 flex items-center gap-3">
-              <div className="rounded-lg p-2.5 bg-teal-100 dark:bg-teal-950 text-teal-700 dark:text-teal-300">
+              <div className="rounded-lg p-2.5 bg-blue-100 dark:bg-blue-950/60 dark:bg-blue-950 text-[#01265D] dark:text-blue-300">
                 <DollarSign className="h-5 w-5" />
               </div>
               <div>
@@ -114,7 +114,7 @@ export function ServiceViewSheet({
           {/* Description */}
           <div className="space-y-2">
             <h3 className="text-xs font-bold uppercase tracking-wider text-muted-foreground flex items-center gap-2">
-              <Activity className="h-4 w-4 text-teal-600" />
+              <Activity className="h-4 w-4 text-[#01265D] dark:text-blue-400" />
               Service Overview & Description
             </h3>
             <div className="rounded-xl border p-4 bg-card text-xs leading-relaxed text-foreground space-y-2">

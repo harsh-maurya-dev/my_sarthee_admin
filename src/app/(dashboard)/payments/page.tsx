@@ -126,7 +126,7 @@ export default function PaymentsAndBillingDashboard() {
           <h2 className="text-sm font-extrabold text-foreground">Revenue by Service Line (MTD)</h2>
           <div className="space-y-3">
             {[
-              { service: "Home Nursing (ICU & Post-Op)", amount: "₹10,50,000", pct: 42, color: "bg-teal-600" },
+              { service: "Home Nursing (ICU & Post-Op)", amount: "₹10,50,000", pct: 42, color: "bg-[#01265D]" },
               { service: "Combination Recovery Packages", amount: "₹7,20,000", pct: 29, color: "bg-indigo-600" },
               { service: "Physiotherapy & Neuro-Rehab", amount: "₹4,10,000", pct: 16, color: "bg-sky-600" },
               { service: "Personal Care & Geriatric Assist", amount: "₹3,00,000", pct: 13, color: "bg-emerald-600" },
@@ -148,7 +148,7 @@ export default function PaymentsAndBillingDashboard() {
         <div className="rounded-2xl border bg-card p-5.5 shadow-xs space-y-4">
           <div className="flex items-center justify-between">
             <h2 className="text-sm font-extrabold text-foreground">Revenue by B2B Partner Network</h2>
-            <Link href="/partners" className="text-xs text-teal-700 font-semibold hover:underline">
+            <Link href="/partners" className="text-xs text-[#01265D] dark:text-blue-300 font-semibold hover:underline">
               Partner Hub &rarr;
             </Link>
           </div>
@@ -265,7 +265,7 @@ export default function PaymentsAndBillingDashboard() {
                   {b.billing.balance > 0 ? (
                     <Button
                       size="sm"
-                      className="h-6 text-[10px] bg-teal-600 hover:bg-teal-700 text-white font-bold"
+                      className="h-6 text-[10px] bg-[#01265D] hover:bg-[#0a3375] text-white font-bold"
                       onClick={() =>
                         swiftAlert.success({
                           title: "Payment Link Dispatched",

@@ -130,7 +130,7 @@ export default function BlogManagementPage() {
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl flex items-center gap-2">
-            <BookOpen className="h-7 w-7 text-teal-600" />
+            <BookOpen className="h-7 w-7 text-[#01265D] dark:text-blue-400" />
             Blog / News Management
           </h1>
           <p className="text-xs text-muted-foreground mt-1">
@@ -140,7 +140,7 @@ export default function BlogManagementPage() {
         <Button
           size="sm"
           onClick={handleOpenAdd}
-          className="h-9 gap-2 bg-teal-600 text-white hover:bg-teal-700 text-xs font-semibold shadow-xs"
+          className="h-9 gap-2 bg-[#01265D] text-white hover:bg-[#0a3375] text-xs font-semibold shadow-xs"
         >
           <Plus className="h-3.5 w-3.5" />
           <span>Create New Post</span>
@@ -243,7 +243,7 @@ export default function BlogManagementPage() {
                     <p className="text-xs text-muted-foreground line-clamp-2 leading-relaxed">
                       {b.content}
                     </p>
-                    <span className="text-[10px] text-teal-600 dark:text-teal-400 font-semibold block pt-1">
+                    <span className="text-[10px] text-[#01265D] dark:text-blue-400 font-semibold block pt-1">
                       By {b.author}
                     </span>
                   </div>

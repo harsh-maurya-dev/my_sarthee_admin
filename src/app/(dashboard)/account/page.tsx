@@ -93,7 +93,7 @@ export default function AccountPage() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl flex items-center gap-2">
-            <UserCheck className="h-7 w-7 text-teal-600" />
+            <UserCheck className="h-7 w-7 text-[#01265D] dark:text-blue-400" />
             Account & Profile Settings
           </h1>
           <p className="text-xs text-muted-foreground mt-1">
@@ -116,7 +116,7 @@ export default function AccountPage() {
         {/* MY PROFILE CARD */}
         <Card className="md:col-span-1 border rounded-2xl shadow-xs space-y-4">
           <CardHeader className="text-center pb-2">
-            <div className="mx-auto relative h-24 w-24 rounded-full overflow-hidden border-4 border-teal-600 shadow-md">
+            <div className="mx-auto relative h-24 w-24 rounded-full overflow-hidden border-4 border-[#01265D] shadow-md">
               <img
                 src={profile.avatarUrl}
                 alt={profile.name}
@@ -125,7 +125,7 @@ export default function AccountPage() {
             </div>
             <CardTitle className="text-lg font-extrabold mt-3">{profile.name}</CardTitle>
             <CardDescription className="text-xs">
-              <Badge variant="outline" className="bg-teal-50 text-teal-900 border-teal-300 font-bold mt-1">
+              <Badge variant="outline" className="bg-blue-50 dark:bg-blue-950/40 text-[#01265D] dark:text-blue-100 border-blue-300 dark:border-blue-800 font-bold mt-1">
                 {profile.roleTitle}
               </Badge>
             </CardDescription>
@@ -133,12 +133,12 @@ export default function AccountPage() {
 
           <CardContent className="space-y-3 text-xs border-t pt-4">
             <div className="flex items-center gap-2.5 text-muted-foreground">
-              <Mail className="h-4 w-4 text-teal-600 shrink-0" />
+              <Mail className="h-4 w-4 text-[#01265D] dark:text-blue-400 shrink-0" />
               <span className="truncate text-foreground font-mono">{profile.email}</span>
             </div>
 
             <div className="flex items-center gap-2.5 text-muted-foreground">
-              <Phone className="h-4 w-4 text-teal-600 shrink-0" />
+              <Phone className="h-4 w-4 text-[#01265D] dark:text-blue-400 shrink-0" />
               <span className="text-foreground font-mono">{profile.phone}</span>
             </div>
 
@@ -165,7 +165,7 @@ export default function AccountPage() {
         <Card className="md:col-span-2 border rounded-2xl shadow-xs">
           <CardHeader className="border-b pb-4">
             <CardTitle className="text-base font-bold flex items-center gap-2">
-              <KeyRound className="h-5 w-5 text-teal-600" />
+              <KeyRound className="h-5 w-5 text-[#01265D] dark:text-blue-400" />
               Account Security & Password Settings
             </CardTitle>
             <CardDescription className="text-xs">
@@ -214,7 +214,7 @@ export default function AccountPage() {
               </div>
 
               <div className="pt-3 flex justify-end">
-                <Button type="submit" size="sm" className="h-9 gap-1.5 bg-teal-600 text-white hover:bg-teal-700 text-xs font-semibold">
+                <Button type="submit" size="sm" className="h-9 gap-1.5 bg-[#01265D] text-white hover:bg-[#0a3375] text-xs font-semibold">
                   <CheckCircle2 className="h-4 w-4" />
                   <span>Update Password</span>
                 </Button>

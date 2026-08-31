@@ -134,7 +134,7 @@ export function ReviewRequestModal({
           <div className="flex items-center justify-between">
             <div>
               <DialogTitle className="text-xl font-bold flex items-center gap-2">
-                <Sparkles className="h-5 w-5 text-teal-600" />
+                <Sparkles className="h-5 w-5 text-[#01265D] dark:text-blue-400" />
                 Service Request Management Flow
               </DialogTitle>
               <DialogDescription className="text-xs text-muted-foreground mt-1">
@@ -163,12 +163,12 @@ export function ReviewRequestModal({
               onClick={() => setCurrentStep(1)}
               className={`flex items-center gap-2 p-2 rounded-lg border text-xs font-semibold transition-all text-left ${
                 currentStep === 1
-                  ? "bg-teal-50 border-teal-500 text-teal-900 dark:bg-teal-950 dark:text-teal-200"
+                  ? "bg-blue-50 dark:bg-blue-950/40 border-[#01265D] text-[#01265D] dark:text-blue-100 dark:bg-blue-950 dark:text-blue-300"
                   : "bg-slate-50 border-slate-200 text-muted-foreground hover:bg-slate-100"
               }`}
             >
               <span className={`h-5 w-5 rounded-full flex items-center justify-center text-[11px] font-bold ${
-                currentStep === 1 ? "bg-teal-600 text-white" : "bg-slate-200 text-slate-700"
+                currentStep === 1 ? "bg-[#01265D] text-white" : "bg-slate-200 text-slate-700"
               }`}>
                 1
               </span>
@@ -180,12 +180,12 @@ export function ReviewRequestModal({
               onClick={() => setCurrentStep(2)}
               className={`flex items-center gap-2 p-2 rounded-lg border text-xs font-semibold transition-all text-left ${
                 currentStep === 2
-                  ? "bg-teal-50 border-teal-500 text-teal-900 dark:bg-teal-950 dark:text-teal-200"
+                  ? "bg-blue-50 dark:bg-blue-950/40 border-[#01265D] text-[#01265D] dark:text-blue-100 dark:bg-blue-950 dark:text-blue-300"
                   : "bg-slate-50 border-slate-200 text-muted-foreground hover:bg-slate-100"
               }`}
             >
               <span className={`h-5 w-5 rounded-full flex items-center justify-center text-[11px] font-bold ${
-                currentStep === 2 ? "bg-teal-600 text-white" : "bg-slate-200 text-slate-700"
+                currentStep === 2 ? "bg-[#01265D] text-white" : "bg-slate-200 text-slate-700"
               }`}>
                 2
               </span>
@@ -197,12 +197,12 @@ export function ReviewRequestModal({
               onClick={() => setCurrentStep(3)}
               className={`flex items-center gap-2 p-2 rounded-lg border text-xs font-semibold transition-all text-left ${
                 currentStep === 3
-                  ? "bg-teal-50 border-teal-500 text-teal-900 dark:bg-teal-950 dark:text-teal-200"
+                  ? "bg-blue-50 dark:bg-blue-950/40 border-[#01265D] text-[#01265D] dark:text-blue-100 dark:bg-blue-950 dark:text-blue-300"
                   : "bg-slate-50 border-slate-200 text-muted-foreground hover:bg-slate-100"
               }`}
             >
               <span className={`h-5 w-5 rounded-full flex items-center justify-center text-[11px] font-bold ${
-                currentStep === 3 ? "bg-teal-600 text-white" : "bg-slate-200 text-slate-700"
+                currentStep === 3 ? "bg-[#01265D] text-white" : "bg-slate-200 text-slate-700"
               }`}>
                 3
               </span>
@@ -218,7 +218,7 @@ export function ReviewRequestModal({
             <div className="rounded-xl border bg-slate-50/80 dark:bg-slate-900/50 p-4 space-y-3">
               <div className="flex items-start justify-between">
                 <div className="flex items-center gap-3">
-                  <div className="h-10 w-10 rounded-full bg-teal-100 text-teal-800 font-bold flex items-center justify-center text-sm dark:bg-teal-950 dark:text-teal-300">
+                  <div className="h-10 w-10 rounded-full bg-blue-100 dark:bg-blue-950/60 text-[#01265D] dark:text-blue-200 font-bold flex items-center justify-center text-sm dark:bg-blue-950 dark:text-blue-300">
                     {request.patientName.charAt(0)}
                   </div>
                   <div>
@@ -256,7 +256,7 @@ export function ReviewRequestModal({
             {/* Care Requirement Section */}
             <div className="rounded-xl border p-4 space-y-2 bg-card">
               <h4 className="text-xs font-bold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
-                <FileText className="h-4 w-4 text-teal-600" />
+                <FileText className="h-4 w-4 text-[#01265D] dark:text-blue-400" />
                 Patient Care Requirement Statement
               </h4>
               <p className="text-xs text-foreground leading-relaxed font-medium bg-slate-50 dark:bg-slate-900 p-3 rounded-lg border">
@@ -284,10 +284,10 @@ export function ReviewRequestModal({
             <div className="rounded-xl border p-4 bg-card space-y-3">
               <div className="flex items-center justify-between">
                 <h4 className="text-xs font-bold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
-                  <Sparkles className="h-4 w-4 text-teal-600" />
+                  <Sparkles className="h-4 w-4 text-[#01265D] dark:text-blue-400" />
                   Recommend Healthcare Service
                 </h4>
-                <span className="text-[11px] text-teal-600 font-semibold">Step 2 of 3</span>
+                <span className="text-[11px] text-[#01265D] dark:text-blue-400 font-semibold">Step 2 of 3</span>
               </div>
 
               <div className="space-y-2">
@@ -307,8 +307,8 @@ export function ReviewRequestModal({
               </div>
 
               {selectedService && (
-                <div className="p-3 rounded-lg border bg-teal-50/50 dark:bg-teal-950/30 text-xs space-y-1">
-                  <p className="font-semibold text-teal-900 dark:text-teal-200">
+                <div className="p-3 rounded-lg border bg-blue-50/50 dark:bg-blue-950/30 dark:bg-blue-950/30 text-xs space-y-1">
+                  <p className="font-semibold text-[#01265D] dark:text-blue-100 dark:text-blue-300">
                     Selected: {selectedService.serviceName}
                   </p>
                   <p className="text-muted-foreground line-clamp-2">{selectedService.description}</p>
@@ -319,7 +319,7 @@ export function ReviewRequestModal({
             {/* Pricing Review Section */}
             <div className="rounded-xl border p-4 bg-card space-y-3">
               <h4 className="text-xs font-bold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
-                <DollarSign className="h-4 w-4 text-teal-600" />
+                <DollarSign className="h-4 w-4 text-[#01265D] dark:text-blue-400" />
                 Service Pricing Review & Adjustments
               </h4>
 
@@ -356,7 +356,7 @@ export function ReviewRequestModal({
               {/* Total Calculation Display */}
               <div className="flex items-center justify-between p-3 rounded-xl bg-slate-900 text-white dark:bg-slate-800">
                 <span className="text-xs font-semibold">Total Service Price for Booking:</span>
-                <span className="text-lg font-bold text-teal-400 font-mono">
+                <span className="text-lg font-bold text-blue-400 font-mono">
                   ${calculatedFinalPrice.toFixed(2)}
                 </span>
               </div>
@@ -384,7 +384,7 @@ export function ReviewRequestModal({
               </div>
               <div className="flex justify-between border-b pb-2">
                 <span className="text-muted-foreground">Recommended Service:</span>
-                <strong className="text-teal-700 dark:text-teal-400">{selectedService?.serviceName || "Standard Healthcare"}</strong>
+                <strong className="text-[#01265D] dark:text-blue-300 dark:text-blue-400">{selectedService?.serviceName || "Standard Healthcare"}</strong>
               </div>
               <div className="flex justify-between border-b pb-2">
                 <span className="text-muted-foreground">Scheduled Date & Time:</span>
@@ -438,7 +438,7 @@ export function ReviewRequestModal({
                 type="button"
                 size="sm"
                 onClick={() => setCurrentStep((prev) => (prev + 1) as any)}
-                className="h-9 text-xs bg-teal-600 hover:bg-teal-700 text-white font-semibold"
+                className="h-9 text-xs bg-[#01265D] hover:bg-[#0a3375] text-white font-semibold"
               >
                 Next Step
                 <ChevronRight className="h-3.5 w-3.5 ml-1" />

@@ -194,7 +194,7 @@ export default function PatientManagementPage() {
             <h1 className="text-2xl font-black tracking-tight text-foreground sm:text-3xl">
               Patient Management
             </h1>
-            <Badge className="bg-teal-600 text-white font-semibold text-xs">
+            <Badge className="bg-[#01265D] text-white font-semibold text-xs">
               {filteredPatients.length} Patients
             </Badge>
           </div>
@@ -280,7 +280,7 @@ export default function PatientManagementPage() {
         <div className="flex flex-wrap items-center justify-between gap-2 pt-2 border-t text-xs">
           <div className="flex flex-wrap items-center gap-2">
             <div className="flex items-center gap-1.5 text-muted-foreground font-semibold">
-              <Calendar className="h-3.5 w-3.5 text-teal-600" />
+              <Calendar className="h-3.5 w-3.5 text-[#01265D] dark:text-blue-400" />
               <span>Start Date Range:</span>
             </div>
 
@@ -381,11 +381,11 @@ export default function PatientManagementPage() {
                     {/* Patient Name & ID */}
                     <TableCell className="py-3">
                       <div className="flex items-center gap-2.5">
-                        <Avatar className="h-8 w-8 bg-teal-100 text-teal-800 text-xs font-bold shrink-0">
+                        <Avatar className="h-8 w-8 bg-blue-100 dark:bg-blue-950/60 text-[#01265D] dark:text-blue-200 text-xs font-bold shrink-0">
                           <AvatarFallback>{p.fullName.slice(0, 2).toUpperCase()}</AvatarFallback>
                         </Avatar>
                         <div>
-                          <div className="text-xs font-bold text-foreground hover:text-teal-600 transition-colors">
+                          <div className="text-xs font-bold text-foreground hover:text-[#01265D] dark:text-blue-400 transition-colors">
                             {p.fullName}
                           </div>
                           <span className="text-[10px] font-mono text-muted-foreground">
@@ -406,7 +406,7 @@ export default function PatientManagementPage() {
                         variant="outline"
                         className={`text-[10px] font-semibold ${
                           careDisplay === "Nursing"
-                            ? "bg-teal-50 text-teal-800 border-teal-200 dark:bg-teal-950/50 dark:text-teal-300"
+                            ? "bg-blue-50 dark:bg-blue-950/40 text-[#01265D] dark:text-blue-200 border-blue-200 dark:border-blue-900 dark:bg-blue-950/50 dark:text-blue-300"
                             : careDisplay === "Physiotherapy"
                             ? "bg-sky-50 text-sky-800 border-sky-200 dark:bg-sky-950/50 dark:text-sky-300"
                             : "bg-amber-50 text-amber-800 border-amber-200 dark:bg-amber-950/50 dark:text-amber-300"
@@ -419,7 +419,7 @@ export default function PatientManagementPage() {
                     {/* Location Area */}
                     <TableCell className="text-xs font-medium text-muted-foreground py-3">
                       <span className="flex items-center gap-1">
-                        <MapPin className="h-3 w-3 text-teal-600 shrink-0" />
+                        <MapPin className="h-3 w-3 text-[#01265D] dark:text-blue-400 shrink-0" />
                         {p.locationArea}
                       </span>
                     </TableCell>
@@ -430,7 +430,7 @@ export default function PatientManagementPage() {
                         {p.primaryContactName}
                       </div>
                       <div className="text-[10px] text-muted-foreground flex items-center gap-1">
-                        <Phone className="h-2.5 w-2.5 text-teal-600" />
+                        <Phone className="h-2.5 w-2.5 text-[#01265D] dark:text-blue-400" />
                         {p.primaryContactPhone}
                       </div>
                     </TableCell>
@@ -476,7 +476,7 @@ export default function PatientManagementPage() {
                       <Button
                         size="sm"
                         variant="ghost"
-                        className="h-7 text-xs font-bold text-teal-700 hover:text-teal-800 hover:bg-teal-50"
+                        className="h-7 text-xs font-bold text-[#01265D] dark:text-blue-300 hover:text-[#01265D] dark:text-blue-200 hover:bg-blue-50 dark:hover:bg-blue-950/40"
                         onClick={() => handleOpen360(p)}
                       >
                         <Eye className="h-3.5 w-3.5 mr-1" />

@@ -133,7 +133,7 @@ export default function BannersPage() {
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl flex items-center gap-2">
-            <ImageIcon className="h-7 w-7 text-teal-600" />
+            <ImageIcon className="h-7 w-7 text-[#01265D] dark:text-blue-400" />
             Static Banner Management
           </h1>
           <p className="text-xs text-muted-foreground mt-1">
@@ -143,7 +143,7 @@ export default function BannersPage() {
         <Button
           size="sm"
           onClick={handleOpenAdd}
-          className="h-9 gap-2 bg-teal-600 text-white hover:bg-teal-700 text-xs font-semibold shadow-xs"
+          className="h-9 gap-2 bg-[#01265D] text-white hover:bg-[#0a3375] text-xs font-semibold shadow-xs"
         >
           <Plus className="h-3.5 w-3.5" />
           <span>Add New Static Banner</span>

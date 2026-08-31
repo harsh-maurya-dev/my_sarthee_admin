@@ -93,7 +93,7 @@ export function AddEditBannerModal({
       <DialogContent className="sm:max-w-lg max-h-[90vh] overflow-y-auto no-scrollbar p-6">
         <DialogHeader>
           <DialogTitle className="text-lg font-bold flex items-center gap-2">
-            <ImageIcon className="h-5 w-5 text-teal-600" />
+            <ImageIcon className="h-5 w-5 text-[#01265D] dark:text-blue-400" />
             {bannerToEdit ? "Edit Static Banner" : "Add New Static Banner"}
           </DialogTitle>
           <DialogDescription className="text-xs text-muted-foreground">
@@ -172,7 +172,7 @@ export function AddEditBannerModal({
             <Button type="button" variant="outline" size="sm" onClick={onClose} className="h-9 text-xs">
               Cancel
             </Button>
-            <Button type="submit" size="sm" className="h-9 text-xs bg-teal-600 text-white hover:bg-teal-700 font-semibold">
+            <Button type="submit" size="sm" className="h-9 text-xs bg-[#01265D] text-white hover:bg-[#0a3375] font-semibold">
               {bannerToEdit ? "Update Banner" : "Create Static Banner"}
             </Button>
           </DialogFooter>

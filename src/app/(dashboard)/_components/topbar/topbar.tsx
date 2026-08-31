@@ -67,11 +67,11 @@ export function Topbar() {
             <Button
               variant="outline"
               size="sm"
-              className="h-8 gap-1.5 rounded-lg border-teal-200 bg-teal-50/50 text-xs font-semibold text-teal-900 hover:bg-teal-100/70 dark:border-teal-900 dark:bg-teal-950/40 dark:text-teal-200"
+              className="h-8 gap-1.5 rounded-lg border-blue-200 dark:border-blue-900 bg-blue-50/50 dark:bg-blue-950/30 text-xs font-semibold text-[#01265D] dark:text-blue-100 hover:bg-blue-100 dark:hover:bg-blue-900/40/70 dark:border-blue-900 dark:bg-blue-950/40 dark:text-blue-300"
             >
-              <ShieldCheck className="h-3.5 w-3.5 text-teal-600 dark:text-teal-400" />
+              <ShieldCheck className="h-3.5 w-3.5 text-[#01265D] dark:text-blue-400" />
               <span className="hidden md:inline">Role:</span> {activeRole}
-              <ChevronDown className="h-3 w-3 text-teal-600/70 dark:text-teal-400/70" />
+              <ChevronDown className="h-3 w-3 text-[#01265D] dark:text-blue-400/70 dark:text-blue-400/70" />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end" className="w-64">
@@ -89,7 +89,7 @@ export function Topbar() {
                   <div className="flex items-center gap-1.5">
                     <span className="text-xs font-bold text-foreground">{r.role}</span>
                     {activeRole === r.role && (
-                      <CheckCircle2 className="h-3 w-3 text-teal-600" />
+                      <CheckCircle2 className="h-3 w-3 text-[#01265D] dark:text-blue-400" />
                     )}
                   </div>
                   <p className="text-[10px] text-muted-foreground leading-tight line-clamp-1">

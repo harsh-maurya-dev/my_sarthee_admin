@@ -57,7 +57,7 @@ function CareManagementContent() {
             <h1 className="text-2xl font-black tracking-tight text-foreground sm:text-3xl">
               Care Management & Clinical Governance
             </h1>
-            <Badge className="bg-teal-600 text-white font-semibold text-xs">
+            <Badge className="bg-[#01265D] text-white font-semibold text-xs">
               Recovery-Led Care
             </Badge>
           </div>
@@ -81,7 +81,7 @@ function CareManagementContent() {
               onClick={() => handleTabChange(tab.key as any)}
               className={`flex items-center gap-2 rounded-lg px-3.5 py-2 text-xs font-bold transition-all ${
                 activeTab === tab.key
-                  ? "bg-teal-600 text-white shadow-sm"
+                  ? "bg-[#01265D] text-white shadow-sm"
                   : "bg-slate-100 text-muted-foreground hover:bg-slate-200 dark:bg-slate-800"
               }`}
             >
@@ -111,7 +111,7 @@ function CareManagementContent() {
                     onClick={() => setSelectedPatient(p)}
                     className={`cursor-pointer rounded-xl border p-3 transition-all ${
                       isSelected
-                        ? "border-teal-600 bg-teal-50/60 dark:bg-teal-950/40 ring-1 ring-teal-600"
+                        ? "border-[#01265D] bg-blue-50/60 dark:bg-blue-950/30 dark:bg-blue-950/40 ring-1 ring-[#01265D]/30"
                         : "border-slate-200/80 bg-slate-50/40 hover:bg-slate-100 dark:border-slate-800"
                     }`}
                   >
@@ -141,7 +141,7 @@ function CareManagementContent() {
                   Diagnosis: {selectedPatient.primaryDiagnosis}
                 </p>
               </div>
-              <Badge className="bg-teal-600 text-white font-bold">{selectedPatient.carePlan.careType}</Badge>
+              <Badge className="bg-[#01265D] text-white font-bold">{selectedPatient.carePlan.careType}</Badge>
             </div>
 
             {/* Matrix Attributes: Care Type, Frequency, Duration, Goals */}
@@ -166,7 +166,7 @@ function CareManagementContent() {
 
             <div className="space-y-1.5">
               <h4 className="text-xs font-bold text-foreground">Defined Clinical Recovery Goals:</h4>
-              <p className="text-xs text-muted-foreground leading-relaxed bg-teal-50/50 dark:bg-teal-950/30 p-3 rounded-lg border border-teal-200 dark:border-teal-900">
+              <p className="text-xs text-muted-foreground leading-relaxed bg-blue-50/50 dark:bg-blue-950/30 dark:bg-blue-950/30 p-3 rounded-lg border border-blue-200 dark:border-blue-900">
                 {selectedPatient.carePlan.goals}
               </p>
             </div>
@@ -176,7 +176,7 @@ function CareManagementContent() {
               <div className="grid gap-2 sm:grid-cols-2">
                 {selectedPatient.carePlan.specialRequirements.map((req, i) => (
                   <div key={i} className="flex items-center gap-2 text-xs bg-slate-50 dark:bg-slate-900 p-2 rounded border">
-                    <CheckCircle2 className="h-3.5 w-3.5 text-teal-600 shrink-0" />
+                    <CheckCircle2 className="h-3.5 w-3.5 text-[#01265D] dark:text-blue-400 shrink-0" />
                     <span>{req}</span>
                   </div>
                 ))}
@@ -192,10 +192,10 @@ function CareManagementContent() {
                     <div key={i} className="space-y-1">
                       <div className="flex justify-between text-xs font-medium">
                         <span>{act.activity} ({act.target})</span>
-                        <span className="font-bold text-teal-700 dark:text-teal-400">{act.completed}/{act.total} {act.unit} ({pct}%)</span>
+                        <span className="font-bold text-[#01265D] dark:text-blue-300 dark:text-blue-400">{act.completed}/{act.total} {act.unit} ({pct}%)</span>
                       </div>
                       <div className="h-2 w-full bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
-                        <div className="h-full bg-teal-600 rounded-full" style={{ width: `${pct}%` }} />
+                        <div className="h-full bg-[#01265D] rounded-full" style={{ width: `${pct}%` }} />
                       </div>
                     </div>
                   );
@@ -225,7 +225,7 @@ function CareManagementContent() {
               <div className="rounded-xl border border-rose-200 bg-rose-50/40 p-4.5 space-y-3 dark:border-rose-900/50 dark:bg-rose-950/20">
                 <div className="flex items-start justify-between">
                   <div className="flex items-center gap-3">
-                    <Avatar className="h-10 w-10 bg-teal-800 text-white font-bold">
+                    <Avatar className="h-10 w-10 bg-[#01265D] text-white font-bold">
                       <AvatarFallback>AK</AvatarFallback>
                     </Avatar>
                     <div>
@@ -267,7 +267,7 @@ function CareManagementContent() {
               <div className="rounded-xl border border-slate-200 bg-slate-50/50 p-4.5 space-y-3 dark:border-slate-800 dark:bg-slate-900/30">
                 <div className="flex items-start justify-between">
                   <div className="flex items-center gap-3">
-                    <Avatar className="h-10 w-10 bg-teal-100 text-teal-800 font-bold">
+                    <Avatar className="h-10 w-10 bg-blue-100 dark:bg-blue-950/60 text-[#01265D] dark:text-blue-200 font-bold">
                       <AvatarFallback>KM</AvatarFallback>
                     </Avatar>
                     <div>

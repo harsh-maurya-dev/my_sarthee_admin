@@ -120,7 +120,7 @@ export function ReviewApplicantModal({
           <div className="flex items-center justify-between">
             <div>
               <DialogTitle className="text-lg font-bold flex items-center gap-2">
-                <UserCheck className="h-5 w-5 text-teal-600" />
+                <UserCheck className="h-5 w-5 text-[#01265D] dark:text-blue-400" />
                 Review Caregiver Registration Request
               </DialogTitle>
               <DialogDescription className="text-xs text-muted-foreground mt-1">
@@ -164,8 +164,8 @@ export function ReviewApplicantModal({
           )}
 
           {/* Mobile App Notification Notification Banner */}
-          <div className="rounded-xl border border-teal-200 bg-teal-50/60 dark:bg-teal-950/30 dark:border-teal-800 p-3 text-xs flex items-center gap-2.5 text-teal-900 dark:text-teal-200">
-            <BellRing className="h-4 w-4 text-teal-600 shrink-0" />
+          <div className="rounded-xl border border-blue-200 dark:border-blue-900 bg-blue-50/60 dark:bg-blue-950/30 dark:bg-blue-950/30 dark:border-blue-800 p-3 text-xs flex items-center gap-2.5 text-[#01265D] dark:text-blue-100 dark:text-blue-300">
+            <BellRing className="h-4 w-4 text-[#01265D] dark:text-blue-400 shrink-0" />
             <p>
               <strong>Live Notification Sync:</strong> Actions taken on this request automatically notify the caregiver through the mobile application.
             </p>
@@ -175,7 +175,7 @@ export function ReviewApplicantModal({
           <div className="rounded-xl border bg-slate-50/80 dark:bg-slate-900/50 p-4 space-y-3">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <div className="h-12 w-12 rounded-full bg-teal-100 text-teal-800 font-bold flex items-center justify-center text-base dark:bg-teal-950 dark:text-teal-300 shadow-xs">
+                <div className="h-12 w-12 rounded-full bg-blue-100 dark:bg-blue-950/60 text-[#01265D] dark:text-blue-200 font-bold flex items-center justify-center text-base dark:bg-blue-950 dark:text-blue-300 shadow-xs">
                   {applicant.fullName.charAt(0)}
                 </div>
                 <div>
@@ -194,19 +194,19 @@ export function ReviewApplicantModal({
 
             <div className="grid grid-cols-2 gap-2 text-xs pt-3 border-t text-muted-foreground">
               <div className="flex items-center gap-1.5">
-                <Phone className="h-3.5 w-3.5 text-teal-600" />
+                <Phone className="h-3.5 w-3.5 text-[#01265D] dark:text-blue-400" />
                 <span className="font-mono text-foreground font-medium">{applicant.phoneNumber}</span>
               </div>
               <div className="flex items-center gap-1.5 truncate">
-                <Mail className="h-3.5 w-3.5 text-teal-600" />
+                <Mail className="h-3.5 w-3.5 text-[#01265D] dark:text-blue-400" />
                 <span className="truncate text-foreground font-medium">{applicant.email}</span>
               </div>
               <div className="flex items-center gap-1.5">
-                <Calendar className="h-3.5 w-3.5 text-teal-600" />
+                <Calendar className="h-3.5 w-3.5 text-[#01265D] dark:text-blue-400" />
                 <span>Date of Birth: <strong className="text-foreground">{applicant.dateOfBirth}</strong></span>
               </div>
               <div className="flex items-center gap-1.5">
-                <Briefcase className="h-3.5 w-3.5 text-teal-600" />
+                <Briefcase className="h-3.5 w-3.5 text-[#01265D] dark:text-blue-400" />
                 <span>Experience: <strong className="text-foreground">{applicant.experience}</strong></span>
               </div>
             </div>
@@ -215,7 +215,7 @@ export function ReviewApplicantModal({
           {/* Skills & Certifications Section */}
           <div className="rounded-xl border p-4 bg-card space-y-3">
             <h4 className="text-xs font-bold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
-              <Award className="h-4 w-4 text-teal-600" />
+              <Award className="h-4 w-4 text-[#01265D] dark:text-blue-400" />
               Clinical Skills & Professional Certifications
             </h4>
 
@@ -223,7 +223,7 @@ export function ReviewApplicantModal({
               <span className="text-[11px] font-semibold text-muted-foreground block mb-1.5">Registered Skills:</span>
               <div className="flex flex-wrap gap-1.5">
                 {applicant.skills.map((skill, idx) => (
-                  <Badge key={idx} variant="outline" className="text-[10px] bg-teal-50 text-teal-900 border-teal-200 dark:bg-teal-950/60 dark:text-teal-200">
+                  <Badge key={idx} variant="outline" className="text-[10px] bg-blue-50 dark:bg-blue-950/40 text-[#01265D] dark:text-blue-100 border-blue-200 dark:border-blue-900 dark:bg-blue-950/60 dark:text-blue-300">
                     {skill}
                   </Badge>
                 ))}
@@ -247,7 +247,7 @@ export function ReviewApplicantModal({
           <div className="rounded-xl border p-4 bg-card space-y-3">
             <div className="flex items-center justify-between">
               <h4 className="text-xs font-bold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
-                <ShieldCheck className="h-4 w-4 text-teal-600" />
+                <ShieldCheck className="h-4 w-4 text-[#01265D] dark:text-blue-400" />
                 KYC Document Verification Checklist
               </h4>
               {allKycPassed ? (

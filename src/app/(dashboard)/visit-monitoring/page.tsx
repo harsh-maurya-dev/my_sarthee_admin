@@ -75,7 +75,7 @@ export default function VisitMonitoringPage() {
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl flex items-center gap-2">
-            <Eye className="h-7 w-7 text-teal-600" />
+            <Eye className="h-7 w-7 text-[#01265D] dark:text-blue-400" />
             Visit Monitoring & Real-time Telemetry
           </h1>
           <p className="text-xs text-muted-foreground mt-1">
@@ -123,9 +123,9 @@ export default function VisitMonitoringPage() {
           <div>
             <p className="text-xs font-medium text-muted-foreground">Completed Today</p>
             <h3 className="text-2xl font-extrabold text-foreground mt-1">{completedCount}</h3>
-            <p className="text-[10px] text-teal-600 font-semibold mt-0.5">Checked-out & Vitals Logged</p>
+            <p className="text-[10px] text-[#01265D] dark:text-blue-400 font-semibold mt-0.5">Checked-out & Vitals Logged</p>
           </div>
-          <div className="h-10 w-10 rounded-full bg-teal-100 dark:bg-teal-950 text-teal-600 flex items-center justify-center">
+          <div className="h-10 w-10 rounded-full bg-blue-100 dark:bg-blue-950/60 dark:bg-blue-950 text-[#01265D] dark:text-blue-400 flex items-center justify-center">
             <CheckCircle2 className="h-5 w-5" />
           </div>
         </div>
@@ -244,7 +244,7 @@ export default function VisitMonitoringPage() {
                     <TableCell className="text-xs">
                       {v.checkOut.status === "Verified Check-Out" ? (
                         <div className="flex flex-col">
-                          <span className="font-semibold text-teal-600 dark:text-teal-400 flex items-center gap-1">
+                          <span className="font-semibold text-[#01265D] dark:text-blue-400 flex items-center gap-1">
                             <CheckCircle2 className="h-3 w-3" /> Checked-Out
                           </span>
                           <span className="text-[10px] font-mono text-muted-foreground">{v.checkOut.timestamp}</span>
@@ -261,7 +261,7 @@ export default function VisitMonitoringPage() {
                           {v.actualDurationMinutes} mins elapsed ({v.plannedDurationHours}h planned)
                         </span>
                         <span className="text-[10px] text-muted-foreground flex items-center gap-1 mt-0.5">
-                          <CheckSquare className="h-3 w-3 text-teal-600" />
+                          <CheckSquare className="h-3 w-3 text-[#01265D] dark:text-blue-400" />
                           Tasks: <strong className="text-foreground">{completedTasks}/{v.tasks.length} Done</strong>
                         </span>
                       </div>
@@ -289,7 +289,7 @@ export default function VisitMonitoringPage() {
                         size="sm"
                         variant="outline"
                         onClick={() => handleOpenDetails(v)}
-                        className="h-8 text-xs gap-1 border-slate-200 hover:bg-teal-50 hover:text-teal-700"
+                        className="h-8 text-xs gap-1 border-slate-200 hover:bg-blue-50 dark:hover:bg-blue-950/40 hover:text-[#01265D] dark:text-blue-300"
                       >
                         <Eye className="h-3.5 w-3.5" />
                         <span>View</span>
@@ -306,7 +306,7 @@ export default function VisitMonitoringPage() {
           <span>
             Showing <strong className="text-foreground">{filteredVisits.length}</strong> monitored caregiver visits
           </span>
-          <span className="font-medium text-teal-600 dark:text-teal-400 flex items-center gap-1.5">
+          <span className="font-medium text-[#01265D] dark:text-blue-400 flex items-center gap-1.5">
             <Radio className="h-3.5 w-3.5 text-emerald-500 animate-pulse" />
             Live Telemetry Stream Active
           </span>

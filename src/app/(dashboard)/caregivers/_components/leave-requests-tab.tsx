@@ -232,7 +232,7 @@ export function LeaveRequestsTab() {
       case "Emergency Leave":
         return "bg-amber-50 text-amber-700 border-amber-200 dark:bg-amber-950/40 dark:text-amber-300 dark:border-amber-800";
       case "Casual Leave":
-        return "bg-teal-50 text-teal-700 border-teal-200 dark:bg-teal-950/40 dark:text-teal-300 dark:border-teal-800";
+        return "bg-blue-50 dark:bg-blue-950/40 text-[#01265D] dark:text-blue-300 border-blue-200 dark:border-blue-900 dark:bg-blue-950/40 dark:text-blue-300 dark:border-blue-800";
       case "Annual Leave":
         return "bg-sky-50 text-sky-700 border-sky-200 dark:bg-sky-950/40 dark:text-sky-300 dark:border-sky-800";
       default:
@@ -349,7 +349,7 @@ export function LeaveRequestsTab() {
             <Button
               size="sm"
               onClick={() => setIsAddLeaveOpen(true)}
-              className="h-9 gap-1.5 bg-teal-600 text-white hover:bg-teal-700 text-xs font-semibold shadow-xs"
+              className="h-9 gap-1.5 bg-[#01265D] text-white hover:bg-[#0a3375] text-xs font-semibold shadow-xs"
             >
               <Plus className="h-3.5 w-3.5" />
               <span>Log Leave Request</span>
@@ -404,7 +404,7 @@ export function LeaveRequestsTab() {
                     <div className="flex items-center gap-3">
                       <Avatar className="h-9 w-9 border shrink-0">
                         <AvatarImage src={req.avatar} alt={req.caregiverName} />
-                        <AvatarFallback className="text-xs font-bold bg-teal-100 text-teal-800">
+                        <AvatarFallback className="text-xs font-bold bg-blue-100 dark:bg-blue-950/60 text-[#01265D] dark:text-blue-200">
                           {req.caregiverName.substring(0, 2)}
                         </AvatarFallback>
                       </Avatar>
@@ -413,7 +413,7 @@ export function LeaveRequestsTab() {
                         <div className="flex items-center gap-1.5 text-[11px] text-muted-foreground mt-0.5">
                           <span className="font-mono">{req.caregiverId}</span>
                           <span>&bull;</span>
-                          <span className="font-medium text-teal-700 dark:text-teal-400">{req.role}</span>
+                          <span className="font-medium text-[#01265D] dark:text-blue-300 dark:text-blue-400">{req.role}</span>
                         </div>
                       </div>
                     </div>
@@ -430,7 +430,7 @@ export function LeaveRequestsTab() {
                   <TableCell className="py-3.5">
                     <div className="space-y-0.5">
                       <div className="flex items-center gap-1.5 text-xs font-semibold text-foreground">
-                        <Calendar className="h-3 w-3 text-teal-600 shrink-0" />
+                        <Calendar className="h-3 w-3 text-[#01265D] dark:text-blue-400 shrink-0" />
                         <span>{req.startDate}</span>
                         <span className="text-muted-foreground text-[10px]">to</span>
                         <span>{req.endDate}</span>
@@ -451,7 +451,7 @@ export function LeaveRequestsTab() {
                         &ldquo;{req.reason}&rdquo;
                       </p>
                       {req.reassignedTo && (
-                        <div className="mt-1 flex items-center gap-1.5 text-[10px] text-teal-700 dark:text-teal-300">
+                        <div className="mt-1 flex items-center gap-1.5 text-[10px] text-[#01265D] dark:text-blue-300">
                           <ArrowRightLeft className="h-3 w-3 shrink-0" />
                           <span>
                             Substitute: <strong>{req.reassignedTo.name}</strong> ({req.reassignedTo.role})
@@ -488,7 +488,7 @@ export function LeaveRequestsTab() {
                         size="sm"
                         variant="ghost"
                         onClick={() => handleViewDetails(req)}
-                        className="h-8 text-xs text-teal-700 hover:bg-teal-50 dark:text-teal-300 dark:hover:bg-teal-950 px-2 gap-1"
+                        className="h-8 text-xs text-[#01265D] dark:text-blue-300 hover:bg-blue-50 dark:hover:bg-blue-950/40 dark:text-blue-300 dark:hover:bg-blue-950 px-2 gap-1"
                         title="View Leave Details"
                       >
                         <Eye className="h-3.5 w-3.5" />
@@ -526,7 +526,7 @@ export function LeaveRequestsTab() {
                           size="sm"
                           variant="outline"
                           onClick={() => handleOpenReassignModal(req)}
-                          className="h-8 gap-1 text-teal-700 border-teal-200 hover:bg-teal-50 dark:text-teal-300 dark:border-teal-800 dark:hover:bg-teal-950 text-xs font-semibold px-2"
+                          className="h-8 gap-1 text-[#01265D] dark:text-blue-300 border-blue-200 dark:border-blue-900 hover:bg-blue-50 dark:hover:bg-blue-950/40 dark:text-blue-300 dark:border-blue-800 dark:hover:bg-blue-950 text-xs font-semibold px-2"
                           title="Reassign another substitute staff"
                         >
                           <ArrowRightLeft className="h-3.5 w-3.5" />
@@ -547,7 +547,7 @@ export function LeaveRequestsTab() {
             Showing <strong className="text-foreground">{filteredRequests.length}</strong> of{" "}
             <strong className="text-foreground">{leaveRequests.length}</strong> leave requests
           </span>
-          <span className="font-medium text-teal-600 dark:text-teal-400">
+          <span className="font-medium text-[#01265D] dark:text-blue-400">
             Caregiver Roster Sync Active
           </span>
         </div>
@@ -680,7 +680,7 @@ export function LeaveRequestsTab() {
               <Button
                 type="submit"
                 size="sm"
-                className="h-9 text-xs bg-teal-600 text-white hover:bg-teal-700 font-semibold"
+                className="h-9 text-xs bg-[#01265D] text-white hover:bg-[#0a3375] font-semibold"
               >
                 Submit Leave Request
               </Button>

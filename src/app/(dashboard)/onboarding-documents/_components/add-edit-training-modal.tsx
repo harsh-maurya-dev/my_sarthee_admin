@@ -166,7 +166,7 @@ export function AddEditTrainingModal({
         <form onSubmit={handleSubmit} className="space-y-4">
           <DialogHeader className="border-b pb-3">
             <DialogTitle className="text-base font-bold flex items-center gap-2">
-              <GraduationCap className="h-5 w-5 text-teal-600" />
+              <GraduationCap className="h-5 w-5 text-[#01265D] dark:text-blue-400" />
               {documentToEdit ? "Edit Training Protocol Document" : "Create New Training SOP & Protocol"}
             </DialogTitle>
             <DialogDescription className="text-xs text-muted-foreground mt-0.5">
@@ -200,7 +200,7 @@ export function AddEditTrainingModal({
                       onClick={() => toggleRole(role)}
                       className={`text-xs px-3 py-1.5 rounded-lg border font-semibold transition-all ${
                         isSelected
-                          ? "bg-teal-600 text-white border-teal-600 shadow-xs"
+                          ? "bg-[#01265D] text-white border-[#01265D] shadow-xs"
                           : "bg-slate-100 dark:bg-slate-800 text-muted-foreground border-slate-200 dark:border-slate-700"
                       }`}
                     >
@@ -227,15 +227,15 @@ export function AddEditTrainingModal({
               />
 
               {fileName ? (
-                <div className="flex items-center justify-between p-3 rounded-xl border border-teal-200 dark:border-teal-900 bg-teal-50/50 dark:bg-teal-950/30">
+                <div className="flex items-center justify-between p-3 rounded-xl border border-blue-200 dark:border-blue-900 bg-blue-50/50 dark:bg-blue-950/30 dark:bg-blue-950/30">
                   <div className="flex items-center gap-2.5 min-w-0">
-                    <div className="p-2 rounded-lg bg-teal-600 text-white shrink-0">
+                    <div className="p-2 rounded-lg bg-[#01265D] text-white shrink-0">
                       <FileText className="h-4 w-4" />
                     </div>
                     <div className="min-w-0">
                       <p className="text-xs font-bold text-foreground truncate">{fileName}</p>
                       <div className="flex items-center gap-2 mt-0.5">
-                        <span className="text-[10px] font-semibold text-teal-700 dark:text-teal-300 font-mono">
+                        <span className="text-[10px] font-semibold text-[#01265D] dark:text-blue-300 font-mono">
                           {fileFormat}
                         </span>
                         {fileSizeStr && (
@@ -275,12 +275,12 @@ export function AddEditTrainingModal({
               ) : (
                 <div
                   onClick={() => fileInputRef.current?.click()}
-                  className="flex flex-col items-center justify-center p-5 rounded-xl border-2 border-dashed border-slate-300 dark:border-slate-700 bg-slate-50/60 dark:bg-slate-900/40 hover:bg-teal-50/30 dark:hover:bg-teal-950/20 hover:border-teal-400 transition-all cursor-pointer text-center group"
+                  className="flex flex-col items-center justify-center p-5 rounded-xl border-2 border-dashed border-slate-300 dark:border-slate-700 bg-slate-50/60 dark:bg-slate-900/40 hover:bg-blue-50 dark:hover:bg-blue-950/40/30 dark:hover:bg-blue-950/20 hover:border-blue-200 transition-all cursor-pointer text-center group"
                 >
-                  <div className="p-2.5 rounded-full bg-slate-100 dark:bg-slate-800 text-muted-foreground group-hover:text-teal-600 group-hover:bg-teal-100 dark:group-hover:bg-teal-950 transition-colors mb-2">
+                  <div className="p-2.5 rounded-full bg-slate-100 dark:bg-slate-800 text-muted-foreground group-hover:text-[#01265D] dark:text-blue-400 group-hover:bg-blue-100 dark:hover:bg-blue-900/40 dark:group-hover:bg-blue-950 transition-colors mb-2">
                     <UploadCloud className="h-5 w-5" />
                   </div>
-                  <p className="text-xs font-bold text-foreground group-hover:text-teal-600 transition-colors">
+                  <p className="text-xs font-bold text-foreground group-hover:text-[#01265D] dark:text-blue-400 transition-colors">
                     Click to browse or drag and drop file
                   </p>
                   <p className="text-[11px] text-muted-foreground mt-0.5">
@@ -295,7 +295,7 @@ export function AddEditTrainingModal({
             <Button type="button" variant="outline" size="sm" onClick={onClose} className="h-8 text-xs">
               Cancel
             </Button>
-            <Button type="submit" size="sm" className="h-8 text-xs bg-teal-600 hover:bg-teal-700 text-white font-bold gap-1.5 shadow-xs">
+            <Button type="submit" size="sm" className="h-8 text-xs bg-[#01265D] hover:bg-[#0a3375] text-white font-bold gap-1.5 shadow-xs">
               <Save className="h-3.5 w-3.5" />
               <span>{documentToEdit ? "Update Protocol" : "Publish Training SOP"}</span>
             </Button>

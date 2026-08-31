@@ -407,7 +407,7 @@ export default function EscalationCentrePage() {
           }}
           className={`pb-3 text-xs font-bold transition-all flex items-center gap-2 relative shrink-0 ${
             mainTab === "caregivers"
-              ? "text-teal-600 dark:text-teal-400 border-b-2 border-teal-600 dark:border-teal-400"
+              ? "text-[#01265D] dark:text-blue-400 border-b-2 border-[#01265D] dark:border-blue-800"
               : "text-muted-foreground hover:text-foreground"
           }`}
         >
@@ -423,7 +423,7 @@ export default function EscalationCentrePage() {
           }}
           className={`pb-3 text-xs font-bold transition-all flex items-center gap-2 relative shrink-0 ${
             mainTab === "patients"
-              ? "text-teal-600 dark:text-teal-400 border-b-2 border-teal-600 dark:border-teal-400"
+              ? "text-[#01265D] dark:text-blue-400 border-b-2 border-[#01265D] dark:border-blue-800"
               : "text-muted-foreground hover:text-foreground"
           }`}
         >
@@ -439,7 +439,7 @@ export default function EscalationCentrePage() {
           }}
           className={`pb-3 text-xs font-bold transition-all flex items-center gap-2 relative shrink-0 ${
             mainTab === "otp_bypass"
-              ? "text-teal-600 dark:text-teal-400 border-b-2 border-teal-600 dark:border-teal-400"
+              ? "text-[#01265D] dark:text-blue-400 border-b-2 border-[#01265D] dark:border-blue-800"
               : "text-muted-foreground hover:text-foreground"
           }`}
         >
@@ -527,7 +527,7 @@ export default function EscalationCentrePage() {
                   <TableRow key={byp.id} className="hover:bg-slate-50/80 dark:hover:bg-slate-900/50 border-b">
                     {/* User ID */}
                     <TableCell className="text-xs font-mono font-bold py-3.5 align-middle whitespace-nowrap">
-                      <span className="text-teal-700 dark:text-teal-300 font-bold bg-teal-50 dark:bg-teal-950 px-2 py-0.5 rounded border border-teal-200 dark:border-teal-900">
+                      <span className="text-[#01265D] dark:text-blue-300 font-bold bg-blue-50 dark:bg-blue-950/40 dark:bg-blue-950 px-2 py-0.5 rounded border border-blue-200 dark:border-blue-900">
                         {byp.userId}
                       </span>
                     </TableCell>
@@ -576,9 +576,9 @@ export default function EscalationCentrePage() {
                           setSelectedOTPBypass(byp);
                           setIsOTPBypassModalOpen(true);
                         }}
-                        className="h-8 px-3 text-xs font-bold text-slate-700 dark:text-slate-200 hover:text-teal-600 hover:border-teal-300 shadow-xs"
+                        className="h-8 px-3 text-xs font-bold text-slate-700 dark:text-slate-200 hover:text-[#01265D] dark:text-blue-400 hover:border-blue-300 dark:border-blue-800 shadow-xs"
                       >
-                        <Eye className="h-3.5 w-3.5 mr-1 text-teal-600" />
+                        <Eye className="h-3.5 w-3.5 mr-1 text-[#01265D] dark:text-blue-400" />
                         View
                       </Button>
                     </TableCell>
@@ -642,7 +642,7 @@ export default function EscalationCentrePage() {
                   <TableRow key={esc.id} className="hover:bg-slate-50/80 dark:hover:bg-slate-900/50 border-b">
                     {/* Escalation ID & Time */}
                     <TableCell className="text-xs font-mono font-bold py-3.5 align-top whitespace-nowrap">
-                      <span className="text-teal-700 dark:text-teal-400 block">{esc.escalationId}</span>
+                      <span className="text-[#01265D] dark:text-blue-300 dark:text-blue-400 block">{esc.escalationId}</span>
                       <span className="text-[10px] text-muted-foreground font-normal">{esc.timeRaised}</span>
                     </TableCell>
 
@@ -666,7 +666,7 @@ export default function EscalationCentrePage() {
                         <TableCell className="py-3.5 align-top">
                           <div className="text-xs font-semibold text-foreground">{esc.patientName}</div>
                           <span className="text-[10px] text-muted-foreground flex items-center gap-1 mt-0.5">
-                            <MapPin className="h-2.5 w-2.5 text-teal-600" /> {esc.patientLocation} · {esc.patientId}
+                            <MapPin className="h-2.5 w-2.5 text-[#01265D] dark:text-blue-400" /> {esc.patientLocation} · {esc.patientId}
                           </span>
                         </TableCell>
                       </>
@@ -676,7 +676,7 @@ export default function EscalationCentrePage() {
                         <TableCell className="py-3.5 align-top">
                           <div className="text-xs font-bold text-foreground">{esc.patientName}</div>
                           <span className="text-[10px] text-muted-foreground flex items-center gap-1 mt-0.5">
-                            <MapPin className="h-2.5 w-2.5 text-teal-600" /> {esc.patientLocation} · {esc.patientId}
+                            <MapPin className="h-2.5 w-2.5 text-[#01265D] dark:text-blue-400" /> {esc.patientLocation} · {esc.patientId}
                           </span>
                         </TableCell>
 

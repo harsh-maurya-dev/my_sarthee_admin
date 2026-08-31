@@ -48,7 +48,7 @@ export function HealthReportViewModal({
           <div className="flex items-center justify-between">
             <div>
               <DialogTitle className="text-lg font-bold flex items-center gap-2">
-                <FileText className="h-5 w-5 text-teal-600" />
+                <FileText className="h-5 w-5 text-[#01265D] dark:text-blue-400" />
                 Caregiver Clinical Health Report
               </DialogTitle>
               <DialogDescription className="text-xs text-muted-foreground mt-1">
@@ -98,7 +98,7 @@ export function HealthReportViewModal({
           {/* Vitals Telemetry Section */}
           <div className="rounded-xl border p-4 bg-card space-y-3">
             <h4 className="text-xs font-bold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
-              <Activity className="h-4 w-4 text-teal-600" />
+              <Activity className="h-4 w-4 text-[#01265D] dark:text-blue-400" />
               Logged Vital Signs Telemetry
             </h4>
 
@@ -129,7 +129,7 @@ export function HealthReportViewModal({
           {/* Visit Notes Narrative */}
           <div className="rounded-xl border p-4 bg-card space-y-2">
             <h4 className="text-xs font-bold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
-              <Stethoscope className="h-4 w-4 text-teal-600" />
+              <Stethoscope className="h-4 w-4 text-[#01265D] dark:text-blue-400" />
               Caregiver Visit Clinical Notes
             </h4>
             <p className="text-xs leading-relaxed text-foreground bg-slate-50 dark:bg-slate-900/60 p-3 rounded-lg border font-medium">
@@ -141,7 +141,7 @@ export function HealthReportViewModal({
           {report.uploadedImages && report.uploadedImages.length > 0 && (
             <div className="rounded-xl border p-4 bg-card space-y-3">
               <h4 className="text-xs font-bold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
-                <ImageIcon className="h-4 w-4 text-teal-600" />
+                <ImageIcon className="h-4 w-4 text-[#01265D] dark:text-blue-400" />
                 Uploaded Clinical Observations ({report.uploadedImages.length} Photos)
               </h4>
 
@@ -169,16 +169,16 @@ export function HealthReportViewModal({
           <div className="rounded-xl border p-4 bg-card space-y-3">
             <div className="flex items-center justify-between">
               <h4 className="text-xs font-bold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
-                <TrendingUp className="h-4 w-4 text-teal-600" />
+                <TrendingUp className="h-4 w-4 text-[#01265D] dark:text-blue-400" />
                 Patient Recovery Progress Trajectory
               </h4>
-              <span className="text-xs font-extrabold text-teal-600">{report.progressScorePercent}%</span>
+              <span className="text-xs font-extrabold text-[#01265D] dark:text-blue-400">{report.progressScorePercent}%</span>
             </div>
 
             {/* Progress Bar */}
             <div className="w-full bg-slate-100 dark:bg-slate-800 rounded-full h-2 overflow-hidden">
               <div
-                className="bg-teal-600 h-full rounded-full transition-all duration-500"
+                className="bg-[#01265D] h-full rounded-full transition-all duration-500"
                 style={{ width: `${report.progressScorePercent}%` }}
               />
             </div>
@@ -211,7 +211,7 @@ export function HealthReportViewModal({
             Export Medical PDF
           </Button>
 
-          <Button type="button" onClick={onClose} className="h-9 text-xs bg-teal-600 hover:bg-teal-700 text-white font-bold">
+          <Button type="button" onClick={onClose} className="h-9 text-xs bg-[#01265D] hover:bg-[#0a3375] text-white font-bold">
             Close Report
           </Button>
         </DialogFooter>

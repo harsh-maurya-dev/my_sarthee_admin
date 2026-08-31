@@ -175,7 +175,7 @@ export function OnboardProfessionalModal({
         <div className="bg-slate-900 text-white p-5 sticky top-0 z-20 shadow-md">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-teal-600 text-white font-bold">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#01265D] text-white font-bold">
                 <UserPlus className="h-5 w-5" />
               </div>
               <div>
@@ -187,7 +187,7 @@ export function OnboardProfessionalModal({
                 </DialogDescription>
               </div>
             </div>
-            <Badge className="bg-teal-500/20 text-teal-300 border border-teal-400/40 text-xs font-semibold">
+            <Badge className="bg-[#01265D]/20 text-[#01265D] border border-blue-200 text-xs font-semibold">
               Role: {selectedRole}
             </Badge>
           </div>
@@ -199,7 +199,7 @@ export function OnboardProfessionalModal({
               onClick={() => setActiveSection("role_basic")}
               className={`py-1.5 px-2 rounded-lg text-left transition-colors flex items-center gap-1.5 ${
                 activeSection === "role_basic"
-                  ? "bg-teal-600 text-white"
+                  ? "bg-[#01265D] text-white"
                   : "bg-slate-800 text-slate-300 hover:bg-slate-700"
               }`}
             >
@@ -210,7 +210,7 @@ export function OnboardProfessionalModal({
               onClick={() => setActiveSection("professional")}
               className={`py-1.5 px-2 rounded-lg text-left transition-colors flex items-center gap-1.5 ${
                 activeSection === "professional"
-                  ? "bg-teal-600 text-white"
+                  ? "bg-[#01265D] text-white"
                   : "bg-slate-800 text-slate-300 hover:bg-slate-700"
               }`}
             >
@@ -221,7 +221,7 @@ export function OnboardProfessionalModal({
               onClick={() => setActiveSection("documents")}
               className={`py-1.5 px-2 rounded-lg text-left transition-colors flex items-center gap-1.5 ${
                 activeSection === "documents"
-                  ? "bg-teal-600 text-white"
+                  ? "bg-[#01265D] text-white"
                   : "bg-slate-800 text-slate-300 hover:bg-slate-700"
               }`}
             >
@@ -232,7 +232,7 @@ export function OnboardProfessionalModal({
               onClick={() => setActiveSection("bank_insurance")}
               className={`py-1.5 px-2 rounded-lg text-left transition-colors flex items-center gap-1.5 ${
                 activeSection === "bank_insurance"
-                  ? "bg-teal-600 text-white"
+                  ? "bg-[#01265D] text-white"
                   : "bg-slate-800 text-slate-300 hover:bg-slate-700"
               }`}
             >
@@ -266,13 +266,13 @@ export function OnboardProfessionalModal({
                         onClick={() => setSelectedRole(item.role)}
                         className={`cursor-pointer rounded-xl border p-3.5 transition-all flex flex-col justify-between ${
                           isSelected
-                            ? "border-teal-600 bg-teal-50/70 dark:bg-teal-950/40 ring-2 ring-teal-600 shadow-sm"
+                            ? "border-[#01265D] bg-blue-50 dark:bg-blue-950/40/70 dark:bg-blue-950/40 ring-2 ring-[#01265D]/30 shadow-sm"
                             : "border-slate-200 bg-slate-50/40 hover:bg-slate-100 dark:border-slate-800"
                         }`}
                       >
                         <div className="flex items-center justify-between">
-                          <Icon className={`h-5 w-5 ${isSelected ? "text-teal-600" : "text-muted-foreground"}`} />
-                          {isSelected && <CheckCircle2 className="h-4 w-4 text-teal-600" />}
+                          <Icon className={`h-5 w-5 ${isSelected ? "text-[#01265D] dark:text-blue-400" : "text-muted-foreground"}`} />
+                          {isSelected && <CheckCircle2 className="h-4 w-4 text-[#01265D] dark:text-blue-400" />}
                         </div>
                         <div className="mt-2">
                           <div className="text-xs font-black text-foreground">{item.role}</div>
@@ -288,9 +288,9 @@ export function OnboardProfessionalModal({
               <div className="grid gap-4 sm:grid-cols-12 items-center bg-slate-50/60 dark:bg-slate-900/40 p-4 rounded-xl border">
                 <div className="sm:col-span-3 flex flex-col items-center gap-2 text-center">
                   <div className="relative group cursor-pointer">
-                    <Avatar className="h-20 w-20 border-2 border-dashed border-teal-500 bg-teal-50 text-teal-800 text-xl font-bold">
+                    <Avatar className="h-20 w-20 border-2 border-dashed border-[#01265D] bg-blue-50 dark:bg-blue-950/40 text-[#01265D] dark:text-blue-200 text-xl font-bold">
                       <AvatarFallback>
-                        {fullName ? fullName.slice(0, 2).toUpperCase() : <Camera className="h-6 w-6 text-teal-600" />}
+                        {fullName ? fullName.slice(0, 2).toUpperCase() : <Camera className="h-6 w-6 text-[#01265D] dark:text-blue-400" />}
                       </AvatarFallback>
                     </Avatar>
                     <div className="absolute inset-0 bg-black/40 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
@@ -385,7 +385,7 @@ export function OnboardProfessionalModal({
                         onClick={() => toggleLanguage(lang)}
                         className={`text-xs px-2.5 py-1 rounded-lg font-medium border transition-colors ${
                           isSelected
-                            ? "bg-teal-600 text-white border-teal-700 shadow-xs"
+                            ? "bg-[#01265D] text-white border-blue-200 shadow-xs"
                             : "bg-slate-100 text-muted-foreground hover:bg-slate-200 dark:bg-slate-800"
                         }`}
                       >
@@ -495,7 +495,7 @@ export function OnboardProfessionalModal({
                     }}
                     className="h-9 text-xs"
                   />
-                  <Button type="button" size="sm" onClick={addSpecialization} className="bg-teal-600 text-white text-xs h-9">
+                  <Button type="button" size="sm" onClick={addSpecialization} className="bg-[#01265D] text-white text-xs h-9">
                     Add
                   </Button>
                 </div>
@@ -504,7 +504,7 @@ export function OnboardProfessionalModal({
                   {specializations.map((spec) => (
                     <span
                       key={spec}
-                      className="text-xs font-medium px-2.5 py-1 rounded-lg bg-teal-50 text-teal-900 border border-teal-200 flex items-center gap-1.5 dark:bg-teal-950 dark:text-teal-300"
+                      className="text-xs font-medium px-2.5 py-1 rounded-lg bg-blue-50 dark:bg-blue-950/40 text-[#01265D] dark:text-blue-100 border border-blue-200 dark:border-blue-900 flex items-center gap-1.5 dark:bg-blue-950 dark:text-blue-300"
                     >
                       {spec}
                       <X className="h-3 w-3 cursor-pointer hover:text-rose-600" onClick={() => removeSpecialization(spec)} />
@@ -525,7 +525,7 @@ export function OnboardProfessionalModal({
                 <div className="rounded-xl border p-3.5 bg-slate-50/50 dark:bg-slate-900/40 space-y-2">
                   <div className="flex items-center justify-between">
                     <Label className="text-xs font-bold flex items-center gap-1.5">
-                      <ShieldCheck className="h-4 w-4 text-teal-600" /> Aadhar Card Details *
+                      <ShieldCheck className="h-4 w-4 text-[#01265D] dark:text-blue-400" /> Aadhar Card Details *
                     </Label>
                     <Badge className="bg-emerald-100 text-emerald-800 text-[10px]">Verified</Badge>
                   </div>
@@ -537,7 +537,7 @@ export function OnboardProfessionalModal({
                   />
                   <div className="flex items-center justify-between text-[11px] text-muted-foreground pt-1 border-t">
                     <span>aadhar_front_back.pdf</span>
-                    <Button type="button" variant="ghost" size="sm" className="h-6 text-[10px] text-teal-700">
+                    <Button type="button" variant="ghost" size="sm" className="h-6 text-[10px] text-[#01265D] dark:text-blue-300">
                       Re-upload
                     </Button>
                   </div>
@@ -547,7 +547,7 @@ export function OnboardProfessionalModal({
                 <div className="rounded-xl border p-3.5 bg-slate-50/50 dark:bg-slate-900/40 space-y-2">
                   <div className="flex items-center justify-between">
                     <Label className="text-xs font-bold flex items-center gap-1.5">
-                      <FileText className="h-4 w-4 text-teal-600" /> PAN Card Details *
+                      <FileText className="h-4 w-4 text-[#01265D] dark:text-blue-400" /> PAN Card Details *
                     </Label>
                     <Badge className="bg-emerald-100 text-emerald-800 text-[10px]">Verified</Badge>
                   </div>
@@ -559,7 +559,7 @@ export function OnboardProfessionalModal({
                   />
                   <div className="flex items-center justify-between text-[11px] text-muted-foreground pt-1 border-t">
                     <span>pan_card_copy.pdf</span>
-                    <Button type="button" variant="ghost" size="sm" className="h-6 text-[10px] text-teal-700">
+                    <Button type="button" variant="ghost" size="sm" className="h-6 text-[10px] text-[#01265D] dark:text-blue-300">
                       Re-upload
                     </Button>
                   </div>
@@ -571,7 +571,7 @@ export function OnboardProfessionalModal({
                 <div className="rounded-xl border p-3.5 bg-slate-50/50 dark:bg-slate-900/40 space-y-2">
                   <div className="flex items-center justify-between">
                     <Label className="text-xs font-bold flex items-center gap-1.5">
-                      <FileCode className="h-4 w-4 text-teal-600" /> Professional Degree / Certificate
+                      <FileCode className="h-4 w-4 text-[#01265D] dark:text-blue-400" /> Professional Degree / Certificate
                     </Label>
                     <Badge className="bg-emerald-100 text-emerald-800 text-[10px]">Uploaded</Badge>
                   </div>
@@ -599,12 +599,12 @@ export function OnboardProfessionalModal({
               </div>
 
               {/* Police Verification */}
-              <div className="rounded-xl border p-3.5 bg-teal-50/40 dark:bg-teal-950/20 space-y-2 border-teal-200 dark:border-teal-900">
+              <div className="rounded-xl border p-3.5 bg-blue-50 dark:bg-blue-950/40/40 dark:bg-blue-950/20 space-y-2 border-blue-200 dark:border-blue-900">
                 <div className="flex items-center justify-between">
-                  <Label className="text-xs font-bold text-teal-950 dark:text-teal-200 flex items-center gap-1.5">
-                    <ShieldCheck className="h-4 w-4 text-teal-600" /> Police Verification Certificate *
+                  <Label className="text-xs font-bold text-[#01265D] dark:text-blue-300 flex items-center gap-1.5">
+                    <ShieldCheck className="h-4 w-4 text-[#01265D] dark:text-blue-400" /> Police Verification Certificate *
                   </Label>
-                  <Badge className="bg-teal-700 text-white text-[10px] font-bold">Clearance Active</Badge>
+                  <Badge className="bg-[#01265D] text-white text-[10px] font-bold">Clearance Active</Badge>
                 </div>
                 <div className="grid gap-3 sm:grid-cols-2">
                   <Input
@@ -630,7 +630,7 @@ export function OnboardProfessionalModal({
               {/* Bank Details */}
               <div className="rounded-xl border p-4 space-y-3 bg-slate-50/50 dark:bg-slate-900/40">
                 <h3 className="text-xs font-bold uppercase tracking-wider text-foreground flex items-center gap-1.5">
-                  <CreditCard className="h-4 w-4 text-teal-600" /> Bank Payout & Direct Deposit Setup
+                  <CreditCard className="h-4 w-4 text-[#01265D] dark:text-blue-400" /> Bank Payout & Direct Deposit Setup
                 </h3>
                 <div className="grid gap-3 sm:grid-cols-2">
                   <div className="space-y-1">
@@ -678,7 +678,7 @@ export function OnboardProfessionalModal({
               {/* Insurance Details */}
               <div className="rounded-xl border p-4 space-y-3 bg-slate-50/50 dark:bg-slate-900/40">
                 <h3 className="text-xs font-bold uppercase tracking-wider text-foreground flex items-center gap-1.5">
-                  <ShieldCheck className="h-4 w-4 text-teal-600" /> Professional Indemnity & Accidental Insurance
+                  <ShieldCheck className="h-4 w-4 text-[#01265D] dark:text-blue-400" /> Professional Indemnity & Accidental Insurance
                 </h3>
                 <div className="grid gap-3 sm:grid-cols-3">
                   <div className="space-y-1 sm:col-span-2">
@@ -747,7 +747,7 @@ export function OnboardProfessionalModal({
                     if (activeSection === "professional") setActiveSection("documents");
                     if (activeSection === "documents") setActiveSection("bank_insurance");
                   }}
-                  className="h-9 text-xs bg-teal-600 hover:bg-teal-700 text-white font-semibold"
+                  className="h-9 text-xs bg-[#01265D] hover:bg-[#0a3375] text-white font-semibold"
                 >
                   Next Step &rarr;
                 </Button>
@@ -755,7 +755,7 @@ export function OnboardProfessionalModal({
                 <Button
                   type="submit"
                   size="sm"
-                  className="h-9 text-xs bg-teal-600 hover:bg-teal-700 text-white font-bold shadow-sm"
+                  className="h-9 text-xs bg-[#01265D] hover:bg-[#0a3375] text-white font-bold shadow-sm"
                 >
                   <Check className="h-4 w-4 mr-1" />
                   Complete Onboarding

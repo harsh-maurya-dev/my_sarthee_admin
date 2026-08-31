@@ -187,7 +187,7 @@ export default function CaregiverManagementPage() {
       case "En route":
         return <Badge className="bg-indigo-100 text-indigo-800 dark:bg-indigo-950 dark:text-indigo-300 font-bold text-[10px]">🚗 En Route</Badge>;
       case "Care Started":
-        return <Badge className="bg-teal-600 text-white font-bold animate-pulse text-[10px]">❤️ Care Started</Badge>;
+        return <Badge className="bg-[#01265D] text-white font-bold animate-pulse text-[10px]">❤️ Care Started</Badge>;
       case "Care Completed":
         return <Badge className="bg-slate-200 text-slate-800 font-bold text-[10px]">✓ Completed</Badge>;
       default:
@@ -202,10 +202,10 @@ export default function CaregiverManagementPage() {
         <div>
           <div className="flex items-center gap-2">
             <h1 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl flex items-center gap-2">
-              <Activity className="h-7 w-7 text-teal-600" />
+              <Activity className="h-7 w-7 text-[#01265D] dark:text-blue-400" />
               Care Professionals & Registration
             </h1>
-            <Badge className="bg-teal-600 text-white font-semibold text-xs">
+            <Badge className="bg-[#01265D] text-white font-semibold text-xs">
               Unified Roster
             </Badge>
           </div>
@@ -231,7 +231,7 @@ export default function CaregiverManagementPage() {
           <Button
             size="sm"
             onClick={() => setIsOnboardModalOpen(true)}
-            className="h-9 gap-2 bg-teal-600 text-white hover:bg-teal-700 text-xs font-semibold shadow-xs"
+            className="h-9 gap-2 bg-[#01265D] text-white hover:bg-[#0a3375] text-xs font-semibold shadow-xs"
           >
             <Plus className="h-3.5 w-3.5" />
             <span>Onboard Professional</span>
@@ -246,7 +246,7 @@ export default function CaregiverManagementPage() {
           onClick={() => setActiveTab("availability")}
           className={`pb-3 text-xs font-bold transition-all flex items-center gap-2 relative ${
             activeTab === "availability"
-              ? "text-teal-600 dark:text-teal-400 border-b-2 border-teal-600 dark:border-teal-400"
+              ? "text-[#01265D] dark:text-blue-400 border-b-2 border-[#01265D] dark:border-blue-800"
               : "text-muted-foreground hover:text-foreground"
           }`}
         >
@@ -262,7 +262,7 @@ export default function CaregiverManagementPage() {
           onClick={() => setActiveTab("requests")}
           className={`pb-3 text-xs font-bold transition-all flex items-center gap-2 relative ${
             activeTab === "requests"
-              ? "text-teal-600 dark:text-teal-400 border-b-2 border-teal-600 dark:border-teal-400"
+              ? "text-[#01265D] dark:text-blue-400 border-b-2 border-[#01265D] dark:border-blue-800"
               : "text-muted-foreground hover:text-foreground"
           }`}
         >
@@ -275,7 +275,7 @@ export default function CaregiverManagementPage() {
           onClick={() => setActiveTab("leaves")}
           className={`pb-3 text-xs font-bold transition-all flex items-center gap-2 relative ${
             activeTab === "leaves"
-              ? "text-teal-600 dark:text-teal-400 border-b-2 border-teal-600 dark:border-teal-400"
+              ? "text-[#01265D] dark:text-blue-400 border-b-2 border-[#01265D] dark:border-blue-800"
               : "text-muted-foreground hover:text-foreground"
           }`}
         >
@@ -303,7 +303,7 @@ export default function CaregiverManagementPage() {
                   onClick={() => setProTypeFilter(tab.key)}
                   className={`flex items-center gap-2 rounded-lg px-3 py-1.5 text-xs font-bold transition-all ${
                     proTypeFilter === tab.key
-                      ? "bg-teal-600 text-white shadow-sm"
+                      ? "bg-[#01265D] text-white shadow-sm"
                       : "bg-slate-100 text-muted-foreground hover:bg-slate-200 dark:bg-slate-800"
                   }`}
                 >
@@ -390,18 +390,18 @@ export default function CaregiverManagementPage() {
                       {/* Professional */}
                       <TableCell className="py-3">
                         <div className="flex items-center gap-3">
-                          <Avatar className="h-9 w-9 bg-teal-100 text-teal-800 text-xs font-bold">
+                          <Avatar className="h-9 w-9 bg-blue-100 dark:bg-blue-950/60 text-[#01265D] dark:text-blue-200 text-xs font-bold">
                             <AvatarFallback>{pro.name.slice(0, 2).toUpperCase()}</AvatarFallback>
                           </Avatar>
                           <div>
                             <div className="text-xs font-bold text-foreground flex items-center gap-1.5">
                               {pro.name}
                               {pro.policeVerified && (
-                                <ShieldCheck className="h-3 w-3 text-teal-600" />
+                                <ShieldCheck className="h-3 w-3 text-[#01265D] dark:text-blue-400" />
                               )}
                             </div>
                             <div className="text-[10px] text-muted-foreground flex items-center gap-1">
-                              <Phone className="h-2.5 w-2.5 text-teal-600" /> {pro.phone}
+                              <Phone className="h-2.5 w-2.5 text-[#01265D] dark:text-blue-400" /> {pro.phone}
                             </div>
                           </div>
                         </div>
@@ -417,7 +417,7 @@ export default function CaregiverManagementPage() {
                       {/* Area */}
                       <TableCell className="text-xs font-medium text-foreground py-3">
                         <span className="flex items-center gap-1">
-                          <MapPin className="h-3 w-3 text-teal-600" />
+                          <MapPin className="h-3 w-3 text-[#01265D] dark:text-blue-400" />
                           {pro.area}
                         </span>
                       </TableCell>
@@ -431,7 +431,7 @@ export default function CaregiverManagementPage() {
                       <TableCell className="py-3">
                         {pro.currentAssignment ? (
                           <div>
-                            <span className="text-xs font-bold text-teal-700 dark:text-teal-400 block">
+                            <span className="text-xs font-bold text-[#01265D] dark:text-blue-300 dark:text-blue-400 block">
                               Patient #{pro.currentAssignment.patientId} ({pro.currentAssignment.patientName})
                             </span>
                             <span className="text-[10px] text-muted-foreground">
@@ -459,21 +459,21 @@ export default function CaregiverManagementPage() {
                           <Button
                             size="sm"
                             variant="outline"
-                            className="h-7 text-xs font-semibold gap-1 border-slate-200 hover:bg-teal-50 hover:text-teal-700 dark:hover:bg-teal-950"
+                            className="h-7 text-xs font-semibold gap-1 border-slate-200 hover:bg-blue-50 dark:hover:bg-blue-950/40 hover:text-[#01265D] dark:text-blue-300 dark:hover:bg-blue-950"
                             onClick={() => {
                               setSelectedProForSchedule(pro);
                               setIsScheduleModalOpen(true);
                             }}
                             title="View Full Date Schedule"
                           >
-                            <Calendar className="h-3 w-3 text-teal-600" />
+                            <Calendar className="h-3 w-3 text-[#01265D] dark:text-blue-400" />
                             <span>View Schedule</span>
                           </Button>
 
                           {pro.status === "Available" ? (
                             <Button
                               size="sm"
-                              className="h-7 text-xs bg-teal-600 hover:bg-teal-700 text-white font-bold"
+                              className="h-7 text-xs bg-[#01265D] hover:bg-[#0a3375] text-white font-bold"
                               onClick={() =>
                                 swiftAlert.info({
                                   title: `Assign ${pro.name}`,
@@ -621,9 +621,9 @@ export default function CaregiverManagementPage() {
                         {/* Application ID & Applied Date */}
                         <TableCell className="font-mono text-xs text-foreground font-semibold">
                           <div className="flex flex-col">
-                            <span className="text-teal-700 dark:text-teal-400 font-bold">{req.id}</span>
+                            <span className="text-[#01265D] dark:text-blue-300 dark:text-blue-400 font-bold">{req.id}</span>
                             <span className="text-[10px] text-muted-foreground font-normal flex items-center gap-1">
-                              <Smartphone className="h-2.5 w-2.5 text-teal-600" />
+                              <Smartphone className="h-2.5 w-2.5 text-[#01265D] dark:text-blue-400" />
                               {req.appliedDate}
                             </span>
                           </div>
@@ -632,7 +632,7 @@ export default function CaregiverManagementPage() {
                         {/* Applicant Name & Username */}
                         <TableCell className="text-xs">
                           <div className="flex items-center gap-2">
-                            <div className="h-8 w-8 rounded-full bg-teal-100 text-teal-800 font-bold flex items-center justify-center text-xs dark:bg-teal-950 dark:text-teal-300">
+                            <div className="h-8 w-8 rounded-full bg-blue-100 dark:bg-blue-950/60 text-[#01265D] dark:text-blue-200 font-bold flex items-center justify-center text-xs dark:bg-blue-950 dark:text-blue-300">
                               {req.fullName.charAt(0)}
                             </div>
                             <div className="flex flex-col">
@@ -658,7 +658,7 @@ export default function CaregiverManagementPage() {
                         {/* <TableCell className="text-xs max-w-[180px]">
                           <div className="flex flex-wrap gap-1">
                             {req.skills.slice(0, 2).map((skill, idx) => (
-                              <Badge key={idx} variant="outline" className="text-[9px] px-1.5 py-0 bg-teal-50/50 text-teal-900 dark:text-teal-200">
+                              <Badge key={idx} variant="outline" className="text-[9px] px-1.5 py-0 bg-blue-50/50 dark:bg-blue-950/30 text-[#01265D] dark:text-blue-100 dark:text-blue-300">
                                 {skill}
                               </Badge>
                             ))}
@@ -737,7 +737,7 @@ export default function CaregiverManagementPage() {
                                 setSelectedApplicant(req);
                                 setIsReviewOpen(true);
                               }}
-                              className="h-8 text-xs gap-1 font-semibold border-slate-200 hover:bg-teal-50 hover:text-teal-700 hover:border-teal-300 dark:hover:bg-teal-950"
+                              className="h-8 text-xs gap-1 font-semibold border-slate-200 hover:bg-blue-50 dark:hover:bg-blue-950/40 hover:text-[#01265D] dark:text-blue-300 hover:border-blue-300 dark:border-blue-800 dark:hover:bg-blue-950"
                             >
                               <UserCheck className="h-3.5 w-3.5" />
                               <span>Review</span>
@@ -781,7 +781,7 @@ export default function CaregiverManagementPage() {
                 <strong className="text-foreground">{registrationRequests.length}</strong> total requests ·{" "}
                 <strong className="text-amber-600">{pendingCount} pending review</strong>
               </span>
-              <span className="font-medium text-teal-600 dark:text-teal-400 flex items-center gap-1">
+              <span className="font-medium text-[#01265D] dark:text-blue-400 flex items-center gap-1">
                 <Smartphone className="h-3.5 w-3.5" />
                 Mobile App Sync Active
               </span>

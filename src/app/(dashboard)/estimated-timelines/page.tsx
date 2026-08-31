@@ -107,7 +107,7 @@ export default function EstimatedTimelinesPage() {
   const getOptionIcon = (category: string) => {
     switch (category) {
       case "booking_confirmation":
-        return <CalendarCheck className="h-4 w-4 text-teal-600" />;
+        return <CalendarCheck className="h-4 w-4 text-[#01265D] dark:text-blue-400" />;
       case "replacement_request":
         return <RotateCcw className="h-4 w-4 text-rose-600" />;
       case "reschedule_request":
@@ -129,7 +129,7 @@ export default function EstimatedTimelinesPage() {
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between border-b pb-5">
         <div>
           <div className="flex items-center gap-2.5">
-            <div className="p-2 rounded-xl bg-teal-500/10 text-teal-600 dark:bg-teal-950 dark:text-teal-400 border border-teal-200/50 dark:border-teal-900/50">
+            <div className="p-2 rounded-xl bg-[#01265D]/10 text-[#01265D] dark:text-blue-400 dark:bg-blue-950 dark:text-blue-400 border border-blue-200 dark:border-blue-900/50 dark:border-blue-900/50">
               <Timer className="h-6 w-6" />
             </div>
             <div>
@@ -137,7 +137,7 @@ export default function EstimatedTimelinesPage() {
                 <h1 className="text-2xl font-black tracking-tight text-foreground sm:text-3xl">
                   Estimated Timeline
                 </h1>
-                <Badge className="bg-teal-600 text-white font-bold text-[11px] px-2 py-0.5">
+                <Badge className="bg-[#01265D] text-white font-bold text-[11px] px-2 py-0.5">
                   SLA Config
                 </Badge>
               </div>
@@ -199,7 +199,7 @@ export default function EstimatedTimelinesPage() {
                       key={item.id}
                       className={`transition-colors ${
                         isEditingThisRow
-                          ? "bg-teal-50/40 dark:bg-teal-950/30"
+                          ? "bg-blue-50 dark:bg-blue-950/40/40 dark:bg-blue-950/30"
                           : "hover:bg-slate-50/70 dark:hover:bg-slate-900/50"
                       }`}
                     >
@@ -273,7 +273,7 @@ export default function EstimatedTimelinesPage() {
                         ) : (
                           <div className="flex items-center gap-2">
                             <div className="flex items-center gap-1.5 bg-slate-100 dark:bg-slate-800 px-2.5 py-1 rounded-md border">
-                              <Clock className="h-3.5 w-3.5 text-teal-600 dark:text-teal-400" />
+                              <Clock className="h-3.5 w-3.5 text-[#01265D] dark:text-blue-400" />
                               <span className="text-xs font-mono font-bold text-foreground">
                                 {formatHHMM(item.hours, item.minutes)}
                               </span>
@@ -292,7 +292,7 @@ export default function EstimatedTimelinesPage() {
                             <Button
                               size="sm"
                               onClick={() => handleSaveInlineEdit(item.id)}
-                              className="h-8 px-3 text-xs font-bold bg-teal-600 hover:bg-teal-700 text-white shadow-xs"
+                              className="h-8 px-3 text-xs font-bold bg-[#01265D] hover:bg-[#0a3375] text-white shadow-xs"
                             >
                               <Save className="h-3.5 w-3.5 mr-1" />
                               Save
@@ -312,9 +312,9 @@ export default function EstimatedTimelinesPage() {
                               size="sm"
                               variant="outline"
                               onClick={() => handleStartInlineEdit(item)}
-                              className="h-8 px-3 text-xs font-semibold text-slate-700 dark:text-slate-200 hover:text-teal-600 hover:border-teal-300"
+                              className="h-8 px-3 text-xs font-semibold text-slate-700 dark:text-slate-200 hover:text-[#01265D] dark:text-blue-400 hover:border-blue-300 dark:border-blue-800"
                             >
-                              <Edit2 className="h-3.5 w-3.5 mr-1 text-teal-600" />
+                              <Edit2 className="h-3.5 w-3.5 mr-1 text-[#01265D] dark:text-blue-400" />
                               Edit
                             </Button>
                           </div>

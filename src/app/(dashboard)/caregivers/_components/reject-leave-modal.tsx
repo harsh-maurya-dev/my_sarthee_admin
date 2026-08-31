@@ -86,7 +86,7 @@ export function RejectLeaveModal({
         <div className="rounded-xl border bg-slate-50/70 dark:bg-slate-900/50 p-3 space-y-2 text-xs">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <User className="h-3.5 w-3.5 text-teal-600" />
+              <User className="h-3.5 w-3.5 text-[#01265D] dark:text-blue-400" />
               <span className="font-bold text-foreground">{leaveRequest.caregiverName}</span>
               <Badge variant="outline" className="text-[10px] py-0 px-1.5 font-semibold">
                 {leaveRequest.role}

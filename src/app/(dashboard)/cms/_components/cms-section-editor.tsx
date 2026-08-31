@@ -69,14 +69,14 @@ export function CMSSectionEditor({ section, onSave }: CMSSectionEditorProps) {
         <div className="flex items-center justify-between border-b pb-4">
           <div>
             <h2 className="text-lg font-bold text-foreground flex items-center gap-2">
-              <FileCode className="h-5 w-5 text-teal-600" />
+              <FileCode className="h-5 w-5 text-[#01265D] dark:text-blue-400" />
               Editing Section: {section.sectionTitle}
             </h2>
             <p className="text-xs text-muted-foreground mt-0.5">
               Last published update: <strong className="font-mono text-foreground">{section.lastUpdated}</strong>
             </p>
           </div>
-          <Button type="submit" size="sm" className="h-9 gap-2 bg-teal-600 text-white hover:bg-teal-700 text-xs font-semibold">
+          <Button type="submit" size="sm" className="h-9 gap-2 bg-[#01265D] text-white hover:bg-[#0a3375] text-xs font-semibold">
             <Save className="h-4 w-4" />
             <span>Publish Content</span>
           </Button>
@@ -125,7 +125,7 @@ export function CMSSectionEditor({ section, onSave }: CMSSectionEditorProps) {
               variant="outline"
               size="sm"
               onClick={handleAddItem}
-              className="h-8 text-xs gap-1 border-teal-200 text-teal-700"
+              className="h-8 text-xs gap-1 border-blue-200 dark:border-blue-900 text-[#01265D] dark:text-blue-300"
             >
               <Plus className="h-3.5 w-3.5" />
               <span>Add Item</span>
@@ -171,7 +171,7 @@ export function CMSSectionEditor({ section, onSave }: CMSSectionEditorProps) {
         </div>
 
         <div className="pt-4 border-t flex justify-end">
-          <Button type="submit" size="sm" className="h-9 gap-2 bg-teal-600 text-white hover:bg-teal-700 text-xs font-semibold">
+          <Button type="submit" size="sm" className="h-9 gap-2 bg-[#01265D] text-white hover:bg-[#0a3375] text-xs font-semibold">
             <CheckCircle2 className="h-4 w-4" />
             <span>Publish Content Updates</span>
           </Button>

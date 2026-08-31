@@ -1421,7 +1421,7 @@ export const systemRoles = [
   {
     role: "Care Coordinator" as UserRole,
     description: "Direct liaison for patient recovery, family communications, and care plan updates.",
-    badgeColor: "bg-teal-100 text-teal-800 dark:bg-teal-950 dark:text-teal-300",
+    badgeColor: "bg-blue-100 dark:bg-blue-950/60 text-[#01265D] dark:text-blue-200 dark:bg-blue-950 dark:text-blue-300",
     permissions: ["Patient 360", "Care Plan Customization", "WhatsApp & Call Center", "Daily Telemetry"],
   },
   {

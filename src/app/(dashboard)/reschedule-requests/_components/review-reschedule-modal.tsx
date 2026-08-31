@@ -89,7 +89,7 @@ export function ReviewRescheduleModal({
         <DialogHeader className="border-b pb-3">
           <div className="flex items-center justify-between">
             <DialogTitle className="text-base font-bold flex items-center gap-2">
-              <CalendarClock className="h-5 w-5 text-teal-600" />
+              <CalendarClock className="h-5 w-5 text-[#01265D] dark:text-blue-400" />
               Review Shift Reschedule Request
             </DialogTitle>
             <Badge
@@ -120,8 +120,8 @@ export function ReviewRescheduleModal({
 
         <div className="space-y-4 py-2 text-xs">
           {/* Notification Sync Banner */}
-          <div className="rounded-xl border border-teal-200 bg-teal-50/60 dark:bg-teal-950/30 dark:border-teal-800 p-3 flex items-center gap-2.5 text-teal-900 dark:text-teal-200">
-            <BellRing className="h-4 w-4 text-teal-600 shrink-0" />
+          <div className="rounded-xl border border-blue-200 dark:border-blue-900 bg-blue-50/60 dark:bg-blue-950/30 dark:bg-blue-950/30 dark:border-blue-800 p-3 flex items-center gap-2.5 text-[#01265D] dark:text-blue-100 dark:text-blue-300">
+            <BellRing className="h-4 w-4 text-[#01265D] dark:text-blue-400 shrink-0" />
             <p>
               <strong>Mobile Sync:</strong> Approving or declining automatically updates both the Patient Mobile App and Caregiver Handheld Roster.
             </p>
@@ -155,20 +155,20 @@ export function ReviewRescheduleModal({
               </div>
 
               {/* Requested New Schedule */}
-              <div className="p-3.5 rounded-xl border border-teal-300 bg-teal-50/70 dark:bg-teal-950/40 dark:border-teal-800 space-y-2">
+              <div className="p-3.5 rounded-xl border border-blue-300 dark:border-blue-800 bg-blue-50 dark:bg-blue-950/40/70 dark:bg-blue-950/40 dark:border-blue-800 space-y-2">
                 <div className="flex items-center justify-between">
-                  <span className="text-[11px] font-bold uppercase text-teal-800 dark:text-teal-300">Requested New Slot</span>
-                  <Badge className="text-[9px] bg-teal-600 text-white font-bold">
+                  <span className="text-[11px] font-bold uppercase text-[#01265D] dark:text-blue-200 dark:text-blue-300">Requested New Slot</span>
+                  <Badge className="text-[9px] bg-[#01265D] text-white font-bold">
                     Target Time
                   </Badge>
                 </div>
                 <div className="space-y-1">
-                  <div className="text-xs font-bold text-teal-950 dark:text-teal-100 flex items-center gap-1.5">
-                    <Calendar className="h-3.5 w-3.5 text-teal-600" />
+                  <div className="text-xs font-bold text-[#01265D] dark:text-blue-300 flex items-center gap-1.5">
+                    <Calendar className="h-3.5 w-3.5 text-[#01265D] dark:text-blue-400" />
                     <span>{request.requestedNewSchedule.date}</span>
                   </div>
-                  <div className="text-xs font-semibold text-teal-800 dark:text-teal-300 flex items-center gap-1.5">
-                    <Clock className="h-3.5 w-3.5 text-teal-600" />
+                  <div className="text-xs font-semibold text-[#01265D] dark:text-blue-200 dark:text-blue-300 flex items-center gap-1.5">
+                    <Clock className="h-3.5 w-3.5 text-[#01265D] dark:text-blue-400" />
                     <span>{request.requestedNewSchedule.timeSlot} ({request.requestedNewSchedule.duration})</span>
                   </div>
                 </div>
@@ -200,7 +200,7 @@ export function ReviewRescheduleModal({
                 {request.ageGender} · <span className="font-medium text-foreground">{request.careType}</span>
               </div>
               <div className="text-[10px] text-muted-foreground flex items-center gap-1 pt-1 border-t">
-                <MapPin className="h-3 w-3 text-teal-600" /> {request.locationArea} · {request.patientPhone}
+                <MapPin className="h-3 w-3 text-[#01265D] dark:text-blue-400" /> {request.locationArea} · {request.patientPhone}
               </div>
             </div>
 

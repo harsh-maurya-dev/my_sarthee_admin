@@ -47,7 +47,7 @@ export function AssignmentConfirmationModal({
           <div className="flex items-center justify-between border-b pb-2">
             <span className="text-muted-foreground font-medium">Assigned Caregiver:</span>
             <span className="font-bold text-foreground flex items-center gap-1">
-              <UserCheck className="h-3.5 w-3.5 text-teal-600" />
+              <UserCheck className="h-3.5 w-3.5 text-[#01265D] dark:text-blue-400" />
               {assignedCaregiver.name} ({assignedCaregiver.role})
             </span>
           </div>
@@ -71,10 +71,10 @@ export function AssignmentConfirmationModal({
         </div>
 
         {/* Mobile Dispatch Status Card */}
-        <div className="rounded-xl border border-teal-200 dark:border-teal-900 bg-teal-50/60 dark:bg-teal-950/30 p-3 text-left space-y-2">
+        <div className="rounded-xl border border-blue-200 dark:border-blue-900 bg-blue-50/60 dark:bg-blue-950/30 dark:bg-blue-950/30 p-3 text-left space-y-2">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-bold text-teal-900 dark:text-teal-200 flex items-center gap-1.5">
-              <Smartphone className="h-4 w-4 text-teal-600" />
+            <span className="text-xs font-bold text-[#01265D] dark:text-blue-100 dark:text-blue-300 flex items-center gap-1.5">
+              <Smartphone className="h-4 w-4 text-[#01265D] dark:text-blue-400" />
               Push Notifications Dispatched
             </span>
             <Badge className="bg-emerald-600 text-white text-[9px]">Delivered</Badge>
@@ -89,7 +89,7 @@ export function AssignmentConfirmationModal({
         <DialogFooter className="pt-2">
           <Button
             onClick={onClose}
-            className="w-full bg-teal-600 hover:bg-teal-700 text-white font-bold h-9 text-xs"
+            className="w-full bg-[#01265D] hover:bg-[#0a3375] text-white font-bold h-9 text-xs"
           >
             Done
           </Button>

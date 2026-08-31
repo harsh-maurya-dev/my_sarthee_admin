@@ -14,7 +14,7 @@ export const swiftAlert = {
     toast.success(title, {
       description,
       duration,
-      className: "font-sans tracking-tight rounded-xl border-teal-200 dark:border-teal-900 bg-teal-50 dark:bg-teal-950 text-teal-950 dark:text-teal-50",
+      className: "font-sans tracking-tight rounded-xl border-blue-200 dark:border-blue-900 bg-blue-50 dark:bg-blue-950/40 dark:bg-blue-950 text-[#01265D] dark:text-blue-300",
     });
   },
 

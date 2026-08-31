@@ -139,13 +139,13 @@ export function PatientDetailsSheet({
         <div className="bg-slate-900 text-white p-6 sticky top-0 z-20 shadow-md">
           <div className="flex flex-col items-end justify-between gap-4">
             <div className="flex items-center gap-3.5">
-              <Avatar className="h-14 w-14 border-2 border-teal-400 bg-teal-800 text-white text-lg font-bold">
+              <Avatar className="h-14 w-14 border-2 border-blue-200 bg-[#01265D] text-white text-lg font-bold">
                 <AvatarFallback>{patient.fullName.slice(0, 2).toUpperCase()}</AvatarFallback>
               </Avatar>
               <div>
                 <div className="flex items-center gap-4 flex-wrap">
                   <h2 className="text-xl font-black text-white">{patient.fullName}</h2>
-                  <Badge className="bg-teal-700 text-teal-100 text-xs font-mono">{patient.patientId}</Badge>
+                  <Badge className="bg-[#01265D] text-[#01265D] text-xs font-mono">{patient.patientId}</Badge>
                   {getRiskBadge(patient.riskIndicator)}
                 </div>
                 <p className="text-xs text-slate-300 mt-1 flex items-center gap-2 flex-wrap">
@@ -154,14 +154,14 @@ export function PatientDetailsSheet({
                   <span>Blood: <strong className="text-white">{patient.bloodGroup}</strong></span>
                   <span>·</span>
                   <span className="flex items-center gap-1">
-                    <MapPin className="h-3 w-3 text-teal-400" /> {patient.locationArea}
+                    <MapPin className="h-3 w-3 text-blue-400" /> {patient.locationArea}
                   </span>
                 </p>
               </div>
             </div>
 
             <div className="flex items-center gap-2">
-              <Badge className="bg-teal-500/20 text-teal-300 border border-teal-400/40 text-xs px-3 py-1 font-semibold">
+              <Badge className="bg-[#01265D]/20 text-[#01265D] border border-blue-200 text-xs px-3 py-1 font-semibold">
                 Care: {patient.careRequired}
               </Badge>
               <Badge
@@ -218,7 +218,7 @@ export function PatientDetailsSheet({
                 {/* Personal & Family Information */}
                 <div className="rounded-xl border bg-card p-4 space-y-3">
                   <h3 className="text-xs font-extrabold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
-                    <User className="h-3.5 w-3.5 text-teal-600" /> Family & Contact Information
+                    <User className="h-3.5 w-3.5 text-[#01265D] dark:text-blue-400" /> Family & Contact Information
                   </h3>
                   <div className="text-xs space-y-2">
                     <div className="flex justify-between border-b pb-1.5">
@@ -228,7 +228,7 @@ export function PatientDetailsSheet({
                     <div className="flex justify-between border-b pb-1.5">
                       <span className="text-muted-foreground">Contact Phone</span>
                       <span className="font-semibold text-foreground flex items-center gap-1">
-                        <Phone className="h-3 w-3 text-teal-600" /> {patient.primaryContactPhone}
+                        <Phone className="h-3 w-3 text-[#01265D] dark:text-blue-400" /> {patient.primaryContactPhone}
                       </span>
                     </div>
                     <div className="flex justify-between border-b pb-1.5">
@@ -249,7 +249,7 @@ export function PatientDetailsSheet({
                 {/* Medical & Recovery Information */}
                 <div className="rounded-xl border bg-card p-4 space-y-3">
                   <h3 className="text-xs font-extrabold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
-                    <Stethoscope className="h-3.5 w-3.5 text-teal-600" /> Medical & Clinical Profile
+                    <Stethoscope className="h-3.5 w-3.5 text-[#01265D] dark:text-blue-400" /> Medical & Clinical Profile
                   </h3>
                   <div className="text-xs space-y-2">
                     <div className="flex justify-between border-b pb-1.5">
@@ -270,7 +270,7 @@ export function PatientDetailsSheet({
                     </div>
                     <div className="flex justify-between pt-0.5">
                       <span className="text-muted-foreground">Referral Channel</span>
-                      <Badge className="bg-teal-100 text-teal-800 text-[10px]">{patient.referralSource} ({patient.referralPartnerName || "Direct"})</Badge>
+                      <Badge className="bg-blue-100 dark:bg-blue-950/60 text-[#01265D] dark:text-blue-200 text-[10px]">{patient.referralSource} ({patient.referralPartnerName || "Direct"})</Badge>
                     </div>
                   </div>
                 </div>
@@ -279,7 +279,7 @@ export function PatientDetailsSheet({
               {/* Doctor Clinical Notes */}
               <div className="rounded-xl border bg-slate-50/60 dark:bg-slate-900/40 p-4 space-y-1.5">
                 <h4 className="text-xs font-bold text-foreground flex items-center gap-1.5">
-                  <FileText className="h-3.5 w-3.5 text-teal-600" /> Treating Physician Clinical Orders
+                  <FileText className="h-3.5 w-3.5 text-[#01265D] dark:text-blue-400" /> Treating Physician Clinical Orders
                 </h4>
                 <p className="text-xs text-muted-foreground italic leading-relaxed">
                   &quot;{patient.doctorNotes}&quot;
@@ -297,7 +297,7 @@ export function PatientDetailsSheet({
                     <h3 className="text-sm font-extrabold text-foreground">Care Plan Specification</h3>
                     <p className="text-xs text-muted-foreground mt-0.5">Recovery-led structured clinical regime</p>
                   </div>
-                  <Badge className="bg-teal-600 text-white font-bold">{patient.carePlan.careType}</Badge>
+                  <Badge className="bg-[#01265D] text-white font-bold">{patient.carePlan.careType}</Badge>
                 </div>
 
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-xs">
@@ -321,7 +321,7 @@ export function PatientDetailsSheet({
 
                 <div className="space-y-1.5">
                   <h4 className="text-xs font-bold text-foreground">Clinical Recovery Goals:</h4>
-                  <p className="text-xs text-muted-foreground leading-relaxed bg-teal-50/50 dark:bg-teal-950/30 p-3 rounded-lg border border-teal-200 dark:border-teal-900">
+                  <p className="text-xs text-muted-foreground leading-relaxed bg-blue-50/50 dark:bg-blue-950/30 dark:bg-blue-950/30 p-3 rounded-lg border border-blue-200 dark:border-blue-900">
                     {patient.carePlan.goals}
                   </p>
                 </div>
@@ -332,7 +332,7 @@ export function PatientDetailsSheet({
                   <div className="grid gap-2 sm:grid-cols-2">
                     {patient.carePlan.specialRequirements.map((req, idx) => (
                       <div key={idx} className="flex items-center gap-2 text-xs bg-slate-50 dark:bg-slate-900 p-2 rounded border">
-                        <CheckCircle2 className="h-3.5 w-3.5 text-teal-600 shrink-0" />
+                        <CheckCircle2 className="h-3.5 w-3.5 text-[#01265D] dark:text-blue-400 shrink-0" />
                         <span>{req}</span>
                       </div>
                     ))}
@@ -349,10 +349,10 @@ export function PatientDetailsSheet({
                         <div key={i} className="space-y-1">
                           <div className="flex justify-between text-xs font-medium">
                             <span>{act.activity} ({act.target})</span>
-                            <span className="font-bold text-teal-700 dark:text-teal-400">{act.completed}/{act.total} {act.unit} ({pct}%)</span>
+                            <span className="font-bold text-[#01265D] dark:text-blue-300 dark:text-blue-400">{act.completed}/{act.total} {act.unit} ({pct}%)</span>
                           </div>
                           <div className="h-2 w-full bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
-                            <div className="h-full bg-teal-600 rounded-full" style={{ width: `${pct}%` }} />
+                            <div className="h-full bg-[#01265D] rounded-full" style={{ width: `${pct}%` }} />
                           </div>
                         </div>
                       );
@@ -377,7 +377,7 @@ export function PatientDetailsSheet({
                 {patient.assignedTeam.map((member) => (
                   <div key={member.id} className="rounded-xl border bg-card p-4 flex items-center justify-between">
                     <div className="flex items-center gap-3">
-                      <Avatar className="h-10 w-10 bg-teal-100 text-teal-800 font-bold">
+                      <Avatar className="h-10 w-10 bg-blue-100 dark:bg-blue-950/60 text-[#01265D] dark:text-blue-200 font-bold">
                         <AvatarFallback>{member.name.slice(0, 2).toUpperCase()}</AvatarFallback>
                       </Avatar>
                       <div>
@@ -388,7 +388,7 @@ export function PatientDetailsSheet({
                           </Badge>
                         </div>
                         <p className="text-[11px] text-muted-foreground flex items-center gap-1 mt-0.5">
-                          <Phone className="h-3 w-3 text-teal-600" /> {member.phone} · ★ {member.rating}
+                          <Phone className="h-3 w-3 text-[#01265D] dark:text-blue-400" /> {member.phone} · ★ {member.rating}
                         </p>
                       </div>
                     </div>
@@ -424,7 +424,7 @@ export function PatientDetailsSheet({
                   <div className="flex items-center gap-1.5 text-emerald-600">
                     <CheckCircle2 className="h-4 w-4" /> 3. Care Started
                   </div>
-                  <div className="flex items-center gap-1.5 text-teal-600 font-extrabold">
+                  <div className="flex items-center gap-1.5 text-[#01265D] dark:text-blue-400 font-extrabold">
                     <Activity className="h-4 w-4 animate-pulse" /> 4. Daily Visits (Active)
                   </div>
                   <div className="flex items-center gap-1.5 text-muted-foreground">
@@ -477,7 +477,7 @@ export function PatientDetailsSheet({
                     <h3 className="text-sm font-extrabold text-foreground">Invoices & Billing Ledger</h3>
                     <p className="text-xs text-muted-foreground">Booking value, tax, and outstanding balances</p>
                   </div>
-                  <Button size="sm" className="h-7 text-xs bg-teal-600 hover:bg-teal-700 text-white">
+                  <Button size="sm" className="h-7 text-xs bg-[#01265D] hover:bg-[#0a3375] text-white">
                     Generate New Invoice
                   </Button>
                 </div>
@@ -582,7 +582,7 @@ export function PatientDetailsSheet({
                   onChange={(e) => setNewNote(e.target.value)}
                   className="text-xs min-h-[60px]"
                 />
-                <Button size="sm" type="submit" className="text-xs bg-teal-600 hover:bg-teal-700 text-white">
+                <Button size="sm" type="submit" className="text-xs bg-[#01265D] hover:bg-[#0a3375] text-white">
                   Save Note
                 </Button>
               </form>

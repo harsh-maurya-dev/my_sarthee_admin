@@ -103,10 +103,10 @@ export default function ChecklistTemplatesPage() {
         <div>
           <div className="flex items-center gap-2">
             <h1 className="text-2xl font-black tracking-tight text-foreground sm:text-3xl flex items-center gap-2">
-              <CheckSquare className="h-7 w-7 text-teal-600" />
+              <CheckSquare className="h-7 w-7 text-[#01265D] dark:text-blue-400" />
               Checklists & Vitals Protocols
             </h1>
-            <Badge className="bg-teal-600 text-white font-semibold text-xs">
+            <Badge className="bg-[#01265D] text-white font-semibold text-xs">
               Clinical Protocols
             </Badge>
           </div>
@@ -122,7 +122,7 @@ export default function ChecklistTemplatesPage() {
                 setTemplateToEdit(null);
                 setIsAddEditOpen(true);
               }}
-              className="h-9 gap-2 bg-teal-600 text-white hover:bg-teal-700 text-xs font-semibold shadow-xs"
+              className="h-9 gap-2 bg-[#01265D] text-white hover:bg-[#0a3375] text-xs font-semibold shadow-xs"
             >
               <Plus className="h-3.5 w-3.5" />
               <span>
@@ -139,7 +139,7 @@ export default function ChecklistTemplatesPage() {
           onClick={() => setTopTab("templates")}
           className={`pb-3 text-xs font-bold transition-all flex items-center gap-2 relative ${
             topTab === "templates"
-              ? "text-teal-600 dark:text-teal-400 border-b-2 border-teal-600 dark:border-teal-400"
+              ? "text-[#01265D] dark:text-blue-400 border-b-2 border-[#01265D] dark:border-blue-800"
               : "text-muted-foreground hover:text-foreground"
           }`}
         >
@@ -154,7 +154,7 @@ export default function ChecklistTemplatesPage() {
           onClick={() => setTopTab("vitals")}
           className={`pb-3 text-xs font-bold transition-all flex items-center gap-2 relative ${
             topTab === "vitals"
-              ? "text-teal-600 dark:text-teal-400 border-b-2 border-teal-600 dark:border-teal-400"
+              ? "text-[#01265D] dark:text-blue-400 border-b-2 border-[#01265D] dark:border-blue-800"
               : "text-muted-foreground hover:text-foreground"
           }`}
         >
@@ -181,7 +181,7 @@ export default function ChecklistTemplatesPage() {
               }}
               className={`pb-2.5 text-xs font-bold transition-all flex items-center gap-2 relative ${
                 mainTab === "Caregiver"
-                  ? "text-teal-600 dark:text-teal-400 border-b-2 border-teal-600 dark:border-teal-400"
+                  ? "text-[#01265D] dark:text-blue-400 border-b-2 border-[#01265D] dark:border-blue-800"
                   : "text-muted-foreground hover:text-foreground"
               }`}
             >
@@ -200,7 +200,7 @@ export default function ChecklistTemplatesPage() {
               }}
               className={`pb-2.5 text-xs font-bold transition-all flex items-center gap-2 relative ${
                 mainTab === "Nurse"
-                  ? "text-teal-600 dark:text-teal-400 border-b-2 border-teal-600 dark:border-teal-400"
+                  ? "text-[#01265D] dark:text-blue-400 border-b-2 border-[#01265D] dark:border-blue-800"
                   : "text-muted-foreground hover:text-foreground"
               }`}
             >
@@ -219,7 +219,7 @@ export default function ChecklistTemplatesPage() {
               }}
               className={`pb-2.5 text-xs font-bold transition-all flex items-center gap-2 relative ${
                 mainTab === "Physiotherapist"
-                  ? "text-teal-600 dark:text-teal-400 border-b-2 border-teal-600 dark:border-teal-400"
+                  ? "text-[#01265D] dark:text-blue-400 border-b-2 border-[#01265D] dark:border-blue-800"
                   : "text-muted-foreground hover:text-foreground"
               }`}
             >
@@ -242,7 +242,7 @@ export default function ChecklistTemplatesPage() {
                 }}
                 className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 ${
                   physioSubTab === "Exercise"
-                    ? "bg-white dark:bg-slate-800 text-teal-700 dark:text-teal-300 shadow-xs border border-slate-200 dark:border-slate-700"
+                    ? "bg-white dark:bg-slate-800 text-[#01265D] dark:text-blue-300 shadow-xs border border-slate-200 dark:border-slate-700"
                     : "text-muted-foreground hover:text-foreground"
                 }`}
               >
@@ -261,7 +261,7 @@ export default function ChecklistTemplatesPage() {
                 }}
                 className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 ${
                   physioSubTab === "Modalities Applied"
-                    ? "bg-white dark:bg-slate-800 text-teal-700 dark:text-teal-300 shadow-xs border border-slate-200 dark:border-slate-700"
+                    ? "bg-white dark:bg-slate-800 text-[#01265D] dark:text-blue-300 shadow-xs border border-slate-200 dark:border-slate-700"
                     : "text-muted-foreground hover:text-foreground"
                 }`}
               >
@@ -340,7 +340,7 @@ export default function ChecklistTemplatesPage() {
                           setTemplateToEdit(tpl);
                           setIsAddEditOpen(true);
                         }}
-                        className="h-7 text-xs px-2 text-teal-700 hover:bg-teal-50 dark:hover:bg-teal-950"
+                        className="h-7 text-xs px-2 text-[#01265D] dark:text-blue-300 hover:bg-blue-50 dark:hover:bg-blue-950/40 dark:hover:bg-blue-950"
                         title="Edit Checklist"
                       >
                         <Edit className="h-3.5 w-3.5 mr-1" />
@@ -371,7 +371,7 @@ export default function ChecklistTemplatesPage() {
               {mainTab} {mainTab === "Physiotherapist" ? `(${physioSubTab})` : ""}
             </strong>
           </span>
-          <span className="font-medium text-teal-600 dark:text-teal-400">
+          <span className="font-medium text-[#01265D] dark:text-blue-400">
             Care Protocol Sync Active
           </span>
         </div>

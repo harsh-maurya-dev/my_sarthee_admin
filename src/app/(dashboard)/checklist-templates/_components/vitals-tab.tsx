@@ -208,7 +208,7 @@ export function VitalsTab() {
   const getServiceBadge = (srv: VitalService) => {
     switch (srv) {
       case "Nurse":
-        return "bg-teal-50 text-teal-700 border-teal-200 dark:bg-teal-950/50 dark:text-teal-300 dark:border-teal-800";
+        return "bg-blue-50 dark:bg-blue-950/40 text-[#01265D] dark:text-blue-300 border-blue-200 dark:border-blue-900 dark:bg-blue-950/50 dark:text-blue-300 dark:border-blue-800";
       case "Caregiver":
         return "bg-amber-50 text-amber-700 border-amber-200 dark:bg-amber-950/50 dark:text-amber-300 dark:border-amber-800";
       case "Physiotherapist":
@@ -242,7 +242,7 @@ export function VitalsTab() {
                   onClick={() => setServiceFilter(filter)}
                   className={`px-3 py-1 text-xs font-semibold rounded-lg transition-all ${
                     serviceFilter === filter
-                      ? "bg-white dark:bg-slate-800 text-teal-600 dark:text-teal-400 shadow-xs"
+                      ? "bg-white dark:bg-slate-800 text-[#01265D] dark:text-blue-400 shadow-xs"
                       : "text-muted-foreground hover:text-foreground"
                   }`}
                 >
@@ -254,7 +254,7 @@ export function VitalsTab() {
             <Button
               size="sm"
               onClick={handleOpenAdd}
-              className="h-9 gap-1.5 bg-teal-600 text-white hover:bg-teal-700 text-xs font-semibold shadow-xs"
+              className="h-9 gap-1.5 bg-[#01265D] text-white hover:bg-[#0a3375] text-xs font-semibold shadow-xs"
             >
               <Plus className="h-3.5 w-3.5" />
               <span>Add Vital Sign</span>
@@ -313,7 +313,7 @@ export function VitalsTab() {
                   <TableCell className="py-3.5">
                     <div>
                       <div className="flex items-center gap-1.5">
-                        <Activity className="h-3.5 w-3.5 text-teal-600" />
+                        <Activity className="h-3.5 w-3.5 text-[#01265D] dark:text-blue-400" />
                         <span className="text-xs font-bold text-foreground">
                           {vital.name}
                         </span>
@@ -380,7 +380,7 @@ export function VitalsTab() {
                         size="sm"
                         variant="ghost"
                         onClick={() => handleOpenEdit(vital)}
-                        className="h-7 text-xs px-2 text-teal-700 hover:bg-teal-50 dark:hover:bg-teal-950"
+                        className="h-7 text-xs px-2 text-[#01265D] dark:text-blue-300 hover:bg-blue-50 dark:hover:bg-blue-950/40 dark:hover:bg-blue-950"
                         title="Edit Vital Sign"
                       >
                         <Edit className="h-3.5 w-3.5 mr-1" />
@@ -412,7 +412,7 @@ export function VitalsTab() {
             Showing <strong className="text-foreground">{filteredVitals.length}</strong> of{" "}
             <strong className="text-foreground">{vitals.length}</strong> vital sign parameters
           </span>
-          <span className="font-medium text-teal-600 dark:text-teal-400">
+          <span className="font-medium text-[#01265D] dark:text-blue-400">
             Telemetry & Vital Check Protocol Active
           </span>
         </div>
@@ -519,7 +519,7 @@ export function VitalsTab() {
               <Button
                 type="submit"
                 size="sm"
-                className="h-9 text-xs bg-teal-600 text-white hover:bg-teal-700 font-semibold"
+                className="h-9 text-xs bg-[#01265D] text-white hover:bg-[#0a3375] font-semibold"
               >
                 {editingVital ? "Save Changes" : "Create Vital Sign"}
               </Button>

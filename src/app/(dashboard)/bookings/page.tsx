@@ -314,10 +314,10 @@ export default function BookingsManagementPage() {
         <div>
           <div className="flex items-center gap-2">
             <h1 className="text-2xl font-black tracking-tight text-foreground sm:text-3xl flex items-center gap-2">
-              <CalendarCheck2 className="h-7 w-7 text-teal-600" />
+              <CalendarCheck2 className="h-7 w-7 text-[#01265D] dark:text-blue-400" />
               Bookings & Service Intake
             </h1>
-            <Badge className="bg-teal-600 text-white font-semibold text-xs">
+            <Badge className="bg-[#01265D] text-white font-semibold text-xs">
               {activeTab === "bookings"
                 ? `${bookings.length} Total Bookings`
                 : activeTab === "replacements"
@@ -331,7 +331,7 @@ export default function BookingsManagementPage() {
         </div>
         <div className="flex items-center gap-2">
           <Link href="/smart-assignment">
-            <Button size="sm" className="bg-teal-600 hover:bg-teal-700 text-white font-semibold text-xs gap-1.5 shadow-sm">
+            <Button size="sm" className="bg-[#01265D] hover:bg-[#0a3375] text-white font-semibold text-xs gap-1.5 shadow-sm">
               <Sparkles className="h-3.5 w-3.5" />
               Smart Matching Queue
             </Button>
@@ -346,7 +346,7 @@ export default function BookingsManagementPage() {
           onClick={() => setActiveTab("bookings")}
           className={`pb-3 text-xs font-bold transition-all flex items-center gap-2 relative ${
             activeTab === "bookings"
-              ? "text-teal-600 dark:text-teal-400 border-b-2 border-teal-600 dark:border-teal-400"
+              ? "text-[#01265D] dark:text-blue-400 border-b-2 border-[#01265D] dark:border-blue-800"
               : "text-muted-foreground hover:text-foreground"
           }`}
         >
@@ -362,7 +362,7 @@ export default function BookingsManagementPage() {
           onClick={() => setActiveTab("replacements")}
           className={`pb-3 text-xs font-bold transition-all flex items-center gap-2 relative ${
             activeTab === "replacements"
-              ? "text-teal-600 dark:text-teal-400 border-b-2 border-teal-600 dark:border-teal-400"
+              ? "text-[#01265D] dark:text-blue-400 border-b-2 border-[#01265D] dark:border-blue-800"
               : "text-muted-foreground hover:text-foreground"
           }`}
         >
@@ -384,7 +384,7 @@ export default function BookingsManagementPage() {
           onClick={() => setActiveTab("reschedules")}
           className={`pb-3 text-xs font-bold transition-all flex items-center gap-2 relative ${
             activeTab === "reschedules"
-              ? "text-teal-600 dark:text-teal-400 border-b-2 border-teal-600 dark:border-teal-400"
+              ? "text-[#01265D] dark:text-blue-400 border-b-2 border-[#01265D] dark:border-blue-800"
               : "text-muted-foreground hover:text-foreground"
           }`}
         >
@@ -534,7 +534,7 @@ export default function BookingsManagementPage() {
                       </TableCell>
                       <TableCell className="text-xs font-medium text-muted-foreground py-3">
                         <span className="flex items-center gap-1">
-                          <MapPin className="h-3 w-3 text-teal-600" /> {b.locationArea}
+                          <MapPin className="h-3 w-3 text-[#01265D] dark:text-blue-400" /> {b.locationArea}
                         </span>
                       </TableCell>
                       <TableCell className="text-xs py-3">
@@ -575,7 +575,7 @@ export default function BookingsManagementPage() {
                         <Badge
                           className={`text-[10px] font-bold ${
                             b.status === "Ongoing"
-                              ? "bg-teal-600 text-white"
+                              ? "bg-[#01265D] text-white"
                               : b.status === "Pending Assignment"
                               ? "bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-300"
                               : b.status === "New"
@@ -590,7 +590,7 @@ export default function BookingsManagementPage() {
                       </TableCell>
                       <TableCell className="text-right py-3">
                         <Link href="/smart-assignment">
-                          <Button size="sm" variant="ghost" className="h-7 text-xs font-bold text-teal-700 hover:text-teal-800 hover:bg-teal-50 dark:hover:bg-teal-950">
+                          <Button size="sm" variant="ghost" className="h-7 text-xs font-bold text-[#01265D] dark:text-blue-300 hover:text-[#01265D] dark:text-blue-200 hover:bg-blue-50 dark:hover:bg-blue-950/40 dark:hover:bg-blue-950">
                             Details
                           </Button>
                         </Link>
@@ -607,7 +607,7 @@ export default function BookingsManagementPage() {
                 Showing <strong className="text-foreground">{filteredBookings.length}</strong> of{" "}
                 <strong className="text-foreground">{bookings.length}</strong> total bookings
               </span>
-              <span className="font-medium text-teal-600 dark:text-teal-400">
+              <span className="font-medium text-[#01265D] dark:text-blue-400">
                 Live Intake Stream Active
               </span>
             </div>
@@ -734,7 +734,7 @@ export default function BookingsManagementPage() {
                           <span>{req.careType}</span>
                           <span>&bull;</span>
                           <span className="flex items-center gap-0.5">
-                            <MapPin className="h-2.5 w-2.5 text-teal-600" />
+                            <MapPin className="h-2.5 w-2.5 text-[#01265D] dark:text-blue-400" />
                             {req.locationArea}
                           </span>
                         </div>
@@ -829,7 +829,7 @@ export default function BookingsManagementPage() {
               <span>
                 Showing <strong className="text-foreground">{filteredReplacementRequests.length}</strong> replacement requests
               </span>
-              <span className="font-medium text-teal-600 dark:text-teal-400">
+              <span className="font-medium text-[#01265D] dark:text-blue-400">
                 Dispatch Live Sync Active
               </span>
             </div>
@@ -950,7 +950,7 @@ export default function BookingsManagementPage() {
                       {/* Request ID & Submitted Time */}
                       <TableCell className="py-3 font-mono">
                         <div className="flex flex-col">
-                          <span className="text-xs font-bold text-teal-700 dark:text-teal-400">{req.id}</span>
+                          <span className="text-xs font-bold text-[#01265D] dark:text-blue-300 dark:text-blue-400">{req.id}</span>
                           <span className="text-[10px] text-muted-foreground">{req.requestedAt}</span>
                         </div>
                       </TableCell>
@@ -990,12 +990,12 @@ export default function BookingsManagementPage() {
                       {/* Requested New Schedule */}
                       <TableCell className="py-3 text-xs">
                         <div className="flex flex-col">
-                          <span className="font-bold text-teal-700 dark:text-teal-400 flex items-center gap-1">
+                          <span className="font-bold text-[#01265D] dark:text-blue-300 dark:text-blue-400 flex items-center gap-1">
                             <Calendar className="h-3 w-3" />
                             {req.requestedNewSchedule.date}
                           </span>
                           <span className="text-[11px] font-semibold text-foreground flex items-center gap-1 mt-0.5">
-                            <Clock className="h-3 w-3 text-teal-600" />
+                            <Clock className="h-3 w-3 text-[#01265D] dark:text-blue-400" />
                             {req.requestedNewSchedule.timeSlot}
                           </span>
                         </div>
@@ -1042,7 +1042,7 @@ export default function BookingsManagementPage() {
                               setSelectedRescheduleReq(req);
                               setIsRescheduleModalOpen(true);
                             }}
-                            className="h-8 text-xs gap-1 font-semibold border-slate-200 hover:bg-teal-50 hover:text-teal-700 hover:border-teal-300 dark:hover:bg-teal-950"
+                            className="h-8 text-xs gap-1 font-semibold border-slate-200 hover:bg-blue-50 dark:hover:bg-blue-950/40 hover:text-[#01265D] dark:text-blue-300 hover:border-blue-300 dark:border-blue-800 dark:hover:bg-blue-950"
                           >
                             <Eye className="h-3.5 w-3.5" />
                             <span>Review</span>
@@ -1081,7 +1081,7 @@ export default function BookingsManagementPage() {
                 Showing <strong className="text-foreground">{filteredRescheduleRequests.length}</strong> of{" "}
                 <strong className="text-foreground">{rescheduleRequests.length}</strong> total requests
               </span>
-              <span className="font-medium text-teal-600 dark:text-teal-400 flex items-center gap-1">
+              <span className="font-medium text-[#01265D] dark:text-blue-400 flex items-center gap-1">
                 <Smartphone className="h-3.5 w-3.5" />
                 Mobile Sync Active
               </span>

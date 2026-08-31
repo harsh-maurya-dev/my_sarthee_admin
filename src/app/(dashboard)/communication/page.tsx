@@ -60,7 +60,7 @@ export default function CommunicationHubPage() {
             <h1 className="text-2xl font-black tracking-tight text-foreground sm:text-3xl">
               Family & Customer Communication Hub
             </h1>
-            <Badge className="bg-teal-600 text-white font-semibold text-xs">
+            <Badge className="bg-[#01265D] text-white font-semibold text-xs">
               WhatsApp & SMS Gateway
             </Badge>
           </div>
@@ -106,7 +106,7 @@ export default function CommunicationHubPage() {
                     onClick={() => setChannel(ch as any)}
                     className={`rounded-lg py-2 text-xs font-bold transition-all border ${
                       channel === ch
-                        ? "bg-teal-600 text-white border-teal-700 shadow-xs"
+                        ? "bg-[#01265D] text-white border-blue-200 shadow-xs"
                         : "bg-slate-50 text-muted-foreground hover:bg-slate-100 dark:bg-slate-900"
                     }`}
                   >
@@ -144,7 +144,7 @@ export default function CommunicationHubPage() {
               />
             </div>
 
-            <Button type="submit" className="w-full bg-teal-600 hover:bg-teal-700 text-white font-bold text-xs gap-1.5 shadow-sm">
+            <Button type="submit" className="w-full bg-[#01265D] hover:bg-[#0a3375] text-white font-bold text-xs gap-1.5 shadow-sm">
               <Send className="h-3.5 w-3.5" />
               Dispatch {channel} to {selectedPatient.primaryContactPhone}
             </Button>

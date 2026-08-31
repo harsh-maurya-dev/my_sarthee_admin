@@ -51,8 +51,8 @@ export function LeaveDetailsModal({
         <DialogHeader>
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <div className="h-8 w-8 rounded-full bg-teal-100 dark:bg-teal-950 flex items-center justify-center">
-                <FileText className="h-4 w-4 text-teal-600" />
+              <div className="h-8 w-8 rounded-full bg-blue-100 dark:bg-blue-950/60 dark:bg-blue-950 flex items-center justify-center">
+                <FileText className="h-4 w-4 text-[#01265D] dark:text-blue-400" />
               </div>
               <DialogTitle className="text-base font-bold">
                 Leave Request Details
@@ -83,7 +83,7 @@ export function LeaveDetailsModal({
             <div className="flex items-center gap-3">
               <Avatar className="h-10 w-10 border">
                 <AvatarImage src={leaveRequest.avatar} alt={leaveRequest.caregiverName} />
-                <AvatarFallback className="text-xs font-bold bg-teal-100 text-teal-800">
+                <AvatarFallback className="text-xs font-bold bg-blue-100 dark:bg-blue-950/60 text-[#01265D] dark:text-blue-200">
                   {leaveRequest.caregiverName.substring(0, 2)}
                 </AvatarFallback>
               </Avatar>
@@ -92,7 +92,7 @@ export function LeaveDetailsModal({
                 <div className="flex items-center gap-1.5 text-muted-foreground text-[11px] mt-0.5">
                   <span className="font-mono">{leaveRequest.caregiverId}</span>
                   <span>&bull;</span>
-                  <span className="font-medium text-teal-700 dark:text-teal-400">{leaveRequest.role}</span>
+                  <span className="font-medium text-[#01265D] dark:text-blue-300 dark:text-blue-400">{leaveRequest.role}</span>
                 </div>
               </div>
             </div>
@@ -120,7 +120,7 @@ export function LeaveDetailsModal({
             </div>
             <div className="p-2.5 rounded-xl border bg-card">
               <span className="text-[10px] text-muted-foreground uppercase font-bold tracking-wider">Duration</span>
-              <p className="text-xs font-bold text-teal-600 mt-0.5">{leaveRequest.daysCount} Days Total</p>
+              <p className="text-xs font-bold text-[#01265D] dark:text-blue-400 mt-0.5">{leaveRequest.daysCount} Days Total</p>
             </div>
           </div>
 
@@ -136,20 +136,20 @@ export function LeaveDetailsModal({
 
           {/* If Reassigned Replacement Staff */}
           {leaveRequest.reassignedTo && (
-            <div className="p-3 rounded-xl border border-teal-200 bg-teal-50/50 dark:border-teal-900/60 dark:bg-teal-950/20 space-y-2">
+            <div className="p-3 rounded-xl border border-blue-200 dark:border-blue-900 bg-blue-50/50 dark:bg-blue-950/30 dark:border-blue-900/60 dark:bg-blue-950/20 space-y-2">
               <div className="flex items-center justify-between">
-                <span className="text-[10px] font-bold uppercase tracking-wider text-teal-700 dark:text-teal-300 flex items-center gap-1">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-[#01265D] dark:text-blue-300 flex items-center gap-1">
                   <ArrowRightLeft className="h-3.5 w-3.5" />
                   Assigned Substitute Staff
                 </span>
-                <Badge className="bg-teal-600 text-white text-[9px] font-semibold">Active Replacement</Badge>
+                <Badge className="bg-[#01265D] text-white text-[9px] font-semibold">Active Replacement</Badge>
               </div>
 
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2.5">
                   <Avatar className="h-8 w-8 border">
                     <AvatarImage src={leaveRequest.reassignedTo.avatar} alt={leaveRequest.reassignedTo.name} />
-                    <AvatarFallback className="text-xs font-bold bg-teal-100 text-teal-800">
+                    <AvatarFallback className="text-xs font-bold bg-blue-100 dark:bg-blue-950/60 text-[#01265D] dark:text-blue-200">
                       {leaveRequest.reassignedTo.name.substring(0, 2)}
                     </AvatarFallback>
                   </Avatar>
@@ -167,7 +167,7 @@ export function LeaveDetailsModal({
               </div>
 
               {leaveRequest.patientCoverageNotes && (
-                <div className="pt-1.5 border-t border-teal-200 dark:border-teal-900/50 text-[11px] text-muted-foreground">
+                <div className="pt-1.5 border-t border-blue-200 dark:border-blue-900/50 text-[11px] text-muted-foreground">
                   <span className="font-semibold text-foreground">Handover Notes: </span>
                   {leaveRequest.patientCoverageNotes}
                 </div>
@@ -238,7 +238,7 @@ export function LeaveDetailsModal({
                   onClose();
                   onOpenReassign?.(leaveRequest);
                 }}
-                className="h-8 text-xs gap-1.5 border-teal-300 text-teal-700 hover:bg-teal-50 dark:border-teal-800 dark:text-teal-300"
+                className="h-8 text-xs gap-1.5 border-blue-300 dark:border-blue-800 text-[#01265D] dark:text-blue-300 hover:bg-blue-50 dark:hover:bg-blue-950/40 dark:border-blue-800 dark:text-blue-300"
               >
                 <ArrowRightLeft className="h-3.5 w-3.5" />
                 <span>{leaveRequest.reassignedTo ? "Change Replacement" : "Reassign Another Staff"}</span>

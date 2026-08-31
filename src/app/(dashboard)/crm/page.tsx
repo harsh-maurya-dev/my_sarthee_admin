@@ -98,7 +98,7 @@ export default function CRMDashboardPage() {
               %48
             </div>
             <p className="text-xs text-muted-foreground leading-relaxed">
-              You have completed <span className="font-semibold text-teal-600">48%</span> of the given target, you can also check your status.
+              You have completed <span className="font-semibold text-[#01265D] dark:text-blue-400">48%</span> of the given target, you can also check your status.
             </p>
           </div>
         </div>
@@ -359,7 +359,7 @@ export default function CRMDashboardPage() {
           </div>
 
           <div className="border-t pt-3 text-center">
-            <span className="text-xs font-semibold text-teal-600 dark:text-teal-400">
+            <span className="text-xs font-semibold text-[#01265D] dark:text-blue-400">
               Total Active Deals Value: $997,500
             </span>
           </div>

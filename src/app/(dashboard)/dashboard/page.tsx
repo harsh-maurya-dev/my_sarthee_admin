@@ -52,7 +52,7 @@ export default function AdminPersonalizedDashboard() {
     { key: "assignment_pending", label: "Assignment Pending", count: 7, color: "bg-amber-100 text-amber-800" },
     { key: "professional_accepted", label: "Professional Accepted", count: 14, color: "bg-indigo-100 text-indigo-800" },
     { key: "care_started", label: "Care Started", count: 12, color: "bg-emerald-100 text-emerald-800" },
-    { key: "care_completed", label: "Care Completed", count: 28, color: "bg-teal-100 text-teal-800" },
+    { key: "care_completed", label: "Care Completed", count: 28, color: "bg-blue-100 dark:bg-blue-950/60 text-[#01265D] dark:text-blue-200" },
     { key: "escalation", label: "Escalation", count: 3, color: "bg-rose-100 text-rose-800" },
     { key: "cancellation", label: "Cancellation", count: 1, color: "bg-zinc-100 text-zinc-800" },
   ];
@@ -71,7 +71,7 @@ export default function AdminPersonalizedDashboard() {
             <h1 className="text-2xl font-black tracking-tight text-foreground sm:text-3xl">
               Operations Command Centre
             </h1>
-            <Badge className="bg-teal-600 hover:bg-teal-700 text-white text-[11px] font-semibold px-2 py-0.5">
+            <Badge className="bg-[#01265D] hover:bg-[#0a3375] text-white text-[11px] font-semibold px-2 py-0.5">
               Live Real-Time
             </Badge>
           </div>
@@ -81,7 +81,7 @@ export default function AdminPersonalizedDashboard() {
         </div>
         <div className="flex items-center gap-2">
           <Link href="/smart-assignment">
-            <Button size="sm" className="bg-teal-600 hover:bg-teal-700 text-white font-medium text-xs shadow-sm gap-1.5">
+            <Button size="sm" className="bg-[#01265D] hover:bg-[#0a3375] text-white font-medium text-xs shadow-sm gap-1.5">
               <Sparkles className="h-3.5 w-3.5" />
               Smart Auto-Assign (7)
             </Button>
@@ -109,10 +109,10 @@ export default function AdminPersonalizedDashboard() {
         <div className="grid gap-3.5 sm:grid-cols-2 lg:grid-cols-4">
           {/* Card 1: Active Patients */}
           <Link href="/patients?tab=Active" className="group block">
-            <div className="rounded-xl border bg-card p-4.5 shadow-xs transition-all hover:border-teal-500/50 hover:shadow-md">
+            <div className="rounded-xl border bg-card p-4.5 shadow-xs transition-all hover:border-[#01265D]/50 hover:shadow-md">
               <div className="flex items-center justify-between">
                 <span className="text-xs font-semibold text-muted-foreground">Active Patients</span>
-                <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-teal-50 text-teal-600 dark:bg-teal-950 dark:text-teal-400">
+                <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50 dark:bg-blue-950/40 text-[#01265D] dark:text-blue-400 dark:bg-blue-950 dark:text-blue-400">
                   <Users className="h-4.5 w-4.5" />
                 </div>
               </div>
@@ -205,10 +205,10 @@ export default function AdminPersonalizedDashboard() {
 
           {/* Card 6: Ongoing Care */}
           <Link href="/visit-monitoring" className="group block">
-            <div className="rounded-xl border bg-card p-4.5 shadow-xs transition-all hover:border-teal-500/50 hover:shadow-md">
+            <div className="rounded-xl border bg-card p-4.5 shadow-xs transition-all hover:border-[#01265D]/50 hover:shadow-md">
               <div className="flex items-center justify-between">
                 <span className="text-xs font-semibold text-muted-foreground">Ongoing Care</span>
-                <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-teal-50 text-teal-600 dark:bg-teal-950 dark:text-teal-400">
+                <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50 dark:bg-blue-950/40 text-[#01265D] dark:text-blue-400 dark:bg-blue-950 dark:text-blue-400">
                   <Activity className="h-4.5 w-4.5" />
                 </div>
               </div>
@@ -278,7 +278,7 @@ export default function AdminPersonalizedDashboard() {
           <div>
             <div className="flex items-center gap-2">
               <h2 className="text-lg font-black text-foreground">Today&apos;s Operations</h2>
-              <Badge variant="outline" className="text-xs font-semibold border-teal-200 text-teal-800 bg-teal-50 dark:border-teal-900 dark:text-teal-300">
+              <Badge variant="outline" className="text-xs font-semibold border-blue-200 dark:border-blue-900 text-[#01265D] dark:text-blue-200 bg-blue-50 dark:bg-blue-950/40 dark:border-blue-900 dark:text-blue-300">
                 83 Lifecycle Events Today
               </Badge>
             </div>
@@ -287,8 +287,8 @@ export default function AdminPersonalizedDashboard() {
             </p>
           </div>
           <Link href="/smart-assignment">
-            <Button variant="outline" size="sm" className="h-8 text-xs font-semibold gap-1.5 border-teal-300 text-teal-800 hover:bg-teal-50">
-              <Sparkles className="h-3.5 w-3.5 text-teal-600" />
+            <Button variant="outline" size="sm" className="h-8 text-xs font-semibold gap-1.5 border-blue-300 dark:border-blue-800 text-[#01265D] dark:text-blue-200 hover:bg-blue-50 dark:hover:bg-blue-950/40">
+              <Sparkles className="h-3.5 w-3.5 text-[#01265D] dark:text-blue-400" />
               Smart Matching Engine
             </Button>
           </Link>
@@ -304,7 +304,7 @@ export default function AdminPersonalizedDashboard() {
                 onClick={() => setSelectedOpTab(stage.key)}
                 className={`flex items-center gap-2 rounded-lg px-3 py-2 text-xs font-semibold transition-all shrink-0 ${
                   isSelected
-                    ? "bg-teal-600 text-white shadow-sm ring-1 ring-teal-700"
+                    ? "bg-[#01265D] text-white shadow-sm ring-1 ring-[#01265D]/30"
                     : "bg-slate-100/80 text-muted-foreground hover:bg-slate-200/80 hover:text-foreground dark:bg-slate-800/60"
                 }`}
               >
@@ -361,10 +361,10 @@ export default function AdminPersonalizedDashboard() {
 
               <div className="mt-3 pt-2.5 border-t border-border/50 flex items-center justify-between">
                 <span className="text-[10px] font-medium text-muted-foreground flex items-center gap-1">
-                  <MapPin className="h-3 w-3 text-teal-600" /> {item.area}
+                  <MapPin className="h-3 w-3 text-[#01265D] dark:text-blue-400" /> {item.area}
                 </span>
                 <Link href={item.type === "escalation" ? "/escalations" : item.type === "new_booking" || item.type === "assignment_pending" ? "/smart-assignment" : "/patients"}>
-                  <Button size="sm" variant="ghost" className="h-6 text-[11px] font-bold text-teal-700 hover:text-teal-800 p-0 hover:bg-transparent">
+                  <Button size="sm" variant="ghost" className="h-6 text-[11px] font-bold text-[#01265D] dark:text-blue-300 hover:text-[#01265D] dark:text-blue-200 p-0 hover:bg-transparent">
                     {item.actionLabel || "View Details"} &rarr;
                   </Button>
                 </Link>
@@ -383,7 +383,7 @@ export default function AdminPersonalizedDashboard() {
           <div>
             <div className="flex items-center justify-between pb-3 border-b">
               <div className="flex items-center gap-2">
-                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-teal-50 text-teal-700 dark:bg-teal-950 dark:text-teal-300">
+                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-50 dark:bg-blue-950/40 text-[#01265D] dark:text-blue-300 dark:bg-blue-950 dark:text-blue-300">
                   <HeartPulse className="h-4.5 w-4.5" />
                 </div>
                 <div>
@@ -392,7 +392,7 @@ export default function AdminPersonalizedDashboard() {
                 </div>
               </div>
               <Link href="/care-management?tab=todays-care">
-                <Button variant="ghost" size="sm" className="h-7 text-xs font-semibold text-teal-700">
+                <Button variant="ghost" size="sm" className="h-7 text-xs font-semibold text-[#01265D] dark:text-blue-300">
                   View Full Log &rarr;
                 </Button>
               </Link>
@@ -482,7 +482,7 @@ export default function AdminPersonalizedDashboard() {
 
           <div className="border-t pt-3 flex items-center justify-between text-xs text-muted-foreground">
             <span>Live telemetry sync active from Caregiver Mobile App</span>
-            <Link href="/patients" className="font-semibold text-teal-700 hover:underline">
+            <Link href="/patients" className="font-semibold text-[#01265D] dark:text-blue-300 hover:underline">
               Patient 360° Records &rarr;
             </Link>
           </div>
@@ -497,7 +497,7 @@ export default function AdminPersonalizedDashboard() {
                 <p className="text-[11px] text-muted-foreground">Live lifecycle & assignment tracker</p>
               </div>
               <Link href="/caregivers?tab=availability">
-                <Button variant="ghost" size="sm" className="h-7 text-xs font-semibold text-teal-700">
+                <Button variant="ghost" size="sm" className="h-7 text-xs font-semibold text-[#01265D] dark:text-blue-300">
                   Full Roster &rarr;
                 </Button>
               </Link>
@@ -509,7 +509,7 @@ export default function AdminPersonalizedDashboard() {
                 <div key={pro.id} className="py-2.5 flex items-center justify-between gap-2">
                   <div className="flex items-center gap-2.5 min-w-0">
                     <Avatar className="h-8 w-8 shrink-0">
-                      <AvatarFallback className="bg-teal-100 text-teal-800 text-xs font-bold">
+                      <AvatarFallback className="bg-blue-100 dark:bg-blue-950/60 text-[#01265D] dark:text-blue-200 text-xs font-bold">
                         {pro.name.slice(0, 2).toUpperCase()}
                       </AvatarFallback>
                     </Avatar>
@@ -521,7 +521,7 @@ export default function AdminPersonalizedDashboard() {
                         </Badge>
                       </div>
                       <p className="text-[10px] text-muted-foreground flex items-center gap-1 truncate">
-                        <MapPin className="h-2.5 w-2.5 text-teal-600" /> {pro.area} · ★ {pro.rating}
+                        <MapPin className="h-2.5 w-2.5 text-[#01265D] dark:text-blue-400" /> {pro.area} · ★ {pro.rating}
                       </p>
                     </div>
                   </div>
@@ -554,7 +554,7 @@ export default function AdminPersonalizedDashboard() {
           <div className="border-t pt-3 flex items-center justify-between">
             <span className="text-xs text-muted-foreground">Available &rarr; Assigned &rarr; Accepted &rarr; En route &rarr; Care Started</span>
             <Link href="/smart-assignment">
-              <Button size="sm" className="h-7 text-xs bg-teal-600 hover:bg-teal-700 text-white font-medium">
+              <Button size="sm" className="h-7 text-xs bg-[#01265D] hover:bg-[#0a3375] text-white font-medium">
                 Assign Now
               </Button>
             </Link>

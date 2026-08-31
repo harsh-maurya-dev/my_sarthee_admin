@@ -74,7 +74,7 @@ export default function HealthReportPage() {
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl flex items-center gap-2">
-            <FileText className="h-7 w-7 text-teal-600" />
+            <FileText className="h-7 w-7 text-[#01265D] dark:text-blue-400" />
             Caregiver Health Reports
           </h1>
           <p className="text-xs text-muted-foreground mt-1">
@@ -89,7 +89,7 @@ export default function HealthReportPage() {
               description: "Exported clinical health report logs to CSV.",
             })
           }
-          className="h-9 gap-2 bg-teal-600 text-white hover:bg-teal-700 text-xs font-semibold shadow-xs"
+          className="h-9 gap-2 bg-[#01265D] text-white hover:bg-[#0a3375] text-xs font-semibold shadow-xs"
         >
           <Download className="h-3.5 w-3.5" />
           <span>Export All Reports</span>
@@ -102,9 +102,9 @@ export default function HealthReportPage() {
           <div>
             <p className="text-xs font-medium text-muted-foreground">Total Reports Logged</p>
             <h3 className="text-2xl font-extrabold text-foreground mt-1">{totalReportsCount}</h3>
-            <p className="text-[10px] text-teal-600 font-semibold mt-0.5">Caregiver Submissions Active</p>
+            <p className="text-[10px] text-[#01265D] dark:text-blue-400 font-semibold mt-0.5">Caregiver Submissions Active</p>
           </div>
-          <div className="h-10 w-10 rounded-full bg-teal-100 dark:bg-teal-950 text-teal-600 flex items-center justify-center">
+          <div className="h-10 w-10 rounded-full bg-blue-100 dark:bg-blue-950/60 dark:bg-blue-950 text-[#01265D] dark:text-blue-400 flex items-center justify-center">
             <FileText className="h-5 w-5" />
           </div>
         </div>
@@ -216,7 +216,7 @@ export default function HealthReportPage() {
                   {/* Vitals Summary */}
                   <TableCell className="text-xs">
                     <div className="flex items-center gap-1 font-mono text-[11px]">
-                      <Activity className="h-3 w-3 text-teal-600" />
+                      <Activity className="h-3 w-3 text-[#01265D] dark:text-blue-400" />
                       <span>BP: <strong>{r.vitals.bloodPressure}</strong> · HR: <strong>{r.vitals.heartRateBpm}</strong></span>
                     </div>
                   </TableCell>
@@ -225,7 +225,7 @@ export default function HealthReportPage() {
                   <TableCell className="text-center">
                     {r.uploadedImages && r.uploadedImages.length > 0 ? (
                       <Badge variant="outline" className="text-[9px] bg-slate-50 gap-1">
-                        <ImageIcon className="h-3 w-3 text-teal-600" />
+                        <ImageIcon className="h-3 w-3 text-[#01265D] dark:text-blue-400" />
                         {r.uploadedImages.length} Photos
                       </Badge>
                     ) : (
@@ -255,7 +255,7 @@ export default function HealthReportPage() {
                       size="sm"
                       variant="outline"
                       onClick={() => handleOpenView(r)}
-                      className="h-8 text-xs gap-1 border-slate-200 hover:bg-teal-50 hover:text-teal-700"
+                      className="h-8 text-xs gap-1 border-slate-200 hover:bg-blue-50 dark:hover:bg-blue-950/40 hover:text-[#01265D] dark:text-blue-300"
                     >
                       <Eye className="h-3.5 w-3.5" />
                       <span>View</span>
@@ -271,7 +271,7 @@ export default function HealthReportPage() {
           <span>
             Showing <strong className="text-foreground">{filteredReports.length}</strong> submitted clinical reports
           </span>
-          <span className="font-medium text-teal-600 dark:text-teal-400">
+          <span className="font-medium text-[#01265D] dark:text-blue-400">
             Caregiver Mobile Sync Active
           </span>
         </div>

@@ -60,9 +60,9 @@ export function CaregiverDetailsSheet({
       <SheetContent className="sm:max-w-md w-full overflow-y-auto no-scrollbar p-6 space-y-6">
         <SheetHeader className="border-b pb-4">
           <div className="flex items-center gap-3">
-            <Avatar className="h-14 w-14 border-2 border-teal-500 shadow-sm">
+            <Avatar className="h-14 w-14 border-2 border-[#01265D] shadow-sm">
               <AvatarImage src={caregiver.avatar} alt={caregiver.fullName} />
-              <AvatarFallback className="bg-teal-700 text-white font-bold text-lg">
+              <AvatarFallback className="bg-[#01265D] text-white font-bold text-lg">
                 {caregiver.fullName.charAt(0)}
               </AvatarFallback>
             </Avatar>
@@ -94,25 +94,25 @@ export function CaregiverDetailsSheet({
           </h4>
           <div className="grid grid-cols-2 gap-2">
             <div className="flex items-center gap-1.5 text-muted-foreground">
-              <Calendar className="h-3.5 w-3.5 text-teal-600" />
+              <Calendar className="h-3.5 w-3.5 text-[#01265D] dark:text-blue-400" />
               <span>Age / Gender: <strong className="text-foreground">{caregiver.age}y · {caregiver.gender}</strong></span>
             </div>
             <div className="flex items-center gap-1.5 text-muted-foreground">
-              <Calendar className="h-3.5 w-3.5 text-teal-600" />
+              <Calendar className="h-3.5 w-3.5 text-[#01265D] dark:text-blue-400" />
               <span>DOB: <strong className="text-foreground">{caregiver.dateOfBirth}</strong></span>
             </div>
             <div className="flex items-center gap-1.5 text-muted-foreground">
-              <Phone className="h-3.5 w-3.5 text-teal-600" />
+              <Phone className="h-3.5 w-3.5 text-[#01265D] dark:text-blue-400" />
               <span className="font-mono text-foreground">{caregiver.phoneNumber}</span>
             </div>
             <div className="flex items-center gap-1.5 text-muted-foreground truncate">
-              <Mail className="h-3.5 w-3.5 text-teal-600" />
+              <Mail className="h-3.5 w-3.5 text-[#01265D] dark:text-blue-400" />
               <span className="truncate text-foreground">{caregiver.email}</span>
             </div>
           </div>
           {caregiver.address && (
             <div className="flex items-center gap-1.5 text-muted-foreground pt-1 border-t">
-              <MapPin className="h-3.5 w-3.5 text-teal-600 shrink-0" />
+              <MapPin className="h-3.5 w-3.5 text-[#01265D] dark:text-blue-400 shrink-0" />
               <span className="truncate text-foreground">{caregiver.address}</span>
             </div>
           )}
@@ -131,7 +131,7 @@ export function CaregiverDetailsSheet({
             </div>
             <div className="p-2 rounded-lg bg-slate-50 dark:bg-slate-900 border">
               <span className="text-xs text-muted-foreground block">Visits</span>
-              <strong className="text-base text-teal-600 font-extrabold">{caregiver.completedVisits}</strong>
+              <strong className="text-base text-[#01265D] dark:text-blue-400 font-extrabold">{caregiver.completedVisits}</strong>
             </div>
             <div className="p-2 rounded-lg bg-slate-50 dark:bg-slate-900 border">
               <span className="text-xs text-muted-foreground block">Punctuality</span>
@@ -144,7 +144,7 @@ export function CaregiverDetailsSheet({
         <div className="rounded-xl border p-4 bg-card space-y-3">
           <div className="flex items-center justify-between">
             <h4 className="text-xs font-bold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
-              <ShieldCheck className="h-4 w-4 text-teal-600" />
+              <ShieldCheck className="h-4 w-4 text-[#01265D] dark:text-blue-400" />
               KYC & License Verification
             </h4>
             <Badge
@@ -192,7 +192,7 @@ export function CaregiverDetailsSheet({
         {/* Skills & Experience */}
         <div className="rounded-xl border p-4 bg-card space-y-3">
           <h4 className="text-xs font-bold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
-            <Briefcase className="h-4 w-4 text-teal-600" />
+            <Briefcase className="h-4 w-4 text-[#01265D] dark:text-blue-400" />
             Skills & Clinical Certifications
           </h4>
 
@@ -202,7 +202,7 @@ export function CaregiverDetailsSheet({
             </span>
             <div className="flex flex-wrap gap-1.5 pt-1">
               {caregiver.skills.map((skill, idx) => (
-                <Badge key={idx} variant="outline" className="text-[10px] bg-teal-50 text-teal-900 dark:bg-teal-950/60 dark:text-teal-200">
+                <Badge key={idx} variant="outline" className="text-[10px] bg-blue-50 dark:bg-blue-950/40 text-[#01265D] dark:text-blue-100 dark:bg-blue-950/60 dark:text-blue-300">
                   {skill}
                 </Badge>
               ))}
@@ -211,7 +211,7 @@ export function CaregiverDetailsSheet({
 
           <div className="space-y-1.5 pt-2 border-t text-xs">
             <span className="text-[11px] text-muted-foreground font-semibold flex items-center gap-1">
-              <Award className="h-3.5 w-3.5 text-teal-600" /> Certifications:
+              <Award className="h-3.5 w-3.5 text-[#01265D] dark:text-blue-400" /> Certifications:
             </span>
             <ul className="list-disc list-inside text-muted-foreground space-y-0.5 pl-1">
               {caregiver.certifications.map((cert, idx) => (

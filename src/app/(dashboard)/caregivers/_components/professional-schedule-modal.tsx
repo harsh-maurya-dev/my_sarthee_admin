@@ -187,7 +187,7 @@ export function ProfessionalScheduleModal({
       case "Completed":
         return <Badge className="bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300 font-bold text-[10px]">✓ Completed</Badge>;
       case "In Progress":
-        return <Badge className="bg-teal-600 text-white font-bold animate-pulse text-[10px]">❤️ In Progress</Badge>;
+        return <Badge className="bg-[#01265D] text-white font-bold animate-pulse text-[10px]">❤️ In Progress</Badge>;
       case "Upcoming":
         return <Badge className="bg-sky-100 text-sky-800 dark:bg-sky-950 dark:text-sky-300 font-bold text-[10px]">Upcoming</Badge>;
       case "Available":
@@ -201,10 +201,10 @@ export function ProfessionalScheduleModal({
         <DialogHeader className="border-b pb-3">
           <div className="flex items-center justify-between">
             <DialogTitle className="text-base font-bold flex items-center gap-2">
-              <CalendarDays className="h-5 w-5 text-teal-600" />
+              <CalendarDays className="h-5 w-5 text-[#01265D] dark:text-blue-400" />
               Full Date Schedule & Roster
             </DialogTitle>
-            <Badge className="bg-teal-600 text-white text-[10px] font-bold">
+            <Badge className="bg-[#01265D] text-white text-[10px] font-bold">
               {professional.type}
             </Badge>
           </div>
@@ -223,11 +223,11 @@ export function ProfessionalScheduleModal({
               </h3>
               <div className="flex items-center gap-2 text-[11px] text-muted-foreground mt-0.5">
                 <span className="flex items-center gap-1">
-                  <Phone className="h-3 w-3 text-teal-600" /> {professional.phone}
+                  <Phone className="h-3 w-3 text-[#01265D] dark:text-blue-400" /> {professional.phone}
                 </span>
                 <span>&bull;</span>
                 <span className="flex items-center gap-1">
-                  <MapPin className="h-3 w-3 text-teal-600" /> Base: {professional.area}
+                  <MapPin className="h-3 w-3 text-[#01265D] dark:text-blue-400" /> Base: {professional.area}
                 </span>
               </div>
             </div>
@@ -263,18 +263,18 @@ export function ProfessionalScheduleModal({
                     onClick={() => setSelectedDateIndex(idx)}
                     className={`flex flex-col items-center justify-center p-2 rounded-xl border text-center transition-all cursor-pointer ${
                       isSelected
-                        ? "bg-teal-600 text-white border-teal-600 shadow-xs scale-102"
+                        ? "bg-[#01265D] text-white border-[#01265D] shadow-xs scale-102"
                         : "bg-card hover:bg-slate-50 dark:hover:bg-slate-900 border-slate-200 dark:border-slate-800 text-foreground"
                     }`}
                   >
-                    <span className={`text-[10px] uppercase font-bold ${isSelected ? "text-teal-100" : "text-muted-foreground"}`}>
+                    <span className={`text-[10px] uppercase font-bold ${isSelected ? "text-[#01265D]" : "text-muted-foreground"}`}>
                       {w.dayName}
                     </span>
                     <span className="text-xs font-extrabold mt-0.5">
                       {w.displayDate.split(" ")[1]}
                     </span>
                     {w.isToday && (
-                      <span className={`text-[8px] font-bold mt-0.5 px-1 rounded-full ${isSelected ? "bg-white text-teal-700" : "bg-teal-100 text-teal-800 dark:bg-teal-950 dark:text-teal-300"}`}>
+                      <span className={`text-[8px] font-bold mt-0.5 px-1 rounded-full ${isSelected ? "bg-white text-[#01265D] dark:text-blue-300" : "bg-blue-100 dark:bg-blue-950/60 text-[#01265D] dark:text-blue-200 dark:bg-blue-950 dark:text-blue-300"}`}>
                         Today
                       </span>
                     )}
@@ -285,14 +285,14 @@ export function ProfessionalScheduleModal({
           </div>
 
           {/* Selected Date Summary Header */}
-          <div className="flex items-center justify-between bg-teal-50/60 dark:bg-teal-950/30 border border-teal-200 dark:border-teal-900/60 p-3 rounded-xl">
+          <div className="flex items-center justify-between bg-blue-50/60 dark:bg-blue-950/30 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-900/60 p-3 rounded-xl">
             <div className="flex items-center gap-2">
-              <CalendarIcon className="h-4 w-4 text-teal-600" />
-              <span className="text-xs font-bold text-teal-950 dark:text-teal-200">
+              <CalendarIcon className="h-4 w-4 text-[#01265D] dark:text-blue-400" />
+              <span className="text-xs font-bold text-[#01265D] dark:text-blue-300">
                 Schedule for {activeDate.dayName}, {activeDate.displayDate}
               </span>
             </div>
-            <span className="text-[11px] font-semibold text-teal-700 dark:text-teal-300">
+            <span className="text-[11px] font-semibold text-[#01265D] dark:text-blue-300">
               {scheduleSlots.filter((s) => s.status !== "Available").length} Assigned Visits
             </span>
           </div>
@@ -304,7 +304,7 @@ export function ProfessionalScheduleModal({
                 key={slot.id}
                 className={`rounded-2xl border p-3.5 transition-all flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 ${
                   slot.status === "In Progress"
-                    ? "bg-teal-50/30 border-teal-300 dark:bg-teal-950/20 dark:border-teal-800 shadow-xs"
+                    ? "bg-blue-50 dark:bg-blue-950/40/30 border-blue-300 dark:border-blue-800 dark:bg-blue-950/20 dark:border-blue-800 shadow-xs"
                     : slot.status === "Completed"
                     ? "bg-slate-50/70 dark:bg-slate-900/40 border-slate-200 dark:border-slate-800"
                     : slot.status === "Available"
@@ -315,7 +315,7 @@ export function ProfessionalScheduleModal({
                 {/* Time & Indicator */}
                 <div className="flex items-start gap-3">
                   <div className="h-9 w-9 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 flex items-center justify-center shrink-0 mt-0.5">
-                    <Clock className="h-4 w-4 text-teal-600" />
+                    <Clock className="h-4 w-4 text-[#01265D] dark:text-blue-400" />
                   </div>
 
                   <div className="space-y-1">
@@ -332,7 +332,7 @@ export function ProfessionalScheduleModal({
                       <span>{slot.careType}</span>
                       <span>&bull;</span>
                       <span className="flex items-center gap-0.5">
-                        <MapPin className="h-2.5 w-2.5 text-teal-600" /> {slot.locationArea}
+                        <MapPin className="h-2.5 w-2.5 text-[#01265D] dark:text-blue-400" /> {slot.locationArea}
                       </span>
                       <span>&bull;</span>
                       <span className="font-mono">{slot.bookingCode}</span>
@@ -357,7 +357,7 @@ export function ProfessionalScheduleModal({
                           description: `${professional.name} checked in at ${slot.patientName}'s residence in ${slot.locationArea}.`,
                         })
                       }
-                      className="h-7 text-xs bg-teal-600 hover:bg-teal-700 text-white font-bold gap-1 shadow-xs"
+                      className="h-7 text-xs bg-[#01265D] hover:bg-[#0a3375] text-white font-bold gap-1 shadow-xs"
                     >
                       <Activity className="h-3 w-3" />
                       Live Feed
@@ -373,7 +373,7 @@ export function ProfessionalScheduleModal({
                           description: `Opening Smart Matcher for ${activeDate.displayDate} (${slot.timeRange}).`,
                         })
                       }
-                      className="h-7 text-xs font-semibold border-teal-300 text-teal-700 hover:bg-teal-50"
+                      className="h-7 text-xs font-semibold border-blue-300 dark:border-blue-800 text-[#01265D] dark:text-blue-300 hover:bg-blue-50 dark:hover:bg-blue-950/40"
                     >
                       + Assign Booking
                     </Button>
@@ -397,7 +397,7 @@ export function ProfessionalScheduleModal({
             }
             className="h-8 text-xs gap-1.5"
           >
-            <Sparkles className="h-3.5 w-3.5 text-teal-600" />
+            <Sparkles className="h-3.5 w-3.5 text-[#01265D] dark:text-blue-400" />
             Sync Mobile Calendar
           </Button>
 

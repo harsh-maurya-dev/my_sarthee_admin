@@ -119,7 +119,7 @@ export function ReplacementManagementModal({
                     onClick={() => setSelectedCaregiverName(rep.name)}
                     className={`rounded-xl border p-3 cursor-pointer text-xs transition-all flex items-center justify-between ${
                       isSelected
-                        ? "border-teal-600 bg-teal-50/50 dark:bg-teal-950/40 ring-1 ring-teal-600"
+                        ? "border-[#01265D] bg-blue-50/50 dark:bg-blue-950/30 dark:bg-blue-950/40 ring-1 ring-[#01265D]/30"
                         : "bg-card hover:border-slate-300"
                     }`}
                   >
@@ -134,7 +134,7 @@ export function ReplacementManagementModal({
                     </div>
 
                     {isSelected && (
-                      <CheckCircle2 className="h-5 w-5 text-teal-600 shrink-0" />
+                      <CheckCircle2 className="h-5 w-5 text-[#01265D] dark:text-blue-400 shrink-0" />
                     )}
                   </div>
                 );
@@ -150,7 +150,7 @@ export function ReplacementManagementModal({
               type="submit"
               size="sm"
               disabled={!selectedCaregiverName}
-              className="h-9 text-xs bg-teal-600 hover:bg-teal-700 text-white font-bold gap-1"
+              className="h-9 text-xs bg-[#01265D] hover:bg-[#0a3375] text-white font-bold gap-1"
             >
               <UserCheck className="h-3.5 w-3.5" />
               Assign Replacement
