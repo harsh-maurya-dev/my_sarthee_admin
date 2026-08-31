@@ -84,6 +84,13 @@ export const navGroups: NavGroup[] = [
         href: "/caregivers",
         icon: HeartPulse,
       },
+      {
+        title: "Scheduling",
+        href: "/scheduling",
+        icon: CalendarClock,
+        badge: "Daily Shifts",
+        badgeColor: "bg-blue-100 text-[#01265D] dark:bg-blue-950 dark:text-blue-300",
+      },
       // {
       //   title: "Care Professional Onboarding",
       //   href: "/care-professional-onboarding",
@@ -130,11 +137,11 @@ export const navGroups: NavGroup[] = [
   {
     groupName: "Clinical & Quality",
     items: [
-      {
-        title: "Care Plan Management",
-        href: "/care-management",
-        icon: HeartHandshake,
-      },
+      // {
+      //   title: "Care Plan Management",
+      //   href: "/care-management",
+      //   icon: HeartHandshake,
+      // },
       {
         title: "Escalations",
         href: "/escalations",
@@ -170,9 +177,9 @@ export const navGroups: NavGroup[] = [
         // badgeColor: "bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-300",
         subItems: [
           { title: "Revenue Dashboard", href: "/payments?tab=revenue" },
-          // { title: "Invoices & Balance", href: "/payments?tab=invoices" },
-          { title: "Transactions Log", href: "/transactions" },
+          { title: "Earning System", href: "/earning-system" },
           { title: "Caregiver Payouts", href: "/payouts" },
+          { title: "Transactions Log", href: "/transactions" },
         ],
       },
       {

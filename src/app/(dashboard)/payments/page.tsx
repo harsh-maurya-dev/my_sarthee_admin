@@ -32,6 +32,8 @@ import {
   Filter,
   CheckCircle2,
   ArrowUpRight,
+  BadgePercent,
+  Coins,
 } from "lucide-react";
 import { swiftAlert } from "@/lib/swift-alert";
 
@@ -56,6 +58,15 @@ export default function PaymentsAndBillingDashboard() {
           </p>
         </div>
         <div className="flex items-center gap-2">
+          <Link href="/earning-system">
+            <Button
+              size="sm"
+              className="bg-[#01265D] hover:bg-[#0a3375] text-white text-xs font-semibold"
+            >
+              <BadgePercent className="h-3.5 w-3.5 mr-1.5" />
+              Earning System Rates
+            </Button>
+          </Link>
           <Button
             size="sm"
             variant="outline"

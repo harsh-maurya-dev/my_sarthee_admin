@@ -37,11 +37,12 @@ export function CreateScheduleModal({
   const [patientName, setPatientName] = useState("");
   const [patientAddress, setPatientAddress] = useState("");
   const [patientPhone, setPatientPhone] = useState("");
+  const [service, setService] = useState("Essential Care");
   const [caregiverName, setCaregiverName] = useState("Dr. Sarah Jenkins");
   const [caregiverRole, setCaregiverRole] = useState<"Nurse" | "Caregiver" | "Physiotherapist">("Nurse");
-  const [date, setDate] = useState("2026-08-03");
-  const [startTime, setStartTime] = useState("09:00 AM");
-  const [endTime, setEndTime] = useState("01:00 PM");
+  const [date, setDate] = useState("2026-08-31");
+  const [startTime, setStartTime] = useState("08:00 AM");
+  const [endTime, setEndTime] = useState("06:00 PM");
   const [repeatFrequency, setRepeatFrequency] = useState<"Single Visit" | "Daily" | "Mon-Wed-Fri" | "Weekly">("Daily");
   const [tasksInput, setTasksInput] = useState("Vitals Check, Medication Administration, Hygiene Care");
 
@@ -58,19 +59,21 @@ export function CreateScheduleModal({
 
     const newSchedule: VisitSchedule = {
       id: `VS-${Math.floor(100 + Math.random() * 900)}`,
-      bookingId: `REQ-${Math.floor(9000 + Math.random() * 999)}`,
+      bookingId: `BK-${Math.floor(9000 + Math.random() * 999)}`,
       patientName,
       patientAddress,
-      patientPhone: patientPhone || "+1 (555) 000-1122",
+      patientPhone: patientPhone || "+91 98200 11223",
       caregiverId: `CG-${Math.floor(100 + Math.random() * 90)}`,
       caregiverName,
       caregiverRole,
+      service,
       date,
       startTime,
       endTime,
+      timeSlotFormatted: `${startTime.replace(":00", "")}–${endTime.replace(":00", "")}`,
       repeatFrequency,
       tasks: tasksInput.split(",").map((t) => t.trim()).filter(Boolean),
-      status: "Scheduled",
+      status: "Confirmed",
     };
 
     onAddSchedule(newSchedule);
@@ -86,7 +89,7 @@ export function CreateScheduleModal({
       <DialogContent className="sm:max-w-lg max-h-[90vh] overflow-y-auto no-scrollbar p-6">
         <DialogHeader>
           <DialogTitle className="text-lg font-bold flex items-center gap-2">
-            <CalendarIcon className="h-5 w-5 text-teal-600" />
+            <CalendarIcon className="h-5 w-5 text-[#01265D]" />
             Schedule Caregiver Visit
           </DialogTitle>
           <DialogDescription className="text-xs text-muted-foreground">
