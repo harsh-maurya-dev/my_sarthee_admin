@@ -385,22 +385,6 @@ export function ProfessionalScheduleModal({
         </div>
 
         <DialogFooter className="border-t pt-3 flex items-center justify-between">
-          <Button
-            type="button"
-            variant="outline"
-            size="sm"
-            onClick={() =>
-              swiftAlert.info({
-                title: "Roster Synced",
-                description: `Updated mobile calendar schedule for ${professional.name}.`,
-              })
-            }
-            className="h-8 text-xs gap-1.5"
-          >
-            <Sparkles className="h-3.5 w-3.5 text-[#01265D] dark:text-blue-400" />
-            Sync Mobile Calendar
-          </Button>
-
           <Button type="button" size="sm" onClick={onClose} className="h-8 text-xs">
             Close Schedule
           </Button>

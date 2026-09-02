@@ -10,6 +10,7 @@ import {
   AssignReplacementModal,
   BookingReplacementRequest,
 } from "./_components/assign-replacement-modal";
+import { BookingDetailsModal } from "./_components/booking-details-modal";
 import {
   RescheduleRequestItem,
   initialRescheduleRequests,
@@ -152,6 +153,9 @@ export default function BookingsManagementPage() {
 
   const [selectedRescheduleReq, setSelectedRescheduleReq] = useState<RescheduleRequestItem | null>(null);
   const [isRescheduleModalOpen, setIsRescheduleModalOpen] = useState(false);
+
+  const [selectedBookingDetails, setSelectedBookingDetails] = useState<BookingItem | null>(null);
+  const [isBookingDetailsOpen, setIsBookingDetailsOpen] = useState(false);
 
   // Filtered Bookings
   const filteredBookings = useMemo(() => {
@@ -589,11 +593,17 @@ export default function BookingsManagementPage() {
                         </Badge>
                       </TableCell>
                       <TableCell className="text-right py-3">
-                        <Link href="/smart-assignment">
-                          <Button size="sm" variant="ghost" className="h-7 text-xs font-bold text-[#01265D] dark:text-blue-300 hover:text-[#01265D] dark:text-blue-200 hover:bg-blue-50 dark:hover:bg-blue-950/40 dark:hover:bg-blue-950">
-                            Details
-                          </Button>
-                        </Link>
+                        <Button
+                          size="sm"
+                          variant="ghost"
+                          onClick={() => {
+                            setSelectedBookingDetails(b);
+                            setIsBookingDetailsOpen(true);
+                          }}
+                          className="h-7 text-xs font-bold text-[#01265D] dark:text-blue-300 hover:text-[#01265D] dark:text-blue-200 hover:bg-blue-50 dark:hover:bg-blue-950/40 dark:hover:bg-blue-950"
+                        >
+                          Details
+                        </Button>
                       </TableCell>
                     </TableRow>
                   ))
@@ -1105,6 +1115,13 @@ export default function BookingsManagementPage() {
         request={selectedRescheduleReq}
         onApprove={handleApproveReschedule}
         onDecline={handleDeclineReschedule}
+      />
+
+      {/* Booking Details Modal */}
+      <BookingDetailsModal
+        isOpen={isBookingDetailsOpen}
+        onClose={() => setIsBookingDetailsOpen(false)}
+        booking={selectedBookingDetails}
       />
     </div>
   );

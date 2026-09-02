@@ -49,6 +49,8 @@ import {
   RefreshCw,
   Award,
   Layers,
+  Files,
+  FileText,
 } from "lucide-react";
 import { swiftAlert } from "@/lib/swift-alert";
 
@@ -314,7 +316,7 @@ export default function OnboardingDocumentsPage() {
                 />
               </div>
 
-              <div className="flex items-center gap-2">
+              <div className="flex flex-wrap items-center gap-2">
                 <div className="flex items-center gap-1.5 text-xs">
                   <span className="text-muted-foreground font-medium hidden sm:inline">Category:</span>
                   <Select value={kycCategoryFilter} onValueChange={(val) => val && setKycCategoryFilter(val)}>
@@ -350,7 +352,7 @@ export default function OnboardingDocumentsPage() {
             </div>
           </div>
 
-          {/* Cards View (Exact Mobile Styling from Image 1) */}
+          {/* Cards View */}
           {viewMode === "cards" ? (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
               {filteredKYC.map((doc) => (
@@ -359,8 +361,8 @@ export default function OnboardingDocumentsPage() {
                   className="rounded-2xl border border-slate-200/90 dark:border-slate-800 bg-card p-4 hover:shadow-md transition-all flex flex-col justify-between space-y-3 group"
                 >
                   <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-3.5">
-                      <div className="h-11 w-11 rounded-2xl bg-sky-50 dark:bg-sky-950/70 border border-sky-200 dark:border-sky-800 flex items-center justify-center shadow-xs shrink-0">
+                    <div className="flex items-center gap-3">
+                      <div className="h-10 w-10 rounded-2xl bg-sky-50 dark:bg-sky-950/70 border border-sky-200 dark:border-sky-800 flex items-center justify-center shadow-xs shrink-0">
                         {getKYCIcon(doc.iconType)}
                       </div>
                       <div>
@@ -378,16 +380,16 @@ export default function OnboardingDocumentsPage() {
                       </div>
                     </div>
 
-                    <div
-                      className="h-9 w-9 rounded-full bg-amber-50 dark:bg-amber-950 text-amber-600 border border-amber-300 dark:border-amber-700 flex items-center justify-center shadow-xs shrink-0 cursor-pointer hover:bg-amber-100 transition-all"
-                      title="Upload Status Button"
-                      onClick={() => {
-                        setPreviewKycDoc(doc);
-                        setPreviewTrainingDoc(null);
-                        setIsPreviewOpen(true);
-                      }}
-                    >
-                      <Upload className="h-4 w-4" />
+                    <div className="flex items-center gap-1">
+                      {doc.allowMultipleFiles ? (
+                        <Badge className="bg-blue-50 text-[#01265D] border border-blue-200 dark:bg-blue-950 dark:text-blue-300 text-[10px] font-bold">
+                          Multi-File ({doc.maxFilesCount || 2} max)
+                        </Badge>
+                      ) : (
+                        <Badge variant="outline" className="text-[10px] font-semibold text-muted-foreground">
+                          Single File
+                        </Badge>
+                      )}
                     </div>
                   </div>
 
@@ -453,8 +455,8 @@ export default function OnboardingDocumentsPage() {
                     <TableHead className="text-xs font-bold uppercase w-12">Icon</TableHead>
                     <TableHead className="text-xs font-bold uppercase">Document Name</TableHead>
                     <TableHead className="text-xs font-bold uppercase">Category</TableHead>
-                    {/* <TableHead className="text-xs font-bold uppercase">Verification Method</TableHead> */}
                     <TableHead className="text-xs font-bold uppercase">Formats & Size</TableHead>
+                    <TableHead className="text-xs font-bold uppercase text-center">Upload Mode</TableHead>
                     <TableHead className="text-xs font-bold uppercase text-center">Requirement</TableHead>
                     <TableHead className="text-xs font-bold uppercase text-center">Status</TableHead>
                     <TableHead className="text-xs font-bold uppercase text-right">Actions</TableHead>
@@ -469,11 +471,19 @@ export default function OnboardingDocumentsPage() {
                         <span className="text-[10px] text-muted-foreground font-mono">{doc.code}</span>
                       </TableCell>
                       <TableCell className="py-3 text-xs">{doc.category}</TableCell>
-                      {/* <TableCell className="py-3 text-xs font-medium text-[#01265D] dark:text-blue-300 dark:text-blue-400">
-                        {doc.verificationMethod}
-                      </TableCell> */}
                       <TableCell className="py-3 text-xs text-muted-foreground">
                         {doc.allowedFormats.join(", ")} · Max {doc.maxSizeMB}MB
+                      </TableCell>
+                      <TableCell className="py-3 text-center">
+                        {doc.allowMultipleFiles ? (
+                          <Badge className="bg-blue-50 text-[#01265D] border border-blue-200 dark:bg-blue-950 dark:text-blue-300 text-[10px] font-bold">
+                            Multi-File (Max {doc.maxFilesCount || 2})
+                          </Badge>
+                        ) : (
+                          <Badge variant="outline" className="text-[10px] font-medium text-muted-foreground">
+                            Single File
+                          </Badge>
+                        )}
                       </TableCell>
                       <TableCell className="py-3 text-center">
                         {doc.isMandatory ? (
@@ -493,7 +503,7 @@ export default function OnboardingDocumentsPage() {
                       </TableCell>
                       <TableCell className="py-3 text-right">
                         <div className="flex items-center justify-end gap-1">
-                          {/* <Button
+                          <Button
                             size="sm"
                             variant="ghost"
                             onClick={() => {
@@ -501,10 +511,11 @@ export default function OnboardingDocumentsPage() {
                               setPreviewTrainingDoc(null);
                               setIsPreviewOpen(true);
                             }}
-                            className="h-7 text-xs px-2 text-[#01265D] dark:text-blue-300 hover:bg-blue-50 dark:hover:bg-blue-950/40"
+                            className="h-7 text-xs px-2 text-[#01265D] dark:text-blue-300 hover:bg-blue-50 dark:hover:bg-blue-950/40 dark:hover:bg-blue-950"
                           >
-                            <Eye className="h-3.5 w-3.5" />
-                          </Button> */}
+                            <Eye className="h-3.5 w-3.5 mr-1" />
+                            Preview
+                          </Button>
                           <Button
                             size="sm"
                             variant="ghost"
@@ -514,7 +525,8 @@ export default function OnboardingDocumentsPage() {
                             }}
                             className="h-7 text-xs px-2"
                           >
-                            <Edit className="h-3.5 w-3.5" />
+                            <Edit className="h-3.5 w-3.5 mr-1" />
+                            Edit
                           </Button>
                           <Button
                             size="sm"

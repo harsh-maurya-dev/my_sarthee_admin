@@ -11,6 +11,9 @@ export interface KYCDocumentItem {
   verificationMethod: "Manual Admin Review" | "API / UIDAI Instant Verification" | "Third-Party Background Check Agency";
   status: "Active" | "Inactive";
   sampleTemplateUrl?: string;
+  allowMultipleFiles?: boolean;
+  maxFilesCount?: number;
+  sampleFiles?: string[];
   createdDate: string;
   totalSubmissions: number;
   verifiedCount: number;

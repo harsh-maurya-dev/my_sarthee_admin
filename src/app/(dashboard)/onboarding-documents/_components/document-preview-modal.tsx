@@ -90,6 +90,11 @@ export function DocumentPreviewModal({
                       <p className="text-[11px] text-muted-foreground mt-0.5">
                         {kycDoc.isMandatory ? "Mandatory Document" : "Optional"} · Max {kycDoc.maxSizeMB}MB
                       </p>
+                      {kycDoc.allowMultipleFiles && (
+                        <span className="text-[10px] font-semibold text-blue-600 dark:text-blue-400 block mt-0.5">
+                          Multi-File Upload Allowed (Up to {kycDoc.maxFilesCount || 2} files)
+                        </span>
+                      )}
                     </div>
                   </div>
 

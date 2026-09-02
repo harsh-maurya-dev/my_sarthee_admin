@@ -4,7 +4,6 @@ import { useState } from "react";
 import { systemRoles, UserRole } from "@/lib/admin-data";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-
 import {
   Table,
   TableBody,
@@ -19,11 +18,110 @@ import {
   Lock,
   MapPin,
   FileCode,
+  Trash2,
+  Sparkles,
 } from "lucide-react";
+import { AddRoleModal, CustomRoleItem } from "./_components/add-role-modal";
+import { swiftAlert } from "@/lib/swift-alert";
 
+const defaultRoleMatrix: Record<string, Record<string, "Full Access" | "Read / Write" | "Read Only" | "—">> = {
+  "Super Admin": {
+    "Dashboard KPI Telemetry": "Full Access",
+    "Patient Management & 360°": "Full Access",
+    "Care Professionals Availability": "Full Access",
+    "Smart Allocation Engine": "Full Access",
+    "Care Plans & Clinical Protocols": "Full Access",
+    "Escalation Centre Triage": "Full Access",
+    "Family Communication Hub": "Full Access",
+    "Payments & Revenue Dashboard": "Full Access",
+    "Partners & Referral Networks": "Full Access",
+    "Settings & Role Delegation": "Full Access",
+  },
+  "Operations Manager": {
+    "Dashboard KPI Telemetry": "Read / Write",
+    "Patient Management & 360°": "Read / Write",
+    "Care Professionals Availability": "Read / Write",
+    "Smart Allocation Engine": "Read / Write",
+    "Care Plans & Clinical Protocols": "Read / Write",
+    "Escalation Centre Triage": "Read / Write",
+    "Family Communication Hub": "Read / Write",
+    "Payments & Revenue Dashboard": "—",
+    "Partners & Referral Networks": "—",
+    "Settings & Role Delegation": "—",
+  },
+  "Care Coordinator": {
+    "Dashboard KPI Telemetry": "Read Only",
+    "Patient Management & 360°": "Read / Write",
+    "Care Professionals Availability": "Read Only",
+    "Smart Allocation Engine": "Read Only",
+    "Care Plans & Clinical Protocols": "Read / Write",
+    "Escalation Centre Triage": "Read Only",
+    "Family Communication Hub": "Read / Write",
+    "Payments & Revenue Dashboard": "—",
+    "Partners & Referral Networks": "—",
+    "Settings & Role Delegation": "—",
+  },
+  "Clinical/Quality Manager": {
+    "Dashboard KPI Telemetry": "—",
+    "Patient Management & 360°": "Read / Write",
+    "Care Professionals Availability": "—",
+    "Smart Allocation Engine": "—",
+    "Care Plans & Clinical Protocols": "Read / Write",
+    "Escalation Centre Triage": "Read / Write",
+    "Family Communication Hub": "—",
+    "Payments & Revenue Dashboard": "—",
+    "Partners & Referral Networks": "—",
+    "Settings & Role Delegation": "—",
+  },
+  "Finance": {
+    "Dashboard KPI Telemetry": "—",
+    "Patient Management & 360°": "—",
+    "Care Professionals Availability": "—",
+    "Smart Allocation Engine": "—",
+    "Care Plans & Clinical Protocols": "—",
+    "Escalation Centre Triage": "—",
+    "Family Communication Hub": "—",
+    "Payments & Revenue Dashboard": "Read / Write",
+    "Partners & Referral Networks": "—",
+    "Settings & Role Delegation": "—",
+  },
+  "Customer Support": {
+    "Dashboard KPI Telemetry": "—",
+    "Patient Management & 360°": "Read Only",
+    "Care Professionals Availability": "—",
+    "Smart Allocation Engine": "—",
+    "Care Plans & Clinical Protocols": "—",
+    "Escalation Centre Triage": "—",
+    "Family Communication Hub": "Read / Write",
+    "Payments & Revenue Dashboard": "—",
+    "Partners & Referral Networks": "—",
+    "Settings & Role Delegation": "—",
+  },
+  "Business Development": {
+    "Dashboard KPI Telemetry": "—",
+    "Patient Management & 360°": "—",
+    "Care Professionals Availability": "—",
+    "Smart Allocation Engine": "—",
+    "Care Plans & Clinical Protocols": "—",
+    "Escalation Centre Triage": "—",
+    "Family Communication Hub": "—",
+    "Payments & Revenue Dashboard": "—",
+    "Partners & Referral Networks": "Read / Write",
+    "Settings & Role Delegation": "—",
+  },
+};
 
 export default function SettingsAndRolesPage() {
   const [activeTab, setActiveTab] = useState<"roles" | "pricing" | "locations" | "audit">("roles");
+  const [isAddRoleOpen, setIsAddRoleOpen] = useState(false);
+
+  const [rolesList, setRolesList] = useState<CustomRoleItem[]>(
+    systemRoles.map((r) => ({
+      ...r,
+      moduleAccess: defaultRoleMatrix[r.role] || {},
+      isCustom: false,
+    }))
+  );
 
   const modules = [
     "Dashboard KPI Telemetry",
@@ -37,6 +135,20 @@ export default function SettingsAndRolesPage() {
     "Partners & Referral Networks",
     "Settings & Role Delegation",
   ];
+
+  const handleAddRole = (newRole: CustomRoleItem) => {
+    setRolesList((prev) => [...prev, newRole]);
+  };
+
+  const handleDeleteRole = (roleName: string) => {
+    if (confirm(`Are you sure you want to remove role "${roleName}"?`)) {
+      setRolesList((prev) => prev.filter((r) => r.role !== roleName));
+      swiftAlert.error({
+        title: "Role Removed",
+        description: `Role "${roleName}" has been deleted from system access control.`,
+      });
+    }
+  };
 
   return (
     <div className="space-y-6 pb-10">
@@ -61,10 +173,8 @@ export default function SettingsAndRolesPage() {
       <div className="flex items-center gap-2 border-b pb-3 overflow-x-auto scrollbar-none">
         {[
           { key: "roles", label: "Users & Roles Matrix", icon: ShieldCheck },
-
-          { key: "pricing", label: "Pricing & Rules", icon: Lock },
           { key: "locations", label: "Coverage Locations", icon: MapPin },
-          { key: "audit", label: "Compliance Audit Logs", icon: FileCode },
+          // { key: "audit", label: "Compliance Audit Logs", icon: FileCode },
         ].map((tab) => {
           const Icon = tab.icon;
           return (
@@ -93,22 +203,54 @@ export default function SettingsAndRolesPage() {
             <div className="flex items-center justify-between border-b pb-3">
               <div>
                 <h2 className="text-sm font-extrabold text-foreground">Operational Role Profiles & Permissions</h2>
-                <p className="text-xs text-muted-foreground">Each role accesses only clinical and financial data within their defined scope</p>
+                <p className="text-xs text-muted-foreground">Each role accesses only clinical and financial data within their defined scope ({rolesList.length} active roles)</p>
               </div>
-              <Button size="sm" className="bg-[#01265D] hover:bg-[#0a3375] text-white text-xs font-bold">
-                <Plus className="h-3.5 w-3.5 mr-1" /> Add Role
+              <Button
+                size="sm"
+                onClick={() => setIsAddRoleOpen(true)}
+                className="bg-[#01265D] hover:bg-[#0a3375] text-white text-xs font-bold shadow-xs gap-1.5"
+              >
+                <Plus className="h-3.5 w-3.5" /> Add Role
               </Button>
             </div>
 
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-              {systemRoles.map((roleObj) => (
-                <div key={roleObj.role} className="rounded-xl border p-4 space-y-3 bg-slate-50/50 dark:bg-slate-900/40">
-                  <div className="flex items-center justify-between">
-                    <h3 className="text-xs font-bold text-foreground">{roleObj.role}</h3>
-                    <Badge className={roleObj.badgeColor}>{roleObj.role.split(" ")[0]}</Badge>
+              {rolesList.map((roleObj) => (
+                <div
+                  key={roleObj.role}
+                  className="rounded-xl border p-4 space-y-3 bg-slate-50/50 dark:bg-slate-900/40 relative group flex flex-col justify-between"
+                >
+                  <div className="space-y-2">
+                    <div className="flex items-center justify-between gap-2">
+                      <div className="flex items-center gap-1.5">
+                        <h3 className="text-xs font-bold text-foreground">{roleObj.role}</h3>
+                        {roleObj.isCustom && (
+                          <Badge className="bg-sky-50 text-[#01265D] border-blue-200 text-[9px] px-1 py-0 font-bold">
+                            Custom
+                          </Badge>
+                        )}
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <Badge className={`text-[10px] font-bold ${roleObj.badgeColor}`}>
+                          {roleObj.role.split(" ")[0]}
+                        </Badge>
+                        {roleObj.isCustom && (
+                          <Button
+                            size="sm"
+                            variant="ghost"
+                            onClick={() => handleDeleteRole(roleObj.role)}
+                            className="h-6 w-6 p-0 text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-950"
+                            title="Delete custom role"
+                          >
+                            <Trash2 className="h-3 w-3" />
+                          </Button>
+                        )}
+                      </div>
+                    </div>
+                    <p className="text-xs text-muted-foreground leading-snug">{roleObj.description}</p>
                   </div>
-                  <p className="text-xs text-muted-foreground leading-snug">{roleObj.description}</p>
-                  <div className="space-y-1 pt-1 border-t">
+
+                  <div className="space-y-1 pt-2 border-t">
                     <span className="text-[10px] font-bold text-muted-foreground uppercase">Key Scopes:</span>
                     <div className="flex flex-wrap gap-1">
                       {roleObj.permissions.map((p, idx) => (
@@ -125,60 +267,71 @@ export default function SettingsAndRolesPage() {
 
           {/* Detailed Permissions Matrix Table */}
           <div className="rounded-2xl border bg-card shadow-xs overflow-hidden p-5 space-y-3">
-            <h3 className="text-sm font-extrabold text-foreground">Role Permissions Matrix Table</h3>
-            <Table>
-              <TableHeader>
-                <TableRow className="bg-slate-50/80 dark:bg-slate-900/50 hover:bg-slate-50/80">
-                  <TableHead className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-                    Module / Feature
-                  </TableHead>
-                  <TableHead className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-                    Super Admin
-                  </TableHead>
-                  <TableHead className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-                    Ops Manager
-                  </TableHead>
-                  <TableHead className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-                    Care Coordinator
-                  </TableHead>
-                  <TableHead className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-                    Clinical Manager
-                  </TableHead>
-                  <TableHead className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-                    Finance
-                  </TableHead>
-                  <TableHead className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-                    Support
-                  </TableHead>
-                  <TableHead className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-                    BD
-                  </TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {modules.map((mod, i) => (
-                  <TableRow key={i} className="hover:bg-slate-50/80 dark:hover:bg-slate-900/50">
-                    <TableCell className="text-xs font-bold text-foreground py-2.5">
-                      {mod}
-                    </TableCell>
-                    <TableCell className="text-xs text-emerald-600 font-bold">Full Access</TableCell>
-                    <TableCell className="text-xs">{i < 6 ? "Read / Write" : "—"}</TableCell>
-                    <TableCell className="text-xs">{i === 1 || i === 4 || i === 6 ? "Read / Write" : "Read Only"}</TableCell>
-                    <TableCell className="text-xs">{i === 1 || i === 4 || i === 5 ? "Read / Write" : "—"}</TableCell>
-                    <TableCell className="text-xs">{i === 7 ? "Read / Write" : "—"}</TableCell>
-                    <TableCell className="text-xs">{i === 1 || i === 6 ? "Read Only" : "—"}</TableCell>
-                    <TableCell className="text-xs">{i === 8 ? "Read / Write" : "—"}</TableCell>
+            <div className="flex items-center justify-between">
+              <div>
+                <h3 className="text-sm font-extrabold text-foreground">Role Permissions Matrix Table</h3>
+                <p className="text-xs text-muted-foreground">Live scope matrix mapping modules to read, write, and full administrative access</p>
+              </div>
+              <Badge variant="outline" className="text-xs font-semibold">
+                {rolesList.length} Roles Defined
+              </Badge>
+            </div>
+
+            <div className="overflow-x-auto">
+              <Table>
+                <TableHeader>
+                  <TableRow className="bg-slate-50/80 dark:bg-slate-900/50 hover:bg-slate-50/80">
+                    <TableHead className="text-xs font-bold uppercase tracking-wider text-muted-foreground min-w-[200px]">
+                      Module / Feature
+                    </TableHead>
+                    {rolesList.map((r) => (
+                      <TableHead
+                        key={r.role}
+                        className="text-xs font-bold uppercase tracking-wider text-muted-foreground text-center whitespace-nowrap px-3"
+                      >
+                        {r.role}
+                      </TableHead>
+                    ))}
                   </TableRow>
-                ))}
-              </TableBody>
-            </Table>
+                </TableHeader>
+                <TableBody>
+                  {modules.map((mod, i) => (
+                    <TableRow key={i} className="hover:bg-slate-50/80 dark:hover:bg-slate-900/50">
+                      <TableCell className="text-xs font-bold text-foreground py-2.5">
+                        {mod}
+                      </TableCell>
+                      {rolesList.map((r, roleIdx) => {
+                        const access =
+                          r.moduleAccess?.[mod] ||
+                          (r.role === "Super Admin" ? "Full Access" : "—");
+                        return (
+                          <TableCell
+                            key={roleIdx}
+                            className={`text-xs text-center whitespace-nowrap px-3 ${
+                              access === "Full Access"
+                                ? "text-emerald-600 font-bold"
+                                : access === "Read / Write"
+                                ? "text-blue-600 font-medium dark:text-blue-400"
+                                : access === "Read Only"
+                                ? "text-foreground font-medium"
+                                : "text-muted-foreground"
+                            }`}
+                          >
+                            {access}
+                          </TableCell>
+                        );
+                      })}
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </div>
           </div>
         </div>
       )}
 
-
       {/* ------------------------------------------------------------- */}
-      {/* TAB 4: LOCATIONS */}
+      {/* TAB 3: LOCATIONS */}
       {/* ------------------------------------------------------------- */}
       {activeTab === "locations" && (
         <div className="rounded-2xl border bg-card p-6 shadow-xs space-y-4">
@@ -202,9 +355,9 @@ export default function SettingsAndRolesPage() {
       )}
 
       {/* ------------------------------------------------------------- */}
-      {/* TAB 5: AUDIT LOGS */}
+      {/* TAB 4: AUDIT LOGS */}
       {/* ------------------------------------------------------------- */}
-      {activeTab === "audit" && (
+      {/* {activeTab === "audit" && (
         <div className="rounded-2xl border bg-card p-6 shadow-xs space-y-3">
           <h3 className="text-sm font-extrabold text-foreground">Clinical & Operational Audit Trail</h3>
           <div className="space-y-2 text-xs">
@@ -224,7 +377,14 @@ export default function SettingsAndRolesPage() {
             ))}
           </div>
         </div>
-      )}
+      )} */}
+
+      {/* Add Role Modal */}
+      <AddRoleModal
+        isOpen={isAddRoleOpen}
+        onClose={() => setIsAddRoleOpen(false)}
+        onAddRole={handleAddRole}
+      />
     </div>
   );
 }

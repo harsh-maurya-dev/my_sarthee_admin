@@ -5,6 +5,7 @@ import { VisitSchedule, initialVisitSchedules } from "./_data/schedules";
 import { CalendarView } from "./_components/calendar-view";
 import { CreateScheduleModal } from "./_components/create-schedule-modal";
 import { ReplacementManagementModal } from "./_components/replacement-management-modal";
+import { ScheduleDetailsModal } from "./_components/schedule-details-modal";
 import {
   Table,
   TableBody,
@@ -61,6 +62,8 @@ function SchedulingContent() {
   const [isCreateOpen, setIsCreateOpen] = useState(false);
   const [selectedReplacementSchedule, setSelectedReplacementSchedule] = useState<VisitSchedule | null>(null);
   const [isReplacementOpen, setIsReplacementOpen] = useState(false);
+  const [selectedViewSchedule, setSelectedViewSchedule] = useState<VisitSchedule | null>(null);
+  const [isViewDetailsOpen, setIsViewDetailsOpen] = useState(false);
 
   // Filtered schedules for the daily shift snapshot view
   const filteredDailySchedules = useMemo(() => {
@@ -352,10 +355,8 @@ function SchedulingContent() {
                             variant="outline"
                             className="h-7 text-[11px] font-medium"
                             onClick={() => {
-                              swiftAlert.info({
-                                title: `Shift Details: ${schedule.patientName}`,
-                                description: `Assigned: ${schedule.caregiverName} | Service: ${schedule.service} | Timing: ${schedule.timeSlotFormatted} | Status: ${schedule.status}`,
-                              });
+                              setSelectedViewSchedule(schedule);
+                              setIsViewDetailsOpen(true);
                             }}
                           >
                             View
@@ -383,6 +384,16 @@ function SchedulingContent() {
         onClose={() => setIsReplacementOpen(false)}
         schedule={selectedReplacementSchedule}
         onAssignReplacement={handleAssignReplacement}
+      />
+
+      <ScheduleDetailsModal
+        isOpen={isViewDetailsOpen}
+        onClose={() => setIsViewDetailsOpen(false)}
+        schedule={selectedViewSchedule}
+        onReassign={(sched) => {
+          setSelectedReplacementSchedule(sched);
+          setIsReplacementOpen(true);
+        }}
       />
     </div>
   );
